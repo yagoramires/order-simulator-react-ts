@@ -1,0 +1,309 @@
+{
+  "industries": [
+    {
+      "id": 1,
+      "name": "ILUMI",
+      "cnpj": "00.000.000/0000-0",
+      "products": [
+        {
+          "id": 1,
+          "name": "Produto 1 ILUMI",
+          "code": "784234329",
+          "value": 7.28
+        },
+        {
+          "id": 2,
+          "name": "Produto 2 ILUMI",
+          "code": "784234329",
+          "value": 3.75
+        },
+        {
+          "id": 3,
+          "name": "Produto 3 ILUMI",
+          "code": "784234329",
+          "value": 1.42
+        },
+        {
+          "id": 4,
+          "name": "Produto 4 ILUMI",
+          "code": "784234329",
+          "value": 13.5
+        },
+        {
+          "id": 5,
+          "name": "Produto 5 ILUMI",
+          "code": "784234329",
+          "value": 4.25
+        },
+        {
+          "id": 6,
+          "name": "Produto 6 ILUMI",
+          "code": "784234329",
+          "value": 1.27
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "ITEC",
+      "cnpj": "00.000.000/0000-0",
+      "products": [
+        {
+          "id": 1,
+          "name": "Produto 1 ITEC",
+          "code": "784234329",
+          "value": 7.28
+        },
+        {
+          "id": 2,
+          "name": "Produto 2 ITEC",
+          "code": "784234329",
+          "value": 3.75
+        },
+        {
+          "id": 3,
+          "name": "Produto 3 ITEC",
+          "code": "784234329",
+          "value": 1.42
+        },
+        {
+          "id": 4,
+          "name": "Produto 4 ITEC",
+          "code": "784234329",
+          "value": 13.5
+        },
+        {
+          "id": 5,
+          "name": "Produto 5 ITEC",
+          "code": "784234329",
+          "value": 4.25
+        },
+        {
+          "id": 6,
+          "name": "Produto 6 ITEC",
+          "code": "784234329",
+          "value": 1.27
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "AVANT",
+      "cnpj": "00.000.000/0000-0",
+      "products": [
+        {
+          "id": 1,
+          "name": "Produto 1 AVANT",
+          "code": "784234329",
+          "value": 7.28
+        },
+        {
+          "id": 2,
+          "name": "Produto 2 AVANT",
+          "code": "784234329",
+          "value": 3.75
+        },
+        {
+          "id": 3,
+          "name": "Produto 3 AVANT",
+          "code": "784234329",
+          "value": 1.42
+        },
+        {
+          "id": 4,
+          "name": "Produto 4 AVANT",
+          "code": "784234329",
+          "value": 13.5
+        },
+        {
+          "id": 5,
+          "name": "Produto 5 AVANT",
+          "code": "784234329",
+          "value": 4.25
+        },
+        {
+          "id": 6,
+          "name": "Produto 6 AVANT",
+          "code": "784234329",
+          "value": 1.27
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "ADERE",
+      "cnpj": "00.000.000/0000-0",
+      "products": [
+        {
+          "id": 1,
+          "name": "Produto 1",
+          "code": "784234329",
+          "value": 7.28
+        },
+        {
+          "id": 2,
+          "name": "Produto 2",
+          "code": "784234329",
+          "value": 3.75
+        },
+        {
+          "id": 3,
+          "name": "Produto 3",
+          "code": "784234329",
+          "value": 1.42
+        },
+        {
+          "id": 4,
+          "name": "Produto 4",
+          "code": "784234329",
+          "value": 13.5
+        },
+        {
+          "id": 5,
+          "name": "Produto 5",
+          "code": "784234329",
+          "value": 4.25
+        },
+        {
+          "id": 6,
+          "name": "Produto 6",
+          "code": "784234329",
+          "value": 1.27
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "name": "Cofeos Ferragens",
+      "cnpj": "00.000.000/0000-0",
+      "discount": 15
+    },
+    {
+      "id": 2,
+      "name": "Fluzão Malvadão",
+      "cnpj": "00.000.000/0000-0",
+      "discount": 15
+    },
+    {
+      "id": 3,
+      "name": "Trenamar ",
+      "cnpj": "00.000.000/0000-0",
+      "discount": 15
+    },
+    {
+      "id": 4,
+      "name": "DIBA 695 ",
+      "cnpj": "00.000.000/0000-0",
+      "discount": 15
+    }
+  ],
+  "deadlines": [
+    {
+      "id": 1,
+      "deadline": "14/28/42"
+    },
+    {
+      "id": 2,
+      "deadline": "63/70/77/84/91/98/105/112"
+    },
+    {
+      "id": 3,
+      "deadline": "26/56"
+    },
+    {
+      "id": 4,
+      "deadline": "56"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "industry": "ILUMI",
+      "client": "COFEOS FERRAGENS",
+      "total": 170231,
+      "products": [
+        {
+          "id": 1,
+          "name": "Produto 1",
+          "code": "784234329",
+          "value": 7.28,
+          "quantity": 500
+        },
+        {
+          "id": 2,
+          "name": "Produto 2",
+          "code": "784234329",
+          "value": 3.75,
+          "quantity": 500
+        },
+        {
+          "id": 3,
+          "name": "Produto 3",
+          "code": "784234329",
+          "value": 1.42,
+          "quantity": 500
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "industry": "AVANT",
+      "client": "FERRAGENS RAMADA",
+      "total": 20242,
+      "products": [
+        {
+          "id": 1,
+          "name": "Produto 1",
+          "code": "784234329",
+          "value": 7.28,
+          "quantity": 500
+        },
+        {
+          "id": 2,
+          "name": "Produto 2",
+          "code": "784234329",
+          "value": 3.75,
+          "quantity": 500
+        },
+        {
+          "id": 3,
+          "name": "Produto 3",
+          "code": "784234329",
+          "value": 1.42,
+          "quantity": 500
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "industry": "ADERE",
+      "client": "TRENAMAR",
+      "total": 5481,
+      "products": [
+        {
+          "id": 1,
+          "name": "Produto 1",
+          "code": "784234329",
+          "value": 7.28,
+          "quantity": 500
+        },
+        {
+          "id": 2,
+          "name": "Produto 2",
+          "code": "784234329",
+          "value": 3.75,
+          "quantity": 500
+        },
+        {
+          "id": 3,
+          "name": "Produto 3",
+          "code": "784234329",
+          "value": 1.42,
+          "quantity": 500
+        }
+      ]
+    }
+  ]
+}
