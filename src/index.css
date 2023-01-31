@@ -11,3 +11,24 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+input,
+buttom,
+select {
+  outline: none;
+}
+
+.loginTabs {
+  font-weight: medium;
+  color: black;
+  border-bottom: 2px solid rgb(37, 99, 235, 0);
+  width: 50%;
+}
+
+
+.loginTabs[data-state='active'] {
+  font-weight: bold;
+  color: rgb(37 99 235);
+  border-bottom: 2px solid rgb(37, 99, 235);
+  width: 50%;
+}
