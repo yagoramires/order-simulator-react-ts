@@ -10,7 +10,14 @@ const Login = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
 
   return (
-    <div className='flex justify-center items-center min-h-[100vh] bg-image bg-gradient-to-r from-blue-800 to-blue-600'>
+    <section className='flex flex-col gap-10 justify-center items-center min-h-[100vh] bg-image bg-gradient-to-r from-blue-800 to-blue-600'>
+      <h1 className='text-5xl text-white'>
+        <span className='font-bold'>
+          D<span className='text-black'>2</span>B
+        </span>{' '}
+        Sales Platform
+      </h1>
+
       <Tabs.Root
         className='flex flex-col w-[90%] max-w-[600px] shadow-md bg-white rounded-md py-4'
         defaultValue='tab1'
@@ -31,7 +38,7 @@ const Login = () => {
               onChange={(e) => {
                 setLogin(e.target.value)
               }}
-              className='shadow-sm p-2 bg-gray-300 rounded-md'
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='E-mail'
             />
             <input
@@ -40,13 +47,13 @@ const Login = () => {
               onChange={(e) => {
                 setPassword(e.target.value)
               }}
-              className='shadow-sm p-2 bg-gray-300 rounded-md'
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Senha'
             />
 
             <input
               type='submit'
-              className='bg-gradient-to-r from-blue-600 to-blue-800 my-4 p-2 rounded-md text-white font-medium cursor-pointer shadow-sm'
+              className='p-2 my-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-600 to-blue-800'
               value={'Entrar'}
             />
           </form>
@@ -59,7 +66,7 @@ const Login = () => {
               onChange={(e) => {
                 setName(e.target.value)
               }}
-              className='shadow-sm p-2 bg-gray-300 rounded-md'
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Nome'
             />
             <input
@@ -68,7 +75,7 @@ const Login = () => {
               onChange={(e) => {
                 setEmail(e.target.value)
               }}
-              className='shadow-sm p-2 bg-gray-300 rounded-md'
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='E-mail'
             />
             <input
@@ -77,7 +84,7 @@ const Login = () => {
               onChange={(e) => {
                 setPassword(e.target.value)
               }}
-              className='shadow-sm p-2 bg-gray-300 rounded-md'
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Senha'
             />
             <input
@@ -86,18 +93,18 @@ const Login = () => {
               onChange={(e) => {
                 setConfirmPassword(e.target.value)
               }}
-              className='shadow-sm p-2 bg-gray-300 rounded-md'
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Confirmação de senha'
             />
             <input
               type='submit'
-              className='bg-gradient-to-r from-blue-600 to-blue-800 my-4 p-2 rounded-md text-white font-medium cursor-pointer shadow-sm'
+              className='p-2 my-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-600 to-blue-800'
               value={'Registrar'}
             />
           </form>
         </Tabs.Content>
       </Tabs.Root>
-    </div>
+    </section>
   )
 }
 

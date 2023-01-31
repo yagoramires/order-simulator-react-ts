@@ -38,7 +38,10 @@ const Header = ({ industries, industry, setIndustry }: selectIndustry) => {
             </li>
           ))}
 
-          <Link to='/dashboard' className='w-[42px] h-[42px] bg-black rounded-full ml-4'></Link>
+          <Link
+            to='/dashboard/orders'
+            className='w-[42px] h-[42px] bg-black rounded-full ml-4'
+          ></Link>
         </ul>
       </nav>
     </header>
