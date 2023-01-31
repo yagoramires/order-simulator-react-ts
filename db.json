@@ -3,172 +3,220 @@
     {
       "id": 1,
       "name": "ILUMI",
+      "socialname": "ILUMI INDUSTRIA E COMERCIO LTDA",
       "cnpj": "00.000.000/0000-0",
       "products": [
         {
           "id": 1,
-          "name": "Produto 1 ILUMI",
           "code": "784234329",
-          "value": 7.28
+          "name": "Produto 1 ILUMI",
+          "industry": "ILUMI",
+          "price": 7.28
         },
         {
           "id": 2,
           "name": "Produto 2 ILUMI",
           "code": "784234329",
-          "value": 3.75
+          "industry": "ILUMI",
+          "price": 7.28
         },
         {
           "id": 3,
           "name": "Produto 3 ILUMI",
           "code": "784234329",
-          "value": 1.42
+          "industry": "ILUMI",
+          "price": 7.28
         },
         {
           "id": 4,
           "name": "Produto 4 ILUMI",
           "code": "784234329",
-          "value": 13.5
+          "industry": "ILUMI",
+          "price": 7.28
         },
         {
           "id": 5,
           "name": "Produto 5 ILUMI",
           "code": "784234329",
-          "value": 4.25
+          "industry": "ILUMI",
+          "price": 7.28
         },
         {
           "id": 6,
           "name": "Produto 6 ILUMI",
           "code": "784234329",
-          "value": 1.27
+          "industry": "ILUMI",
+          "price": 7.28
         }
       ]
     },
     {
       "id": 2,
       "name": "ITEC",
+      "socialname": "ITEC INDUSTRIA E COMERCIO DE PERFIS E CONDUTORES ELETRICOS LTDA",
+
       "cnpj": "00.000.000/0000-0",
       "products": [
         {
           "id": 1,
           "name": "Produto 1 ITEC",
           "code": "784234329",
-          "value": 7.28
+          "industry": "ITEC",
+          "price": 7.28
         },
         {
           "id": 2,
           "name": "Produto 2 ITEC",
           "code": "784234329",
-          "value": 3.75
+          "industry": "ITEC",
+
+          "price": 3.75
         },
         {
           "id": 3,
           "name": "Produto 3 ITEC",
           "code": "784234329",
-          "value": 1.42
+          "industry": "ITEC",
+
+          "price": 1.42
         },
         {
           "id": 4,
           "name": "Produto 4 ITEC",
           "code": "784234329",
-          "value": 13.5
+          "industry": "ITEC",
+
+          "price": 13.5
         },
         {
           "id": 5,
           "name": "Produto 5 ITEC",
           "code": "784234329",
-          "value": 4.25
+          "industry": "ITEC",
+
+          "price": 4.25
         },
         {
           "id": 6,
           "name": "Produto 6 ITEC",
           "code": "784234329",
-          "value": 1.27
+          "industry": "ITEC",
+
+          "price": 1.27
         }
       ]
     },
     {
       "id": 3,
       "name": "AVANT",
+      "socialname": "LPS DISTRIBUIDORA E MATERIAIS ELÉTRICOS LTDA",
+
       "cnpj": "00.000.000/0000-0",
       "products": [
         {
           "id": 1,
           "name": "Produto 1 AVANT",
           "code": "784234329",
-          "value": 7.28
+          "industry": "AVANT",
+
+          "price": 7.28
         },
         {
           "id": 2,
           "name": "Produto 2 AVANT",
           "code": "784234329",
-          "value": 3.75
+          "industry": "AVANT",
+
+          "price": 3.75
         },
         {
           "id": 3,
           "name": "Produto 3 AVANT",
           "code": "784234329",
-          "value": 1.42
+          "industry": "AVANT",
+
+          "price": 1.42
         },
         {
           "id": 4,
           "name": "Produto 4 AVANT",
           "code": "784234329",
-          "value": 13.5
+          "industry": "AVANT",
+
+          "price": 13.5
         },
         {
           "id": 5,
           "name": "Produto 5 AVANT",
           "code": "784234329",
-          "value": 4.25
+          "industry": "AVANT",
+
+          "price": 4.25
         },
         {
           "id": 6,
           "name": "Produto 6 AVANT",
           "code": "784234329",
-          "value": 1.27
+          "industry": "AVANT",
+
+          "price": 1.27
         }
       ]
     },
     {
       "id": 4,
       "name": "ADERE",
+      "socialname": "ADERE PRODUTOS AUTO ADESIVOS LTDA",
+
       "cnpj": "00.000.000/0000-0",
       "products": [
         {
           "id": 1,
           "name": "Produto 1",
           "code": "784234329",
-          "value": 7.28
+          "industry": "ADERE",
+
+          "price": 7.28
         },
         {
           "id": 2,
           "name": "Produto 2",
           "code": "784234329",
-          "value": 3.75
+          "industry": "ADERE",
+
+          "price": 3.75
         },
         {
           "id": 3,
           "name": "Produto 3",
           "code": "784234329",
-          "value": 1.42
+          "industry": "ADERE",
+
+          "price": 1.42
         },
         {
           "id": 4,
           "name": "Produto 4",
           "code": "784234329",
-          "value": 13.5
+          "industry": "ADERE",
+
+          "price": 13.5
         },
         {
           "id": 5,
           "name": "Produto 5",
           "code": "784234329",
-          "value": 4.25
+          "industry": "ADERE",
+
+          "price": 4.25
         },
         {
           "id": 6,
           "name": "Produto 6",
           "code": "784234329",
-          "value": 1.27
+          "industry": "ADERE",
+
+          "price": 1.27
         }
       ]
     }
@@ -228,21 +276,21 @@
           "id": 1,
           "name": "Produto 1",
           "code": "784234329",
-          "value": 7.28,
+          "price": 7.28,
           "quantity": 500
         },
         {
           "id": 2,
           "name": "Produto 2",
           "code": "784234329",
-          "value": 3.75,
+          "price": 3.75,
           "quantity": 500
         },
         {
           "id": 3,
           "name": "Produto 3",
           "code": "784234329",
-          "value": 1.42,
+          "price": 1.42,
           "quantity": 500
         }
       ]
@@ -257,21 +305,21 @@
           "id": 1,
           "name": "Produto 1",
           "code": "784234329",
-          "value": 7.28,
+          "price": 7.28,
           "quantity": 500
         },
         {
           "id": 2,
           "name": "Produto 2",
           "code": "784234329",
-          "value": 3.75,
+          "price": 3.75,
           "quantity": 500
         },
         {
           "id": 3,
           "name": "Produto 3",
           "code": "784234329",
-          "value": 1.42,
+          "price": 1.42,
           "quantity": 500
         }
       ]
@@ -286,21 +334,21 @@
           "id": 1,
           "name": "Produto 1",
           "code": "784234329",
-          "value": 7.28,
+          "price": 7.28,
           "quantity": 500
         },
         {
           "id": 2,
           "name": "Produto 2",
           "code": "784234329",
-          "value": 3.75,
+          "price": 3.75,
           "quantity": 500
         },
         {
           "id": 3,
           "name": "Produto 3",
           "code": "784234329",
-          "value": 1.42,
+          "price": 1.42,
           "quantity": 500
         }
       ]
@@ -315,21 +363,21 @@
           "id": 1,
           "name": "Produto 1",
           "code": "784234329",
-          "value": 7.28,
+          "price": 7.28,
           "quantity": 500
         },
         {
           "id": 2,
           "name": "Produto 2",
           "code": "784234329",
-          "value": 3.75,
+          "price": 3.75,
           "quantity": 500
         },
         {
           "id": 3,
           "name": "Produto 3",
           "code": "784234329",
-          "value": 1.42,
+          "price": 1.42,
           "quantity": 500
         }
       ]
@@ -344,21 +392,21 @@
           "id": 1,
           "name": "Produto 1",
           "code": "784234329",
-          "value": 7.28,
+          "price": 7.28,
           "quantity": 500
         },
         {
           "id": 2,
           "name": "Produto 2",
           "code": "784234329",
-          "value": 3.75,
+          "price": 3.75,
           "quantity": 500
         },
         {
           "id": 3,
           "name": "Produto 3",
           "code": "784234329",
-          "value": 1.42,
+          "price": 1.42,
           "quantity": 500
         }
       ]
@@ -373,21 +421,21 @@
           "id": 1,
           "name": "Produto 1",
           "code": "784234329",
-          "value": 7.28,
+          "price": 7.28,
           "quantity": 500
         },
         {
           "id": 2,
           "name": "Produto 2",
           "code": "784234329",
-          "value": 3.75,
+          "price": 3.75,
           "quantity": 500
         },
         {
           "id": 3,
           "name": "Produto 3",
           "code": "784234329",
-          "value": 1.42,
+          "price": 1.42,
           "quantity": 500
         }
       ]
@@ -402,21 +450,21 @@
           "id": 1,
           "name": "Produto 1",
           "code": "784234329",
-          "value": 7.28,
+          "price": 7.28,
           "quantity": 500
         },
         {
           "id": 2,
           "name": "Produto 2",
           "code": "784234329",
-          "value": 3.75,
+          "price": 3.75,
           "quantity": 500
         },
         {
           "id": 3,
           "name": "Produto 3",
           "code": "784234329",
-          "value": 1.42,
+          "price": 1.42,
           "quantity": 500
         }
       ]

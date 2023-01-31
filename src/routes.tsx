@@ -21,6 +21,7 @@ const routes = () => {
       </Route>
       <Route path='dashboard/orders/:id' element={<Details />} />
       <Route path='dashboard/industries/:id' element={<IndustriesDetails />} />
+      {/* <Route path='dashboard/industries/:id/:id' element={<ProductDetails />} /> */}
       <Route path='dashboard/clients/:id' element={<Details />} />
       <Route path='dashboard/deadlines/:id' element={<Details />} />
       <Route path='order' element={<Order />} />

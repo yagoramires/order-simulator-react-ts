@@ -4,9 +4,17 @@ import { MdKeyboardArrowLeft } from 'react-icons/md'
 
 interface industryIndustry {
   industry: {
+    id: number
     name: string
-    cnpj: string
     socialname: string
+    cnpj: string
+    products?: Array<{
+      id: number
+      code: string
+      name: string
+      industry: string
+      price: number
+    }>
   }
 }
 
