@@ -69,6 +69,11 @@ const FormDashboard = ({ type }: FormProps) => {
                 placeholder='CNPJ'
               />
               <input
+                type='text'
+                className='p-2 bg-gray-300 rounded-md shadow-sm'
+                placeholder='Rede'
+              />
+              <input
                 type='number'
                 className='p-2 bg-gray-300 rounded-md shadow-sm'
                 placeholder='Desconto'

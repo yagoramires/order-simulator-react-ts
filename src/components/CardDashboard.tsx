@@ -62,7 +62,7 @@ const CardDashboard = ({ type }: CardProps) => {
   }
 
   return (
-    <div className='flex flex-col gap-4 text-black'>
+    <div className='flex flex-col gap-4'>
       {type === 'orders' &&
         orders?.map((order) => (
           <Link

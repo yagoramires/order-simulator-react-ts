@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Order from './pages/Order'
 import Dashboard from './pages/Dashboard'
 import Details from './pages/Details'
+import IndustriesDetails from './pages/IndustriesDetails'
 
 const routes = () => {
   return (
@@ -19,7 +20,7 @@ const routes = () => {
         <Route path='deadlines' element={<Dashboard />} />
       </Route>
       <Route path='dashboard/orders/:id' element={<Details />} />
-      <Route path='dashboard/industries/:id' element={<Details />} />
+      <Route path='dashboard/industries/:id' element={<IndustriesDetails />} />
       <Route path='dashboard/clients/:id' element={<Details />} />
       <Route path='dashboard/deadlines/:id' element={<Details />} />
       <Route path='order' element={<Order />} />
