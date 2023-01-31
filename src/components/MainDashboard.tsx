@@ -10,7 +10,7 @@ const MainDashboard = () => {
     <main className='bg-gradient-to-r from-blue-800 to-blue-600 min-h-[100vh] w-full text-white p-8'>
       <div className='flex items-center justify-between w-full'>
         {nameUrl.includes('orders') && <h1 className='text-2xl font-medium'>Pedidos</h1>}
-        {nameUrl.includes('industries') && <h1 className='text-2xl font-medium'>Fábricas</h1>}
+        {nameUrl.includes('industries') && <h1 className='text-2xl font-medium'>Indústrias</h1>}
         {nameUrl.includes('clients') && <h1 className='text-2xl font-medium'>Clientes</h1>}
         {nameUrl.includes('deadlines') && (
           <h1 className='text-2xl font-medium'>Prazos de Pagamento</h1>

@@ -56,7 +56,7 @@ const Order = () => {
   }, [industry])
 
   return (
-    <div className='min-h-[100vh] bg-image bg-gradient-to-r from-blue-800 to-blue-600 '>
+    <div className='min-h-[100vh] bg-gradient-to-r from-blue-800 to-blue-600'>
       <Header industry={industry} setIndustry={setIndustry} industries={industries} />
 
       <main>

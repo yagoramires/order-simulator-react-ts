@@ -46,7 +46,7 @@ const SidebarDashboard = (props: userProps) => {
                 className='flex items-center gap-4 p-4 md:p-6 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center md:w-full'
               >
                 <FaIndustry />
-                <span className='md:hidden'>Fábricas</span>
+                <span className='md:hidden'>Indústrias</span>
               </Link>
             </li>
             <li className='md:w-[20%]'>
