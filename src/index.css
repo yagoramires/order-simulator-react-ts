@@ -32,3 +32,8 @@ select {
   border-bottom: 2px solid rgb(37, 99, 235);
   width: 50%;
 }
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+
+}

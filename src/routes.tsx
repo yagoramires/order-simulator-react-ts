@@ -8,8 +8,9 @@ import Order from './pages/Order'
 const routes = () => {
   return (
     <Routes>
-      <Route path='/' element={<Login />} />
-      <Route path='/order' element={<Order />} />
+      {/* <Route path='/' element={<Login />} />
+      <Route path='/order' element={<Order />} /> */}
+      <Route path='/' element={<Order />} />
       {/* <Route path='*' element={<NotFoundPage />} /> */}
     </Routes>
   )
