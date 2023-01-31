@@ -28,7 +28,7 @@ interface dataProps {
   total?: string
 }
 
-const CardDashboard = ({ type }: CardProps) => {
+const CardDetails = ({ type }: CardProps) => {
   const [industries, setIndustries] = useState<dataProps[]>([])
   const [deadlines, setDeadlines] = useState<dataProps[]>([])
   const [clients, setClients] = useState<dataProps[]>([])
@@ -139,4 +139,4 @@ const CardDashboard = ({ type }: CardProps) => {
   )
 }
 
-export default CardDashboard
+export default CardDetails

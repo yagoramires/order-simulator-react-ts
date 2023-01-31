@@ -1,4 +1,7 @@
+// React
 import React from 'react'
+
+// Routes
 import { Link } from 'react-router-dom'
 
 interface selectIndustry {

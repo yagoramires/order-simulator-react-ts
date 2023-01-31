@@ -1,8 +1,11 @@
-// COMPONENTS
-
+// Hooks
 import { useEffect, useState } from 'react'
+
+// Components
 import Header from '../components/Header'
 import SelectedIndustryOrder from '../components/SelectedIndustryOrder'
+
+// API
 import { getClients, getDeadLines, getIndustries } from '../services/api'
 
 interface dataProps {

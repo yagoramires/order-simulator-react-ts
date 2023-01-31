@@ -1,4 +1,4 @@
-import React from 'react'
+// Components
 import Product from './Product'
 
 interface IndustryProps {

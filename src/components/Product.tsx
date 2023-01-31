@@ -1,4 +1,7 @@
+// Hooks
 import { useState, useEffect } from 'react'
+
+// Images
 import noImg from '../assets/no-image.jpg'
 
 interface ProductProps {
@@ -23,15 +26,15 @@ const Product = (props: ProductProps) => {
       ) : (
         <img src={noImg} alt={props.name} className='lg:hidden w-[100px]' />
       )}
-      <div className='flex lg:flex-col w-full justify-between p-4'>
-        <div className='flex gap-2 w-full'>
+      <div className='flex justify-between w-full p-4 lg:flex-col'>
+        <div className='flex w-full gap-2'>
           <div className='flex flex-col  text-start gap-1 w-[25%]'>
             <span className='text-xs text-zinc-500'>Código</span>
-            <p className='font-medium mb-2'>{props.code}</p>
+            <p className='mb-2 font-medium'>{props.code}</p>
           </div>
           <div className='flex flex-col  text-start gap-1 w-[75%]'>
             <span className='text-xs text-zinc-500'>Nome</span>
-            <p className='font-medium mb-2'>{props.name}</p>
+            <p className='mb-2 font-medium'>{props.name}</p>
           </div>
         </div>
         <div className='flex gap-4 lg:w-full w-[40%] justify-between items-center'>
@@ -47,7 +50,7 @@ const Product = (props: ProductProps) => {
               type='number'
               value={quantity}
               onChange={(e) => setQuantity(+e.target.value)}
-              className=' text-center p-2 rounded-md'
+              className='p-2 text-center rounded-md '
             />
           </div>
           <div className='flex flex-col gap-1 text-center'>

@@ -1,4 +1,7 @@
+// Hooks
 import { useState } from 'react'
+
+// Component Tabs Radix
 import * as Tabs from '@radix-ui/react-tabs'
 
 const Login = () => {

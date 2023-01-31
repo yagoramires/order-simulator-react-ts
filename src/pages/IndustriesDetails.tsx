@@ -1,6 +1,5 @@
-import React from 'react'
+// Components
 import MainDetails from '../components/MainDetails'
-
 import SidebarDetails from '../components/SidebarDetails'
 
 const IndustriesDetails = () => {

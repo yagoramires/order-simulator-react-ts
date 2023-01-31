@@ -1,5 +1,8 @@
+// Icons
 import { BsCartCheckFill } from 'react-icons/bs'
 import { FaPlus, FaIndustry, FaUserAlt, FaRegCalendarAlt } from 'react-icons/fa'
+
+// Router
 import { Link } from 'react-router-dom'
 
 interface userProps {

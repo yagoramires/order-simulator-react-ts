@@ -9,7 +9,7 @@ interface FormProps {
   type: string
 }
 
-const FormDashboard = ({ type }: FormProps) => {
+const FormDetails = ({ type }: FormProps) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -107,4 +107,4 @@ const FormDashboard = ({ type }: FormProps) => {
   )
 }
 
-export default FormDashboard
+export default FormDetails

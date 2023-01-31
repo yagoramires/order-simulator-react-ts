@@ -1,3 +1,4 @@
+// Components
 import MainDashboard from '../components/MainDashboard'
 import SidebarDashboard from '../components/SidebarDashboard'
 
