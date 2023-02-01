@@ -14,9 +14,10 @@ interface dataProps {
   cnpj?: string
   products?: Array<{
     id: number
-    name: string
     code: string
-    value: number
+    name: string
+    industry: string
+    price: number
   }>
   discount?: number
   deadline?: string
@@ -112,7 +113,7 @@ const Order = () => {
 
           <input
             type='submit'
-            className='fixed right-[5%] bottom-0 bg-gradient-to-l text-white border-t-[1px] border-x-[1px] border-black from-blue-800 to-blue-600 py-2 px-4 rounded-t-md cursor-pointer font-bold shadow-md'
+            className='fixed right-[5%] bottom-0 bg-gradient-to-l text-white border-t-[1px] border-x-[1px] border-blue-900 from-blue-800 to-blue-600 py-2 px-4 rounded-t-md cursor-pointer font-bold shadow-md'
             value={'Finalizar Pedido'}
           />
         </form>

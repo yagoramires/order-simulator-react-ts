@@ -13,9 +13,10 @@ interface selectIndustry {
     cnpj?: string
     products?: Array<{
       id: number
-      name: string
       code: string
-      value: number
+      name: string
+      industry: string
+      price: number
     }>
   }>
 }
