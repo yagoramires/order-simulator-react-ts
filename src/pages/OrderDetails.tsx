@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { MdKeyboardArrowLeft } from 'react-icons/md'
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getOrders } from '../services/api'
 
 interface OrderDetailsProps {
@@ -22,6 +22,7 @@ const OrderDetails = () => {
   const [order, setOrder] = useState<OrderDetailsProps>()
 
   const { id } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     ;(async () => {
@@ -41,13 +42,13 @@ const OrderDetails = () => {
   return (
     <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] flex justify-center items-center'>
       <div className='h-[80vh] w-[90%] bg-white p-8 flex flex-col gap-4 rounded-md shadow-md'>
-        <Link
-          to={window.location.href.replace(`${id}`, '')}
+        <button
+          onClick={() => navigate(-1)}
           className='flex items-center justify-end w-full font-medium text-blue-600'
         >
           <MdKeyboardArrowLeft size={20} />
           Voltar
-        </Link>
+        </button>
         <div className='flex flex-col '>
           <span className='text-xs text-zinc-400'>Cliente</span>
           <span className='font-bold'>{order.client}</span>
