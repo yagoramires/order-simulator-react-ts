@@ -1,6 +1,6 @@
 // Icons
 import { BsCartCheckFill } from 'react-icons/bs'
-import { FaPlus, FaIndustry, FaUserAlt, FaRegCalendarAlt } from 'react-icons/fa'
+import { FaPlus, FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit } from 'react-icons/fa'
 
 // Router
 import { Link } from 'react-router-dom'
@@ -24,7 +24,7 @@ const SidebarDashboard = (props: userProps) => {
       <div className='w-full h-full'>
         <nav>
           <ul className='flex flex-col gap-4 md:flex-row md:justify-center md:gap-0'>
-            <li className='md:w-[20%]'>
+            <li className='md:w-[16.66%]'>
               <Link
                 to='/order'
                 className='flex items-center gap-4 p-4 md:p-6 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center md:w-[full]'
@@ -34,7 +34,7 @@ const SidebarDashboard = (props: userProps) => {
               </Link>
             </li>
 
-            <li className='md:w-[20%]'>
+            <li className='md:w-[16.66%]'>
               <Link
                 to='/dashboard/orders'
                 className='flex items-center gap-4 p-4 md:p-6 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center md:w-full'
@@ -43,7 +43,7 @@ const SidebarDashboard = (props: userProps) => {
                 <span className='md:hidden'>Pedidos</span>
               </Link>
             </li>
-            <li className='md:w-[20%]'>
+            <li className='md:w-[16.66%]'>
               <Link
                 to='/dashboard/industries'
                 className='flex items-center gap-4 p-4 md:p-6 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center md:w-full'
@@ -52,7 +52,7 @@ const SidebarDashboard = (props: userProps) => {
                 <span className='md:hidden'>Indústrias</span>
               </Link>
             </li>
-            <li className='md:w-[20%]'>
+            <li className='md:w-[16.66%]'>
               <Link
                 to='/dashboard/clients'
                 className='flex items-center gap-4 p-4 md:p-6 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center md:w-full'
@@ -61,13 +61,22 @@ const SidebarDashboard = (props: userProps) => {
                 <span className='md:hidden'>Clientes</span>
               </Link>
             </li>
-            <li className='md:w-[20%]'>
+            <li className='md:w-[16.66%]'>
               <Link
                 to='/dashboard/deadlines'
-                className='flex items-center gap-4 p-4 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:p-6 md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none md:justify-center md:w-full'
+                className='flex items-center gap-4 p-4 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:p-6 md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center md:w-full'
               >
                 <FaRegCalendarAlt />
                 <span className='md:hidden'>Prazos de Pagamento</span>
+              </Link>
+            </li>
+            <li className='md:w-[16.66%]'>
+              <Link
+                to='/profile'
+                className='flex items-center gap-4 p-4 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:p-6 md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none md:justify-center md:w-full'
+              >
+                <FaEdit />
+                <span className='md:hidden'>Editar Perfil</span>
               </Link>
             </li>
           </ul>
