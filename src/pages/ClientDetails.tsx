@@ -15,7 +15,7 @@ const ClientDetails = () => {
   const [clients, setClients] = useState<ClientDetailsProps[]>([])
   const [client, setClient] = useState<ClientDetailsProps>()
 
-  const { id } = useParams()
+  const { clientId } = useParams()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -26,10 +26,10 @@ const ClientDetails = () => {
   }, [])
 
   useEffect(() => {
-    const filterClient = clients.filter((order) => `${order.id}` === id)
+    const filterClient = clients.filter((order) => `${order.id}` === clientId)
     const client = filterClient[0]
     setClient(client)
-  }, [clients, id])
+  }, [clients, clientId])
 
   if (!client) return <p>loading</p>
 

@@ -21,7 +21,7 @@ const OrderDetails = () => {
   const [orders, setOrders] = useState<OrderDetailsProps[]>([])
   const [order, setOrder] = useState<OrderDetailsProps>()
 
-  const { id } = useParams()
+  const { orderId } = useParams()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -32,10 +32,10 @@ const OrderDetails = () => {
   }, [])
 
   useEffect(() => {
-    const filterOrder = orders.filter((order) => `${order.id}` === id)
+    const filterOrder = orders.filter((order) => `${order.id}` === orderId)
     const order = filterOrder[0]
     setOrder(order)
-  }, [orders, id])
+  }, [orders, orderId])
 
   if (!order) return <p>loading</p>
 

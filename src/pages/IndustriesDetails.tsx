@@ -21,7 +21,7 @@ interface industriesProps {
 }
 
 const IndustriesDetails = () => {
-  const { id } = useParams()
+  const { industryId } = useParams()
   const [industries, setIndustries] = useState<industriesProps[]>([])
   const [industry, setIndustry] = useState<industriesProps[]>([])
 
@@ -33,9 +33,9 @@ const IndustriesDetails = () => {
   }, [])
 
   useEffect(() => {
-    const industryFilter = industries.filter((item) => `${item.id}` === `${id}`)
+    const industryFilter = industries.filter((item) => `${item.id}` === `${industryId}`)
     setIndustry(industryFilter)
-  }, [id, industries])
+  }, [industryId, industries])
 
   if (industry.length === 0) return <p>loading</p>
 

@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard'
 import ClientDetails from './pages/ClientDetails'
 import IndustriesDetails from './pages/IndustriesDetails'
 import OrderDetails from './pages/OrderDetails'
+import ProductDetails from './pages/ProductDetails'
 
 const routes = () => {
   return (
@@ -20,10 +21,10 @@ const routes = () => {
         <Route path='clients' element={<Dashboard />} />
         <Route path='deadlines' element={<Dashboard />} />
       </Route>
-      <Route path='dashboard/orders/:id' element={<OrderDetails />} />
-      <Route path='dashboard/industries/:id' element={<IndustriesDetails />} />
-      {/* <Route path='dashboard/industries/:id/:id' element={<ProductDetails />} /> */}
-      <Route path='dashboard/clients/:id' element={<ClientDetails />} />
+      <Route path='dashboard/orders/:orderId' element={<OrderDetails />} />
+      <Route path='dashboard/industries/:industryId' element={<IndustriesDetails />} />
+      <Route path='dashboard/industries/:industryId/:productId' element={<ProductDetails />} />
+      <Route path='dashboard/clients/:clientId' element={<ClientDetails />} />
       <Route path='order' element={<Order />} />
       {/* <Route path='*' element={<NotFoundPage />} /> */}
     </Routes>
