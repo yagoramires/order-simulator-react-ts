@@ -47,7 +47,7 @@ const Header = ({ industries, industry, setIndustry }: selectIndustry) => {
             </li>
           ))}
 
-          <Link to='/dashboard/orders'>
+          <Link to='/orders'>
             {userData?.photoURL ? (
               <img
                 src={userData.photoURL}

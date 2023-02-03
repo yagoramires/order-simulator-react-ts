@@ -15,6 +15,53 @@ const SidebarDashboard = () => {
   const { userData } = useContext(AuthContext)
   const { signOutUser } = useAuth()
 
+  const options = [
+    {
+      icon: <FaPlus />,
+      text: 'Novo Pedido',
+      path: 'order',
+    },
+    {
+      icon: <BsCartCheckFill />,
+      text: 'Pedidos',
+      path: 'orders',
+    },
+    {
+      icon: <FaIndustry />,
+      text: 'Indústrias',
+      path: 'industries',
+    },
+    {
+      icon: <FaUserAlt />,
+      text: 'Clientes',
+      path: 'clients',
+    },
+    {
+      icon: <FaRegCalendarAlt />,
+      text: 'Prazos de Pagamento',
+      path: 'deadlines',
+    },
+    {
+      icon: <FaEdit />,
+      text: 'Editar Perfil',
+      path: 'profile',
+    },
+  ]
+
+  const liMap = () => {
+    return options.map((option) => (
+      <li className='md:w-[14.28%]' key={option.path}>
+        <Link
+          to={`/${option.path}`}
+          className='flex items-center gap-4 border-[1px] border-blue-500 p-4 md:p-6 text-xl text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none md:border-r-zinc-300 md:border-y-0 md:border-r-[1px] md:border-l-0 md:justify-center'
+        >
+          {option.icon}
+          <span className='font-medium md:hidden'>{option.text}</span>
+        </Link>
+      </li>
+    ))
+  }
+
   return (
     <aside className='flex flex-col gap-16 items-center justify-between p-4 md:p-0 bg-white md:fixed md:left-0 md:right-0 md:bottom-0 md:z-[999] md:w-full md:flex-row w-[450px] shadow-lg'>
       <div className='flex flex-col items-center justify-center gap-4 md:hidden'>
@@ -37,68 +84,15 @@ const SidebarDashboard = () => {
       <div className='w-full h-full'>
         <nav>
           <ul className='flex flex-col gap-4 md:flex-row md:justify-center md:gap-0'>
-            <li className='md:w-[14.28%]'>
-              <Link
-                to='/order'
-                className='flex items-center gap-4 p-4 md:p-6 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center'
-              >
-                <FaPlus />
-                <span className='md:hidden'>Novo Pedido</span>
-              </Link>
-            </li>
+            {liMap()}
 
-            <li className='md:w-[14.28%]'>
-              <Link
-                to='/dashboard/orders'
-                className='flex items-center gap-4 p-4 md:p-6 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center '
-              >
-                <BsCartCheckFill />
-                <span className='md:hidden'>Pedidos</span>
-              </Link>
-            </li>
-            <li className='md:w-[14.28%]'>
-              <Link
-                to='/dashboard/industries'
-                className='flex items-center gap-4 p-4 md:p-6 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center '
-              >
-                <FaIndustry />
-                <span className='md:hidden'>Indústrias</span>
-              </Link>
-            </li>
-            <li className='md:w-[14.28%]'>
-              <Link
-                to='/dashboard/clients'
-                className='flex items-center gap-4 p-4 md:p-6 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center '
-              >
-                <FaUserAlt />
-                <span className='md:hidden'>Clientes</span>
-              </Link>
-            </li>
-            <li className='md:w-[14.28%]'>
-              <Link
-                to='/dashboard/deadlines'
-                className='flex items-center gap-4 p-4 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:p-6 md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center '
-              >
-                <FaRegCalendarAlt />
-                <span className='md:hidden'>Prazos de Pagamento</span>
-              </Link>
-            </li>
-            <li className='md:w-[14.28%]'>
-              <Link
-                to='/profile'
-                className='flex items-center gap-4 p-4 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:p-6 md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center '
-              >
-                <FaEdit />
-                <span className='md:hidden'>Editar Perfil</span>
-              </Link>
-            </li>
             <li className='md:w-[14.28%]'>
               <button
                 onClick={signOutUser}
-                className='flex items-center w-full gap-4 p-4 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:p-6 md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none md:justify-center'
+                className='flex items-center gap-4 border-[1px] border-blue-500 p-4 md:p-6 text-xl text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none md:border-r-zinc-300 md:border-y-0 md:border-r-[1px] md:border-l-0 md:justify-center w-full'
               >
                 <MdLogout />
-                <span className='md:hidden'>Sair</span>
+                <span className='font-medium md:hidden'>Sair</span>
               </button>
             </li>
           </ul>

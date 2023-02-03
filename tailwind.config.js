@@ -19,6 +19,9 @@ module.exports = {
       sm: { max: '639px' },
       // => @media (max-width: 639px) { ... }
     },
+    boxShadow: {
+      md: '0 0 5px 0 rgba(0, 0, 0, 0.5)',
+    },
   },
   plugins: [],
 }

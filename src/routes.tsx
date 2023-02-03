@@ -36,16 +36,14 @@ const routes = () => {
       {user && (
         <>
           <Route path='order' element={<Order />} />
-          <Route path='dashboard'>
-            <Route path='orders' element={<Dashboard />} />
-            <Route path='industries' element={<Dashboard />} />
-            <Route path='clients' element={<Dashboard />} />
-            <Route path='deadlines' element={<Dashboard />} />
-          </Route>
-          <Route path='dashboard/orders/:orderId' element={<OrderDetails />} />
-          <Route path='dashboard/industries/:industryId' element={<IndustriesDetails />} />
-          <Route path='dashboard/industries/:industryId/:productId' element={<ProductDetails />} />
-          <Route path='dashboard/clients/:clientId' element={<ClientDetails />} />
+          <Route path='orders' element={<Dashboard />} />
+          <Route path='industries' element={<Dashboard />} />
+          <Route path='clients' element={<Dashboard />} />
+          <Route path='deadlines' element={<Dashboard />} />
+          <Route path='orders/:orderId' element={<OrderDetails />} />
+          <Route path='industries/:industryId' element={<IndustriesDetails />} />
+          <Route path='industries/:industryId/:productId' element={<ProductDetails />} />
+          <Route path='clients/:clientId' element={<ClientDetails />} />
           <Route path='profile' element={<Profile />} />
         </>
       )}

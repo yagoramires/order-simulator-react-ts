@@ -13,7 +13,7 @@ const FormDashboard = ({ type }: FormProps) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <div className='relative flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md'>
+        <div className='relative flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md shadow-md'>
           <IoMdAdd /> Novo
         </div>
       </Dialog.Trigger>

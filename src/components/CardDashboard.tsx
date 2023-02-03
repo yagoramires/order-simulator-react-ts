@@ -73,7 +73,7 @@ const CardDashboard = ({ type }: CardProps) => {
           <Link
             to={`${order.id}`}
             key={order.id}
-            className='flex w-full gap-2 p-4 text-white transition-all duration-200 bg-blue-700 rounded-md cursor-pointer lg:flex-col hover:bg-blue-600'
+            className='flex w-full gap-2 p-4 text-white transition-all duration-200 bg-blue-700 rounded-md shadow-md cursor-pointer lg:flex-col hover:bg-blue-600'
           >
             <div className='flex flex-col w-[60%] md:w-[100%]'>
               <span className='text-xs text-zinc-300'>Cliente</span>

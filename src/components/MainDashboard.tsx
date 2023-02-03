@@ -23,7 +23,7 @@ const MainDashboard = () => {
         {nameUrl.includes('orders') && (
           <Link
             to='/order'
-            className='flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md '
+            className='flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md shadow-md'
           >
             <IoMdAdd /> Novo
           </Link>
