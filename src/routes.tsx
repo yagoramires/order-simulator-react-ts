@@ -16,6 +16,7 @@ import ClientDetails from './pages/ClientDetails'
 import IndustriesDetails from './pages/IndustriesDetails'
 import OrderDetails from './pages/OrderDetails'
 import ProductDetails from './pages/ProductDetails'
+import Profile from './pages/Profile'
 
 const routes = () => {
   const { user } = useContext(AuthContext)
@@ -45,6 +46,7 @@ const routes = () => {
           <Route path='dashboard/industries/:industryId' element={<IndustriesDetails />} />
           <Route path='dashboard/industries/:industryId/:productId' element={<ProductDetails />} />
           <Route path='dashboard/clients/:clientId' element={<ClientDetails />} />
+          <Route path='profile' element={<Profile />} />
         </>
       )}
     </Routes>

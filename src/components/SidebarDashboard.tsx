@@ -12,18 +12,26 @@ import { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
 
 const SidebarDashboard = () => {
-  const { user } = useContext(AuthContext)
+  const { userData } = useContext(AuthContext)
   const { signOutUser } = useAuth()
 
   return (
     <aside className='flex flex-col gap-16 items-center justify-between p-4 md:p-0 bg-white md:fixed md:left-0 md:right-0 md:bottom-0 md:z-[999] md:w-full md:flex-row w-[450px] shadow-lg'>
       <div className='flex flex-col items-center justify-center gap-4 md:hidden'>
-        <img
-          src={''}
-          alt=''
-          className='w-48 h-48 border-4 border-blue-600 rounded-full cursor-pointer'
-        />
-        <h1 className='text-2xl font-medium text-blue-600 cursor-pointer'>Yago</h1>
+        {userData?.photoURL ? (
+          <img
+            src={userData.photoURL}
+            alt=''
+            className='w-48 h-48 border-4 border-blue-600 rounded-full '
+          />
+        ) : (
+          <div className='flex items-center justify-center w-48 h-48 overflow-hidden border-4 border-blue-600 rounded-full'>
+            <FaUserAlt size={100} className='text-blue-600' />
+          </div>
+        )}
+        <h1 className='text-2xl font-medium text-blue-600 cursor-pointer'>
+          {userData.displayName}
+        </h1>
       </div>
 
       <div className='w-full h-full'>
@@ -77,7 +85,7 @@ const SidebarDashboard = () => {
             </li>
             <li className='md:w-[14.28%]'>
               <Link
-                to='/dashboard/deadlines'
+                to='/profile'
                 className='flex items-center gap-4 p-4 text-xl font-bold text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:p-6 md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none border-r-zinc-300 border-r-[1px] md:justify-center '
               >
                 <FaEdit />
