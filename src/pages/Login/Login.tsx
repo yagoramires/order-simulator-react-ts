@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 
 // Component Tabs Radix
 import * as Tabs from '@radix-ui/react-tabs'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 import { toast } from 'react-toastify'
-import Loading from '../components/Loading'
+import Loading from '../../components/Loading'
 
 const Login = () => {
   const [email, setEmail] = useState('')

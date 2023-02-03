@@ -5,11 +5,11 @@ import { FaPlus, FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit } from 'react-i
 
 // Router
 import { Link } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 
 // Context
 import { useContext } from 'react'
-import { AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../../context/AuthContext'
 
 const SidebarDashboard = () => {
   const { userData } = useContext(AuthContext)

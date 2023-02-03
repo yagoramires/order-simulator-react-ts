@@ -2,66 +2,66 @@
 import { useEffect, useState } from 'react'
 
 // Components
-import Header from '../components/Header'
-import SelectedIndustryOrder from '../components/SelectedIndustryOrder'
+import Header from '../../components/Order/Header'
+import SelectedIndustryOrder from '../../components/Order/SelectedIndustryOrder'
 
 // API
-import { getClients, getDeadLines, getIndustries } from '../services/api'
+import { getClients, getDeadLines, getIndustries } from '../../services/api'
 
-interface dataProps {
-  id: number
-  name: string
-  cnpj?: string
-  products?: Array<{
-    id: number
-    code: string
-    name: string
-    industry: string
-    price: number
-  }>
-  discount?: number
-  deadline?: string
-}
+// interface dataProps {
+//   id: number
+//   name: string
+//   cnpj?: string
+//   products?: Array<{
+//     id: number
+//     code: string
+//     name: string
+//     industry: string
+//     price: number
+//   }>
+//   discount?: number
+//   deadline?: string
+// }
 
 const Order = () => {
-  const total = 14765.23
+  const total = 0
 
-  const [industries, setIndustries] = useState<dataProps[]>([])
-  const [deadlines, setDeadlines] = useState<dataProps[]>([])
-  const [clients, setClients] = useState<dataProps[]>([])
-  const [selectedIndustry, setSelectedIndustry] = useState<dataProps[]>([])
+  // const [industries, setIndustries] = useState<dataProps[]>([])
+  // const [deadlines, setDeadlines] = useState<dataProps[]>([])
+  // const [clients, setClients] = useState<dataProps[]>([])
+  // const [selectedIndustry, setSelectedIndustry] = useState<dataProps[]>([])
 
   const [industry, setIndustry] = useState('')
 
-  useEffect(() => {
-    ;(async () => {
-      const industriesRequest = await getIndustries()
-      setIndustries(industriesRequest.data)
-    })()
-  }, [])
+  // useEffect(() => {
+  //   ;(async () => {
+  //     const industriesRequest = await getIndustries()
+  //     setIndustries(industriesRequest.data)
+  //   })()
+  // }, [])
 
-  useEffect(() => {
-    ;(async () => {
-      const deadlinesRequest = await getDeadLines()
-      setDeadlines(deadlinesRequest.data)
-    })()
-  }, [])
+  // useEffect(() => {
+  //   ;(async () => {
+  //     const deadlinesRequest = await getDeadLines()
+  //     setDeadlines(deadlinesRequest.data)
+  //   })()
+  // }, [])
 
-  useEffect(() => {
-    ;(async () => {
-      const clientsRequest = await getClients()
-      setClients(clientsRequest.data)
-    })()
-  }, [])
+  // useEffect(() => {
+  //   ;(async () => {
+  //     const clientsRequest = await getClients()
+  //     setClients(clientsRequest.data)
+  //   })()
+  // }, [])
 
-  useEffect(() => {
-    const filteredIndustry = industries.filter((item) => industry === item.name)
-    setSelectedIndustry(filteredIndustry)
-  }, [industry])
+  // useEffect(() => {
+  //   const filteredIndustry = industries.filter((item) => industry === item.name)
+  //   setSelectedIndustry(filteredIndustry)
+  // }, [industry])
 
   return (
     <div className='min-h-[100vh] bg-gradient-to-r from-blue-800 to-blue-600'>
-      <Header industry={industry} setIndustry={setIndustry} industries={industries} />
+      <Header industry={industry} setIndustry={setIndustry} />
 
       <main>
         <form className='flex flex-col items-center justify-center'>
@@ -77,12 +77,12 @@ const Order = () => {
                 <option value='selecione' disabled>
                   Selecione
                 </option>
-                {clients.length > 0 &&
+                {/* {clients.length > 0 &&
                   clients.map((client) => (
                     <option value={client.name} key={client.id}>
                       {client.name}
                     </option>
-                  ))}
+                  ))} */}
               </select>
             </div>
             <div className='flex flex-col w-full gap-1 text-start'>
@@ -95,11 +95,11 @@ const Order = () => {
                 <option value='selecione' disabled>
                   Selecione
                 </option>
-                {deadlines.map((deadline) => (
+                {/* {deadlines.map((deadline) => (
                   <option value={deadline.deadline} key={deadline.id}>
                     {deadline.deadline}
                   </option>
-                ))}
+                ))} */}
               </select>
             </div>
 
@@ -109,7 +109,7 @@ const Order = () => {
             </div>
           </div>
 
-          <SelectedIndustryOrder industry={selectedIndustry} />
+          {/* <SelectedIndustryOrder industry={selectedIndustry} /> */}
 
           <input
             type='submit'

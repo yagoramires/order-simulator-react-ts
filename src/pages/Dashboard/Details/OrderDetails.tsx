@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getOrders } from '../services/api'
+import { getOrders } from '../../../services/api'
 
 interface OrderDetailsProps {
   id: number

@@ -1,31 +1,44 @@
 // React
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 // Routes
 import { Link } from 'react-router-dom'
 
 // Context
-import { AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../../context/AuthContext'
+import { useFetchCollection } from '../../hooks/useFetchCollection'
 
-interface selectIndustry {
+interface HeaderProps {
   industry: string
   setIndustry: React.Dispatch<React.SetStateAction<string>>
-  industries: Array<{
+}
+interface IndustryProps {
+  id?: number
+  socialName?: string
+  fantasyName?: string
+  cnpj?: string
+  products?: Array<{
     id: number
+    code: string
     name: string
-    cnpj?: string
-    products?: Array<{
-      id: number
-      code: string
-      name: string
-      industry: string
-      price: number
-    }>
+    industry: string
+    price: number
   }>
 }
 
-const Header = ({ industries, industry, setIndustry }: selectIndustry) => {
+const Header = ({ industry, setIndustry }: HeaderProps) => {
   const { userData } = useContext(AuthContext)
+  const { documents } = useFetchCollection('industries')
+
+  const [industries, setIndustries] = useState()
+
+  // useEffect(() => {
+  //   if (documents) {
+  //     setIndustries(documents)
+  //   }
+  // }, [documents])
+
+  console.log(documents)
 
   return (
     <header className='flex items-center justify-between p-4 shadow-lg bg-gradient-to-r from-white to-gray-200'>
@@ -35,15 +48,15 @@ const Header = ({ industries, industry, setIndustry }: selectIndustry) => {
 
       <nav>
         <ul className='flex items-center justify-between gap-2 text-xl font-bold text-blue-600 md:text-base'>
-          {industries?.map((item) => (
+          {documents?.map((item) => (
             <li
-              onClick={() => setIndustry(item.name)}
+              // onClick={() => setIndustry(item.fantasyName)}
               className={`${
                 industry === item.name ? 'border-b-4 border-blue-600' : 'border-b-4'
               } cursor-pointer hover:border-blue-600`}
               key={item.id}
             >
-              {item.name}
+              {/* {item.name} */}
             </li>
           ))}
 

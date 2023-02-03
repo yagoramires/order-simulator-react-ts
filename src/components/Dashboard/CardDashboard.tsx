@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react'
 
 // Router
 import { Link } from 'react-router-dom'
+import { useFetchCollection } from '../../hooks/useFetchCollection'
 
 // API
-import { getClients, getDeadLines, getIndustries, getOrders } from '../services/api'
+import { getClients, getDeadLines, getIndustries, getOrders } from '../../services/api'
 
 interface CardProps {
   type: string
@@ -34,12 +35,8 @@ const CardDashboard = ({ type }: CardProps) => {
   const [clients, setClients] = useState<dataProps[]>([])
   const [orders, setOrders] = useState<dataProps[]>([])
 
-  useEffect(() => {
-    ;(async () => {
-      const industriesRequest = await getIndustries()
-      setIndustries(industriesRequest.data)
-    })()
-  }, [])
+  const { documents } = useFetchCollection(type)
+  console.log(documents)
 
   useEffect(() => {
     ;(async () => {
@@ -69,7 +66,7 @@ const CardDashboard = ({ type }: CardProps) => {
   return (
     <div className='flex flex-col gap-4'>
       {type === 'orders' &&
-        orders?.map((order) => (
+        documents?.map((order) => (
           <Link
             to={`${order.id}`}
             key={order.id}
@@ -97,15 +94,21 @@ const CardDashboard = ({ type }: CardProps) => {
           </Link>
         ))}
       {type === 'industries' &&
-        industries?.map((industry) => (
+        documents?.map((industry) => (
           <Link
             to={`${industry.id}`}
             className='flex w-full gap-2 p-4 text-white transition-all duration-200 bg-blue-700 rounded-md cursor-pointer md:flex-col hover:bg-blue-600'
             key={industry.id}
           >
-            <div className='flex flex-col'>
-              <span className='text-xs text-zinc-300'>Fábrica</span>
-              <span className='font-medium'>{industry.name}</span>
+            <div className='flex items-center justify-between w-full gap-4'>
+              <div className='flex flex-col w-full'>
+                <span className='text-xs text-zinc-300'>Indústria</span>
+                <span className='font-medium'>{industry.socialName}</span>
+              </div>
+              <div className='flex flex-col w-full lg:hidden'>
+                <span className='text-xs text-zinc-300'>CNPJ</span>
+                <span className='text-sm font-normal '>{industry.cnpj}</span>
+              </div>
             </div>
           </Link>
         ))}

@@ -7,6 +7,7 @@ import { IoMdAdd } from 'react-icons/io'
 // Components
 import CardDashboard from './CardDashboard'
 import FormDashboard from './FormDashboard'
+import IndustryForm from './IndustryForm'
 
 const MainDashboard = () => {
   const nameUrl = window.location.href
@@ -28,7 +29,7 @@ const MainDashboard = () => {
             <IoMdAdd /> Novo
           </Link>
         )}
-        {nameUrl.includes('industries') && <FormDashboard type={'industries'} />}
+        {nameUrl.includes('industries') && <IndustryForm />}
         {nameUrl.includes('clients') && <FormDashboard type={'clients'} />}
         {nameUrl.includes('deadlines') && <FormDashboard type={'deadlines'} />}
       </div>

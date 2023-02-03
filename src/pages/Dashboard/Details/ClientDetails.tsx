@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getClients } from '../services/api'
+import { getClients } from '../../../services/api'
 
 interface ClientDetailsProps {
   id: number

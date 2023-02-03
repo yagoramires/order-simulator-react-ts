@@ -5,11 +5,20 @@ import { MdClose } from 'react-icons/md'
 // Component Dialog Radix
 import * as Dialog from '@radix-ui/react-dialog'
 
+// Hooks
+import { useHandleIndustries } from '../../hooks/useHandleIndustries'
+
 interface FormProps {
   type: string
 }
 
 const FormDashboard = ({ type }: FormProps) => {
+  const { addIndustry } = useHandleIndustries()
+
+  const handleIndustry = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+  }
+
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -30,7 +39,7 @@ const FormDashboard = ({ type }: FormProps) => {
           </Dialog.Title>
 
           {type === 'industries' && (
-            <form className='flex flex-col w-full gap-4'>
+            <form className='flex flex-col w-full gap-4' onSubmit={handleIndustry}>
               <input
                 type='text'
                 className='p-2 bg-gray-300 rounded-md shadow-sm'

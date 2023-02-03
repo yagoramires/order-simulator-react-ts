@@ -1,6 +1,6 @@
 // Components
-import MainDashboard from '../components/MainDashboard'
-import SidebarDashboard from '../components/SidebarDashboard'
+import MainDashboard from '../../components/Dashboard/MainDashboard'
+import SidebarDashboard from '../../components/Dashboard/SidebarDashboard'
 
 const Dashboard = () => {
   return (
