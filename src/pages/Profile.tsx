@@ -1,5 +1,5 @@
 // Context
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaUserAlt } from 'react-icons/fa'
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
@@ -14,6 +14,7 @@ const Profile = () => {
     updateDisplayName,
     updateUserEmail,
     updateUserPassword,
+    uploadProgress,
     loadingImg,
     loadingName,
     loadingEmail,
@@ -22,7 +23,7 @@ const Profile = () => {
 
   const navigate = useNavigate()
 
-  //   const [profileImg, setProfileImg] = useState<Blob>()
+  const [profileImg, setProfileImg] = useState(null)
   const [displayName, setDisplayName] = useState(userData.displayName || '')
   const [email, setEmail] = useState(userData.email || '')
   const [password, setPassword] = useState('')
@@ -31,9 +32,9 @@ const Profile = () => {
   const handleUpdateProfile = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // if (profileImg) {
-    //     updateImage(image)
-    // }
+    if (profileImg) {
+      updateImage(profileImg)
+    }
 
     if (displayName !== userData.displayName && displayName !== '') {
       updateDisplayName(displayName)
@@ -48,9 +49,13 @@ const Profile = () => {
     }
   }
 
+  const handleSelectImage = (e: any) => {
+    setProfileImg(e.target.files[0])
+  }
+
   return (
-    <main className='min-h-[100vh] bg-gradient-to-r from-blue-800 to-blue-600 flex justify-center items-center'>
-      <div className='w-[90%] bg-white max-h-[900px] max-w-[1200px] rounded-md shadow-md p-8 flex flex-col gap-4'>
+    <main className='min-h-[100vh] bg-gradient-to-r from-blue-800 to-blue-600 flex justify-center items-center py-4'>
+      <div className='w-[90%] bg-white max-w-[1200px] rounded-md shadow-md p-8 flex flex-col gap-4'>
         <button
           onClick={() => navigate(-1)}
           className='flex items-center justify-end w-full font-medium text-blue-600'
@@ -61,13 +66,21 @@ const Profile = () => {
         <div className='flex flex-col items-center justify-center gap-4 mb-4'>
           {userData?.photoURL ? (
             <img
-              src={userData.photoURL}
+              src={profileImg ? URL.createObjectURL(profileImg) : userData.photoURL}
               alt=''
               className='w-48 h-48 border-4 border-blue-600 rounded-full md:w-36 md:h-36 '
             />
           ) : (
             <div className='flex items-center justify-center w-48 h-48 overflow-hidden border-4 border-blue-600 rounded-full md:w-36 md:h-36'>
-              <FaUserAlt className='text-blue-600 text-[100px] md:text-[50px]' />
+              {profileImg ? (
+                <img
+                  src={URL.createObjectURL(profileImg)}
+                  alt=''
+                  className='w-48 h-48 rounded-full md:w-36 md:h-36 '
+                />
+              ) : (
+                <FaUserAlt className='text-blue-600 text-[100px] md:text-[50px]' />
+              )}
             </div>
           )}
           <h1 className='text-2xl font-medium text-blue-600 cursor-pointer md:text-xl'>
@@ -80,7 +93,7 @@ const Profile = () => {
             type='file'
             placeholder='Nome'
             className='w-full p-2 bg-gray-300 rounded-md shadow-sm'
-            // onChange={(e) => setProfileImg(e.target.files[0])}
+            onChange={handleSelectImage}
           />
           <input
             type='text'

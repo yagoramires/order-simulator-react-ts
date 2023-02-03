@@ -20,7 +20,7 @@ const MainDetails = ({ products }: productProps) => {
 
         <FormDetails industry={'ILUMI'} />
       </div>
-      <div className='flex flex-col gap-4 p-8 my-10 bg-white  shadow-md h-[75vh] overflow-y-scroll rounded-md'>
+      <div className='flex flex-col gap-4 p-8 my-10 bg-white  shadow-md max-h-[75vh] overflow-y-scroll rounded-md'>
         {products && products.map((product) => <CardDetails product={product} key={product.id} />)}
       </div>
     </main>

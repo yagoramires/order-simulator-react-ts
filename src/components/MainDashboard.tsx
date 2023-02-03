@@ -32,7 +32,7 @@ const MainDashboard = () => {
         {nameUrl.includes('clients') && <FormDashboard type={'clients'} />}
         {nameUrl.includes('deadlines') && <FormDashboard type={'deadlines'} />}
       </div>
-      <div className='p-8 my-10 bg-white rounded-md shadow-md h-[75vh] overflow-y-scroll'>
+      <div className='p-8 my-10 bg-white rounded-md shadow-md max-h-[75vh] overflow-y-scroll'>
         {/* <div> */}
         {nameUrl.includes('orders') && <CardDashboard type={'orders'} />}
         {nameUrl.includes('industries') && <CardDashboard type={'industries'} />}

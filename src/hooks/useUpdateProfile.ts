@@ -12,12 +12,10 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { toast } from 'react-toastify'
 
 export const useUpdateProfile = () => {
+  const [uploadProgress, setUploadProgress] = useState(0)
   const [loadingImg, setLoadingImg] = useState(false)
-
   const [loadingName, setLoadingName] = useState(false)
-
   const [loadingEmail, setLoadingEmail] = useState(false)
-
   const [loadingPassword, setLoadingPassword] = useState(false)
 
   const auth = getAuth(app)
@@ -35,10 +33,10 @@ export const useUpdateProfile = () => {
         'state_changed',
         (snapshot) => {
           const uploadingProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          console.log(uploadingProgress)
+          setUploadProgress(uploadingProgress)
         },
         (error) => {
-          alert(error.message)
+          toast.error(error.message)
         },
         async () => {
           const url = await getDownloadURL(uploadingTask.snapshot.ref)
@@ -102,6 +100,7 @@ export const useUpdateProfile = () => {
     updateDisplayName,
     updateUserEmail,
     updateUserPassword,
+    uploadProgress,
     loadingImg,
     loadingName,
     loadingEmail,
