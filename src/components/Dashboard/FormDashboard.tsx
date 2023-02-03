@@ -38,64 +38,6 @@ const FormDashboard = ({ type }: FormProps) => {
             </Dialog.Close>
           </Dialog.Title>
 
-          {type === 'industries' && (
-            <form className='flex flex-col w-full gap-4' onSubmit={handleIndustry}>
-              <input
-                type='text'
-                className='p-2 bg-gray-300 rounded-md shadow-sm'
-                placeholder='Nome Fantasia'
-              />
-              <input
-                type='text'
-                className='p-2 bg-gray-300 rounded-md shadow-sm'
-                placeholder='Razão Social'
-              />
-              <input
-                type='text'
-                className='p-2 bg-gray-300 rounded-md shadow-sm'
-                placeholder='CNPJ'
-              />
-              <input
-                type='submit'
-                className='p-2 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-800 to-blue-600'
-                value={'Adicionar'}
-              />
-            </form>
-          )}
-          {type === 'clients' && (
-            <form className='flex flex-col w-full gap-4'>
-              <input
-                type='text'
-                className='p-2 bg-gray-300 rounded-md shadow-sm'
-                placeholder='Nome Fantasia'
-              />
-              <input
-                type='text'
-                className='p-2 bg-gray-300 rounded-md shadow-sm'
-                placeholder='Razão Social'
-              />
-              <input
-                type='text'
-                className='p-2 bg-gray-300 rounded-md shadow-sm'
-                placeholder='CNPJ'
-              />
-              <input
-                type='text'
-                className='p-2 bg-gray-300 rounded-md shadow-sm'
-                placeholder='Rede'
-              />
-              <input
-                type='number'
-                className='p-2 bg-gray-300 rounded-md shadow-sm'
-                placeholder='Desconto'
-              />
-              <input
-                type='submit'
-                className='p-2 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-800 to-blue-600'
-                value={'Adicionar'}
-              />
-            </form>
-          )}
           {type === 'deadlines' && (
             <form className='flex flex-col w-full gap-4'>
               <input

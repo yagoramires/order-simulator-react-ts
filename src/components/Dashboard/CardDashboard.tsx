@@ -5,59 +5,12 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useFetchCollection } from '../../hooks/useFetchCollection'
 
-// API
-import { getClients, getDeadLines, getIndustries, getOrders } from '../../services/api'
-
 interface CardProps {
   type: string
 }
 
-interface dataProps {
-  id: number
-  name: string
-  cnpj?: string
-  products?: Array<{
-    id: number
-    name: string
-    code: string
-    value: number
-  }>
-  discount?: number
-  deadline?: string
-  client?: string
-  industry?: string
-  total?: string
-}
-
 const CardDashboard = ({ type }: CardProps) => {
-  const [industries, setIndustries] = useState<dataProps[]>([])
-  const [deadlines, setDeadlines] = useState<dataProps[]>([])
-  const [clients, setClients] = useState<dataProps[]>([])
-  const [orders, setOrders] = useState<dataProps[]>([])
-
-  const { documents } = useFetchCollection(type)
-  console.log(documents)
-
-  useEffect(() => {
-    ;(async () => {
-      const deadlinesRequest = await getDeadLines()
-      setDeadlines(deadlinesRequest.data)
-    })()
-  }, [])
-
-  useEffect(() => {
-    ;(async () => {
-      const clientsRequest = await getClients()
-      setClients(clientsRequest.data)
-    })()
-  }, [])
-
-  useEffect(() => {
-    ;(async () => {
-      const ordersRequest = await getOrders()
-      setOrders(ordersRequest.data)
-    })()
-  }, [])
+  const { industries, clients, deadlines, orders } = useFetchCollection(type)
 
   const transform = (value: number) => {
     return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
@@ -66,7 +19,7 @@ const CardDashboard = ({ type }: CardProps) => {
   return (
     <div className='flex flex-col gap-4'>
       {type === 'orders' &&
-        documents?.map((order) => (
+        orders?.map((order) => (
           <Link
             to={`${order.id}`}
             key={order.id}
@@ -74,7 +27,7 @@ const CardDashboard = ({ type }: CardProps) => {
           >
             <div className='flex flex-col w-[60%] md:w-[100%]'>
               <span className='text-xs text-zinc-300'>Cliente</span>
-              <span className='font-medium'>{order.client}</span>
+              <span className='font-medium'>{order.clientName}</span>
             </div>
 
             <div className='flex gap-2 w-[40%] md:w-[100%]'>
@@ -84,7 +37,7 @@ const CardDashboard = ({ type }: CardProps) => {
               </div>
               <div className='flex flex-col md:w-[33.33%] '>
                 <span className='text-xs text-zinc-300'>Data</span>
-                <span className='font-medium'>31/01/2023</span>
+                <span className='font-medium'>{order.createdAt}</span>
               </div>
               <div className='flex flex-col md:w-[33.33%] '>
                 <span className='text-xs text-zinc-300'>Total</span>
@@ -94,7 +47,7 @@ const CardDashboard = ({ type }: CardProps) => {
           </Link>
         ))}
       {type === 'industries' &&
-        documents?.map((industry) => (
+        industries?.map((industry) => (
           <Link
             to={`${industry.id}`}
             className='flex w-full gap-2 p-4 text-white transition-all duration-200 bg-blue-700 rounded-md cursor-pointer md:flex-col hover:bg-blue-600'
@@ -121,7 +74,7 @@ const CardDashboard = ({ type }: CardProps) => {
           >
             <div className='flex flex-col'>
               <span className='text-xs text-zinc-300'>Cliente</span>
-              <span className='font-medium'>{client.name}</span>
+              <span className='font-medium'>{client.socialName}</span>
             </div>
           </Link>
         ))}
@@ -134,7 +87,7 @@ const CardDashboard = ({ type }: CardProps) => {
           >
             <div className='flex flex-col'>
               <span className='text-xs text-zinc-300'>Prazo</span>
-              <span className='font-medium'>{deadline.deadline}</span>
+              <span className='font-medium'>{deadline.value}</span>
             </div>
           </Link>
         ))}

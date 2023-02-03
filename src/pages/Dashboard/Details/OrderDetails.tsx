@@ -4,12 +4,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getOrders } from '../../../services/api'
 
 interface OrderDetailsProps {
-  id: number
+  id: string
   industry: string
   client: string
   total: number
   products: Array<{
-    id: number
+    id: string
     name: string
     code: string
     price: number

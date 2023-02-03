@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 interface ProductProps {
   product: {
-    id: number
+    id: string
     code: string
     name: string
     industry: string

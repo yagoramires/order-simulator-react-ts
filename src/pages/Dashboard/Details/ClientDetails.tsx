@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getClients } from '../../../services/api'
 
 interface ClientDetailsProps {
-  id: number
+  id: string
   name: string
   cnpj: string
   discount: number

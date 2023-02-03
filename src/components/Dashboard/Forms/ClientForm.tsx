@@ -9,30 +9,45 @@ import { MdClose } from 'react-icons/md'
 import * as Dialog from '@radix-ui/react-dialog'
 
 // Hooks
-import { useHandleIndustries } from '../../hooks/useHandleIndustries'
+import { useHandleClients } from '../../../hooks/useHandleClients'
 import { toast } from 'react-toastify'
 
-const IndustryForm = () => {
+const ClientForm = () => {
   const [fantasyName, setFantasyName] = useState('')
   const [socialName, setSocialName] = useState('')
   const [cnpj, setCnpj] = useState('')
+  const [network, setNetwork] = useState('')
+  const [disccount, setDisccount] = useState('')
 
-  const { addIndustry } = useHandleIndustries()
+  const [open, setOpen] = useState(false)
 
-  const handleIndustry = (e: React.FormEvent<HTMLFormElement>) => {
+  const { addClient } = useHandleClients()
+
+  const handleClient = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!fantasyName || !socialName || !cnpj) return toast.error('Preencha todos os campos!')
+    if (!fantasyName) return toast.error('Preencha o nome fantasia!')
+    if (!socialName) return toast.error('Preencha a razão social!')
+    if (!cnpj) return toast.error('Preencha todos o cnpj!')
 
-    addIndustry({
+    addClient({
       fantasyName,
       socialName,
       cnpj,
+      network,
+      disccount: +disccount,
     })
+
+    setFantasyName('')
+    setSocialName('')
+    setCnpj('')
+    setNetwork('')
+    setDisccount('')
+    setOpen(false)
   }
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
         <div className='relative flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md shadow-md'>
           <IoMdAdd /> Novo
@@ -47,33 +62,41 @@ const IndustryForm = () => {
               <MdClose className='text-xl' />
             </Dialog.Close>
           </Dialog.Title>
-          <form className='flex flex-col w-full gap-4' onSubmit={handleIndustry}>
+          <form className='flex flex-col w-full gap-4' onSubmit={handleClient}>
             <input
               type='text'
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Nome Fantasia'
               value={fantasyName}
-              onChange={(e) => {
-                setFantasyName(e.target.value)
-              }}
+              onChange={(e) => setFantasyName(e.target.value)}
             />
             <input
               type='text'
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Razão Social'
               value={socialName}
-              onChange={(e) => {
-                setSocialName(e.target.value)
-              }}
+              onChange={(e) => setSocialName(e.target.value)}
             />
             <input
               type='text'
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='CNPJ'
               value={cnpj}
-              onChange={(e) => {
-                setCnpj(e.target.value)
-              }}
+              onChange={(e) => setCnpj(e.target.value)}
+            />
+            <input
+              type='text'
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
+              placeholder='Rede'
+              value={network}
+              onChange={(e) => setNetwork(e.target.value)}
+            />
+            <input
+              type='number'
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
+              placeholder='Desconto'
+              value={disccount}
+              onChange={(e) => setDisccount(e.target.value)}
             />
             <input
               type='submit'
@@ -87,4 +110,4 @@ const IndustryForm = () => {
   )
 }
 
-export default IndustryForm
+export default ClientForm

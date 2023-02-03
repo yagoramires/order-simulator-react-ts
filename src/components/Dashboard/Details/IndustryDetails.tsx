@@ -1,15 +1,15 @@
 // Components
 import CardDetails from './CardDetails'
-import FormDetails from './FormDetails'
+import FormDetails from '../Forms/FormDetails'
 
 interface IndustryProps {
   industry: {
-    id: number
+    id: string
     fantasyName: string
     socialName: string
     cnpj: string
     products?: Array<{
-      id: number
+      id: string
       code: string
       name: string
       industry: string

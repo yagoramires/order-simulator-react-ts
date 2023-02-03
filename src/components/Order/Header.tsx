@@ -13,12 +13,12 @@ interface HeaderProps {
   setIndustry: React.Dispatch<React.SetStateAction<string>>
 }
 interface IndustryProps {
-  id?: number
-  socialName?: string
-  fantasyName?: string
-  cnpj?: string
+  id: string
+  socialName: string
+  fantasyName: string
+  cnpj: string
   products?: Array<{
-    id: number
+    id: string
     code: string
     name: string
     industry: string
@@ -28,17 +28,15 @@ interface IndustryProps {
 
 const Header = ({ industry, setIndustry }: HeaderProps) => {
   const { userData } = useContext(AuthContext)
-  const { documents } = useFetchCollection('industries')
+  const { industries: documents } = useFetchCollection('industries')
 
-  const [industries, setIndustries] = useState()
+  const [industries, setIndustries] = useState<IndustryProps[]>()
 
-  // useEffect(() => {
-  //   if (documents) {
-  //     setIndustries(documents)
-  //   }
-  // }, [documents])
-
-  console.log(documents)
+  useEffect(() => {
+    if (documents) {
+      setIndustries(documents)
+    }
+  }, [documents])
 
   return (
     <header className='flex items-center justify-between p-4 shadow-lg bg-gradient-to-r from-white to-gray-200'>
@@ -48,15 +46,15 @@ const Header = ({ industry, setIndustry }: HeaderProps) => {
 
       <nav>
         <ul className='flex items-center justify-between gap-2 text-xl font-bold text-blue-600 md:text-base'>
-          {documents?.map((item) => (
+          {industries?.map((item) => (
             <li
-              // onClick={() => setIndustry(item.fantasyName)}
+              onClick={() => setIndustry(item.id)}
               className={`${
-                industry === item.name ? 'border-b-4 border-blue-600' : 'border-b-4'
+                industry === item.fantasyName ? 'border-b-4 border-blue-600' : 'border-b-4'
               } cursor-pointer hover:border-blue-600`}
               key={item.id}
             >
-              {/* {item.name} */}
+              {item.fantasyName}
             </li>
           ))}
 

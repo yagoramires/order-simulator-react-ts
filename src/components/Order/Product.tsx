@@ -2,12 +2,12 @@
 import { useState, useEffect } from 'react'
 
 // Images
-import noImg from '../assets/no-image.jpg'
+import noImg from '../../assets/no-image.jpg'
 
 interface ProductProps {
   product: {
     imagePath?: string
-    id: number
+    id: string
     code: string
     name: string
     industry: string

@@ -7,7 +7,8 @@ import { IoMdAdd } from 'react-icons/io'
 // Components
 import CardDashboard from './CardDashboard'
 import FormDashboard from './FormDashboard'
-import IndustryForm from './IndustryForm'
+import IndustryForm from './Forms/IndustryForm'
+import ClientForm from './Forms/ClientForm'
 
 const MainDashboard = () => {
   const nameUrl = window.location.href
@@ -30,15 +31,17 @@ const MainDashboard = () => {
           </Link>
         )}
         {nameUrl.includes('industries') && <IndustryForm />}
-        {nameUrl.includes('clients') && <FormDashboard type={'clients'} />}
+        {nameUrl.includes('clients') && <ClientForm />}
         {nameUrl.includes('deadlines') && <FormDashboard type={'deadlines'} />}
       </div>
-      <div className='p-8 my-10 bg-white rounded-md shadow-md max-h-[75vh] overflow-y-scroll'>
-        {/* <div> */}
-        {nameUrl.includes('orders') && <CardDashboard type={'orders'} />}
-        {nameUrl.includes('industries') && <CardDashboard type={'industries'} />}
-        {nameUrl.includes('clients') && <CardDashboard type={'clients'} />}
-        {nameUrl.includes('deadlines') && <CardDashboard type={'deadlines'} />}
+      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
+        <div className='flex flex-col gap-4  p-8  overflow-y-scroll rounded-md max-h-[75vh]'>
+          {/* <div> */}
+          {nameUrl.includes('orders') && <CardDashboard type={'orders'} />}
+          {nameUrl.includes('industries') && <CardDashboard type={'industries'} />}
+          {nameUrl.includes('clients') && <CardDashboard type={'clients'} />}
+          {nameUrl.includes('deadlines') && <CardDashboard type={'deadlines'} />}
+        </div>
       </div>
     </main>
   )

@@ -1,63 +1,41 @@
 // Hooks
 import { useEffect, useState } from 'react'
+import { useFetchCollection } from '../../hooks/useFetchCollection'
 
 // Components
 import Header from '../../components/Order/Header'
-import SelectedIndustryOrder from '../../components/Order/SelectedIndustryOrder'
+import Product from '../../components/Order/Product'
 
-// API
-import { getClients, getDeadLines, getIndustries } from '../../services/api'
-
-// interface dataProps {
-//   id: number
-//   name: string
-//   cnpj?: string
-//   products?: Array<{
-//     id: number
-//     code: string
-//     name: string
-//     industry: string
-//     price: number
-//   }>
-//   discount?: number
-//   deadline?: string
-// }
+interface IndustryProps {
+  id: string
+  socialName: string
+  fantasyName: string
+  cnpj: string
+  products?: Array<{
+    id: string
+    code: string
+    name: string
+    industry: string
+    price: number
+  }>
+}
 
 const Order = () => {
   const total = 0
 
-  // const [industries, setIndustries] = useState<dataProps[]>([])
-  // const [deadlines, setDeadlines] = useState<dataProps[]>([])
-  // const [clients, setClients] = useState<dataProps[]>([])
-  // const [selectedIndustry, setSelectedIndustry] = useState<dataProps[]>([])
-
   const [industry, setIndustry] = useState('')
 
-  // useEffect(() => {
-  //   ;(async () => {
-  //     const industriesRequest = await getIndustries()
-  //     setIndustries(industriesRequest.data)
-  //   })()
-  // }, [])
+  const { industries } = useFetchCollection('industries')
+  const { deadlines } = useFetchCollection('deadlines')
+  const { clients } = useFetchCollection('clients')
 
-  // useEffect(() => {
-  //   ;(async () => {
-  //     const deadlinesRequest = await getDeadLines()
-  //     setDeadlines(deadlinesRequest.data)
-  //   })()
-  // }, [])
+  const [selectedIndustry, setSelectedIndustry] = useState<IndustryProps>()
+  console.log(industry)
 
-  // useEffect(() => {
-  //   ;(async () => {
-  //     const clientsRequest = await getClients()
-  //     setClients(clientsRequest.data)
-  //   })()
-  // }, [])
-
-  // useEffect(() => {
-  //   const filteredIndustry = industries.filter((item) => industry === item.name)
-  //   setSelectedIndustry(filteredIndustry)
-  // }, [industry])
+  useEffect(() => {
+    const filterIndustry = industries?.filter((item) => item.id == industry)
+    if (filterIndustry) setSelectedIndustry(filterIndustry[0])
+  })
 
   return (
     <div className='min-h-[100vh] bg-gradient-to-r from-blue-800 to-blue-600'>
@@ -77,12 +55,11 @@ const Order = () => {
                 <option value='selecione' disabled>
                   Selecione
                 </option>
-                {/* {clients.length > 0 &&
-                  clients.map((client) => (
-                    <option value={client.name} key={client.id}>
-                      {client.name}
-                    </option>
-                  ))} */}
+                {clients?.map((client) => (
+                  <option value={client.socialName} key={client.id}>
+                    {client.socialName}
+                  </option>
+                ))}
               </select>
             </div>
             <div className='flex flex-col w-full gap-1 text-start'>
@@ -95,11 +72,11 @@ const Order = () => {
                 <option value='selecione' disabled>
                   Selecione
                 </option>
-                {/* {deadlines.map((deadline) => (
-                  <option value={deadline.deadline} key={deadline.id}>
-                    {deadline.deadline}
+                {deadlines?.map((deadline) => (
+                  <option value={deadline.value} key={deadline.id}>
+                    {deadline.value}
                   </option>
-                ))} */}
+                ))}
               </select>
             </div>
 
@@ -109,7 +86,20 @@ const Order = () => {
             </div>
           </div>
 
-          {/* <SelectedIndustryOrder industry={selectedIndustry} /> */}
+          {industry ? (
+            <div className='p-4 bg-white w-[90%] rounded-md flex flex-col gap-4'>
+              {selectedIndustry?.products?.map((product) => (
+                <Product product={product} key={product.id} />
+              ))}
+              {!selectedIndustry?.products && (
+                <p className='w-full py-20 text-center '>Nenhum produto cadastrado.</p>
+              )}
+            </div>
+          ) : (
+            <div className='p-4 bg-white w-[90%] rounded-md flex flex-col gap-4'>
+              <p className='w-full py-20 text-center '>Selecione uma fábrica.</p>
+            </div>
+          )}
 
           <input
             type='submit'

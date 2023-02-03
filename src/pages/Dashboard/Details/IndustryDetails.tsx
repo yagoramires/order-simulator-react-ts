@@ -8,17 +8,17 @@ import { useEffect, useState } from 'react'
 import { useFetchDocument } from '../../../hooks/useFetchDocument'
 
 // Components
-import MainDetails from '../../../components/Dashboard/Details/MainDetails'
+import Details from '../../../components/Dashboard/Details/IndustryDetails'
 import SidebarDetails from '../../../components/Dashboard/Details/SidebarDetails'
 import Loading from '../../../components/Loading'
 
 interface IndustryProps {
-  id: number
+  id: string
   socialName: string
   fantasyName: string
   cnpj: string
   products?: Array<{
-    id: number
+    id: string
     code: string
     name: string
     industry: string
@@ -50,7 +50,7 @@ const IndustryDetails = () => {
       {industry && (
         <>
           <SidebarDetails industry={industry} />
-          <MainDetails industry={industry} />
+          <Details industry={industry} />
         </>
       )}
     </div>

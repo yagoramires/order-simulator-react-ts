@@ -2,26 +2,54 @@ import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { database } from '../firebase/config'
 
-interface dataProps {
-  id?: number
-  name?: string
-  socialName?: string
-  cnpj?: string
+interface OrderProps {
+  id: string
+  clientId: string
+  industryId: string
+  clientName: string
+  total: number
+  createdAt: any
   products?: Array<{
-    id: number
-    name: string
+    id: string
     code: string
-    value: number
+    name: string
+    industry: string
+    price: number
   }>
-  discount?: number
-  deadline?: string
-  client?: string
-  industry?: string
-  total?: string
+}
+interface IndustryProps {
+  id: string
+  socialName: string
+  fantasyName: string
+  cnpj: string
+  products?: Array<{
+    id: string
+    code: string
+    name: string
+    industry: string
+    price: number
+  }>
+}
+interface ClientProps {
+  id: string
+  socialName: string
+  fantasyName: string
+  cnpj: string
+  orders?: any
+}
+
+interface DeadlineProps {
+  id: string
+  value: string
 }
 
 export const useFetchCollection = (docCollection: string) => {
-  const [documents, setDocuments] = useState<dataProps[]>()
+  const [orders, setOrders] = useState<OrderProps[]>()
+  const [industries, setIndustries] = useState<IndustryProps[]>()
+  const [clients, setClients] = useState<ClientProps[]>()
+  const [deadlines, setDeadlines] = useState<DeadlineProps[]>()
+
+  const [products, setProducts] = useState<IndustryProps[]>()
 
   useEffect(() => {
     const fetchData = () => {
@@ -30,12 +58,21 @@ export const useFetchCollection = (docCollection: string) => {
         const q = query(collectionRef, orderBy('createdAt', 'asc'))
 
         onSnapshot(q, (querySnapshot: any) => {
-          setDocuments(
-            querySnapshot.docs.map((doc: any) => ({
-              id: doc.id,
-              ...doc.data(),
-            })),
-          )
+          const snapshot = querySnapshot.docs.map((doc: any) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          if (docCollection === 'industries') {
+            setIndustries(snapshot)
+          } else if (docCollection === 'orders') {
+            setOrders(snapshot)
+          } else if (docCollection === 'clients') {
+            setClients(snapshot)
+          } else if (docCollection === 'deadlines') {
+            setDeadlines(snapshot)
+          } else if (docCollection === 'products') {
+            setProducts(snapshot)
+          }
         })
       } catch (e: any) {
         console.log(e.message)
@@ -44,5 +81,5 @@ export const useFetchCollection = (docCollection: string) => {
     fetchData()
   }, [docCollection])
 
-  return { documents }
+  return { industries, clients, deadlines, orders, products }
 }
