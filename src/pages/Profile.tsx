@@ -14,7 +14,6 @@ const Profile = () => {
     updateDisplayName,
     updateUserEmail,
     updateUserPassword,
-    uploadProgress,
     loadingImg,
     loadingName,
     loadingEmail,
