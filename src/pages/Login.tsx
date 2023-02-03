@@ -1,16 +1,39 @@
 // Hooks
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // Component Tabs Radix
 import * as Tabs from '@radix-ui/react-tabs'
+import { useAuth } from '../hooks/useAuth'
+import { toast } from 'react-toastify'
+import Loading from '../components/Loading'
 
 const Login = () => {
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
-
-  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+
+  const { signInUser, registerUser, loading, error } = useAuth()
+
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!email || !password) return toast.error('Preencha todos os campos!')
+
+    signInUser(email, password)
+  }
+  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!email || !password || !name) return toast.error('Preencha todos os campos!')
+    if (password !== confirmPassword) return toast.error('As senhas precisam ser iguais!')
+
+    registerUser(email, password, name)
+  }
+
+  useEffect(() => {
+    if (error !== '') {
+      toast.error(error)
+    }
+  }, [error])
 
   return (
     <section className='flex flex-col gap-10 justify-center items-center min-h-[100vh] bg-image bg-gradient-to-r from-blue-800 to-blue-600'>
@@ -34,15 +57,16 @@ const Login = () => {
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value='tab1' className=''>
-          <form className='flex flex-col gap-4 px-4'>
+          <form className='flex flex-col gap-4 px-4' onSubmit={handleLogin}>
             <input
               type='text'
-              value={login}
+              value={email}
               onChange={(e) => {
-                setLogin(e.target.value)
+                setEmail(e.target.value)
               }}
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='E-mail'
+              autoComplete='true'
             />
             <input
               type='password'
@@ -52,17 +76,23 @@ const Login = () => {
               }}
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Senha'
+              autoComplete='true'
             />
-
-            <input
-              type='submit'
-              className='p-2 my-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-600 to-blue-800'
-              value={'Entrar'}
-            />
+            {loading ? (
+              <div className='flex justify-center w-full'>
+                <Loading size='30px' />
+              </div>
+            ) : (
+              <input
+                type='submit'
+                className='p-2 my-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-600 to-blue-800'
+                value={'Entrar'}
+              />
+            )}
           </form>
         </Tabs.Content>
         <Tabs.Content value='tab2'>
-          <form className='flex flex-col gap-4 px-4'>
+          <form className='flex flex-col gap-4 px-4' onSubmit={handleRegister}>
             <input
               type='text'
               value={name}
@@ -71,6 +101,7 @@ const Login = () => {
               }}
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Nome'
+              autoComplete='true'
             />
             <input
               type='email'
@@ -80,6 +111,7 @@ const Login = () => {
               }}
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='E-mail'
+              autoComplete='true'
             />
             <input
               type='password'
@@ -89,6 +121,7 @@ const Login = () => {
               }}
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Senha'
+              autoComplete='true'
             />
             <input
               type='password'
@@ -98,12 +131,19 @@ const Login = () => {
               }}
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Confirmação de senha'
+              autoComplete='true'
             />
-            <input
-              type='submit'
-              className='p-2 my-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-600 to-blue-800'
-              value={'Registrar'}
-            />
+            {loading ? (
+              <div className='flex justify-center w-full'>
+                <Loading size='30px' />
+              </div>
+            ) : (
+              <input
+                type='submit'
+                className='p-2 my-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-600 to-blue-800'
+                value={'Registrar'}
+              />
+            )}
           </form>
         </Tabs.Content>
       </Tabs.Root>
