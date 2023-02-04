@@ -1,35 +1,24 @@
 // Components
 import CardDetails from './CardDetails'
 import ProductForm from '../Forms/ProductForm'
+import { useParams } from 'react-router-dom'
+import { useFetchCollection } from '../../../hooks/useFetchCollection'
 
-interface IndustryProps {
-  industry: {
-    id: string
-    fantasyName: string
-    socialName: string
-    cnpj: string
-    products?: Array<{
-      id: string
-      code: string
-      name: string
-      industry: string
-      price: number
-    }>
-  }
-}
+const MainDetails = () => {
+  const { industryId } = useParams()
+  const { products } = useFetchCollection(`industries/${industryId}/products`)
 
-const MainDetails = ({ industry }: IndustryProps) => {
   return (
     <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] w-full text-white p-8'>
       <div className='flex items-center justify-between w-full'>
         <h1 className='text-2xl font-medium'>Produtos</h1>
 
-        <ProductForm industry={'ILUMI'} />
+        <ProductForm />
       </div>
       <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
         <div className='flex flex-col gap-4  p-8  overflow-y-scroll rounded-md max-h-[75vh]'>
-          {industry.products ? (
-            industry.products.map((product) => <CardDetails product={product} key={product.id} />)
+          {products && products?.length > 0 ? (
+            products?.map((product) => <CardDetails product={product} key={product.id} />)
           ) : (
             <>
               <p className=' text-zinc-800'>Nenhum produto cadastrado.</p>

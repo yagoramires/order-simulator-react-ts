@@ -43,13 +43,22 @@ interface DeadlineProps {
   value: string
 }
 
+interface ProductProps {
+  id?: string
+  code: string
+  name: string
+  industry?: string
+  price: number
+  family?: string
+  createdAt?: Date
+}
+
 export const useFetchCollection = (docCollection: string) => {
   const [orders, setOrders] = useState<OrderProps[]>()
   const [industries, setIndustries] = useState<IndustryProps[]>()
   const [clients, setClients] = useState<ClientProps[]>()
   const [deadlines, setDeadlines] = useState<DeadlineProps[]>()
-
-  const [products, setProducts] = useState<IndustryProps[]>()
+  const [products, setProducts] = useState<ProductProps[]>()
 
   useEffect(() => {
     const fetchData = () => {
@@ -70,7 +79,7 @@ export const useFetchCollection = (docCollection: string) => {
             setClients(snapshot)
           } else if (docCollection === 'deadlines') {
             setDeadlines(snapshot)
-          } else if (docCollection === 'products') {
+          } else if (docCollection.includes('products')) {
             setProducts(snapshot)
           }
         })

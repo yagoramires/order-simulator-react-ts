@@ -50,7 +50,7 @@ const IndustryDetails = () => {
       {industry && (
         <>
           <SidebarDetails industry={industry} />
-          <Details industry={industry} />
+          <Details />
         </>
       )}
     </div>

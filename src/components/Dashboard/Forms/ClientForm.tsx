@@ -58,7 +58,7 @@ const ClientForm = () => {
         <Dialog.Content className='fixed bg-white top-[25%] left-[10%] w-[80%]  md:left-[5%] md:w-[90%] rounded-md shadow-lg p-8'>
           <Dialog.Title className='flex justify-between mb-4 font-bold text-blue-600'>
             <Dialog.Close className='flex justify-between w-full mb-4'>
-              Adicionar indústria
+              Adicionar Cliente
               <MdClose className='text-xl' />
             </Dialog.Close>
           </Dialog.Title>

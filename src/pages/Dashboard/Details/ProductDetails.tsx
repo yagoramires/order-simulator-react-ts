@@ -1,7 +1,7 @@
 // Router
-import { useEffect, useState } from 'react'
+
 import { MdKeyboardArrowLeft } from 'react-icons/md'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const ProductDetails = () => {
   const navigate = useNavigate()
