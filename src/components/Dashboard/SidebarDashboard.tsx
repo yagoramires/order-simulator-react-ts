@@ -76,9 +76,7 @@ const SidebarDashboard = () => {
             <FaUserAlt size={100} className='text-blue-600' />
           </div>
         )}
-        <h1 className='text-2xl font-medium text-blue-600 cursor-pointer'>
-          {userData.displayName}
-        </h1>
+        <h1 className='text-2xl font-bold text-blue-600 cursor-pointer'>{userData.displayName}</h1>
       </div>
 
       <div className='w-full h-full'>
