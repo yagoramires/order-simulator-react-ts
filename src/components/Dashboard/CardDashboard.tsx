@@ -17,7 +17,11 @@ const CardDashboard = ({ type }: CardProps) => {
 
   const linkComponent = (path: string, children: React.ReactNode) => {
     return (
-      <Link to={path} key={path} className='text-black border-b-[1px] border-b-zinc-200 p-2'>
+      <Link
+        to={path}
+        key={path}
+        className='text-black border-b-[1px] border-b-zinc-200 p-2 rounded-md hover:bg-zinc-200'
+      >
         {children}
       </Link>
     )
