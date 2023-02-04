@@ -6,12 +6,14 @@ import noImg from '../../assets/no-image.jpg'
 
 interface ProductProps {
   product: {
+    id?: string
     imagePath?: string
-    id: string
     code: string
     name: string
-    industry: string
+    industry?: string
     price: number
+    family?: string
+    createdAt?: Date
   }
 }
 

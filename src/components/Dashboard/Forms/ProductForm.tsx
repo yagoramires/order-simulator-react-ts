@@ -16,6 +16,7 @@ import { useHandleProducts } from '../../../hooks/handleData/useHandleProducts'
 import { toast } from 'react-toastify'
 
 const ClientForm = () => {
+  const [profileImg, setProductImage] = useState(null)
   const [code, setCode] = useState('')
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
@@ -34,6 +35,7 @@ const ClientForm = () => {
     if (!price) return toast.error('Preencha o preço!')
 
     addProduct({
+      // image: profileImg,
       code,
       name,
       industry: industryId,
@@ -46,6 +48,10 @@ const ClientForm = () => {
     setPrice('')
     setFamily('')
     setOpen(false)
+  }
+
+  const handleSelectImage = (e: any) => {
+    setProductImage(e.target.files[0])
   }
 
   return (
@@ -65,6 +71,12 @@ const ClientForm = () => {
             </Dialog.Close>
           </Dialog.Title>
           <form className='flex flex-col w-full gap-4' onSubmit={handleClient}>
+            <input
+              type='file'
+              placeholder='Nome'
+              className='w-full p-2 bg-gray-300 rounded-md shadow-sm'
+              onChange={handleSelectImage}
+            />
             <input
               type='text'
               className='p-2 bg-gray-300 rounded-md shadow-sm'

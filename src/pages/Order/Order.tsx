@@ -12,11 +12,14 @@ interface IndustryProps {
   fantasyName: string
   cnpj: string
   products?: Array<{
-    id: string
+    id?: string
+    imagePath?: string
     code: string
     name: string
-    industry: string
+    industry?: string
     price: number
+    family?: string
+    createdAt?: Date
   }>
 }
 
@@ -30,7 +33,8 @@ const Order = () => {
   const { clients } = useFetchCollection('clients')
 
   const [selectedIndustry, setSelectedIndustry] = useState<IndustryProps>()
-  console.log(industry)
+
+  const { products } = useFetchCollection(`industries/${selectedIndustry?.id}/products`)
 
   useEffect(() => {
     const filterIndustry = industries?.filter((item) => item.id == industry)
@@ -88,10 +92,10 @@ const Order = () => {
 
           {industry ? (
             <div className='p-4 bg-white w-[90%] rounded-md flex flex-col gap-4'>
-              {selectedIndustry?.products?.map((product) => (
+              {products?.map((product) => (
                 <Product product={product} key={product.id} />
               ))}
-              {!selectedIndustry?.products && (
+              {products?.length === 0 && (
                 <p className='w-full py-20 text-center '>Nenhum produto cadastrado.</p>
               )}
             </div>

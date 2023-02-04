@@ -18,11 +18,14 @@ interface IndustryProps {
   fantasyName: string
   cnpj: string
   products?: Array<{
-    id: string
+    id?: string
+    imagePath?: string
     code: string
     name: string
-    industry: string
+    industry?: string
     price: number
+    family?: string
+    createdAt?: Date
   }>
 }
 
@@ -50,7 +53,7 @@ const Header = ({ industry, setIndustry }: HeaderProps) => {
             <li
               onClick={() => setIndustry(item.id)}
               className={`${
-                industry === item.fantasyName ? 'border-b-4 border-blue-600' : 'border-b-4'
+                industry === item.id ? 'border-b-4 border-blue-600' : 'border-b-4'
               } cursor-pointer hover:border-blue-600`}
               key={item.id}
             >

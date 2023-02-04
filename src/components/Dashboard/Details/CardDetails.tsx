@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 interface ProductProps {
   product: {
     id?: string
+    imagePath?: string
     code: string
     name: string
     industry?: string

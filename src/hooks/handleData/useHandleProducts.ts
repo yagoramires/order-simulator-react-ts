@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 
 interface ProductProps {
   id?: string
+  imagePath?: string
   code: string
   name: string
   industry?: string

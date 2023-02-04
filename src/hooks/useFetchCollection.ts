@@ -23,11 +23,14 @@ interface IndustryProps {
   fantasyName: string
   cnpj: string
   products?: Array<{
-    id: string
+    id?: string
+    imagePath?: string
     code: string
     name: string
-    industry: string
+    industry?: string
     price: number
+    family?: string
+    createdAt?: Date
   }>
 }
 interface ClientProps {
@@ -45,6 +48,7 @@ interface DeadlineProps {
 
 interface ProductProps {
   id?: string
+  imagePath?: string
   code: string
   name: string
   industry?: string
