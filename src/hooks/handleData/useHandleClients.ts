@@ -1,30 +1,32 @@
 import { useState } from 'react'
 
 import { addDoc, collection, Timestamp } from 'firebase/firestore'
-import { database } from '../firebase/config'
+import { database } from '../../firebase/config'
 
 import { toast } from 'react-toastify'
 
-interface industryProps {
+interface ClientProps {
   id?: string
   fantasyName: string
   socialName: string
   cnpj: string
-  products?: any
+  network?: string
+  disccount?: number
+  orders?: any
   createdAt?: Date
 }
 
-export const useHandleIndustries = () => {
+export const useHandleClients = () => {
   const [loading, setLoading] = useState(false)
 
-  const addIndustry = async (industryData: industryProps) => {
+  const addClient = async (clientData: ClientProps) => {
     setLoading(true)
     try {
-      const ref = collection(database, 'industries')
-      const data = { ...industryData, createdAt: Timestamp.now() }
+      const ref = collection(database, 'clients')
+      const data = { ...clientData, createdAt: Timestamp.now() }
       await addDoc(ref, data)
 
-      toast.success('Indústria adicionada com sucesso!')
+      toast.success('Cliente adicionadao com sucesso!')
       setLoading(false)
     } catch (e: any) {
       toast.error(e.message)
@@ -32,9 +34,9 @@ export const useHandleIndustries = () => {
     }
   }
 
-  const updateIndustry = () => {
+  const updateClient = () => {
     console.log('teste')
   }
 
-  return { addIndustry, updateIndustry, loading }
+  return { addClient, updateClient, loading }
 }

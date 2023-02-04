@@ -9,32 +9,26 @@ import { MdClose } from 'react-icons/md'
 import * as Dialog from '@radix-ui/react-dialog'
 
 // Hooks
-import { useHandleIndustries } from '../../../hooks/handleData/useHandleIndustries'
+import { useHandleDeadlines } from '../../../hooks/handleData/useHandleDeadlines'
 import { toast } from 'react-toastify'
 
-const IndustryForm = () => {
-  const [fantasyName, setFantasyName] = useState('')
-  const [socialName, setSocialName] = useState('')
-  const [cnpj, setCnpj] = useState('')
+const DeadlineForm = () => {
+  const [value, setValue] = useState('')
 
   const [open, setOpen] = useState(false)
 
-  const { addIndustry } = useHandleIndustries()
+  const { addDeadline } = useHandleDeadlines()
 
-  const handleIndustry = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleDeadline = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!fantasyName || !socialName || !cnpj) return toast.error('Preencha todos os campos!')
+    if (!value) return toast.error('Preencha o prazo de pagamento!')
 
-    addIndustry({
-      fantasyName,
-      socialName,
-      cnpj,
+    addDeadline({
+      value,
     })
 
-    setFantasyName('')
-    setSocialName('')
-    setCnpj('')
+    setValue('')
     setOpen(false)
   }
 
@@ -54,33 +48,13 @@ const IndustryForm = () => {
               <MdClose className='text-xl' />
             </Dialog.Close>
           </Dialog.Title>
-          <form className='flex flex-col w-full gap-4' onSubmit={handleIndustry}>
+          <form className='flex flex-col w-full gap-4' onSubmit={handleDeadline}>
             <input
               type='text'
               className='p-2 bg-gray-300 rounded-md shadow-sm'
-              placeholder='Nome Fantasia'
-              value={fantasyName}
-              onChange={(e) => {
-                setFantasyName(e.target.value)
-              }}
-            />
-            <input
-              type='text'
-              className='p-2 bg-gray-300 rounded-md shadow-sm'
-              placeholder='Razão Social'
-              value={socialName}
-              onChange={(e) => {
-                setSocialName(e.target.value)
-              }}
-            />
-            <input
-              type='text'
-              className='p-2 bg-gray-300 rounded-md shadow-sm'
-              placeholder='CNPJ'
-              value={cnpj}
-              onChange={(e) => {
-                setCnpj(e.target.value)
-              }}
+              placeholder='Prazo de pagamento'
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
             />
             <input
               type='submit'
@@ -94,4 +68,4 @@ const IndustryForm = () => {
   )
 }
 
-export default IndustryForm
+export default DeadlineForm

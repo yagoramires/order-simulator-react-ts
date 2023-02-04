@@ -6,9 +6,9 @@ import { IoMdAdd } from 'react-icons/io'
 
 // Components
 import CardDashboard from './CardDashboard'
-import FormDashboard from './FormDashboard'
 import IndustryForm from './Forms/IndustryForm'
 import ClientForm from './Forms/ClientForm'
+import DeadlineForm from './Forms/DeadlineForm'
 
 const MainDashboard = () => {
   const nameUrl = window.location.href
@@ -32,11 +32,10 @@ const MainDashboard = () => {
         )}
         {nameUrl.includes('industries') && <IndustryForm />}
         {nameUrl.includes('clients') && <ClientForm />}
-        {nameUrl.includes('deadlines') && <FormDashboard type={'deadlines'} />}
+        {nameUrl.includes('deadlines') && <DeadlineForm />}
       </div>
       <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
         <div className='flex flex-col gap-4  p-8  overflow-y-scroll rounded-md max-h-[75vh]'>
-          {/* <div> */}
           {nameUrl.includes('orders') && <CardDashboard type={'orders'} />}
           {nameUrl.includes('industries') && <CardDashboard type={'industries'} />}
           {nameUrl.includes('clients') && <CardDashboard type={'clients'} />}

@@ -9,7 +9,7 @@ interface industryProps {
   industry: string
 }
 
-const FormDetails = ({ industry }: industryProps) => {
+const ProductForm = ({ industry }: industryProps) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -56,4 +56,4 @@ const FormDetails = ({ industry }: industryProps) => {
   )
 }
 
-export default FormDetails
+export default ProductForm

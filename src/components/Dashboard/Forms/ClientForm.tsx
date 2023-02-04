@@ -9,7 +9,7 @@ import { MdClose } from 'react-icons/md'
 import * as Dialog from '@radix-ui/react-dialog'
 
 // Hooks
-import { useHandleClients } from '../../../hooks/useHandleClients'
+import { useHandleClients } from '../../../hooks/handleData/useHandleClients'
 import { toast } from 'react-toastify'
 
 const ClientForm = () => {
