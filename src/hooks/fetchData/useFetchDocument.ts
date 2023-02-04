@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { database } from '../firebase/config'
+import { database } from '../../firebase/config'
 import { doc, getDoc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 

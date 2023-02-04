@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
 import { addDoc, collection, Timestamp } from 'firebase/firestore'
-import { database } from '../../firebase/config'
+import { database, storage } from '../../firebase/config'
 
 import { toast } from 'react-toastify'
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
 interface ProductProps {
   id?: string
@@ -19,15 +20,52 @@ interface ProductProps {
 export const useHandleProducts = () => {
   const [loading, setLoading] = useState(false)
 
-  const addProduct = async (productData: ProductProps) => {
+  const addProduct = async (productData: ProductProps, img: File | '') => {
     setLoading(true)
-    try {
-      const ref = collection(database, `industries/${productData.industry}/products`)
-      const data = { ...productData, createdAt: Timestamp.now() }
-      await addDoc(ref, data)
 
-      toast.success('Produto adicionado com sucesso!')
-      setLoading(false)
+    try {
+      if (img !== '') {
+        const generateName = `industries/${productData.industry}/${Date.now()}`
+        const storageRef = ref(storage, generateName)
+
+        const uploadTask = uploadBytesResumable(storageRef, img)
+
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            console.log(uploadProgress)
+          },
+          (error) => {
+            alert(error.message)
+          },
+          async () => {
+            const url = await getDownloadURL(uploadTask.snapshot.ref)
+            const docRef = collection(database, `industries/${productData.industry}/products`)
+
+            const docData = {
+              imagePath: url,
+              createdAt: Timestamp.now(),
+              ...productData,
+            }
+
+            await addDoc(docRef, docData)
+            setLoading(false)
+            toast.success('Produto adicionado com sucesso!')
+          },
+        )
+      } else {
+        const docRef = collection(database, `industries/${productData.industry}/products`)
+
+        const docData = {
+          createdAt: Timestamp.now(),
+          ...productData,
+        }
+
+        await addDoc(docRef, docData)
+        setLoading(false)
+        toast.success('Produto adicionado com sucesso!')
+      }
     } catch (e: any) {
       toast.error(e.message)
       setLoading(false)

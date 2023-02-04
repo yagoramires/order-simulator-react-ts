@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 // Router
 import { Link } from 'react-router-dom'
-import { useFetchCollection } from '../../hooks/useFetchCollection'
+import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 
 interface CardProps {
   type: string

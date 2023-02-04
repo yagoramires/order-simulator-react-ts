@@ -2,7 +2,7 @@
 import CardDetails from './CardDetails'
 import ProductForm from '../Forms/ProductForm'
 import { useParams } from 'react-router-dom'
-import { useFetchCollection } from '../../../hooks/useFetchCollection'
+import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 
 const MainDetails = () => {
   const { industryId } = useParams()

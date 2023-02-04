@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 // Context
 import { AuthContext } from '../../context/AuthContext'
-import { useFetchCollection } from '../../hooks/useFetchCollection'
+import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 
 interface HeaderProps {
   industry: string
@@ -42,38 +42,40 @@ const Header = ({ industry, setIndustry }: HeaderProps) => {
   }, [documents])
 
   return (
-    <header className='flex items-center justify-between p-4 shadow-lg bg-gradient-to-r from-white to-gray-200'>
-      <h1 className='font-bold text-4xl leading-[1.5rem] md:text-2xl md:leading-[1.25rem]'>
-        D<span className='text-blue-600'>2</span>B
-      </h1>
+    <header className='flex items-center justify-center p-4 shadow-lg bg-gradient-to-r from-white to-gray-200'>
+      <div className='max-w-[1200px] w-[90%] flex items-center justify-between'>
+        <h1 className='font-bold text-5xl leading-[1.5rem] md:text-3xl md:leading-[1.25rem] md:hidden'>
+          D<span className='text-blue-600'>2</span>B
+        </h1>
 
-      <nav>
-        <ul className='flex items-center justify-between gap-2 text-xl font-bold text-blue-600 md:text-base'>
-          {industries?.map((item) => (
-            <li
-              onClick={() => setIndustry(item.id)}
-              className={`${
-                industry === item.id ? 'border-b-4 border-blue-600' : 'border-b-4'
-              } cursor-pointer hover:border-blue-600`}
-              key={item.id}
-            >
-              {item.fantasyName}
-            </li>
-          ))}
+        <nav className='md:w-full'>
+          <ul className='flex items-center justify-between gap-2 text-xl font-medium text-blue-600 md:text-sm'>
+            {industries?.map((item) => (
+              <li
+                onClick={() => setIndustry(item.id)}
+                className={`${
+                  industry === item.id ? 'border-b-4 border-blue-600 font-bold' : 'border-b-4'
+                } cursor-pointer hover:border-blue-600 hover:font-bold`}
+                key={item.id}
+              >
+                {item.fantasyName}
+              </li>
+            ))}
 
-          <Link to='/orders'>
-            {userData?.photoURL ? (
-              <img
-                src={userData.photoURL}
-                alt=''
-                className='w-16 h-16 ml-4 bg-black border-2 border-blue-600 rounded-full md:w-12 md:h-12'
-              />
-            ) : (
-              <div className='w-16 h-16 ml-4 bg-black rounded-full md:w-12 md:h-12'></div>
-            )}
-          </Link>
-        </ul>
-      </nav>
+            <Link to='/orders'>
+              {userData?.photoURL ? (
+                <img
+                  src={userData.photoURL}
+                  alt=''
+                  className='w-16 h-16 ml-4 bg-black border-2 border-blue-600 rounded-full md:w-10 md:h-10'
+                />
+              ) : (
+                <div className='w-16 h-16 ml-4 bg-black rounded-full md:w-10 md:h-10'></div>
+              )}
+            </Link>
+          </ul>
+        </nav>
+      </div>
     </header>
   )
 }

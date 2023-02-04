@@ -1,10 +1,16 @@
 // Hooks
 import { useEffect, useState } from 'react'
-import { useFetchCollection } from '../../hooks/useFetchCollection'
+import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 
 // Components
 import Header from '../../components/Order/Header'
 import Product from '../../components/Order/Product'
+import SelectData from '../../components/Order/Select'
+
+import { RiArrowDownSLine } from 'react-icons/ri'
+
+import * as Select from '@radix-ui/react-select'
+import Loading from '../../components/Loading'
 
 interface IndustryProps {
   id: string
@@ -24,8 +30,6 @@ interface IndustryProps {
 }
 
 const Order = () => {
-  const total = 0
-
   const [industry, setIndustry] = useState('')
 
   const { industries } = useFetchCollection('industries')
@@ -41,57 +45,33 @@ const Order = () => {
     if (filterIndustry) setSelectedIndustry(filterIndustry[0])
   })
 
+  if (!industries || !deadlines || !clients)
+    return (
+      <div className='min-h-[100vh] bg-gradient-to-r from-blue-800 to-blue-600 justify-center items-center flex'>
+        <Loading size={'60px'} />
+      </div>
+    )
+
   return (
     <div className='min-h-[100vh] bg-gradient-to-r from-blue-800 to-blue-600'>
       <Header industry={industry} setIndustry={setIndustry} />
 
       <main>
         <form className='flex flex-col items-center justify-center'>
-          <div className='flex md:flex-col items-end justify-center gap-4 p-4 bg-white w-[90%] rounded-md my-4'>
-            <div className='flex flex-col w-full gap-1 text-start'>
-              <span className='text-xs text-zinc-500'>Cliente</span>
-
-              <select
-                name='clients'
-                defaultValue={'selecione'}
-                className='shadow-sm p-2 bg-zinc-300 rounded-md w-full border-[1px] border-zinc-400'
-              >
-                <option value='selecione' disabled>
-                  Selecione
-                </option>
-                {clients?.map((client) => (
-                  <option value={client.socialName} key={client.id}>
-                    {client.socialName}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className='flex flex-col w-full gap-1 text-start'>
-              <span className='text-xs text-zinc-500'>Cliente</span>
-              <select
-                name='prazo'
-                defaultValue={'selecione'}
-                className='shadow-sm p-2 bg-zinc-300 rounded-md w-full border-[1px] border-zinc-400'
-              >
-                <option value='selecione' disabled>
-                  Selecione
-                </option>
-                {deadlines?.map((deadline) => (
-                  <option value={deadline.value} key={deadline.id}>
-                    {deadline.value}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className='flex w-full gap-2 font-bold md:flex-col md:gap-0 text-start'>
-              <h2>Total do pedido:</h2>
-              <span>{total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-            </div>
-          </div>
+          <SelectData clients={clients} deadlines={deadlines} />
 
           {industry ? (
-            <div className='p-4 bg-white w-[90%] rounded-md flex flex-col gap-4'>
+            <div className='p-4 bg-white w-[90%] max-w-[1200px] rounded-md flex flex-col gap-4'>
+              <div className='flex items-center w-full text-center'>
+                <span className='text-xs text-zinc-500 w-[100px]'></span>
+                <span className='text-xs text-zinc-500 w-[10%]'>Código</span>
+                <span className='text-xs text-zinc-500 w-[60%]'>Nome</span>
+                <div className='flex w-[30%] items-center gap-4 md:hidden '>
+                  <span className='text-xs text-zinc-500'>Valor Un.</span>
+                  <span className='text-xs text-zinc-500 w-[80px]'>Quantidade</span>
+                  <span className='text-xs text-zinc-500 w-[50px]'>Total</span>
+                </div>
+              </div>
               {products?.map((product) => (
                 <Product product={product} key={product.id} />
               ))}
@@ -100,7 +80,7 @@ const Order = () => {
               )}
             </div>
           ) : (
-            <div className='p-4 bg-white w-[90%] rounded-md flex flex-col gap-4'>
+            <div className='p-4 bg-white w-[90%] max-w-[1200px] rounded-md flex flex-col gap-4'>
               <p className='w-full py-20 text-center '>Selecione uma fábrica.</p>
             </div>
           )}

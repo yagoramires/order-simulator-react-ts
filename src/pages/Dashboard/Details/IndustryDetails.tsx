@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 // Fetch Data
-import { useFetchDocument } from '../../../hooks/useFetchDocument'
+import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
 
 // Components
 import Details from '../../../components/Dashboard/Details/IndustryDetails'

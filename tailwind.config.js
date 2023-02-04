@@ -20,6 +20,7 @@ module.exports = {
       // => @media (max-width: 639px) { ... }
     },
     boxShadow: {
+      sm: '0 0 10px 0 rgba(0, 0, 0, 0.3)',
       md: '0 0 5px 0 rgba(0, 0, 0, 0.5)',
     },
   },

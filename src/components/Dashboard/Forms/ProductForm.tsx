@@ -16,7 +16,7 @@ import { useHandleProducts } from '../../../hooks/handleData/useHandleProducts'
 import { toast } from 'react-toastify'
 
 const ClientForm = () => {
-  const [profileImg, setProductImage] = useState(null)
+  const [productImg, setProductImage] = useState(null)
   const [code, setCode] = useState('')
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
@@ -34,14 +34,16 @@ const ClientForm = () => {
     if (!name) return toast.error('Preencha o nome!')
     if (!price) return toast.error('Preencha o preço!')
 
-    addProduct({
-      // image: profileImg,
-      code,
-      name,
-      industry: industryId,
-      price: Number(price),
-      family,
-    })
+    addProduct(
+      {
+        code,
+        name,
+        industry: industryId,
+        price: Number(price),
+        family,
+      },
+      productImg || '',
+    )
 
     setCode('')
     setName('')

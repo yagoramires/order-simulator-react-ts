@@ -1,6 +1,6 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { database } from '../firebase/config'
+import { database } from '../../firebase/config'
 
 interface OrderProps {
   id: string
