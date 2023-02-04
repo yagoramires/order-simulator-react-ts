@@ -53,7 +53,7 @@ const SidebarDashboard = () => {
       <li className='md:w-[14.28%]' key={option.path}>
         <Link
           to={`/${option.path}`}
-          className='flex items-center gap-4 border-[1px] border-blue-500 p-4 md:p-6 text-xl text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none md:border-r-zinc-300 md:border-y-0 md:border-r-[1px] md:border-l-0 md:justify-center'
+          className='flex items-center gap-4 border-[1px] border-blue-500 p-3 md:p-6 text-base text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none md:border-r-zinc-100 md:border-y-0 md:border-r-[1px] md:border-l-0 md:justify-center w-full'
         >
           {option.icon}
           <span className='font-medium md:hidden'>{option.text}</span>
@@ -89,7 +89,7 @@ const SidebarDashboard = () => {
             <li className='md:w-[14.28%]'>
               <button
                 onClick={signOutUser}
-                className='flex items-center gap-4 border-[1px] border-blue-500 p-4 md:p-6 text-xl text-white transition-all duration-200 bg-blue-600 rounded-md shadow-md cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none md:border-r-zinc-300 md:border-y-0 md:border-r-[1px] md:border-l-0 md:justify-center w-full'
+                className='flex items-center gap-4 border-[1px] border-blue-500 p-3 md:p-6 text-base text-white transition-all duration-200 bg-blue-600 rounded-md shadow-sm cursor-pointer md:bg-white md:text-blue-600 hover:bg-blue-500 md:hover:bg-white md:shadow-none md:rounded-none md:border-r-zinc-300 md:border-y-0 md:border-r-[1px] md:border-l-0 md:justify-center w-full'
               >
                 <MdLogout />
                 <span className='font-medium md:hidden'>Sair</span>

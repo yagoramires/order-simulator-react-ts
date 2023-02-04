@@ -26,7 +26,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
 
         <div className='w-[100%]'>
           <div
-            className='relative flex items-center justify-between p-5 font-normal rounded-md shadow-sm cursor-pointer bg-zinc-200'
+            className='relative flex items-center justify-between px-4 py-2 font-normal rounded-md shadow-sm cursor-pointer bg-zinc-200 '
             onClick={() => {
               setClientDropdown(!clientDropdown)
               setDeadlineDropdown(false)
@@ -40,7 +40,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
               clientDropdown ? '' : 'hidden'
             }`}
           >
-            <div className='p-5 overflow-y-scroll  max-h-[300px]'>
+            <div className='p-2 overflow-y-scroll  max-h-[300px]'>
               {clients?.map((client) => (
                 <li
                   key={client.id}
@@ -66,7 +66,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
 
           <div className='w-[100%]'>
             <div
-              className='relative flex items-center justify-between p-5 font-normal rounded-md shadow-sm cursor-pointer bg-zinc-200'
+              className='relative flex items-center justify-between px-4 py-2 font-normal rounded-md shadow-sm cursor-pointer bg-zinc-200'
               onClick={() => {
                 setDeadlineDropdown(!deadlineDropdown)
                 setClientDropdown(false)
@@ -80,7 +80,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
                 deadlineDropdown ? '' : 'hidden'
               }`}
             >
-              <div className='p-5 overflow-y-scroll  max-h-[300px]'>
+              <div className='p-2 overflow-y-scroll  max-h-[300px]'>
                 {deadlines?.map((deadline) => (
                   <li
                     key={deadline.id}

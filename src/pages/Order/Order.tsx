@@ -63,13 +63,13 @@ const Order = () => {
           {industry ? (
             <div className='p-4 bg-white w-[90%] max-w-[1200px] rounded-md flex flex-col gap-4'>
               <div className='flex items-center w-full text-center'>
-                <span className='text-xs text-zinc-500 w-[100px]'></span>
+                <span className='text-xs text-zinc-500 w-[100px] md:hidden'></span>
                 <span className='text-xs text-zinc-500 w-[10%]'>Código</span>
                 <span className='text-xs text-zinc-500 w-[60%]'>Nome</span>
-                <div className='flex w-[30%] items-center gap-4 md:hidden '>
-                  <span className='text-xs text-zinc-500'>Valor Un.</span>
-                  <span className='text-xs text-zinc-500 w-[80px]'>Quantidade</span>
-                  <span className='text-xs text-zinc-500 w-[50px]'>Total</span>
+                <div className='flex w-[30%] items-center gap-4  '>
+                  <span className='text-xs text-zinc-500 md:hidden'>Valor Un.</span>
+                  <span className='text-xs text-zinc-500 w-[80px] '>Quantidade</span>
+                  <span className='text-xs text-zinc-500 w-[50px] md:hidden'>Total</span>
                 </div>
               </div>
               {products?.map((product) => (
