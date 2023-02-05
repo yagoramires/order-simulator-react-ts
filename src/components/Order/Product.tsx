@@ -1,5 +1,7 @@
 // Hooks
 import { useState, useEffect } from 'react'
+
+// Icons
 import { MdNoPhotography } from 'react-icons/md'
 
 interface ProductProps {

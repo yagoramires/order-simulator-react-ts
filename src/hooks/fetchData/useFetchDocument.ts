@@ -3,16 +3,17 @@ import { database } from '../../firebase/config'
 import { doc, getDoc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 
-export const useFetchDocument = (docCollection: string, id: string) => {
+export const useFetchDocument = (docCollection: string, id: string | undefined) => {
   const [document, setDocument] = useState<any>(null)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    if (!id) return
     const loadDocument = async () => {
       setLoading(true)
 
       try {
-        const docRef = await doc(database, docCollection, id)
+        const docRef = doc(database, docCollection, id)
         const docSnap = await getDoc(docRef)
 
         setDocument(docSnap.data())
