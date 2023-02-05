@@ -11,6 +11,30 @@ import Loading from '../../../components/Loading'
 // Icons
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 
+interface ProductProps {
+  id?: string
+  imagePath?: string
+  code: string
+  name: string
+  industry?: string
+  price: number
+  quantity: number
+  family?: string
+  createdAt?: Date
+}
+
+interface OrderProps {
+  id: string
+  createdAt: Date
+  clientId: string
+  clientName: string
+  industryId: string
+  industryName: string
+  sellerId: string
+  sellerName: string
+  products: Array<ProductProps>
+}
+
 const ClientDetails = () => {
   const navigate = useNavigate()
 
@@ -22,7 +46,7 @@ const ClientDetails = () => {
   const [fantasyName, setFantasyName] = useState('')
   const [network, setNetwork] = useState('')
   const [cnpj, setCnpj] = useState('')
-  const [disccount, setDisccount] = useState('')
+  const [discount, setDiscount] = useState(0)
 
   useEffect(() => {
     if (client) {
@@ -30,7 +54,7 @@ const ClientDetails = () => {
       setFantasyName(client?.fantasyName)
       setNetwork(client?.network)
       setCnpj(client?.cnpj)
-      setDisccount(client?.disccount)
+      setDiscount(client?.discount)
     }
   }, [client])
 
@@ -46,6 +70,8 @@ const ClientDetails = () => {
         <Loading size={'60px'} />
       </div>
     )
+
+  console.log(client)
 
   return (
     <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] flex justify-center items-center'>
@@ -99,8 +125,8 @@ const ClientDetails = () => {
             <span className='md:text-xs text-zinc-400'>Desconto</span>
             <input
               type='number'
-              value={disccount}
-              onChange={(e) => setDisccount(e.target.value)}
+              value={discount}
+              onChange={(e) => setDiscount(+e.target.value)}
               className='p-2 rounded-md shadow-sm bg-zinc-200'
             />
           </label>
@@ -110,6 +136,10 @@ const ClientDetails = () => {
             value='Atualizar'
           />
         </form>
+
+        <div>
+          {client.orders && client?.orders?.map((order: OrderProps) => <p key={order.id}>teste</p>)}
+        </div>
       </div>
     </main>
   )

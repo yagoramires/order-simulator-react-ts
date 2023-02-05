@@ -5,15 +5,36 @@ import { database } from '../../firebase/config'
 
 import { toast } from 'react-toastify'
 
+interface ProductProps {
+  id?: string
+  imagePath?: string
+  code: string
+  name: string
+  industry?: string
+  price: number
+  quantity?: number
+  family?: string
+  createdAt?: Date
+}
+interface OrderProps {
+  id: string
+  createdAt: Date
+  clientId: string
+  clientName: string
+  industryId: string
+  industryName: string
+  sellerId: string
+  sellerName: string
+  products: Array<ProductProps>
+}
 interface ClientProps {
   id?: string
-  fantasyName: string
   socialName: string
+  fantasyName: string
   cnpj: string
+  discount: number
   network?: string
-  disccount?: number
-  orders?: any
-  createdAt?: Date
+  orders?: Array<OrderProps>
 }
 
 export const useHandleClients = () => {

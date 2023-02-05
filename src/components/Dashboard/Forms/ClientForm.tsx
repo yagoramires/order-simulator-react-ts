@@ -17,7 +17,7 @@ const ClientForm = () => {
   const [socialName, setSocialName] = useState('')
   const [cnpj, setCnpj] = useState('')
   const [network, setNetwork] = useState('')
-  const [disccount, setDisccount] = useState('')
+  const [discount, setdiscount] = useState('')
 
   const [open, setOpen] = useState(false)
 
@@ -35,14 +35,14 @@ const ClientForm = () => {
       socialName,
       cnpj,
       network,
-      disccount: +disccount,
+      discount: +discount,
     })
 
     setFantasyName('')
     setSocialName('')
     setCnpj('')
     setNetwork('')
-    setDisccount('')
+    setdiscount('')
     setOpen(false)
   }
 
@@ -95,8 +95,8 @@ const ClientForm = () => {
               type='number'
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Desconto'
-              value={disccount}
-              onChange={(e) => setDisccount(e.target.value)}
+              value={discount}
+              onChange={(e) => setdiscount(e.target.value)}
             />
             <input
               type='submit'

@@ -4,41 +4,31 @@ import { database } from '../../firebase/config'
 
 interface OrderProps {
   id: string
+  createdAt: Date
   clientId: string
-  industryId: string
   clientName: string
-  total: number
-  createdAt: any
-  products?: Array<{
-    id: string
-    code: string
-    name: string
-    industry: string
-    price: number
-  }>
+  industryId: string
+  industryName: string
+  sellerId: string
+  sellerName: string
+  products: Array<ProductProps>
 }
 interface IndustryProps {
   id: string
   socialName: string
   fantasyName: string
   cnpj: string
-  products?: Array<{
-    id?: string
-    imagePath?: string
-    code: string
-    name: string
-    industry?: string
-    price: number
-    family?: string
-    createdAt?: Date
-  }>
+  products?: Array<ProductProps>
 }
+
 interface ClientProps {
   id: string
   socialName: string
   fantasyName: string
   cnpj: string
-  orders?: any
+  discount: number
+  network?: string
+  orders?: Array<OrderProps>
 }
 
 interface DeadlineProps {
@@ -53,6 +43,7 @@ interface ProductProps {
   name: string
   industry?: string
   price: number
+  quantity?: number
   family?: string
   createdAt?: Date
 }

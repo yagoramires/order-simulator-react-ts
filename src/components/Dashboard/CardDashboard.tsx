@@ -31,7 +31,7 @@ const CardDashboard = ({ type }: CardProps) => {
       {type === 'orders' &&
         orders?.map((order) => (
           <div key={order.id}>
-            {linkComponent(
+            {/* {linkComponent(
               order.id,
               <div className='flex items-center justify-between w-full gap-4' key={order.id}>
                 <div className='flex flex-col w-[60%] md:w-[100%]'>
@@ -54,7 +54,7 @@ const CardDashboard = ({ type }: CardProps) => {
                   </div>
                 </div>
               </div>,
-            )}
+            )} */}
           </div>
         ))}
       {type === 'industries' &&
