@@ -36,7 +36,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
             <RiArrowDownSLine />
           </div>
           <ul
-            className={`absolute z-10 overflow-hidden  mt-3 rounded-md shadow-sm bg-zinc-200 w-[calc(90%-32px)] ${
+            className={`absolute z-10 overflow-hidden  mt-3 rounded-md shadow-sm bg-zinc-200 w-[calc(90%-32px)] max-w-[calc(1200px-32px)] ${
               clientDropdown ? '' : 'hidden'
             }`}
           >
@@ -76,7 +76,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
               <RiArrowDownSLine />
             </div>
             <ul
-              className={`absolute z-10 overflow-hidden  mt-3 rounded-md shadow-sm bg-zinc-200 w-[calc(90%-32px)] ${
+              className={`absolute z-10 overflow-hidden  mt-3 rounded-md shadow-sm bg-zinc-200 w-[calc(90%-32px)] max-w-[calc(1200px-32px)] ${
                 deadlineDropdown ? '' : 'hidden'
               }`}
             >
