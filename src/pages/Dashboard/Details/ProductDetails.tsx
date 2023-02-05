@@ -14,9 +14,12 @@ import { MdKeyboardArrowLeft, MdNoPhotography } from 'react-icons/md'
 const ProductDetails = () => {
   const navigate = useNavigate()
 
-  const { industryId, productId, loading } = useParams()
+  const { industryId, productId } = useParams()
 
-  const { document: product } = useFetchDocument(`industries/${industryId}/products`, productId)
+  const { document: product, loading } = useFetchDocument(
+    `industries/${industryId}/products`,
+    productId,
+  )
 
   const [image, setImage] = useState(null)
   const [name, setName] = useState('')
