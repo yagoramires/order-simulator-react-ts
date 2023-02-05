@@ -19,8 +19,7 @@ const CardDashboard = ({ type }: CardProps) => {
     return (
       <Link
         to={path}
-        key={path}
-        className='text-black border-b-[1px] border-b-zinc-200 p-2 rounded-md hover:bg-zinc-200'
+        className='text-black border-b-[1px] border-b-zinc-200 p-2 rounded-md hover:bg-zinc-200 w-full'
       >
         {children}
       </Link>
@@ -31,10 +30,10 @@ const CardDashboard = ({ type }: CardProps) => {
     <div className='flex flex-col gap-4'>
       {type === 'orders' &&
         orders?.map((order) => (
-          <>
+          <div key={order.id}>
             {linkComponent(
               order.id,
-              <>
+              <div className='flex items-center justify-between w-full gap-4' key={order.id}>
                 <div className='flex flex-col w-[60%] md:w-[100%]'>
                   <span className='text-xs text-zinc-400'>Cliente</span>
                   <span className='font-medium'>{order.clientName}</span>
@@ -54,13 +53,13 @@ const CardDashboard = ({ type }: CardProps) => {
                     <span className='font-medium'>{order.total && transform(+order.total)}</span>
                   </div>
                 </div>
-              </>,
+              </div>,
             )}
-          </>
+          </div>
         ))}
       {type === 'industries' &&
         industries?.map((industry) => (
-          <>
+          <div className='flex items-center justify-between w-full gap-4' key={industry.id}>
             {linkComponent(
               industry.id,
               <div className='flex items-center justify-between w-full gap-4'>
@@ -74,11 +73,11 @@ const CardDashboard = ({ type }: CardProps) => {
                 </div>
               </div>,
             )}
-          </>
+          </div>
         ))}
       {type === 'clients' &&
         clients?.map((client) => (
-          <>
+          <div className='flex items-center justify-between w-full gap-4' key={client.id}>
             {linkComponent(
               client.id,
               <div className='flex flex-col'>
@@ -86,11 +85,11 @@ const CardDashboard = ({ type }: CardProps) => {
                 <span className='font-medium'>{client.socialName}</span>
               </div>,
             )}
-          </>
+          </div>
         ))}
       {type === 'deadlines' &&
         deadlines?.map((deadline) => (
-          <>
+          <div className='flex items-center justify-between w-full gap-4' key={deadline.id}>
             {linkComponent(
               deadline.id,
               <div className='flex flex-col'>
@@ -98,7 +97,7 @@ const CardDashboard = ({ type }: CardProps) => {
                 <span className='font-medium'>{deadline.value}</span>
               </div>,
             )}
-          </>
+          </div>
         ))}
     </div>
   )

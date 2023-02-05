@@ -1,5 +1,5 @@
 // Components
-import CardDetails from './CardDetails'
+import ProductCard from '../Cards/ProductCard'
 import ProductForm from '../Forms/ProductForm'
 import { useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
@@ -18,7 +18,7 @@ const MainDetails = () => {
       <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
         <div className='flex flex-col gap-4  p-8  overflow-y-scroll rounded-md max-h-[75vh]'>
           {products && products?.length > 0 ? (
-            products?.map((product) => <CardDetails product={product} key={product.id} />)
+            products?.map((product) => <ProductCard product={product} key={product.id} />)
           ) : (
             <>
               <p className=' text-zinc-800'>Nenhum produto cadastrado.</p>
