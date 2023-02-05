@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 
 // Hooks
-import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
+import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 
 interface CardProps {
   type: string

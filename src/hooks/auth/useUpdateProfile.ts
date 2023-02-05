@@ -1,5 +1,5 @@
 // Firebase Config
-import { app, storage } from '../firebase/config'
+import { app, storage } from '../../firebase/config'
 
 // Firebase functions
 import { getAuth, updatePassword, updateProfile, updateEmail } from 'firebase/auth'

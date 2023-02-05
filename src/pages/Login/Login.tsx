@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 // Component Tabs Radix
 import * as Tabs from '@radix-ui/react-tabs'
-import { useAuth } from '../../hooks/useAuth'
+import { useAuth } from '../../hooks/auth/useAuth'
 import { toast } from 'react-toastify'
 import Loading from '../../components/Loading'
 

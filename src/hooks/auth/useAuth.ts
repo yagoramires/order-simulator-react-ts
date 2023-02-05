@@ -1,5 +1,5 @@
 // Firebase Config
-import { app } from '../firebase/config'
+import { app } from '../../firebase/config'
 
 // Firebase functions
 import {

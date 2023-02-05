@@ -34,6 +34,8 @@ const Order = () => {
 
   const [selectedIndustry, setSelectedIndustry] = useState<IndustryProps>()
 
+  // const [productsArray, setProductsArray] = useState(0)
+
   const { products } = useFetchCollection(`industries/${selectedIndustry?.id}/products`)
 
   useEffect(() => {

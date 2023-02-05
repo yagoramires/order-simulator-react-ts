@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { IoMdAdd } from 'react-icons/io'
 
 // Components
-import CardDashboard from './CardDashboard'
+import CardDashboard from './Cards/CardDashboard'
 import IndustryForm from './Forms/IndustryForm'
 import ClientForm from './Forms/ClientForm'
 import DeadlineForm from './Forms/DeadlineForm'

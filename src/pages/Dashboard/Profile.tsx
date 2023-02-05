@@ -5,7 +5,7 @@ import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../components/Loading'
 import { AuthContext } from '../../context/AuthContext'
-import { useUpdateProfile } from '../../hooks/useUpdateProfile'
+import { useUpdateProfile } from '../../hooks/auth/useUpdateProfile'
 
 const Profile = () => {
   const { userData } = useContext(AuthContext)
