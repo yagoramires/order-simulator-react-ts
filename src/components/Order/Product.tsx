@@ -4,28 +4,9 @@ import { useState, useEffect } from 'react'
 // Icons
 import { MdNoPhotography } from 'react-icons/md'
 
+import { IProduct } from '../../interfaces'
 interface ProductProps {
-  product: {
-    id?: string
-    imagePath?: string
-    code: string
-    name: string
-    industry?: string
-    price: number
-    family?: string
-    createdAt?: Date
-  }
-  // products: Array<{
-  //   id?: string
-  //   imagePath?: string
-  //   code: string
-  //   name: string
-  //   industry?: string
-  //   price: number
-  //   family?: string
-  //   createdAt?: Date
-  // }>
-  // setProducts: () => void
+  product: IProduct
 }
 
 const Product = ({ product }: ProductProps) => {

@@ -6,21 +6,12 @@ import { database, storage } from '../../firebase/config'
 import { toast } from 'react-toastify'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
-interface ProductProps {
-  id?: string
-  imagePath?: string
-  code: string
-  name: string
-  industry?: string
-  price: number
-  family?: string
-  createdAt?: Date
-}
+import { IAddProduct } from '../../interfaces/index'
 
 export const useHandleProducts = () => {
   const [loading, setLoading] = useState(false)
 
-  const addProduct = async (productData: ProductProps, img: File | '') => {
+  const addProduct = async (productData: IAddProduct, img: File | '') => {
     setLoading(true)
 
     try {

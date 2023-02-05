@@ -1,16 +1,11 @@
 import { useState } from 'react'
 import { RiArrowDownSLine } from 'react-icons/ri'
 
-interface DataProps {
-  clients: Array<{
-    id: string
-    socialName: string
-    fantasyName: string
-    cnpj: string
-    orders?: any
-  }>
+import { IClients, IDeadlines } from '../../interfaces'
 
-  deadlines: Array<{ id: string; value: string }>
+interface DataProps {
+  clients: Array<IClients>
+  deadlines: Array<IDeadlines>
 }
 
 const Select = ({ deadlines, clients }: DataProps) => {
@@ -36,8 +31,6 @@ const Select = ({ deadlines, clients }: DataProps) => {
     setDeadline(deadline)
     setDeadlineDropdown(false)
   }
-
-  console.log(client, deadline)
 
   return (
     <div className='flex flex-col items-center justify-center p-4 bg-white w-[90%] max-w-[1200px] rounded-md my-4'>

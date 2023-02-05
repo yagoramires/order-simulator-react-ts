@@ -1,16 +1,13 @@
-// React
 import { useState } from 'react'
 
-// Icons
-import { IoMdAdd } from 'react-icons/io'
-import { MdClose } from 'react-icons/md'
+import { useHandleClients } from '../../../hooks/handleData/useHandleClients'
 
-// Component Dialog Radix
+import { toast } from 'react-toastify'
+
 import * as Dialog from '@radix-ui/react-dialog'
 
-// Hooks
-import { useHandleClients } from '../../../hooks/handleData/useHandleClients'
-import { toast } from 'react-toastify'
+import { IoMdAdd } from 'react-icons/io'
+import { MdClose } from 'react-icons/md'
 
 const ClientForm = () => {
   const [fantasyName, setFantasyName] = useState('')

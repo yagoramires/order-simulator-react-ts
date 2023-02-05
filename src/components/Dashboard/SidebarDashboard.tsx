@@ -1,15 +1,12 @@
-// Icons
+import { useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext'
+import { useAuth } from '../../hooks/auth/useAuth'
+
+import { Link } from 'react-router-dom'
+
 import { BsCartCheckFill } from 'react-icons/bs'
 import { MdLogout } from 'react-icons/md'
 import { FaPlus, FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit } from 'react-icons/fa'
-
-// Router
-import { Link } from 'react-router-dom'
-import { useAuth } from '../../hooks/auth/useAuth'
-
-// Context
-import { useContext } from 'react'
-import { AuthContext } from '../../context/AuthContext'
 
 const SidebarDashboard = () => {
   const { userData } = useContext(AuthContext)

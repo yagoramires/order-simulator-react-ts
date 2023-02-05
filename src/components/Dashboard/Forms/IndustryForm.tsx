@@ -1,16 +1,12 @@
-// React
 import { useState } from 'react'
+import { useHandleIndustries } from '../../../hooks/handleData/useHandleIndustries'
 
-// Icons
-import { IoMdAdd } from 'react-icons/io'
-import { MdClose } from 'react-icons/md'
+import { toast } from 'react-toastify'
 
-// Component Dialog Radix
 import * as Dialog from '@radix-ui/react-dialog'
 
-// Hooks
-import { useHandleIndustries } from '../../../hooks/handleData/useHandleIndustries'
-import { toast } from 'react-toastify'
+import { IoMdAdd } from 'react-icons/io'
+import { MdClose } from 'react-icons/md'
 
 const IndustryForm = () => {
   const [fantasyName, setFantasyName] = useState('')

@@ -5,19 +5,12 @@ import { database } from '../../firebase/config'
 
 import { toast } from 'react-toastify'
 
-interface industryProps {
-  id?: string
-  fantasyName: string
-  socialName: string
-  cnpj: string
-  products?: any
-  createdAt?: Date
-}
+import { IAddIndustry } from '../../interfaces/index'
 
 export const useHandleIndustries = () => {
   const [loading, setLoading] = useState(false)
 
-  const addIndustry = async (industryData: industryProps) => {
+  const addIndustry = async (industryData: IAddIndustry) => {
     setLoading(true)
     try {
       const ref = collection(database, 'industries')

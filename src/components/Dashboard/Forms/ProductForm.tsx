@@ -1,19 +1,14 @@
-// React
 import { useState } from 'react'
+import { useHandleProducts } from '../../../hooks/handleData/useHandleProducts'
 
-// Router
 import { useParams } from 'react-router-dom'
 
-// Icons
-import { IoMdAdd } from 'react-icons/io'
-import { MdClose } from 'react-icons/md'
+import { toast } from 'react-toastify'
 
-// Component Dialog Radix
 import * as Dialog from '@radix-ui/react-dialog'
 
-// Hooks
-import { useHandleProducts } from '../../../hooks/handleData/useHandleProducts'
-import { toast } from 'react-toastify'
+import { IoMdAdd } from 'react-icons/io'
+import { MdClose } from 'react-icons/md'
 
 const ClientForm = () => {
   const [productImg, setProductImage] = useState(null)
@@ -34,16 +29,18 @@ const ClientForm = () => {
     if (!name) return toast.error('Preencha o nome!')
     if (!price) return toast.error('Preencha o preço!')
 
-    addProduct(
-      {
-        code,
-        name,
-        industry: industryId,
-        price: Number(price),
-        family,
-      },
-      productImg || '',
-    )
+    if (industryId) {
+      addProduct(
+        {
+          code,
+          name,
+          industry: industryId,
+          price: Number(price),
+          family,
+        },
+        productImg || '',
+      )
+    }
 
     setCode('')
     setName('')

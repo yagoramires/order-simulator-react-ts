@@ -1,39 +1,22 @@
-// React
 import React, { useContext, useEffect, useState } from 'react'
 
-// Routes
 import { Link } from 'react-router-dom'
 
-// Context
 import { AuthContext } from '../../context/AuthContext'
 import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
+
+import { IIndustries } from '../../interfaces'
 
 interface HeaderProps {
   industry: string
   setIndustry: React.Dispatch<React.SetStateAction<string>>
-}
-interface IndustryProps {
-  id: string
-  socialName: string
-  fantasyName: string
-  cnpj: string
-  products?: Array<{
-    id?: string
-    imagePath?: string
-    code: string
-    name: string
-    industry?: string
-    price: number
-    family?: string
-    createdAt?: Date
-  }>
 }
 
 const Header = ({ industry, setIndustry }: HeaderProps) => {
   const { userData } = useContext(AuthContext)
   const { industries: documents } = useFetchCollection('industries')
 
-  const [industries, setIndustries] = useState<IndustryProps[]>()
+  const [industries, setIndustries] = useState<IIndustries[]>()
 
   useEffect(() => {
     if (documents) {

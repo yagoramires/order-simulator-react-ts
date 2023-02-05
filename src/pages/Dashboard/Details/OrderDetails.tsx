@@ -1,24 +1,14 @@
-import { useState, useEffect } from 'react'
-import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useNavigate, useParams } from 'react-router-dom'
 
-interface OrderDetailsProps {
-  id: string
-  industry: string
-  client: string
-  total: number
-  products: Array<{
-    id: string
-    name: string
-    code: string
-    price: number
-    quantity: number
-  }>
-}
+import { useState, useEffect } from 'react'
+
+import { MdKeyboardArrowLeft } from 'react-icons/md'
+
+import { IOrder } from '../../../interfaces/index'
 
 const OrderDetails = () => {
-  const [orders, setOrders] = useState<OrderDetailsProps[]>([])
-  const [order, setOrder] = useState<OrderDetailsProps>()
+  const [orders, setOrders] = useState<IOrder[]>([])
+  const [order, setOrder] = useState<IOrder>()
 
   const { orderId } = useParams()
   const navigate = useNavigate()
@@ -33,7 +23,7 @@ const OrderDetails = () => {
 
   return (
     <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] flex justify-center items-center'>
-      <div className='h-[80vh] w-[90%] bg-white p-8 flex flex-col gap-4 rounded-md shadow-md'>
+      {/* <div className='h-[80vh] w-[90%] bg-white p-8 flex flex-col gap-4 rounded-md shadow-md'>
         <button
           onClick={() => navigate(-1)}
           className='flex items-center justify-end w-full font-medium text-blue-600'
@@ -104,7 +94,7 @@ const OrderDetails = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </main>
   )
 }

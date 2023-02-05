@@ -1,40 +1,12 @@
-// Hooks
 import { useEffect, useState } from 'react'
 import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
-
-// Router
-import { useNavigate, useParams } from 'react-router-dom'
-
-// Components
-import Loading from '../../../components/Loading'
-
-// Icons
-import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 
-interface ProductProps {
-  id?: string
-  imagePath?: string
-  code: string
-  name: string
-  industry?: string
-  price: number
-  quantity: number
-  family?: string
-  createdAt?: Date
-}
+import { useNavigate, useParams } from 'react-router-dom'
 
-interface OrderProps {
-  id: string
-  createdAt: Date
-  clientId: string
-  clientName: string
-  industryId: string
-  industryName: string
-  sellerId: string
-  sellerName: string
-  products: Array<ProductProps>
-}
+import Loading from '../../../components/Loading'
+
+import { MdKeyboardArrowLeft } from 'react-icons/md'
 
 const ClientDetails = () => {
   const navigate = useNavigate()

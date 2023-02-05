@@ -5,42 +5,12 @@ import { database } from '../../firebase/config'
 
 import { toast } from 'react-toastify'
 
-interface ProductProps {
-  id?: string
-  imagePath?: string
-  code: string
-  name: string
-  industry?: string
-  price: number
-  quantity?: number
-  family?: string
-  createdAt?: Date
-}
-interface OrderProps {
-  id: string
-  createdAt: Date
-  clientId: string
-  clientName: string
-  industryId: string
-  industryName: string
-  sellerId: string
-  sellerName: string
-  products: Array<ProductProps>
-}
-interface ClientProps {
-  id?: string
-  socialName: string
-  fantasyName: string
-  cnpj: string
-  discount: number
-  network?: string
-  orders?: Array<OrderProps>
-}
+import { IAddClient } from '../../interfaces/index'
 
 export const useHandleClients = () => {
   const [loading, setLoading] = useState(false)
 
-  const addClient = async (clientData: ClientProps) => {
+  const addClient = async (clientData: IAddClient) => {
     setLoading(true)
     try {
       const ref = collection(database, 'clients')

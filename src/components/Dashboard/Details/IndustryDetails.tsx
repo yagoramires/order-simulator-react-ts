@@ -1,8 +1,8 @@
-// Components
-import ProductCard from '../Cards/ProductCard'
-import ProductForm from '../Forms/ProductForm'
 import { useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
+
+import ProductCard from '../Cards/ProductCard'
+import ProductForm from '../Forms/ProductForm'
 
 const MainDetails = () => {
   const { industryId } = useParams()

@@ -1,10 +1,7 @@
-// Router
 import { Link } from 'react-router-dom'
 
-// Icons
 import { IoMdAdd } from 'react-icons/io'
 
-// Components
 import CardDashboard from './Cards/CardDashboard'
 import IndustryForm from './Forms/IndustryForm'
 import ClientForm from './Forms/ClientForm'

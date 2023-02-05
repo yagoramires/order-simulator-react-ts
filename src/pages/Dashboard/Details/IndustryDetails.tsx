@@ -1,35 +1,18 @@
-// Routes
-import { useParams } from 'react-router-dom'
-
-// React
 import { useEffect, useState } from 'react'
-
-// Fetch Data
 import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
 
-// Components
+import { useParams } from 'react-router-dom'
+
 import Details from '../../../components/Dashboard/Details/IndustryDetails'
 import SidebarDetails from '../../../components/Dashboard/Details/SidebarDetails'
 import Loading from '../../../components/Loading'
 
-interface IndustryProps {
-  id: string
-  socialName: string
-  fantasyName: string
-  cnpj: string
-  products?: Array<{
-    id: string
-    code: string
-    name: string
-    industry: string
-    price: number
-  }>
-}
+import { IIndustries } from '../../../interfaces/index'
 
 const IndustryDetails = () => {
   const { industryId } = useParams()
   const { document, loading } = useFetchDocument('industries', industryId || '')
-  const [industry, setIndustry] = useState<IndustryProps>()
+  const [industry, setIndustry] = useState<IIndustries>()
 
   useEffect(() => {
     if (document) {

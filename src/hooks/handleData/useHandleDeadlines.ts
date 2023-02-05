@@ -5,15 +5,12 @@ import { database } from '../../firebase/config'
 
 import { toast } from 'react-toastify'
 
-interface DeadlineProps {
-  id?: string
-  value: string
-}
+import { IAddDeadline } from '../../interfaces/index'
 
 export const useHandleDeadlines = () => {
   const [loading, setLoading] = useState(false)
 
-  const addDeadline = async (deadlineData: DeadlineProps) => {
+  const addDeadline = async (deadlineData: IAddDeadline) => {
     setLoading(true)
     try {
       const ref = collection(database, 'deadlines')

@@ -1,20 +1,12 @@
-// Router
 import { Link } from 'react-router-dom'
 
-interface ProductProps {
-  product: {
-    id?: string
-    imagePath?: string
-    code: string
-    name: string
-    industry?: string
-    price: number
-    family?: string
-    createdAt?: Date
-  }
+import { IProduct } from '../../../interfaces'
+
+interface DataProps {
+  product: IProduct
 }
 
-const ProductCard = ({ product }: ProductProps) => {
+const ProductCard = ({ product }: DataProps) => {
   const transform = (value: number) => {
     return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
   }

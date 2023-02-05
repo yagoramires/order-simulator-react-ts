@@ -2,62 +2,15 @@ import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { database } from '../../firebase/config'
 
-interface OrderProps {
-  id: string
-  createdAt: {
-    nanoseconds: number
-    seconds: number
-  }
-  clientId: string
-  clientName: string
-  industryId: string
-  industryName: string
-  sellerId: string
-  sellerName: string
-  products: Array<ProductProps>
-}
-interface IndustryProps {
-  id: string
-  socialName: string
-  fantasyName: string
-  cnpj: string
-  products?: Array<ProductProps>
-}
-
-interface ClientProps {
-  id: string
-  socialName: string
-  fantasyName: string
-  cnpj: string
-  discount: number
-  network?: string
-  orders?: Array<OrderProps>
-}
-
-interface DeadlineProps {
-  id: string
-  value: string
-}
-
-interface ProductProps {
-  id?: string
-  imagePath?: string
-  code: string
-  name: string
-  industry?: string
-  price: number
-  quantity?: number
-  family?: string
-  createdAt?: Date
-}
+import * as interfaces from '../../interfaces/index'
 
 export const useFetchCollection = (docCollection: string) => {
-  const [orders, setOrders] = useState<OrderProps[]>()
-  const [clientOrders, setClientOrders] = useState<OrderProps[]>()
-  const [industries, setIndustries] = useState<IndustryProps[]>()
-  const [clients, setClients] = useState<ClientProps[]>()
-  const [deadlines, setDeadlines] = useState<DeadlineProps[]>()
-  const [products, setProducts] = useState<ProductProps[]>()
+  const [orders, setOrders] = useState<interfaces.IOrder[]>()
+  const [clientOrders, setClientOrders] = useState<interfaces.IOrder[]>()
+  const [industries, setIndustries] = useState<interfaces.IIndustries[]>()
+  const [clients, setClients] = useState<interfaces.IClients[]>()
+  const [deadlines, setDeadlines] = useState<interfaces.IDeadlines[]>()
+  const [products, setProducts] = useState<interfaces.IProduct[]>()
 
   useEffect(() => {
     const fetchData = () => {

@@ -1,14 +1,10 @@
-// Hooks
 import { useEffect, useState } from 'react'
 import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
 
-// Router
 import { useNavigate, useParams } from 'react-router-dom'
 
-// Components
 import Loading from '../../../components/Loading'
 
-// Icons
 import { MdKeyboardArrowLeft, MdNoPhotography } from 'react-icons/md'
 
 const ProductDetails = () => {

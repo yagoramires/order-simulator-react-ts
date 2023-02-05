@@ -1,26 +1,14 @@
-// Router
 import { useNavigate } from 'react-router-dom'
 
-// Icons
+import { IIndustries } from '../../../interfaces'
+
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 
-interface IndustryProps {
-  industry: {
-    id: string
-    fantasyName: string
-    socialName: string
-    cnpj: string
-    products?: Array<{
-      id: string
-      code: string
-      name: string
-      industry: string
-      price: number
-    }>
-  }
+interface DataProps {
+  industry: IIndustries
 }
 
-const SidebarDetails = ({ industry }: IndustryProps) => {
+const SidebarDetails = ({ industry }: DataProps) => {
   const navigate = useNavigate()
 
   return (

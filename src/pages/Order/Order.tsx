@@ -8,22 +8,7 @@ import Product from '../../components/Order/Product'
 import SelectData from '../../components/Order/Select'
 import Loading from '../../components/Loading'
 
-interface IndustryProps {
-  id: string
-  socialName: string
-  fantasyName: string
-  cnpj: string
-  products?: Array<{
-    id?: string
-    imagePath?: string
-    code: string
-    name: string
-    industry?: string
-    price: number
-    family?: string
-    createdAt?: Date
-  }>
-}
+import { IIndustries } from '../../interfaces/index'
 
 const Order = () => {
   const [industry, setIndustry] = useState('')
@@ -32,7 +17,7 @@ const Order = () => {
   const { deadlines } = useFetchCollection('deadlines')
   const { clients } = useFetchCollection('clients')
 
-  const [selectedIndustry, setSelectedIndustry] = useState<IndustryProps>()
+  const [selectedIndustry, setSelectedIndustry] = useState<IIndustries>()
 
   // const [productsArray, setProductsArray] = useState(0)
 

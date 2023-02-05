@@ -1,14 +1,12 @@
-// Router
 import { Link } from 'react-router-dom'
 
-// Hooks
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 
-interface CardProps {
+interface DataProps {
   type: string
 }
 
-const CardDashboard = ({ type }: CardProps) => {
+const CardDashboard = ({ type }: DataProps) => {
   const { industries, clients, deadlines, orders } = useFetchCollection(type)
 
   const transform = (value: number) => {
