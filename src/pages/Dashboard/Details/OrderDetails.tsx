@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getOrders } from '../../../services/api'
 
 interface OrderDetailsProps {
   id: string
@@ -23,13 +22,6 @@ const OrderDetails = () => {
 
   const { orderId } = useParams()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    ;(async () => {
-      const ordersRequest = await getOrders()
-      setOrders(ordersRequest.data)
-    })()
-  }, [])
 
   useEffect(() => {
     const filterOrder = orders.filter((order) => `${order.id}` === orderId)

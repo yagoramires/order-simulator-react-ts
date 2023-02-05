@@ -4,7 +4,10 @@ import { database } from '../../firebase/config'
 
 interface OrderProps {
   id: string
-  createdAt: Date
+  createdAt: {
+    nanoseconds: number
+    seconds: number
+  }
   clientId: string
   clientName: string
   industryId: string
@@ -50,6 +53,7 @@ interface ProductProps {
 
 export const useFetchCollection = (docCollection: string) => {
   const [orders, setOrders] = useState<OrderProps[]>()
+  const [clientOrders, setClientOrders] = useState<OrderProps[]>()
   const [industries, setIndustries] = useState<IndustryProps[]>()
   const [clients, setClients] = useState<ClientProps[]>()
   const [deadlines, setDeadlines] = useState<DeadlineProps[]>()
@@ -76,6 +80,8 @@ export const useFetchCollection = (docCollection: string) => {
             setDeadlines(snapshot)
           } else if (docCollection.includes('products')) {
             setProducts(snapshot)
+          } else if (docCollection.includes('clients') && docCollection.includes('orders')) {
+            setClientOrders(snapshot)
           }
         })
       } catch (e: any) {
@@ -85,5 +91,5 @@ export const useFetchCollection = (docCollection: string) => {
     fetchData()
   }, [docCollection])
 
-  return { industries, clients, deadlines, orders, products }
+  return { industries, clients, deadlines, orders, products, clientOrders }
 }

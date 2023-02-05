@@ -10,6 +10,7 @@ import Loading from '../../../components/Loading'
 
 // Icons
 import { MdKeyboardArrowLeft } from 'react-icons/md'
+import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 
 interface ProductProps {
   id?: string
@@ -41,6 +42,7 @@ const ClientDetails = () => {
   const { clientId } = useParams()
 
   const { document: client, loading } = useFetchDocument('clients', clientId)
+  const { clientOrders } = useFetchCollection(`clients/${clientId}/orders`)
 
   const [socialName, setSocialName] = useState('')
   const [fantasyName, setFantasyName] = useState('')
@@ -71,7 +73,7 @@ const ClientDetails = () => {
       </div>
     )
 
-  console.log(client)
+  console.log(clientOrders)
 
   return (
     <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] flex justify-center items-center'>
@@ -138,7 +140,14 @@ const ClientDetails = () => {
         </form>
 
         <div>
-          {client.orders && client?.orders?.map((order: OrderProps) => <p key={order.id}>teste</p>)}
+          {clientOrders?.map((order) => (
+            <div key={order.id}>
+              <p>{order.clientName}</p>
+              <p>{order.industryName}</p>
+
+              <p>{order.sellerName}</p>
+            </div>
+          ))}
         </div>
       </div>
     </main>

@@ -21,6 +21,8 @@ const Product = ({ product }: ProductProps) => {
   const [quantity, setQuantity] = useState(0)
   const [total, setTotal] = useState(0)
 
+  const [selectedProduct, setSelectedProduct] = useState()
+
   useEffect(() => {
     setTotal(quantity * product.price)
   }, [quantity])

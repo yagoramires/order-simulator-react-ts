@@ -6,10 +6,6 @@ import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 import Header from '../../components/Order/Header'
 import Product from '../../components/Order/Product'
 import SelectData from '../../components/Order/Select'
-
-import { RiArrowDownSLine } from 'react-icons/ri'
-
-import * as Select from '@radix-ui/react-select'
 import Loading from '../../components/Loading'
 
 interface IndustryProps {

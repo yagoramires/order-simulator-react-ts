@@ -19,6 +19,26 @@ const Select = ({ deadlines, clients }: DataProps) => {
   const [selectedDeadline, setSelectedDeadline] = useState('Selecione um prazo de pagamento')
   const [deadlineDropdown, setDeadlineDropdown] = useState(false)
 
+  const [client, setClient] = useState<{ id: string; socialName: string }>()
+  const [deadline, setDeadline] = useState('')
+
+  const handleSelectClient = (id: string, socialName: string) => {
+    setSelectedClient(socialName)
+    setClient({
+      id,
+      socialName,
+    })
+    setClientDropdown(false)
+  }
+
+  const handleSelectDeadline = (deadline: string) => {
+    setSelectedDeadline(deadline)
+    setDeadline(deadline)
+    setDeadlineDropdown(false)
+  }
+
+  console.log(client, deadline)
+
   return (
     <div className='flex flex-col items-center justify-center p-4 bg-white w-[90%] max-w-[1200px] rounded-md my-4'>
       <div className='flex flex-col w-full gap-1 text-start'>
@@ -48,10 +68,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
                 >
                   <span
                     className='option-text w-[100%]'
-                    onClick={() => {
-                      setSelectedClient(client.socialName)
-                      setClientDropdown(false)
-                    }}
+                    onClick={() => handleSelectClient(client.id, client.socialName)}
                   >
                     {client.socialName}
                   </span>
@@ -88,10 +105,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
                   >
                     <span
                       className='option-text w-[100%]'
-                      onClick={() => {
-                        setSelectedDeadline(deadline.value)
-                        setDeadlineDropdown(false)
-                      }}
+                      onClick={() => handleSelectDeadline(deadline.value)}
                     >
                       {deadline.value}
                     </span>
