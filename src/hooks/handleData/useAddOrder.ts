@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
 import { addDoc, collection, Timestamp } from 'firebase/firestore'
-import { database } from '../firebase/config'
+import { database } from '../../firebase/config'
 
 import { toast } from 'react-toastify'
 
-import { IOrder } from '../interfaces/index'
+import { IOrder } from '../../interfaces/index'
 
 export const useCreateOrder = () => {
   const [loading, setLoading] = useState(false)
