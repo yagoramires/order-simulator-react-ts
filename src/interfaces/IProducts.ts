@@ -8,6 +8,7 @@ export interface IProduct {
   family?: string
   createdAt?: Date
   quantity?: number
+  total?: number
 }
 export interface IAddProduct {
   code: string

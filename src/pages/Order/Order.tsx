@@ -1,27 +1,35 @@
-// Hooks
 import { useEffect, useState } from 'react'
 import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 
-// Components
 import Header from '../../components/Order/Header'
 import Product from '../../components/Order/Product'
 import SelectData from '../../components/Order/Select'
 import Loading from '../../components/Loading'
 
-import { IIndustries } from '../../interfaces/index'
+import { IIndustries, IProduct } from '../../interfaces/index'
 
 const Order = () => {
   const [industry, setIndustry] = useState('')
+  const [selectedIndustry, setSelectedIndustry] = useState<IIndustries>()
+  const [productsArray, setProductsArray] = useState<IProduct[]>([])
+  const [total, setTotal] = useState<number>(0)
 
   const { industries } = useFetchCollection('industries')
   const { deadlines } = useFetchCollection('deadlines')
   const { clients } = useFetchCollection('clients')
-
-  const [selectedIndustry, setSelectedIndustry] = useState<IIndustries>()
-
-  // const [productsArray, setProductsArray] = useState(0)
-
   const { products } = useFetchCollection(`industries/${selectedIndustry?.id}/products`)
+
+  useEffect(() => {
+    setProductsArray([])
+  }, [industry])
+
+  useEffect(() => {
+    const initialValue = 0
+    const total = productsArray.reduce((acc, cur) => {
+      return cur.total ? acc + cur.total : acc
+    }, initialValue)
+    setTotal(total)
+  }, [productsArray])
 
   useEffect(() => {
     const filterIndustry = industries?.filter((item) => item.id == industry)
@@ -41,7 +49,7 @@ const Order = () => {
 
       <main>
         <form className='flex flex-col items-center justify-center'>
-          <SelectData clients={clients} deadlines={deadlines} />
+          <SelectData clients={clients} deadlines={deadlines} total={total} />
 
           {industry ? (
             <div className='p-4 bg-white w-[90%] max-w-[1200px] rounded-md flex flex-col gap-4'>
@@ -56,7 +64,12 @@ const Order = () => {
                 </div>
               </div>
               {products?.map((product) => (
-                <Product product={product} key={product.id} />
+                <Product
+                  product={product}
+                  key={product.id}
+                  productsArray={productsArray}
+                  setProductsArray={setProductsArray}
+                />
               ))}
               {products?.length === 0 && (
                 <p className='w-full py-20 text-center '>Nenhum produto cadastrado.</p>

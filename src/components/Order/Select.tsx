@@ -6,9 +6,10 @@ import { IClients, IDeadlines } from '../../interfaces'
 interface DataProps {
   clients: Array<IClients>
   deadlines: Array<IDeadlines>
+  total: number
 }
 
-const Select = ({ deadlines, clients }: DataProps) => {
+const Select = ({ deadlines, clients, total }: DataProps) => {
   const [selectedClient, setSelectedClient] = useState('Selecione um cliente')
   const [clientDropdown, setClientDropdown] = useState(false)
   const [selectedDeadline, setSelectedDeadline] = useState('Selecione um prazo de pagamento')
@@ -33,11 +34,10 @@ const Select = ({ deadlines, clients }: DataProps) => {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center p-4 bg-white w-[90%] max-w-[1200px] rounded-md my-4'>
-      <div className='flex flex-col w-full gap-1 text-start'>
-        <span className='text-xs text-zinc-500'>Cliente</span>
-
+    <div className='flex items-center justify-center p-4 bg-white w-[90%] max-w-[1200px] rounded-md my-4'>
+      <div className='flex flex-col w-full gap-4 text-start'>
         <div className='w-[100%]'>
+          <span className='text-xs text-zinc-500'>Cliente</span>
           <div
             className='relative flex items-center justify-between px-4 py-2 font-normal rounded-md shadow-sm cursor-pointer bg-zinc-200 '
             onClick={() => {
@@ -49,7 +49,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
             <RiArrowDownSLine />
           </div>
           <ul
-            className={`absolute z-10 overflow-hidden  mt-3 rounded-md shadow-sm bg-zinc-200 w-[calc(90%-32px)] max-w-[calc(1200px-32px)] ${
+            className={`absolute z-10 overflow-hidden rounded-md shadow-sm bg-zinc-200 w-[calc(90%-32px)] max-w-[calc(1200px-32px)] ${
               clientDropdown ? '' : 'hidden'
             }`}
           >
@@ -71,7 +71,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
           </ul>
         </div>
 
-        <div className='flex flex-col w-full gap-1 mt-4 text-start'>
+        <div className='flex flex-col w-full gap-1 text-start'>
           <span className='text-xs text-zinc-500'>Prazo de pagamento</span>
 
           <div className='w-[100%]'>
@@ -86,7 +86,7 @@ const Select = ({ deadlines, clients }: DataProps) => {
               <RiArrowDownSLine />
             </div>
             <ul
-              className={`absolute z-10 overflow-hidden  mt-3 rounded-md shadow-sm bg-zinc-200 w-[calc(90%-32px)] max-w-[calc(1200px-32px)] ${
+              className={`absolute z-10 overflow-hidden rounded-md shadow-sm bg-zinc-200 w-[calc(90%-32px)] max-w-[calc(1200px-32px)] ${
                 deadlineDropdown ? '' : 'hidden'
               }`}
             >
@@ -107,6 +107,13 @@ const Select = ({ deadlines, clients }: DataProps) => {
               </div>
             </ul>
           </div>
+        </div>
+
+        <div className='flex flex-col w-full gap-1 text-start'>
+          <span className='text-xs text-zinc-500'>Total</span>
+          <span className='font-bold'>
+            {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+          </span>
         </div>
       </div>
     </div>
