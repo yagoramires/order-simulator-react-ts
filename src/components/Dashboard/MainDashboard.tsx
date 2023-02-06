@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 import { IoMdAdd } from 'react-icons/io'
 
-import CardDashboard from './Cards/CardDashboard'
 import IndustryForm from './Forms/IndustryForm'
 import ClientForm from './Forms/ClientForm'
 import DeadlineForm from './Forms/DeadlineForm'
@@ -33,10 +32,7 @@ const MainDashboard = () => {
       </div>
       <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
         <div className='flex flex-col gap-4 p-8 overflow-y-scroll rounded-md max-h-[75vh]'>
-          {nameUrl.includes('orders') && <CardDashboard type={'orders'} />}
-          {nameUrl.includes('industries') && <CardDashboard type={'industries'} />}
-          {nameUrl.includes('clients') && <CardDashboard type={'clients'} />}
-          {nameUrl.includes('deadlines') && <CardDashboard type={'deadlines'} />}
+          <Outlet />
         </div>
       </div>
     </main>

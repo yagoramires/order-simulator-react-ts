@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { database } from '../../firebase/config'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, DocumentData, getDoc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 
 export const useFetchDocument = (docCollection: string, id: string | undefined) => {
-  const [document, setDocument] = useState<any>(null)
+  const [document, setDocument] = useState<DocumentData>()
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -18,9 +18,8 @@ export const useFetchDocument = (docCollection: string, id: string | undefined) 
 
         setDocument(docSnap.data())
         setLoading(false)
-      } catch (error: any) {
-        console.log(error)
-        toast.error(error.message)
+      } catch (e: any) {
+        toast.error(e.message)
         setLoading(false)
       }
     }

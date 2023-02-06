@@ -58,42 +58,51 @@ const CardDashboard = ({ type }: DataProps) => {
       {type === 'industries' &&
         industries?.map((industry) => (
           <div className='flex items-center justify-between w-full gap-4' key={industry.id}>
-            {linkComponent(
-              industry.id,
-              <div className='flex items-center justify-between w-full gap-4'>
-                <div className='flex flex-col w-full'>
-                  <span className='text-xs text-zinc-400'>Indústria</span>
-                  <span className='font-medium'>{industry.socialName}</span>
-                </div>
-                <div className='flex flex-col w-full lg:hidden'>
-                  <span className='text-xs text-zinc-400'>CNPJ</span>
-                  <span className='text-sm font-normal '>{industry.cnpj}</span>
-                </div>
-              </div>,
-            )}
+            {industry.id &&
+              linkComponent(
+                industry.id,
+                <div className='flex items-center justify-between w-full gap-4'>
+                  <div className='flex flex-col w-full'>
+                    <span className='text-xs text-zinc-400'>Indústria</span>
+                    <span className='font-medium'>{industry.socialName}</span>
+                  </div>
+                  <div className='flex flex-col w-full lg:hidden'>
+                    <span className='text-xs text-zinc-400'>CNPJ</span>
+                    <span className='text-sm font-normal '>{industry.cnpj}</span>
+                  </div>
+                </div>,
+              )}
           </div>
         ))}
       {type === 'clients' &&
         clients?.map((client) => (
           <div className='flex items-center justify-between w-full gap-4' key={client.id}>
-            {linkComponent(
-              client.id,
-              <div className='flex flex-col'>
-                <span className='text-xs text-zinc-400'>Cliente</span>
-                <span className='font-medium'>{client.socialName}</span>
-              </div>,
+            {client.id && (
+              <>
+                {linkComponent(
+                  client.id,
+                  <div className='flex flex-col'>
+                    <span className='text-xs text-zinc-400'>Cliente</span>
+                    <span className='font-medium'>{client.socialName}</span>
+                  </div>,
+                )}
+              </>
             )}
           </div>
         ))}
       {type === 'deadlines' &&
         deadlines?.map((deadline) => (
           <div className='flex items-center justify-between w-full gap-4' key={deadline.id}>
-            {linkComponent(
-              deadline.id,
-              <div className='flex flex-col'>
-                <span className='text-xs text-zinc-400'>Prazo</span>
-                <span className='font-medium'>{deadline.value}</span>
-              </div>,
+            {deadline.id && (
+              <>
+                {linkComponent(
+                  deadline.id,
+                  <div className='flex flex-col'>
+                    <span className='text-xs text-zinc-400'>Prazo</span>
+                    <span className='font-medium'>{deadline.value}</span>
+                  </div>,
+                )}
+              </>
             )}
           </div>
         ))}

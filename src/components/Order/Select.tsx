@@ -61,7 +61,7 @@ const Select = ({ deadlines, clients, total }: DataProps) => {
                 >
                   <span
                     className='option-text w-[100%]'
-                    onClick={() => handleSelectClient(client.id, client.socialName)}
+                    onClick={() => handleSelectClient(client.id || '', client.socialName || '')}
                   >
                     {client.socialName}
                   </span>
@@ -98,7 +98,7 @@ const Select = ({ deadlines, clients, total }: DataProps) => {
                   >
                     <span
                       className='option-text w-[100%]'
-                      onClick={() => handleSelectDeadline(deadline.value)}
+                      onClick={() => handleSelectDeadline(deadline.value || '')}
                     >
                       {deadline.value}
                     </span>

@@ -16,7 +16,7 @@ const Product = ({ product, productsArray, setProductsArray }: ProductProps) => 
   const [total, setTotal] = useState(0)
 
   useEffect(() => {
-    setTotal(quantity * product.price)
+    setTotal(quantity * (product.price || 0))
   }, [quantity])
 
   const handleSelectProductQuantity = (qnt: number) => {
@@ -29,7 +29,7 @@ const Product = ({ product, productsArray, setProductsArray }: ProductProps) => 
     }
 
     if (checkIfProductIsInArray.length === 0) {
-      const totalPrice = qnt * product.price
+      const totalPrice = qnt * (product.price || 0)
       const addProduct = { ...product, qnt, total: totalPrice }
       return setProductsArray([...productsArray, addProduct])
     }
@@ -37,7 +37,7 @@ const Product = ({ product, productsArray, setProductsArray }: ProductProps) => 
     if (checkIfProductIsInArray.length === 1) {
       const removeProduct = productsArray.filter((prod) => prod.id !== product.id)
 
-      const totalPrice = qnt * product.price
+      const totalPrice = qnt * (product.price || 0)
       const addProduct = { ...product, qnt, total: totalPrice }
       return setProductsArray([...removeProduct, addProduct])
     }
@@ -56,7 +56,7 @@ const Product = ({ product, productsArray, setProductsArray }: ProductProps) => 
       <div className='text-xs text-zinc-700 w-[60%] md:w-[40%]'>{product.name}</div>
       <div className='flex w-[30%] items-center gap-4 md:flex-col'>
         <div className='text-xs  text-zinc-700 w-[50px]'>
-          {product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+          {(product.price || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
         </div>
         <input
           type='number'

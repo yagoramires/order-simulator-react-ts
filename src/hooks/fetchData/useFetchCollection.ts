@@ -1,16 +1,24 @@
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import {
+  collection,
+  DocumentData,
+  DocumentReference,
+  onSnapshot,
+  orderBy,
+  query,
+  QuerySnapshot,
+} from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { database } from '../../firebase/config'
 
 import * as interfaces from '../../interfaces/index'
 
 export const useFetchCollection = (docCollection: string) => {
-  const [orders, setOrders] = useState<interfaces.IOrder[]>()
-  const [clientOrders, setClientOrders] = useState<interfaces.IOrder[]>()
-  const [industries, setIndustries] = useState<interfaces.IIndustries[]>()
-  const [clients, setClients] = useState<interfaces.IClients[]>()
-  const [deadlines, setDeadlines] = useState<interfaces.IDeadlines[]>()
-  const [products, setProducts] = useState<interfaces.IProduct[]>()
+  const [orders, setOrders] = useState<interfaces.IOrder[]>([])
+  const [clientOrders, setClientOrders] = useState<interfaces.IOrder[]>([])
+  const [industries, setIndustries] = useState<interfaces.IIndustries[]>([])
+  const [clients, setClients] = useState<interfaces.IClients[]>([])
+  const [deadlines, setDeadlines] = useState<interfaces.IDeadlines[]>([])
+  const [products, setProducts] = useState<interfaces.IProduct[]>([])
 
   useEffect(() => {
     const fetchData = () => {
@@ -18,8 +26,9 @@ export const useFetchCollection = (docCollection: string) => {
       try {
         const q = query(collectionRef, orderBy('createdAt', 'asc'))
 
-        onSnapshot(q, (querySnapshot: any) => {
-          const snapshot = querySnapshot.docs.map((doc: any) => ({
+        onSnapshot(q, (querySnapshot: QuerySnapshot<DocumentData>) => {
+          console.log(querySnapshot)
+          const snapshot = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }))

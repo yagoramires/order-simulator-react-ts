@@ -35,7 +35,7 @@ const Header = ({ industry, setIndustry }: HeaderProps) => {
           <ul className='flex items-center justify-between gap-2 text-xl font-medium text-blue-600 md:text-sm'>
             {industries?.map((item) => (
               <li
-                onClick={() => setIndustry(item.id)}
+                onClick={() => setIndustry(item.id || '')}
                 className={`${
                   industry === item.id ? 'border-b-4 border-blue-600 font-bold' : 'border-b-4'
                 } cursor-pointer hover:border-blue-600 hover:font-bold`}

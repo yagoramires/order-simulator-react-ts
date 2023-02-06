@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 
-import ProductCard from '../Cards/ProductCard'
+import ProductCard from '../Items/PrudctsItems'
 import ProductForm from '../Forms/ProductForm'
 
 const MainDetails = () => {

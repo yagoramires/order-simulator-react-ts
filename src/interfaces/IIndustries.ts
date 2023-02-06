@@ -1,10 +1,10 @@
 import { IProduct } from './IProducts'
 
 export interface IIndustries {
-  id: string
-  socialName: string
-  fantasyName: string
-  cnpj: string
+  id?: string
+  socialName?: string
+  fantasyName?: string
+  cnpj?: string
   products?: Array<IProduct>
 }
 
