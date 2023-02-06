@@ -27,7 +27,6 @@ export const useFetchCollection = (docCollection: string) => {
         const q = query(collectionRef, orderBy('createdAt', 'asc'))
 
         onSnapshot(q, (querySnapshot: QuerySnapshot<DocumentData>) => {
-          console.log(querySnapshot)
           const snapshot = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),

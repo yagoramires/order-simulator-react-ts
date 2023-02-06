@@ -17,7 +17,10 @@ import OrderDetails from './pages/Dashboard/Details/OrderDetails'
 import ProductDetails from './pages/Dashboard/Details/ProductDetails'
 import Profile from './pages/Dashboard/Profile'
 import IndustryDetails from './pages/Dashboard/Details/IndustryDetails'
-import DashboardItems from './components/Dashboard/Items/DashboardItems'
+import Industries from './components/Dashboard/Items/Industries'
+import Clients from './components/Dashboard/Items/Clients'
+import Deadlines from './components/Dashboard/Items/Deadlines'
+import Orders from './components/Dashboard/Items/Orders'
 
 const routes = () => {
   const { user } = useContext(AuthContext)
@@ -40,10 +43,10 @@ const routes = () => {
           <Route path='profile' element={<Profile />} />
 
           <Route path='/' element={<Dashboard />}>
-            <Route path='orders' element={<DashboardItems type='orders' />}></Route>
-            <Route path='industries' element={<DashboardItems type='industries' />} />
-            <Route path='clients' element={<DashboardItems type='clients' />} />
-            <Route path='deadlines' element={<DashboardItems type='deadlines' />} />
+            <Route path='orders' element={<Orders />} />
+            <Route path='industries' element={<Industries />} />
+            <Route path='clients' element={<Clients />} />
+            <Route path='deadlines' element={<Deadlines />} />
           </Route>
 
           <Route path='industries/:industryId' element={<IndustryDetails />} />

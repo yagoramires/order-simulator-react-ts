@@ -13,6 +13,7 @@ export interface IOrder {
   sellerId?: string
   sellerName?: string
   products?: Array<IProduct>
+  total?: number
 }
 
 export interface IAddOrder {
@@ -23,4 +24,5 @@ export interface IAddOrder {
   sellerId: string
   sellerName: string
   products: Array<IProduct>
+  total: number
 }

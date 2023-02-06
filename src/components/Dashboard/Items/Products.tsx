@@ -6,7 +6,7 @@ interface DataProps {
   product: IProduct
 }
 
-const ProductCard = ({ product }: DataProps) => {
+const Products = ({ product }: DataProps) => {
   const transform = (value: number) => {
     return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
   }
@@ -36,4 +36,4 @@ const ProductCard = ({ product }: DataProps) => {
   )
 }
 
-export default ProductCard
+export default Products
