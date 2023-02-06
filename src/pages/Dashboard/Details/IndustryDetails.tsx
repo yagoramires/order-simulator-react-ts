@@ -3,8 +3,8 @@ import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
 
 import { useParams } from 'react-router-dom'
 
-import Details from '../../../components/Dashboard/Details/IndustryDetails'
-import SidebarDetails from '../../../components/Dashboard/Details/SidebarDetails'
+import MainDetails from '../../../components/Dashboard/IndustryDetails/MainDetails'
+import SidebarDetails from '../../../components/Dashboard/IndustryDetails/SidebarDetails'
 import Loading from '../../../components/Loading'
 
 import { IIndustries } from '../../../interfaces/index'
@@ -33,7 +33,7 @@ const IndustryDetails = () => {
       {industry && (
         <>
           <SidebarDetails industry={industry} />
-          <Details />
+          <MainDetails />
         </>
       )}
     </div>

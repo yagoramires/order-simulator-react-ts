@@ -32,13 +32,17 @@ const Deadlines = () => {
 
   return (
     <div className='flex flex-col gap-4'>
-      <input
-        type='text'
-        className='p-2 rounded-md shadow-sm bg-zinc-300'
-        placeholder='Pesquisar'
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      {deadlines.length === 0 ? (
+        <p className='text-black'>Nenhum pedido cadastrado.</p>
+      ) : (
+        <input
+          type='text'
+          className='p-2 rounded-md shadow-sm bg-zinc-300'
+          placeholder='Pesquisar'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      )}
 
       {search
         ? filteredDeadlines.map((deadline) => linkComponent(deadline))
