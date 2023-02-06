@@ -41,17 +41,15 @@ const MainDetails = () => {
             />
           )}
 
-          {search &&
-            filteredProductCode.length > 0 &&
-            filteredProductCode.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))}
-
-          {search &&
-            filteredProductName.length > 0 &&
-            filteredProductName.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))}
+          {search && filteredProductCode.length > 0
+            ? filteredProductCode.map((product) => (
+                <ProductCard product={product} key={product.id} />
+              ))
+            : filteredProductName.length > 0
+            ? filteredProductName.map((product) => (
+                <ProductCard product={product} key={product.id} />
+              ))
+            : search && <p className='text-black'>Nenhum produto encontrado.</p>}
 
           {!search && products.map((product) => <ProductCard product={product} key={product.id} />)}
         </div>

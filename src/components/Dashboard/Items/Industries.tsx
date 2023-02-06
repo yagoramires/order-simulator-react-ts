@@ -9,11 +9,15 @@ const Industries = () => {
 
   const [search, setSearch] = useState('')
 
-  const filteredIndustries =
+  const filteredIndustriesName =
     search.length > 0
       ? industries.filter((industry) =>
           industry.socialName?.toLowerCase().includes(search.toLowerCase()),
         )
+      : []
+  const filteredIndustriesCnpj =
+    search.length > 0
+      ? industries.filter((industry) => industry.cnpj?.toLowerCase().includes(search.toLowerCase()))
       : []
 
   const linkComponent = (industry: IIndustries) => {
@@ -52,9 +56,13 @@ const Industries = () => {
         />
       )}
 
-      {search
-        ? filteredIndustries.map((industry) => linkComponent(industry))
-        : industries?.map((industry) => linkComponent(industry))}
+      {search && filteredIndustriesName.length > 0
+        ? filteredIndustriesName.map((industry) => linkComponent(industry))
+        : filteredIndustriesCnpj.length > 0
+        ? filteredIndustriesCnpj?.map((industry) => linkComponent(industry))
+        : search && <p className='text-black'> Nenhuma indústria encontrada.</p>}
+
+      {!search && industries?.map((industry) => linkComponent(industry))}
     </div>
   )
 }

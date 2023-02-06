@@ -9,10 +9,17 @@ const Clients = () => {
 
   const [search, setSearch] = useState('')
 
-  const filteredClients =
+  const filteredClientsName =
     search.length > 0
       ? clients.filter((client) => client.socialName?.toLowerCase().includes(search.toLowerCase()))
       : []
+
+  const filteredClientsCnpj =
+    search.length > 0
+      ? clients.filter((client) => client.cnpj?.toLowerCase().includes(search.toLowerCase()))
+      : []
+
+  console.log(filteredClientsCnpj, filteredClientsName)
 
   const linkComponent = (client: IClients) => {
     return (
@@ -44,9 +51,13 @@ const Clients = () => {
         />
       )}
 
-      {search
-        ? filteredClients.map((client) => linkComponent(client))
-        : clients?.map((client) => linkComponent(client))}
+      {search && filteredClientsName.length > 0
+        ? filteredClientsName.map((client) => linkComponent(client))
+        : filteredClientsCnpj.length > 0
+        ? filteredClientsCnpj.map((client) => linkComponent(client))
+        : search && <p className='text-black'>Nenhum cliente encontrado.</p>}
+
+      {!search && clients?.map((client) => linkComponent(client))}
     </div>
   )
 }
