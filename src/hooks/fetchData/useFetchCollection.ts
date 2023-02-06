@@ -1,13 +1,13 @@
 import {
   collection,
   DocumentData,
-  DocumentReference,
   onSnapshot,
   orderBy,
   query,
   QuerySnapshot,
 } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import { database } from '../../firebase/config'
 
 import * as interfaces from '../../interfaces/index'
@@ -46,7 +46,7 @@ export const useFetchCollection = (docCollection: string) => {
           }
         })
       } catch (e: any) {
-        console.log(e.message)
+        toast.error(e.message)
       }
     }
     fetchData()

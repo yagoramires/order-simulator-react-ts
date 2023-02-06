@@ -1,35 +1,43 @@
 import { useState } from 'react'
 import { RiArrowDownSLine } from 'react-icons/ri'
-
-import { IClients, IDeadlines } from '../../interfaces'
+import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 
 interface DataProps {
-  clients: Array<IClients>
-  deadlines: Array<IDeadlines>
+  // clients: Array<IClients>
+  // deadlines: Array<IDeadlines>
   total: number
+  selectedClient: { id: string; socialName: string }
+  setSelectedClient: React.Dispatch<
+    React.SetStateAction<{ id: string; socialName: string; cnpj: string }>
+  >
+  selectedDeadline: string
+  setSelectedDeadline: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Select = ({ deadlines, clients, total }: DataProps) => {
-  const [selectedClient, setSelectedClient] = useState('Selecione um cliente')
+const Select = ({
+  total,
+  selectedClient,
+  setSelectedClient,
+  selectedDeadline,
+  setSelectedDeadline,
+}: DataProps) => {
   const [clientDropdown, setClientDropdown] = useState(false)
-  const [selectedDeadline, setSelectedDeadline] = useState('Selecione um prazo de pagamento')
   const [deadlineDropdown, setDeadlineDropdown] = useState(false)
 
-  const [client, setClient] = useState<{ id: string; socialName: string }>()
-  const [deadline, setDeadline] = useState('')
+  const { deadlines } = useFetchCollection('deadlines')
+  const { clients } = useFetchCollection('clients')
 
-  const handleSelectClient = (id: string, socialName: string) => {
-    setSelectedClient(socialName)
-    setClient({
+  const handleSelectClient = (id: string, socialName: string, cnpj: string) => {
+    setSelectedClient({
       id,
       socialName,
+      cnpj,
     })
     setClientDropdown(false)
   }
 
   const handleSelectDeadline = (deadline: string) => {
     setSelectedDeadline(deadline)
-    setDeadline(deadline)
     setDeadlineDropdown(false)
   }
 
@@ -45,7 +53,7 @@ const Select = ({ deadlines, clients, total }: DataProps) => {
               setDeadlineDropdown(false)
             }}
           >
-            <span className='sBtn-text'>{selectedClient}</span>
+            <span className='sBtn-text'>{selectedClient.socialName}</span>
             <RiArrowDownSLine />
           </div>
           <ul
@@ -61,7 +69,13 @@ const Select = ({ deadlines, clients, total }: DataProps) => {
                 >
                   <span
                     className='option-text w-[100%]'
-                    onClick={() => handleSelectClient(client.id || '', client.socialName || '')}
+                    onClick={() =>
+                      handleSelectClient(
+                        client.id || '',
+                        client.socialName || '',
+                        client.cnpj || '',
+                      )
+                    }
                   >
                     {client.socialName}
                   </span>

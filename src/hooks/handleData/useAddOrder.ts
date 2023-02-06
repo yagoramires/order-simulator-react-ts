@@ -13,11 +13,13 @@ export const useCreateOrder = () => {
   const addOrder = async (orderData: IOrder) => {
     setLoading(true)
     try {
-      const ref = collection(database, 'orders')
+      const ordersRef = collection(database, 'orders')
+      const clientRef = collection(database, `clients/${orderData.clientId}/orders`)
       const data = { ...orderData, createdAt: Timestamp.now() }
-      await addDoc(ref, data)
+      await addDoc(ordersRef, data)
+      await addDoc(clientRef, data)
 
-      toast.success('Pedido adicionadao com sucesso!')
+      toast.success('Pedido adicionado com sucesso!')
       setLoading(false)
     } catch (e: any) {
       toast.error(e.message)

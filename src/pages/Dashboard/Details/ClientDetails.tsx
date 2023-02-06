@@ -45,8 +45,6 @@ const ClientDetails = () => {
       </div>
     )
 
-  console.log(clientOrders)
-
   return (
     <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] flex justify-center items-center'>
       <div className=' w-[90%] max-w-[1200px] bg-white p-8 flex flex-col gap-4 rounded-md shadow-md h-[90vh] max-h-[600px] items-center '>

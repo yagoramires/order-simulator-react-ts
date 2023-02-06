@@ -51,9 +51,6 @@ const Orders = () => {
     )
   }
 
-  console.log(orders)
-  console.log(orders.length)
-
   return (
     <div className='flex flex-col gap-4'>
       {orders.length === 0 ? (

@@ -19,8 +19,6 @@ const Clients = () => {
       ? clients.filter((client) => client.cnpj?.toLowerCase().includes(search.toLowerCase()))
       : []
 
-  console.log(filteredClientsCnpj, filteredClientsName)
-
   const linkComponent = (client: IClients) => {
     return (
       <div className='flex items-center justify-between w-full gap-4' key={client.id}>

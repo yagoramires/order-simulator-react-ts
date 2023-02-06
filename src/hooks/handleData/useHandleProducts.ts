@@ -25,7 +25,6 @@ export const useHandleProducts = () => {
           'state_changed',
           (snapshot) => {
             const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            console.log(uploadProgress)
           },
           (error) => {
             alert(error.message)

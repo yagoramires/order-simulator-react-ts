@@ -23,7 +23,7 @@ import Deadlines from './components/Dashboard/Items/Deadlines'
 import Orders from './components/Dashboard/Items/Orders'
 
 const routes = () => {
-  const { user } = useContext(AuthContext)
+  const { user, userData } = useContext(AuthContext)
 
   if (user === undefined) {
     return (
@@ -39,7 +39,10 @@ const routes = () => {
       <Route path='*' element={<Navigate to='/' />} />
       {user && (
         <>
-          <Route path='order' element={<Order />} />
+          <Route
+            path='order'
+            element={<Order uid={userData?.uid || ''} displayName={userData?.displayName || ''} />}
+          />
           <Route path='profile' element={<Profile />} />
 
           <Route path='/' element={<Dashboard />}>

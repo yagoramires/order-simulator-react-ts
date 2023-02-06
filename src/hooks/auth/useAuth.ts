@@ -76,7 +76,6 @@ export const useAuth = () => {
       setLoading(false)
     } catch (e: any) {
       setError(e.message)
-      console.log(e.message)
       setLoading(false)
     }
   }

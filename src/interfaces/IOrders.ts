@@ -8,21 +8,27 @@ export interface IOrder {
   }
   clientId?: string
   clientName?: string
+  clientCnpj?: string
   industryId?: string
   industryName?: string
   sellerId?: string
   sellerName?: string
+  deadline?: string
   products?: Array<IProduct>
   total?: number
+  orderId?: number
 }
 
 export interface IAddOrder {
   clientId: string
   clientName: string
+  clientCnpj: string
   industryId: string
   industryName: string
   sellerId: string
   sellerName: string
   products: Array<IProduct>
+  deadline: string
   total: number
+  orderId: number
 }
