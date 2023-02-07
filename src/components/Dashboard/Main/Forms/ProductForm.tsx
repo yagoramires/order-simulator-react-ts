@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useHandleProducts } from '../../../hooks/handleData/useHandleProducts'
+import { useHandleProducts } from '../../../../hooks/handleData/useHandleProducts'
 
 import { useParams } from 'react-router-dom'
 

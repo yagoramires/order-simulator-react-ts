@@ -17,10 +17,10 @@ import OrderDetails from './pages/Dashboard/Details/OrderDetails'
 import ProductDetails from './pages/Dashboard/Details/ProductDetails'
 import Profile from './pages/Dashboard/Profile'
 import IndustryDetails from './pages/Dashboard/Details/IndustryDetails'
-import Industries from './components/Dashboard/Items/Industries'
-import Clients from './components/Dashboard/Items/Clients'
-import Deadlines from './components/Dashboard/Items/Deadlines'
-import Orders from './components/Dashboard/Items/Orders'
+import Industries from './components/Dashboard/Main/Industries'
+import Clients from './components/Dashboard/Main/Clients'
+import Deadlines from './components/Dashboard/Main/Deadlines'
+import Orders from './components/Dashboard/Main/Orders'
 
 const routes = () => {
   const { user, userData } = useContext(AuthContext)

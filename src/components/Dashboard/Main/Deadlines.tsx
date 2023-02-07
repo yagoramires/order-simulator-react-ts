@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
-import DeadlineForm from '../Forms/DeadlineForm'
+import DeadlineForm from './Forms/DeadlineForm'
 
 import { IDeadlines } from '../../../interfaces'
 import { FaEdit } from 'react-icons/fa'

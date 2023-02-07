@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { IIndustries } from '../../../interfaces'
+import { IIndustries } from '../../../../interfaces'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 

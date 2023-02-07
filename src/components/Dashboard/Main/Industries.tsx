@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 import { IIndustries } from '../../../interfaces'
-import IndustryForm from '../Forms/IndustryForm'
+import IndustryForm from './Forms/IndustryForm'
 
 const Industries = () => {
   const { industries } = useFetchCollection('industries')

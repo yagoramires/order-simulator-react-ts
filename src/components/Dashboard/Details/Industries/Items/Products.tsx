@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { IProduct } from '../../../../interfaces'
+import { IProduct } from '../../../../../interfaces'
 
 interface DataProps {
   product: IProduct

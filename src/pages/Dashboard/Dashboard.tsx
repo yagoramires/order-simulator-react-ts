@@ -1,12 +1,14 @@
 // Components
-import MainDashboard from '../../components/Dashboard/MainDashboard'
-import SidebarDashboard from '../../components/Dashboard/SidebarDashboard'
+import { Outlet } from 'react-router-dom'
+import Sidebar from '../../components/Dashboard/Sidebar'
 
 const Dashboard = () => {
   return (
     <section className='flex w-full h-[100vh] bg-black100'>
-      <SidebarDashboard />
-      <MainDashboard />
+      <Sidebar />
+      <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] w-full text-white p-8'>
+        <Outlet />
+      </main>
     </section>
   )
 }

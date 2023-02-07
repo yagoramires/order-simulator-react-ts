@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useHandleDeadlines } from '../../../hooks/handleData/useHandleDeadlines'
+import { useHandleDeadlines } from '../../../../hooks/handleData/useHandleDeadlines'
 
 import { toast } from 'react-toastify'
 

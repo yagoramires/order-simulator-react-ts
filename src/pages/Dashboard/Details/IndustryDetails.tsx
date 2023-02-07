@@ -3,8 +3,8 @@ import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
 
 import { useParams } from 'react-router-dom'
 
-import MainDetails from '../../../components/Dashboard/IndustryDetails/MainDetails'
-import SidebarDetails from '../../../components/Dashboard/IndustryDetails/SidebarDetails'
+import Main from '../../../components/Dashboard/Details/Industries/Main'
+import Sidebar from '../../../components/Dashboard/Details/Industries/Sidebar'
 import Loading from '../../../components/Loading'
 
 import { IIndustries } from '../../../interfaces/index'
@@ -32,8 +32,8 @@ const IndustryDetails = () => {
     <div className='flex gap-10'>
       {industry && (
         <>
-          <SidebarDetails industry={industry} />
-          <MainDetails />
+          <Sidebar industry={industry} />
+          <Main />
         </>
       )}
     </div>
