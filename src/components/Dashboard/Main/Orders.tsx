@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { FaEdit } from 'react-icons/fa'
 import { IoMdAdd } from 'react-icons/io'
-import { TiDelete } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
@@ -62,10 +60,6 @@ const Orders = () => {
 
                 <span className='font-medium'>{order.sellerName}</span>
               </div>
-            </div>
-            <div className='flex gap-2 w-[10%] md:flex-col md:gap-8'>
-              <FaEdit className='text-green-400' />
-              <TiDelete className='text-red-400' />
             </div>
           </div>
         </Link>

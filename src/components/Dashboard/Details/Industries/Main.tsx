@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
 
 import ProductCard from './Items/Products'
-import ProductForm from '../../Main/Forms/ProductForm'
+import ProductForm from './Form/ProductForm'
 
 const MainDetails = () => {
   const [search, setSearch] = useState('')

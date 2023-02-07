@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { FaEdit } from 'react-icons/fa'
-import { TiDelete } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
@@ -33,10 +31,6 @@ const Clients = () => {
             <div className='flex flex-col'>
               <span className='text-xs text-zinc-400'>Cliente</span>
               <span className='font-medium'>{client.socialName}</span>
-            </div>
-            <div className='flex gap-2'>
-              <FaEdit className='text-green-400' />
-              <TiDelete className='text-red-400' />
             </div>
           </div>
         </Link>

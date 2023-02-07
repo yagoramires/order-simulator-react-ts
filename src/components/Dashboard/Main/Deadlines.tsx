@@ -26,10 +26,8 @@ const Deadlines = () => {
               <span className='text-xs text-zinc-400'>Prazo</span>
               <span className='font-medium'>{deadline.value}</span>
             </div>
-            <div className='flex gap-2'>
-              <FaEdit className='text-green-400' />
-              <TiDelete className='text-red-400' />
-            </div>
+
+            <TiDelete className='text-red-400 cursor-pointer' size={20} />
           </div>
         </div>
       </div>

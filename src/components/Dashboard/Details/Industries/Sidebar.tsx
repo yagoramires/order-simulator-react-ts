@@ -28,12 +28,16 @@ const SidebarDetails = ({ industry }: DataProps) => {
           <span className='font-medium'>{industry.socialName}</span>
         </div>
         <div className='flex flex-col'>
+          <span className='text-xs text-zinc-400'>Nome Fantasia</span>
+          <span className='font-medium'>{industry.fantasyName}</span>
+        </div>
+        <div className='flex flex-col'>
           <span className='text-xs text-zinc-400'>CNPJ</span>
           <span className='font-medium'>{industry.cnpj}</span>
         </div>
-        {/* <button className='w-full p-4 font-medium text-white rounded-md bg-gradient-to-r from-blue-800 to-blue-600'>
+        <button className='w-full p-4 font-medium text-white rounded-md bg-gradient-to-r from-blue-800 to-blue-600'>
           Editar
-        </button> */}
+        </button>
       </div>
     </aside>
   )
