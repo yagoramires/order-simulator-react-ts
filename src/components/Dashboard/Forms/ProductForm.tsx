@@ -10,7 +10,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { IoMdAdd } from 'react-icons/io'
 import { MdClose } from 'react-icons/md'
 
-const ClientForm = () => {
+const ProductForm = () => {
   const [productImg, setProductImage] = useState(null)
   const [code, setCode] = useState('')
   const [name, setName] = useState('')
@@ -126,4 +126,4 @@ const ClientForm = () => {
   )
 }
 
-export default ClientForm
+export default ProductForm

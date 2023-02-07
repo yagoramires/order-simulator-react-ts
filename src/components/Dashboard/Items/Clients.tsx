@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 import { IClients } from '../../../interfaces'
+import ClientForm from '../Forms/ClientForm'
 
 const Clients = () => {
   const { clients } = useFetchCollection('clients')
@@ -36,27 +37,37 @@ const Clients = () => {
   }
 
   return (
-    <div className='flex flex-col gap-4'>
-      {clients.length === 0 ? (
-        <p className='text-black'>Nenhum pedido cadastrado.</p>
-      ) : (
-        <input
-          type='text'
-          className='p-2 rounded-md shadow-sm bg-zinc-300'
-          placeholder='Pesquisar'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      )}
+    <>
+      <div className='flex items-center justify-between w-full'>
+        <h1 className='text-2xl font-medium'>Prazos de pagamento</h1>
+        <ClientForm />
+      </div>
+      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
+        <div className='flex flex-col gap-4 p-8 overflow-y-scroll rounded-md max-h-[75vh]'>
+          <div className='flex flex-col gap-4'>
+            {clients.length === 0 ? (
+              <p className='text-black'>Nenhum pedido cadastrado.</p>
+            ) : (
+              <input
+                type='text'
+                className='p-2 rounded-md shadow-sm bg-zinc-300'
+                placeholder='Pesquisar'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            )}
 
-      {search && filteredClientsName.length > 0
-        ? filteredClientsName.map((client) => linkComponent(client))
-        : filteredClientsCnpj.length > 0
-        ? filteredClientsCnpj.map((client) => linkComponent(client))
-        : search && <p className='text-black'>Nenhum cliente encontrado.</p>}
+            {search && filteredClientsName.length > 0
+              ? filteredClientsName.map((client) => linkComponent(client))
+              : filteredClientsCnpj.length > 0
+              ? filteredClientsCnpj.map((client) => linkComponent(client))
+              : search && <p className='text-black'>Nenhum cliente encontrado.</p>}
 
-      {!search && clients?.map((client) => linkComponent(client))}
-    </div>
+            {!search && clients?.map((client) => linkComponent(client))}
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 

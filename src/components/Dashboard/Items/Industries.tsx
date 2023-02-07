@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 import { IIndustries } from '../../../interfaces'
+import IndustryForm from '../Forms/IndustryForm'
 
 const Industries = () => {
   const { industries } = useFetchCollection('industries')
@@ -43,27 +44,37 @@ const Industries = () => {
   }
 
   return (
-    <div className='flex flex-col gap-4'>
-      {industries.length === 0 ? (
-        <p className='text-black'>Nenhum pedido cadastrado.</p>
-      ) : (
-        <input
-          type='text'
-          className='p-2 rounded-md shadow-sm bg-zinc-300'
-          placeholder='Pesquisar'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      )}
+    <>
+      <div className='flex items-center justify-between w-full'>
+        <h1 className='text-2xl font-medium'>Indústrias</h1>
+        <IndustryForm />
+      </div>
+      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
+        <div className='flex flex-col gap-4 p-8 overflow-y-scroll rounded-md max-h-[75vh]'>
+          <div className='flex flex-col gap-4'>
+            {industries.length === 0 ? (
+              <p className='text-black'>Nenhuma indústria cadastrada.</p>
+            ) : (
+              <input
+                type='text'
+                className='p-2 rounded-md shadow-sm bg-zinc-300'
+                placeholder='Pesquisar'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            )}
 
-      {search && filteredIndustriesName.length > 0
-        ? filteredIndustriesName.map((industry) => linkComponent(industry))
-        : filteredIndustriesCnpj.length > 0
-        ? filteredIndustriesCnpj?.map((industry) => linkComponent(industry))
-        : search && <p className='text-black'> Nenhuma indústria encontrada.</p>}
+            {search && filteredIndustriesName.length > 0
+              ? filteredIndustriesName.map((industry) => linkComponent(industry))
+              : filteredIndustriesCnpj.length > 0
+              ? filteredIndustriesCnpj?.map((industry) => linkComponent(industry))
+              : search && <p className='text-black'> Nenhuma indústria encontrada.</p>}
 
-      {!search && industries?.map((industry) => linkComponent(industry))}
-    </div>
+            {!search && industries?.map((industry) => linkComponent(industry))}
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 

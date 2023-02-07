@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
+import DeadlineForm from '../Forms/DeadlineForm'
+
 import { IDeadlines } from '../../../interfaces'
 
 const Deadlines = () => {
@@ -31,23 +33,33 @@ const Deadlines = () => {
   }
 
   return (
-    <div className='flex flex-col gap-4'>
-      {deadlines.length === 0 ? (
-        <p className='text-black'>Nenhum pedido cadastrado.</p>
-      ) : (
-        <input
-          type='text'
-          className='p-2 rounded-md shadow-sm bg-zinc-300'
-          placeholder='Pesquisar'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      )}
+    <>
+      <div className='flex items-center justify-between w-full'>
+        <h1 className='text-2xl font-medium'>Prazos de pagamento</h1>
+        <DeadlineForm />
+      </div>
+      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
+        <div className='flex flex-col gap-4 p-8 overflow-y-scroll rounded-md max-h-[75vh]'>
+          <div className='flex flex-col gap-4'>
+            {deadlines.length === 0 ? (
+              <p className='text-black'>Nenhum prazo cadastrado.</p>
+            ) : (
+              <input
+                type='text'
+                className='p-2 rounded-md shadow-sm bg-zinc-300'
+                placeholder='Pesquisar'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            )}
 
-      {search
-        ? filteredDeadlines.map((deadline) => linkComponent(deadline))
-        : deadlines?.map((deadline) => linkComponent(deadline))}
-    </div>
+            {search
+              ? filteredDeadlines.map((deadline) => linkComponent(deadline))
+              : deadlines?.map((deadline) => linkComponent(deadline))}
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 
