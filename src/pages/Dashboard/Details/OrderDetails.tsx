@@ -1,100 +1,119 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
+import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
+import { useFormatDate } from '../../../hooks/handleData/useFormatDate'
 
-import { useState, useEffect } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+
+import Loading from '../../../components/Loading'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 
-import { IOrder } from '../../../interfaces/index'
-
 const OrderDetails = () => {
-  const [orders, setOrders] = useState<IOrder[]>([])
-  const [order, setOrder] = useState<IOrder>()
-
-  const { orderId } = useParams()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const filterOrder = orders.filter((order) => `${order.id}` === orderId)
-    const order = filterOrder[0]
-    setOrder(order)
-  }, [orders, orderId])
+  const { orderId } = useParams()
 
-  if (!order) return <p>loading</p>
+  const { document: order, loading } = useFetchDocument('orders', orderId)
+
+  console.log(order)
+
+  const { formatDate } = useFormatDate()
+
+  if (loading || !order)
+    return (
+      <div className='min-h-[100vh] bg-gradient-to-r from-blue-800 to-blue-600 justify-center items-center flex'>
+        <Loading size={'60px'} />
+      </div>
+    )
 
   return (
     <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] flex justify-center items-center'>
-      {/* <div className='h-[80vh] w-[90%] bg-white p-8 flex flex-col gap-4 rounded-md shadow-md'>
-        <button
-          onClick={() => navigate(-1)}
-          className='flex items-center justify-end w-full font-medium text-blue-600'
-        >
-          <MdKeyboardArrowLeft size={20} />
-          Voltar
-        </button>
-        <div className='flex flex-col '>
-          <span className='text-xs text-zinc-400'>Cliente</span>
-          <span className='font-bold'>{order.client}</span>
-        </div>
-        <div className='flex flex-col gap-1'>
-          <span className='text-xs text-zinc-400'>Fábrica</span>
-          <span className='font-bold'>{order.industry}</span>
-        </div>
-        <div className='flex flex-col gap-1'>
-          <span className='text-xs text-zinc-400'>Data</span>
-          <span className='font-bold'>{order.client}</span>
-        </div>
-        <div className='flex flex-col gap-1'>
-          <span className='text-xs text-zinc-400'>Total do Pedido</span>
-          <span className='font-bold'>
-            {order.total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-          </span>
-        </div>
-        <span className='text-xs text-zinc-400'>Produtos</span>
-        <div className='flex flex-col gap-4 p-4 overflow-y-scroll rounded-md shadow-md bg-gradient-to-r from-blue-800 to-blue-600'>
-          {order.products.map((product) => (
-            <div key={product.id} className='flex p-4 bg-white rounded-md shadow-md md:flex-col'>
-              <div className='flex gap-2 w-[60%] md:w-full'>
-                <div className='flex flex-col gap-1 w-[30%]'>
-                  <span className='text-xs text-zinc-400'>Código</span>
-                  <span className='text-xs font-medium text-zinc-800'>{product.code}</span>
-                </div>
-                <div className='flex flex-col gap-1 w-[70%]'>
-                  <span className='text-xs text-zinc-400'>Produto</span>
-                  <span className='text-sm font-medium md:text-xs text-zinc-800'>
-                    {product.name}
-                  </span>
-                </div>
-              </div>
-              <div className='flex w-[40%] md:w-full gap-4'>
-                <div className='flex flex-col gap-1 w-[33.33%]'>
-                  <span className='text-xs text-zinc-400'>Qnt.</span>
-                  <span className='text-sm font-medium md:text-xs text-zinc-800'>
-                    {product.quantity}
-                  </span>
-                </div>
-                <div className='flex flex-col gap-1 w-[33.33%]'>
-                  <span className='text-xs text-zinc-400'>Vlr. Un.</span>
-                  <span className='text-sm font-medium md:text-xs text-zinc-800'>
-                    {product.price.toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    })}
-                  </span>
-                </div>
-                <div className='flex flex-col gap-1 w-[33.33%]'>
-                  <span className='text-xs text-zinc-400'>Vlr. Total</span>
-                  <span className='text-sm font-medium md:text-xs text-zinc-800'>
-                    {(product.quantity * product.price).toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    })}
-                  </span>
-                </div>
-              </div>
+      <div className='w-[90%] max-w-[1200px] bg-white flex  rounded-md shadow-md max-h-[90vh] items-center overflow-hidden'>
+        <div className='w-full bg-white p-8 flex flex-col gap-4 max-h-[90vh] items-center overflow-y-scroll'>
+          <button
+            onClick={() => navigate(-1)}
+            className='flex items-center justify-end w-full font-medium text-blue-600'
+          >
+            <MdKeyboardArrowLeft size={30} />
+            Voltar
+          </button>
+
+          <div className='flex flex-col gap-4 w-full max-w-[800px]'>
+            <label className='flex flex-col gap-1'>
+              <span className='md:md:text-xs text-zinc-400'>Número do pedido</span>
+              <span className='text-sm text-black'>{order.orderId}</span>
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='md:md:text-xs text-zinc-400'>Razão Social</span>
+              <span className='text-sm text-black'>{order.clientName}</span>
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='md:text-xs text-zinc-400'>CNPJ</span>
+              <span className='text-sm text-black'>{order.clientCnpj}</span>
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='md:text-xs text-zinc-400'>Prazo de pagamento</span>
+              <span className='text-sm text-black'>{order.deadline}</span>
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='md:text-xs text-zinc-400'>Indústria</span>
+              <span className='text-sm text-black'>{order.industryName}</span>
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='md:text-xs text-zinc-400'>Vendedor</span>
+              <span className='text-sm text-black'>{order.sellerId}</span>
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='md:text-xs text-zinc-400'>Total do pedido</span>
+              <span className='text-sm text-black'>
+                {order.total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+              </span>
+            </label>
+          </div>
+
+          {order.length > 0 && (
+            <div className='flex flex-col gap-4 overflow-y-scroll rounded-md max-h-[600px] w-full'>
+              {order?.products?.map((product: any) => (
+                <Link
+                  to={`/industries/${order.industryId}/${product.id}`}
+                  className='flex justify-between w-full gap-4 p-2 rounded-md bg-zinc-200'
+                  key={product.id}
+                >
+                  <div className='flex flex-col items-start justify-center w-[70%]  md:w-full'>
+                    <span className='text-xs text-zinc-400'>Produto</span>
+                    <span className='text-sm'>{product.name}</span>
+                  </div>
+                  <div className='flex md:hidden w-[30%] gap-4'>
+                    <div className='flex flex-col items-start justify-center'>
+                      <span className='text-xs text-zinc-400'>Vlr. un.</span>
+                      <span className='text-sm'>
+                        {product.price.toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </span>
+                    </div>
+                    <div className='flex flex-col items-start justify-center'>
+                      <span className='text-xs text-zinc-400'>Quantidade</span>
+                      <span className='text-sm'>{product.qnt}</span>
+                    </div>
+                    <div className='flex flex-col items-start justify-center'>
+                      <span className='text-xs text-zinc-400'>Total</span>
+                      <span className='text-sm'>
+                        {product.total.toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-          ))}
+          )}
         </div>
-      </div> */}
+      </div>
     </main>
   )
 }

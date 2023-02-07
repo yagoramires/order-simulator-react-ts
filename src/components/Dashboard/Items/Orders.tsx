@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { FaEdit } from 'react-icons/fa'
 import { IoMdAdd } from 'react-icons/io'
+import { TiDelete } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
@@ -11,9 +13,16 @@ const Orders = () => {
 
   const [search, setSearch] = useState('')
 
-  const filteredOrders =
+  const filteredOrdersName =
     search.length > 0
       ? orders.filter((order) => order.clientName?.toLowerCase().includes(search.toLowerCase()))
+      : []
+
+  const filteredOrdersOrderId =
+    search.length > 0
+      ? orders.filter((order) => {
+          String(order.orderId).includes(search)
+        })
       : []
 
   const transform = (value: number) => {
@@ -29,17 +38,19 @@ const Orders = () => {
           to={`${order.id}`}
           className='text-black border-b-[1px] border-b-zinc-200 p-2 rounded-md hover:bg-zinc-200 w-full'
         >
-          <div className='flex items-start justify-start w-full gap-4' key={order.id}>
+          <div
+            className='flex items-start justify-start w-full gap-4 lg:items-center'
+            key={order.id}
+          >
             <div className='flex flex-col items-center w-[10%] lg:hidden'>
               <span className='font-medium'>{order.orderId}</span>
             </div>
 
-            <div className='flex flex-col items-start w-[30%] lg:w-[50%]'>
+            <div className='flex flex-col items-start w-[35%] lg:w-[45%]'>
               <span className='font-medium'>{order.clientName}</span>
             </div>
-            <div className='flex w-[60%] lg:flex-col lg:w-[40%] gap-4'>
+            <div className='flex w-[55%] lg:flex-col lg:w-[35%] gap-4'>
               <div className='flex flex-col items-start w-[30%] lg:w-full'>
-                <span className='hidden text-xs text-zinc-400 lg:inline'>Data</span>
                 <span className='font-medium'>{formatDate(order.createdAt?.seconds || 0)}</span>
               </div>
               <div className='flex flex-col items-start w-[40%] lg:w-full'>
@@ -51,6 +62,10 @@ const Orders = () => {
 
                 <span className='font-medium'>{order.sellerName}</span>
               </div>
+            </div>
+            <div className='flex gap-2 w-[10%] md:flex-col md:gap-8'>
+              <FaEdit className='text-green-400' />
+              <TiDelete className='text-red-400' />
             </div>
           </div>
         </Link>
@@ -85,20 +100,27 @@ const Orders = () => {
             )}
             {search.length > 0 ||
               (orders.length > 0 && (
-                <div className='flex w-full gap-4'>
+                <div className='flex w-full gap-4 lg:text-start'>
                   <span className='text-xs text-zinc-400 w-[10%] lg:hidden'>Pedido</span>
-                  <span className='text-xs text-zinc-400 w-[30%] lg:w-[60%]'>Cliente</span>
+                  <span className='text-xs text-zinc-400 w-[30%] lg:w-[50%]'>Cliente</span>
                   <div className='flex w-[60%] lg:flex-col lg:w-[40%] gap-4'>
-                    <span className='text-xs text-zinc-400 w-[30%] lg:hidden'>Data</span>
+                    <span className='text-xs text-zinc-400 w-[30%] lg:w-full '>Data</span>
                     <span className='text-xs text-zinc-400 w-[40%] lg:hidden'>Total</span>
                     <span className='text-xs text-zinc-400 w-[30%] lg:hidden'>Vendedor</span>
                   </div>
                 </div>
               ))}
 
+            {search && filteredOrdersName.length > 0
+              ? filteredOrdersName.map((industry) => linkComponent(industry))
+              : filteredOrdersOrderId.length > 0
+              ? filteredOrdersOrderId?.map((industry) => linkComponent(industry))
+              : search && <p className='text-black'> Nenhuma indústria encontrada.</p>}
+            {!search && orders?.map((industry) => linkComponent(industry))}
+            {/* 
             {search
               ? filteredOrders.map((order) => linkComponent(order))
-              : orders?.map((order) => linkComponent(order))}
+              : orders?.map((order) => linkComponent(order))} */}
           </div>
         </div>
       </div>

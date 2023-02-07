@@ -54,7 +54,7 @@ const Profile = () => {
 
   return (
     <main className='min-h-[100vh] bg-gradient-to-r from-blue-800 to-blue-600 flex justify-center items-center py-4'>
-      <div className='w-[90%] bg-white max-w-[1200px] rounded-md shadow-md p-8 flex flex-col gap-4'>
+      <div className='w-[90%] bg-white max-w-[1200px] max-h-[95vh] rounded-md shadow-md p-8 flex flex-col gap-4'>
         <button
           onClick={() => navigate(-1)}
           className='flex items-center justify-end w-full font-medium text-blue-600'
@@ -67,7 +67,7 @@ const Profile = () => {
             <img
               src={profileImg ? URL.createObjectURL(profileImg) : userData.photoURL}
               alt=''
-              className='w-48 h-48 border-4 border-blue-600 rounded-full md:w-36 md:h-36 '
+              className='w-48 h-48 border-4 border-blue-600 rounded-full md:w-24 md:h-24 '
             />
           ) : (
             <div className='flex items-center justify-center w-48 h-48 overflow-hidden border-4 border-blue-600 rounded-full md:w-36 md:h-36'>

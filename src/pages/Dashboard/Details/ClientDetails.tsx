@@ -50,7 +50,7 @@ const ClientDetails = () => {
 
   return (
     <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] flex justify-center items-center'>
-      <div className='w-[90%] max-w-[1200px] bg-white p-8 flex flex-col gap-4 rounded-md shadow-md h-[90vh] items-center '>
+      <div className='w-[90%] max-w-[1200px] bg-white p-8 flex flex-col gap-4 rounded-md shadow-md max-h-[90vh] items-center overflow-y-scroll '>
         <button
           onClick={() => navigate(-1)}
           className='flex items-center justify-end w-full font-medium text-blue-600'
@@ -111,43 +111,44 @@ const ClientDetails = () => {
             value='Atualizar'
           />
         </form>
-
-        <div className=' w-full max-w-[800px] max-h-[600px] mt-4 bg-zinc-300 rounded-md overflow-hidden'>
-          <div className='flex flex-col gap-4 p-4 overflow-y-scroll rounded-md max-h-[600px]'>
-            {clientOrders?.map((order) => (
-              <Link
-                to={`/orders/${order.id}`}
-                className='flex justify-between w-full p-2 bg-white rounded-md'
-                key={order.id}
-              >
-                <div className='flex flex-col items-center justify-center w-[15%]'>
-                  <span className='text-xs text-zinc-400'>Pedido</span>
-                  <span className='text-sm'>{order.orderId}</span>
-                </div>
-                <div className='flex flex-col items-center justify-center w-[15%]'>
-                  <span className='text-xs text-zinc-400'>Data de emissão</span>
-                  <span className='text-sm'>{formatDate(order.createdAt?.seconds || 0)}</span>
-                </div>
-                <div className='flex flex-col items-center justify-center w-[10%]'>
-                  <span className='text-xs text-zinc-400'>Indústria</span>
-                  <span className='text-sm'>{order.industryName}</span>
-                </div>
-                <div className='flex flex-col items-center justify-center w-[10%]'>
-                  <span className='text-xs text-zinc-400'>Total</span>
-                  <span className='text-sm'>{order.total}</span>
-                </div>
-                <div className='flex flex-col items-center justify-center w-[15%]'>
-                  <span className='text-xs text-zinc-400'>Vendedor</span>
-                  <span className='text-sm'>{order.sellerName}</span>
-                </div>
-                <div className='flex flex-col items-start justify-center w-[35%]'>
-                  <span className='text-xs text-zinc-400'>Prazo de pagamento</span>
-                  <span className='text-sm'>{order.deadline}</span>
-                </div>
-              </Link>
-            ))}
+        {clientOrders.length > 0 && (
+          <div className=' w-full max-w-[800px] max-h-[600px] mt-4 bg-zinc-300 rounded-md overflow-y-scroll'>
+            <div className='flex flex-col gap-4 p-4 overflow-y-scroll rounded-md max-h-[600px]'>
+              {clientOrders?.map((order) => (
+                <Link
+                  to={`/orders/${order.id}`}
+                  className='flex justify-between w-full p-2 bg-white rounded-md'
+                  key={order.id}
+                >
+                  <div className='flex flex-col items-center justify-center w-[15%]'>
+                    <span className='text-xs text-zinc-400'>Pedido</span>
+                    <span className='text-sm'>{order.orderId}</span>
+                  </div>
+                  <div className='flex flex-col items-center justify-center w-[15%]'>
+                    <span className='text-xs text-zinc-400'>Data de emissão</span>
+                    <span className='text-sm'>{formatDate(order.createdAt?.seconds || 0)}</span>
+                  </div>
+                  <div className='flex flex-col items-center justify-center w-[10%]'>
+                    <span className='text-xs text-zinc-400'>Indústria</span>
+                    <span className='text-sm'>{order.industryName}</span>
+                  </div>
+                  <div className='flex flex-col items-center justify-center w-[10%]'>
+                    <span className='text-xs text-zinc-400'>Total</span>
+                    <span className='text-sm'>{order.total}</span>
+                  </div>
+                  <div className='flex flex-col items-center justify-center w-[15%]'>
+                    <span className='text-xs text-zinc-400'>Vendedor</span>
+                    <span className='text-sm'>{order.sellerName}</span>
+                  </div>
+                  <div className='flex flex-col items-start justify-center w-[35%]'>
+                    <span className='text-xs text-zinc-400'>Prazo de pagamento</span>
+                    <span className='text-sm'>{order.deadline}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </main>
   )

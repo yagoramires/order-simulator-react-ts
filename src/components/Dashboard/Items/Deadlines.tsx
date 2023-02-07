@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 import DeadlineForm from '../Forms/DeadlineForm'
 
 import { IDeadlines } from '../../../interfaces'
+import { FaEdit } from 'react-icons/fa'
+import { TiDelete } from 'react-icons/ti'
 
 const Deadlines = () => {
   const { deadlines } = useFetchCollection('deadlines')
@@ -19,15 +20,18 @@ const Deadlines = () => {
   const linkComponent = (deadline: IDeadlines) => {
     return (
       <div className='flex items-center justify-between w-full gap-4' key={deadline.id}>
-        <Link
-          to={`${deadline.id}`}
-          className='text-black border-b-[1px] border-b-zinc-200 p-2 rounded-md hover:bg-zinc-200 w-full'
-        >
-          <div className='flex flex-col'>
-            <span className='text-xs text-zinc-400'>Prazo</span>
-            <span className='font-medium'>{deadline.value}</span>
+        <div className='text-black border-b-[1px] border-b-zinc-200 p-2 rounded-md hover:bg-zinc-200 w-full'>
+          <div className='flex items-center justify-between'>
+            <div className='flex flex-col'>
+              <span className='text-xs text-zinc-400'>Prazo</span>
+              <span className='font-medium'>{deadline.value}</span>
+            </div>
+            <div className='flex gap-2'>
+              <FaEdit className='text-green-400' />
+              <TiDelete className='text-red-400' />
+            </div>
           </div>
-        </Link>
+        </div>
       </div>
     )
   }
