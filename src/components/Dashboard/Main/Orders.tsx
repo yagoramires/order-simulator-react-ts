@@ -49,7 +49,9 @@ const Orders = () => {
             </div>
             <div className='flex w-[55%] lg:flex-col lg:w-[35%] gap-4'>
               <div className='flex flex-col items-start w-[30%] lg:w-full'>
-                <span className='font-medium'>{formatDate(order.createdAt?.seconds || 0)}</span>
+                <span className='font-medium'>
+                  {order.createdAt && formatDate(order.createdAt)}
+                </span>
               </div>
               <div className='flex flex-col items-start w-[40%] lg:w-full'>
                 <span className='hidden text-xs text-zinc-400 lg:inline'>Total</span>

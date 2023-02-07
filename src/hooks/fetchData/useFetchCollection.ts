@@ -31,8 +31,11 @@ export const useFetchCollection = (docCollection: string) => {
             id: doc.id,
             ...doc.data(),
           }))
+
           if (docCollection === 'industries') {
             setIndustries(snapshot)
+          } else if (docCollection.includes('clients/')) {
+            setClientOrders(snapshot)
           } else if (docCollection === 'orders') {
             setOrders(snapshot)
           } else if (docCollection === 'clients') {
@@ -41,8 +44,6 @@ export const useFetchCollection = (docCollection: string) => {
             setDeadlines(snapshot)
           } else if (docCollection.includes('products')) {
             setProducts(snapshot)
-          } else if (docCollection.includes('clients') && docCollection.includes('orders')) {
-            setClientOrders(snapshot)
           }
         })
       } catch (e: any) {

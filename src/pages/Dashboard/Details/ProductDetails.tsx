@@ -51,74 +51,79 @@ const ProductDetails = () => {
 
   return (
     <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] flex justify-center items-center'>
-      <div className=' w-[90%] max-w-[1200px] bg-white p-8 flex flex-col gap-4 rounded-md shadow-md h-[90vh] max-h-[900px] items-center '>
-        <button
-          onClick={() => navigate(-1)}
-          className='flex items-center justify-end w-full font-medium text-blue-600'
-        >
-          <MdKeyboardArrowLeft size={40} />
-          Voltar
-        </button>
+      <div className=' w-[90%] max-w-[1200px] bg-white flex gap-4  rounded-md shadow-md h-[90vh] max-h-[900px]  overflow-hidden'>
+        <div className=' w-full max-w-[1200px] flex flex-col items-center gap-4 p-8 overflow-y-scroll'>
+          <button
+            onClick={() => navigate(-1)}
+            className='flex items-center justify-end w-full font-medium text-blue-600'
+          >
+            <MdKeyboardArrowLeft size={40} />
+            Voltar
+          </button>
 
-        <div className='flex items-center justify-center w-full mb-4 text-blue-600'>
-          {image || product.imagePath ? (
-            <img
-              src={image ? URL.createObjectURL(image) : product?.imagePath}
-              alt={product.name}
-              className='w-[150px] md:w-[100px] '
+          <div className='flex items-center justify-center w-full mb-4 text-blue-600'>
+            {image || product.imagePath ? (
+              <img
+                src={image ? URL.createObjectURL(image) : product?.imagePath}
+                alt={product.name}
+                className='w-[150px] md:w-[80px] '
+              />
+            ) : (
+              <MdNoPhotography className='text-[100px] md:text-[80px] ' />
+            )}
+          </div>
+          <form className='flex flex-col gap-4 w-[90%] max-w-[800px]' onSubmit={handleUpdate}>
+            <label className='flex flex-col gap-2'>
+              <span className='md:md:text-xs text-zinc-400'>Imagem</span>
+              <input
+                type='file'
+                onChange={handleSelectImage}
+                className='p-2 rounded-md shadow-sm bg-zinc-200'
+              />
+            </label>
+            <label className='flex flex-col gap-2'>
+              <span className='md:md:text-xs text-zinc-400'>Produto</span>
+              <input
+                type='text'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className='p-2 rounded-md shadow-sm bg-zinc-200'
+              />
+            </label>
+            <label className='flex flex-col gap-2'>
+              <span className='md:text-xs text-zinc-400'>Código</span>
+              <input
+                type='text'
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                className='p-2 rounded-md shadow-sm bg-zinc-200'
+              />
+            </label>
+            <label className='flex flex-col gap-2'>
+              <span className='md:text-xs text-zinc-400'>Linha</span>
+              <input
+                type='text'
+                value={family}
+                onChange={(e) => setFamily(e.target.value)}
+                className='p-2 rounded-md shadow-sm bg-zinc-200'
+              />
+            </label>
+            <label className='flex flex-col gap-2'>
+              <span className='md:text-xs text-zinc-400'>Valor</span>
+              <input
+                type='number'
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className='p-2 rounded-md shadow-sm bg-zinc-200'
+              />
+            </label>
+            <input
+              type='submit'
+              className='p-2 mt-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-800 to-blue-600 hover:bg-none hover:bg-blue-500'
+              value='Atualizar'
             />
-          ) : (
-            <MdNoPhotography className='text-[100px] md:text-[60px] ' />
-          )}
+          </form>
         </div>
-        <form className='flex flex-col gap-4 w-[90%] max-w-[800px]' onSubmit={handleUpdate}>
-          <input
-            type='file'
-            onChange={handleSelectImage}
-            className='p-2 rounded-md shadow-sm bg-zinc-200'
-          />
-          <label className='flex flex-col '>
-            <span className='md:md:text-xs text-zinc-400'>Produto</span>
-            <input
-              type='text'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className='p-2 rounded-md shadow-sm bg-zinc-200'
-            />
-          </label>
-          <label className='flex flex-col gap-1'>
-            <span className='md:text-xs text-zinc-400'>Código</span>
-            <input
-              type='text'
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              className='p-2 rounded-md shadow-sm bg-zinc-200'
-            />
-          </label>
-          <label className='flex flex-col gap-1'>
-            <span className='md:text-xs text-zinc-400'>Linha</span>
-            <input
-              type='text'
-              value={family}
-              onChange={(e) => setFamily(e.target.value)}
-              className='p-2 rounded-md shadow-sm bg-zinc-200'
-            />
-          </label>
-          <label className='flex flex-col gap-1'>
-            <span className='md:text-xs text-zinc-400'>Valor</span>
-            <input
-              type='number'
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              className='p-2 rounded-md shadow-sm bg-zinc-200'
-            />
-          </label>
-          <input
-            type='submit'
-            className='p-2 mt-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-800 to-blue-600 hover:bg-none hover:bg-blue-500'
-            value='Atualizar'
-          />
-        </form>
       </div>
     </main>
   )

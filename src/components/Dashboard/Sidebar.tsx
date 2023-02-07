@@ -8,7 +8,7 @@ import { BsCartCheckFill } from 'react-icons/bs'
 import { MdLogout } from 'react-icons/md'
 import { FaPlus, FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit } from 'react-icons/fa'
 
-const SidebarDashboard = () => {
+const Sidebar = () => {
   const { userData } = useContext(AuthContext)
   const { signOutUser } = useAuth()
 
@@ -99,4 +99,4 @@ const SidebarDashboard = () => {
   )
 }
 
-export default SidebarDashboard
+export default Sidebar

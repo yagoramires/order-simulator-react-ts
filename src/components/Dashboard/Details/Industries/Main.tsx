@@ -5,7 +5,7 @@ import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollecti
 import ProductCard from './Items/Products'
 import ProductForm from './Form/ProductForm'
 
-const MainDetails = () => {
+const Main = () => {
   const [search, setSearch] = useState('')
 
   const { industryId } = useParams()
@@ -58,4 +58,4 @@ const MainDetails = () => {
   )
 }
 
-export default MainDetails
+export default Main

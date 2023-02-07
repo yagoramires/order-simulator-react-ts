@@ -1,10 +1,8 @@
 export const useFormatDate = () => {
-  const formatDate = (seconds: number) => {
-    const date = new Date(seconds * 1000)
-    const day = date.getDay()
-    const month = date.getMonth()
-    const year = date.getFullYear()
-    return `${day > 9 ? day : `0${day}`}/${month > 9 ? month : `0${month}`}/${year}`
+  const formatDate = (createdAt: { seconds: number; nanoseconds: number }) => {
+    const date = new Date(createdAt.seconds * 1000 + createdAt.nanoseconds / 1000000)
+
+    return date.toLocaleString('pt-BR', { day: 'numeric', month: 'numeric', year: 'numeric' })
   }
 
   return { formatDate }
