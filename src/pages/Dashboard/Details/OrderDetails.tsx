@@ -16,8 +16,6 @@ const OrderDetails = () => {
 
   const { document: order, loading } = useFetchDocument('orders', orderId)
 
-  console.log(order)
-
   const { formatValue } = useFormatValue()
   const { formatDate } = useFormatDate()
 

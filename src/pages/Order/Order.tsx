@@ -37,6 +37,17 @@ const Order = ({ uid, displayName }: UserProps) => {
   const { orders } = useFetchCollection('orders')
   const { addOrder, loading } = useCreateOrder()
 
+  const [search, setSearch] = useState('')
+
+  const filteredProductsCode =
+    search.length > 0
+      ? products.filter((product) => product.code?.toLowerCase().includes(search.toLowerCase()))
+      : []
+  const filteredProductsName =
+    search.length > 0
+      ? products.filter((product) => product.name?.toLowerCase().includes(search.toLowerCase()))
+      : []
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -112,6 +123,16 @@ const Order = ({ uid, displayName }: UserProps) => {
 
             {industry ? (
               <div className='p-4 bg-white w-[90%] max-w-[1200px] rounded-md flex flex-col gap-4'>
+                <div className='flex justify-center w-full'>
+                  <input
+                    type='text'
+                    className='p-2 rounded-md shadow-sm bg-zinc-300 w-[300px]'
+                    placeholder='Pesquisar'
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                </div>
+
                 <div className='flex items-center w-full text-center'>
                   <span className='text-xs text-zinc-500 w-[100px] md:hidden'></span>
                   <span className='text-xs text-zinc-500 w-[10%]'>Código</span>
@@ -122,14 +143,33 @@ const Order = ({ uid, displayName }: UserProps) => {
                     <span className='text-xs text-zinc-500 w-[50px] md:hidden'>Total</span>
                   </div>
                 </div>
-                {products?.map((product) => (
-                  <Product
-                    product={product}
-                    key={product.id}
-                    productsArray={productsArray}
-                    setProductsArray={setProductsArray}
-                  />
-                ))}
+                {search && filteredProductsCode.length > 0
+                  ? filteredProductsCode?.map((product) => (
+                      <Product
+                        product={product}
+                        key={product.id}
+                        productsArray={productsArray}
+                        setProductsArray={setProductsArray}
+                      />
+                    ))
+                  : search && filteredProductsName.length > 0
+                  ? filteredProductsName?.map((product) => (
+                      <Product
+                        product={product}
+                        key={product.id}
+                        productsArray={productsArray}
+                        setProductsArray={setProductsArray}
+                      />
+                    ))
+                  : !search &&
+                    products?.map((product) => (
+                      <Product
+                        product={product}
+                        key={product.id}
+                        productsArray={productsArray}
+                        setProductsArray={setProductsArray}
+                      />
+                    ))}
                 {products?.length === 0 && (
                   <p className='w-full py-20 text-center '>Nenhum produto cadastrado.</p>
                 )}
