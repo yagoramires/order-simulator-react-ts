@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { FaEdit } from 'react-icons/fa'
-import { TiDelete } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'

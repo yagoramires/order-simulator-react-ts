@@ -30,7 +30,7 @@ const Product = ({ product, productsArray, setProductsArray }: ProductProps) => 
 
     if (checkIfProductIsInArray.length === 0) {
       const totalPrice = qnt * (product.price || 0)
-      const addProduct = { ...product, qnt, total: totalPrice }
+      const addProduct = { ...product, quantity: qnt, total: totalPrice }
       return setProductsArray([...productsArray, addProduct])
     }
 
@@ -38,7 +38,7 @@ const Product = ({ product, productsArray, setProductsArray }: ProductProps) => 
       const removeProduct = productsArray.filter((prod) => prod.id !== product.id)
 
       const totalPrice = qnt * (product.price || 0)
-      const addProduct = { ...product, qnt, total: totalPrice }
+      const addProduct = { ...product, quantity: qnt, total: totalPrice }
       return setProductsArray([...removeProduct, addProduct])
     }
   }

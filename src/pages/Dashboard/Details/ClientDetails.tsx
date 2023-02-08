@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
-import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
-import { useFormatDate } from '../../../hooks/handleData/useFormatDate'
 
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import Loading from '../../../components/Loading'
 
-import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { IClients } from '../../../interfaces'
 import Sidebar from '../../../components/Dashboard/Details/Clients/Sidebar'
 import Main from '../../../components/Dashboard/Details/Clients/Main'

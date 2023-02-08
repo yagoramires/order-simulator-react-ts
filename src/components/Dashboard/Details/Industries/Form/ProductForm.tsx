@@ -49,6 +49,7 @@ const ProductForm = () => {
     setOpen(false)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSelectImage = (e: any) => {
     setProductImage(e.target.files[0])
   }

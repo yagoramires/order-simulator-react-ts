@@ -4,7 +4,6 @@ import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 import DeadlineForm from './Forms/DeadlineForm'
 
 import { IDeadlines } from '../../../interfaces'
-import { FaEdit } from 'react-icons/fa'
 import { TiDelete } from 'react-icons/ti'
 
 const Deadlines = () => {

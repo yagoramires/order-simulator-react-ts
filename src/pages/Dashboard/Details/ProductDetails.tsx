@@ -32,6 +32,7 @@ const ProductDetails = () => {
     }
   }, [product])
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSelectImage = (e: any) => {
     setImage(e.target.files[0])
   }
@@ -57,7 +58,7 @@ const ProductDetails = () => {
             onClick={() => navigate(-1)}
             className='flex items-center justify-end w-full font-medium text-blue-600'
           >
-            <MdKeyboardArrowLeft size={40} />
+            <MdKeyboardArrowLeft size={20} />
             Voltar
           </button>
 

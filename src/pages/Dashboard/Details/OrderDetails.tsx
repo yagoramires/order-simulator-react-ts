@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react'
 import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
-import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 import { useFormatDate } from '../../../hooks/handleData/useFormatDate'
 
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -9,6 +7,7 @@ import Loading from '../../../components/Loading'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useFormatValue } from '../../../hooks/handleData/useFormatValue'
+import { IProduct } from '../../../interfaces'
 
 const OrderDetails = () => {
   const navigate = useNavigate()
@@ -37,73 +36,85 @@ const OrderDetails = () => {
             onClick={() => navigate(-1)}
             className='flex items-center justify-end w-full font-medium text-blue-600'
           >
-            <MdKeyboardArrowLeft size={30} />
+            <MdKeyboardArrowLeft size={20} />
             Voltar
           </button>
 
-          <div className='flex flex-col gap-4 w-full max-w-[800px]'>
-            <label className='flex flex-col gap-1'>
+          <div className='flex flex-col gap-2 w-full max-w-[800px]'>
+            <div className='flex flex-col gap-1'>
               <span className='md:md:text-xs text-zinc-400'>Número do pedido</span>
               <span className='text-sm text-black'>{order.orderId}</span>
-            </label>
-            <label className='flex flex-col gap-1'>
+            </div>
+            <div className='flex flex-col gap-1'>
+              <span className='md:md:text-xs text-zinc-400'>Data</span>
+              <span className='text-sm text-black'>{formatDate(order.createdAt)}</span>
+            </div>
+            <div className='flex flex-col gap-1'>
               <span className='md:md:text-xs text-zinc-400'>Razão Social</span>
               <span className='text-sm text-black'>{order.clientName}</span>
-            </label>
-            <label className='flex flex-col gap-1'>
+            </div>
+            <div className='flex flex-col gap-1'>
+              <span className='md:md:text-xs text-zinc-400'>Razão Social</span>
+              <span className='text-sm text-black'>{order.clientName}</span>
+            </div>
+            <div className='flex flex-col gap-1'>
               <span className='md:text-xs text-zinc-400'>CNPJ</span>
               <span className='text-sm text-black'>{order.clientCnpj}</span>
-            </label>
-            <label className='flex flex-col gap-1'>
+            </div>
+            <div className='flex flex-col gap-1'>
               <span className='md:text-xs text-zinc-400'>Prazo de pagamento</span>
               <span className='text-sm text-black'>{order.deadline}</span>
-            </label>
-            <label className='flex flex-col gap-1'>
+            </div>
+            <div className='flex flex-col gap-1'>
               <span className='md:text-xs text-zinc-400'>Indústria</span>
               <span className='text-sm text-black'>{order.industryName}</span>
-            </label>
-            <label className='flex flex-col gap-1'>
+            </div>
+            <div className='flex flex-col gap-1'>
               <span className='md:text-xs text-zinc-400'>Vendedor</span>
               <span className='text-sm text-black'>{order.sellerId}</span>
-            </label>
-            <label className='flex flex-col gap-1'>
+            </div>
+            <div className='flex flex-col gap-1'>
               <span className='md:text-xs text-zinc-400'>Total do pedido</span>
-              <span className='text-sm text-black'>
-                {order.total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-              </span>
-            </label>
+              <span className='text-sm text-black'>{formatValue(order.total)}</span>
+            </div>
           </div>
 
-          {order.length > 0 && (
-            <div className='flex flex-col gap-4 overflow-y-scroll rounded-md max-h-[600px] w-full'>
-              {order?.products?.map((product: any) => (
-                <Link
-                  to={`/industries/${order.industryId}/${product.id}`}
-                  className='flex justify-between w-full gap-4 p-2 rounded-md bg-zinc-200'
-                  key={product.id}
-                >
-                  <div className='flex flex-col items-start justify-center w-[70%]  md:w-full'>
-                    <span className='text-xs text-zinc-400'>Produto</span>
-                    <span className='text-sm'>{product.name}</span>
-                  </div>
-                  <div className='flex md:hidden w-[30%] gap-4'>
-                    <div className='flex flex-col items-start justify-center'>
-                      <span className='text-xs text-zinc-400'>Vlr. un.</span>
-                      <span className='text-sm'>{formatValue(product.price)}</span>
+          <div className='w-full max-w-[800px] overflow-hidden rounded-md'>
+            {order && (
+              <div className='w-full overflow-y-scroll max-h-[200px] max-w-[800px] bg-zinc-200 rounded-md flex flex-col gap-2 p-2'>
+                {order?.products?.map((product: IProduct) => (
+                  <Link
+                    to={`/industries/${order.industryId}/${product.id}`}
+                    className='w-full p-2 bg-white rounded-md'
+                    key={product.id}
+                  >
+                    <div className='flex flex-col items-start justify-center w-[70%]  md:w-full'>
+                      <span className='text-xs text-zinc-400'>Produto</span>
+                      <span className='text-sm'>{product.name}</span>
                     </div>
-                    <div className='flex flex-col items-start justify-center'>
-                      <span className='text-xs text-zinc-400'>Quantidade</span>
-                      <span className='text-sm'>{product.qnt}</span>
+                    <div className='flex md:hidden w-[30%] gap-4'>
+                      <div className='flex flex-col items-start justify-center'>
+                        <span className='text-xs text-zinc-400'>Vlr. un.</span>
+                        <span className='text-sm'>
+                          {product.price && formatValue(product.price)}
+                        </span>
+                      </div>
+                      <div className='flex flex-col items-start justify-center'>
+                        <span className='text-xs text-zinc-400'>Quantidade</span>
+                        <span className='text-sm'>{product.quantity}</span>
+                      </div>
+                      <div className='flex flex-col items-start justify-center'>
+                        <span className='text-xs text-zinc-400'>Total</span>
+                        <span className='text-sm'>
+                          {product.total && formatValue(product.total)}
+                        </span>
+                      </div>
                     </div>
-                    <div className='flex flex-col items-start justify-center'>
-                      <span className='text-xs text-zinc-400'>Total</span>
-                      <span className='text-sm'>{formatValue(product.total)}</span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </main>
