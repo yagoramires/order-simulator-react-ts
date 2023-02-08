@@ -12,14 +12,15 @@ const SidebarDetails = ({ industry }: DataProps) => {
   const navigate = useNavigate()
 
   return (
-    <aside className='flex flex-col gap-16 items-center justify-between md:justify-center p-4 md:p-0 bg-white md:fixed md:left-0 md:right-0 md:bottom-0 md:z-[999] md:w-full md:flex-row w-[450px] shadow-lg'>
-      <div className='flex flex-col items-center justify-center gap-4 '>
-        <div className='flex items-center justify-between w-full text-4xl font-bold text-blue-600 md:text-2xl md:p-4'>
-          <span onClick={() => navigate(-1)}>
-            <MdKeyboardArrowLeft />
-          </span>
+    <aside className='flex flex-col gap-16 items-center justify-between p-4 md:p-0 bg-white md:fixed md:left-0 md:right-0 md:bottom-0 md:z-[999] md:w-full md:flex-row w-[450px] lg:w-[350px] shadow-lg'>
+      <div className='flex flex-col items-center justify-center gap-4 md:hidden'>
+        <span
+          onClick={() => navigate(-1)}
+          className='flex items-center justify-between w-full text-4xl font-bold text-blue-600 cursor-pointer md:text-2xl md:p-4'
+        >
+          <MdKeyboardArrowLeft size={30} />
           <h1>{industry.fantasyName}</h1>
-        </div>
+        </span>
       </div>
 
       <div className='flex flex-col w-full h-full gap-4 md:hidden'>

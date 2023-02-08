@@ -12,15 +12,15 @@ const Sidebar = ({ client }: DataProps) => {
   const navigate = useNavigate()
 
   return (
-    <aside className='flex flex-col gap-16 items-center justify-between md:justify-center p-4 md:p-0 bg-white md:fixed md:left-0 md:right-0 md:bottom-0 md:z-[999] md:w-full md:flex-row w-[450px] shadow-lg'>
-      <div className='flex flex-col items-center justify-center gap-4 '>
-        <div className='flex items-center justify-between w-full gap-2 text-xl font-bold text-center text-blue-600 lg:text-sm md:p-4'>
-          <span onClick={() => navigate(-1)}>
-            <MdKeyboardArrowLeft />
-          </span>
-          <h1 className='md:hidden'>{client.fantasyName}</h1>
-          <span className='hidden md:flex'>Voltar</span>
-        </div>
+    <aside className='flex flex-col gap-16 items-center justify-between p-4  bg-white w-[450px] shadow-lg md:hidden'>
+      <div className='flex items-center justify-between w-full gap-2 text-xl font-bold text-center text-blue-600 cursor-pointer lg:text-sm md:p-4'>
+        <span
+          onClick={() => navigate(-1)}
+          className='flex items-center justify-between w-full text-xl font-bold text-blue-600 cursor-pointer md:text-sm md:p-4'
+        >
+          <MdKeyboardArrowLeft size={30} />
+          <h1>{client.fantasyName}</h1>
+        </span>
       </div>
 
       <div className='flex flex-col w-full h-full gap-4 md:hidden'>

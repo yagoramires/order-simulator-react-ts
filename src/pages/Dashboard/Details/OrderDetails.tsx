@@ -8,6 +8,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import Loading from '../../../components/Loading'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
+import { useFormatValue } from '../../../hooks/handleData/useFormatValue'
 
 const OrderDetails = () => {
   const navigate = useNavigate()
@@ -18,6 +19,7 @@ const OrderDetails = () => {
 
   console.log(order)
 
+  const { formatValue } = useFormatValue()
   const { formatDate } = useFormatDate()
 
   if (loading || !order)
@@ -87,12 +89,7 @@ const OrderDetails = () => {
                   <div className='flex md:hidden w-[30%] gap-4'>
                     <div className='flex flex-col items-start justify-center'>
                       <span className='text-xs text-zinc-400'>Vlr. un.</span>
-                      <span className='text-sm'>
-                        {product.price.toLocaleString('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL',
-                        })}
-                      </span>
+                      <span className='text-sm'>{formatValue(product.price)}</span>
                     </div>
                     <div className='flex flex-col items-start justify-center'>
                       <span className='text-xs text-zinc-400'>Quantidade</span>
@@ -100,12 +97,7 @@ const OrderDetails = () => {
                     </div>
                     <div className='flex flex-col items-start justify-center'>
                       <span className='text-xs text-zinc-400'>Total</span>
-                      <span className='text-sm'>
-                        {product.total.toLocaleString('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL',
-                        })}
-                      </span>
+                      <span className='text-sm'>{formatValue(product.total)}</span>
                     </div>
                   </div>
                 </Link>

@@ -23,36 +23,30 @@ const Orders = ({ order }: DataProps) => {
     }
   }, [orders])
 
+  console.log(order)
+
   const linkComponent = (order: IOrder) => {
     return (
-      <div className='flex items-center justify-between w-full gap-4' key={order.id}>
+      <div
+        className='flex items-center justify-between w-full gap-4 lg:max-w-[450px]'
+        key={order.id}
+      >
         <Link
           to={`/orders/${orderTrueId.length > 0 && orderTrueId[0].id}`}
           key={order.id}
-          className='flex w-full gap-2 p-4 text-black transition-all duration-200 rounded-md cursor-pointer  hover:bg-zinc-200 border-b-[1px] border-b-zinc-200'
+          className='flex w-full gap-4 p-4 text-black transition-all duration-200 rounded-md cursor-pointer hover:bg-zinc-200 border-b-[1px] border-b-zinc-200'
         >
-          <div className='flex flex-col'>
-            <span className='text-xs text-zinc-400'>Pedido</span>
-            <span className='font-medium'>{order.orderId}</span>
-          </div>
-          <div className='flex flex-col'>
-            <span className='text-xs text-zinc-400'>Data</span>
-            <span className='font-medium'>
-              {order.createdAt?.seconds && formatDate(order.createdAt)}
-            </span>
-          </div>
-          <div className='flex flex-col'>
-            <span className='text-xs text-zinc-400'>Indústria</span>
-            <span className='font-medium'>{order.industryName}</span>
-          </div>
-          <div className='flex gap-2'>
-            <span className='text-xs text-zinc-400'>Valor Uni.</span>
-            <span className='font-medium'>{order.total && formatValue(+order.total)}</span>
-          </div>
-          <div className='flex gap-2'>
-            <span className='text-xs text-zinc-400'>Total</span>
-            <span className='font-medium'>{order.total && formatValue(+order.total)}</span>
-          </div>
+          <span className='font-medium  w-[15%] lg:w-[25%] md:hidden'>{order.orderId}</span>
+          <span className='font-medium w-[20%] lg:w-[25%] md:w-[50%]'>
+            {order.createdAt?.seconds && formatDate(order.createdAt)}
+          </span>
+          <span className='font-medium w-[35%] break-words overflow-hidden lg:hidden'>
+            {order.deadline}
+          </span>
+          <span className='font-medium w-[10%] lg:w-[25%] md:hidden'>{order.industryName}</span>
+          <span className='font-medium w-[15%] lg:w-[25%] md:w-[50%]'>
+            {order.total && formatValue(+order.total)}
+          </span>
         </Link>
       </div>
     )

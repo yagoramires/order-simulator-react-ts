@@ -21,13 +21,13 @@ const Deadlines = () => {
     return (
       <div className='flex items-center justify-between w-full gap-4' key={deadline.id}>
         <div className='text-black border-b-[1px] border-b-zinc-200 p-2 rounded-md hover:bg-zinc-200 w-full'>
-          <div className='flex items-center justify-between'>
-            <div className='flex flex-col'>
+          <div className='flex items-center justify-between gap-4'>
+            <div className='flex flex-col overflow-hidden w-[90%]'>
               <span className='text-xs text-zinc-400'>Prazo</span>
-              <span className='font-medium'>{deadline.value}</span>
+              <span className='font-medium break-words'>{deadline.value}</span>
             </div>
 
-            <TiDelete className='text-red-400 cursor-pointer' size={20} />
+            <TiDelete className='text-red-400 cursor-pointer w-[10%]' size={20} />
           </div>
         </div>
       </div>

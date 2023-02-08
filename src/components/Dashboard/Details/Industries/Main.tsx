@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
 
 import ProductCard from './Items/Products'
 import ProductForm from './Form/ProductForm'
+import { MdKeyboardArrowLeft } from 'react-icons/md'
 
 const Main = () => {
   const [search, setSearch] = useState('')
+  const navigate = useNavigate()
 
   const { industryId } = useParams()
   const { products } = useFetchCollection(`industries/${industryId}/products`)
@@ -29,6 +31,13 @@ const Main = () => {
       </div>
       <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
         <div className='flex flex-col gap-4  p-8  overflow-y-scroll rounded-md max-h-[75vh]'>
+          <span
+            onClick={() => navigate(-1)}
+            className='items-center justify-end hidden w-full text-sm font-bold text-blue-600 cursor-pointer md:flex'
+          >
+            <MdKeyboardArrowLeft size={20} />
+            Voltar
+          </span>
           {products.length === 0 ? (
             <p className='text-black'>Nenhum produto cadastrado.</p>
           ) : (
@@ -40,6 +49,12 @@ const Main = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           )}
+
+          <div className='flex items-center justify-start w-full gap-4 p-4 text-start'>
+            <span className='text-xs text-zinc-400 w-[15%] lg:w-[25%] md:hidden'>Pedido</span>
+            <span className='text-xs text-zinc-400 w-[20%] lg:w-[25%] md:w-[50%]'>Data</span>
+            <span className='text-xs text-zinc-400 w-[35%] lg:hidden'>Prazo</span>
+          </div>
 
           {search && filteredProductCode.length > 0
             ? filteredProductCode.map((product) => (
