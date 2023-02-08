@@ -103,11 +103,18 @@ const Orders = () => {
               ))}
 
             {search && filteredOrdersName.length > 0
-              ? filteredOrdersName.map((industry) => linkComponent(industry))
+              ? filteredOrdersName
+                  .sort((a, b) => Number(b.orderId) - Number(a.orderId))
+                  .map((industry) => linkComponent(industry))
               : filteredOrdersOrderId.length > 0
-              ? filteredOrdersOrderId?.map((industry) => linkComponent(industry))
+              ? filteredOrdersOrderId
+                  .sort((a, b) => Number(b.orderId) - Number(a.orderId))
+                  .map((industry) => linkComponent(industry))
               : search && <p className='text-black'> Nenhuma indústria encontrada.</p>}
-            {!search && orders?.map((industry) => linkComponent(industry))}
+            {!search &&
+              orders
+                ?.sort((a, b) => Number(b.orderId) - Number(a.orderId))
+                .map((industry) => linkComponent(industry))}
           </div>
         </div>
       </div>
