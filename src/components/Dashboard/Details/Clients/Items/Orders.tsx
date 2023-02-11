@@ -23,8 +23,6 @@ const Orders = ({ order }: DataProps) => {
     }
   }, [orders])
 
-  console.log(order)
-
   const linkComponent = (order: IOrder) => {
     return (
       <div
