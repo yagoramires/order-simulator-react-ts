@@ -1,5 +1,5 @@
 import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
-import { useFormatDate } from '../../../hooks/handleData/useFormatDate'
+import { useFormatDate } from '../../../hooks/formatData/useFormatDate'
 
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
@@ -7,7 +7,7 @@ import Loading from '../../../components/Loading'
 import Alert from '../../../components/Dashboard/Alert'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
-import { useFormatValue } from '../../../hooks/handleData/useFormatValue'
+import { useFormatValue } from '../../../hooks/formatData/useFormatValue'
 import { IProduct } from '../../../interfaces'
 import { useDeleteDoc } from '../../../hooks/handleData/useDeleteDoc'
 

@@ -3,8 +3,8 @@ import { IoMdAdd } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
-import { useFormatDate } from '../../../hooks/handleData/useFormatDate'
-import { useFormatValue } from '../../../hooks/handleData/useFormatValue'
+import { useFormatDate } from '../../../hooks/formatData/useFormatDate'
+import { useFormatValue } from '../../../hooks/formatData/useFormatValue'
 import { IOrder } from '../../../interfaces'
 
 const Orders = () => {
