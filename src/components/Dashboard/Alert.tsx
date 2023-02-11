@@ -52,7 +52,7 @@ const Alert = ({ data }: AlertProps) => {
           </AlertDialog.Description>
           <div style={{ display: 'flex', gap: 25, justifyContent: 'flex-end' }}>
             <AlertDialog.Cancel asChild>
-              <button className='flex items-center justify-center px-4 font-medium text-white text-blue-600 transition-all duration-200 border-2 border-solid rounded cursor-pointer border-zinc-300 focus: hover:bg-zinc-200 h-9'>
+              <button className='flex items-center justify-center px-4 font-medium text-blue-600 transition-all duration-200 border-2 border-solid rounded cursor-pointer border-zinc-300 focus: hover:bg-zinc-200 h-9'>
                 Cancelar
               </button>
             </AlertDialog.Cancel>
