@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useHandleProducts } from '../../../../../hooks/handleData/useHandleProducts'
+import { useAddDoc } from '../../../../../hooks/handleData/useAddDoc'
 
 import { useParams } from 'react-router-dom'
 
@@ -20,7 +20,7 @@ const ProductForm = () => {
 
   const { industryId } = useParams()
 
-  const { addProduct } = useHandleProducts()
+  const { addProduct } = useAddDoc()
 
   const handleClient = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useHandleClients } from '../../../../hooks/handleData/useHandleClients'
+import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
 
 import { toast } from 'react-toastify'
 
@@ -18,7 +18,7 @@ const ClientForm = () => {
 
   const [open, setOpen] = useState(false)
 
-  const { addClient } = useHandleClients()
+  const { addClient } = useAddDoc()
 
   const handleClient = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

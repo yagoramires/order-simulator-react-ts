@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useHandleIndustries } from '../../../../hooks/handleData/useHandleIndustries'
+import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
 
 import { toast } from 'react-toastify'
 
@@ -15,7 +15,7 @@ const IndustryForm = () => {
 
   const [open, setOpen] = useState(false)
 
-  const { addIndustry } = useHandleIndustries()
+  const { addIndustry } = useAddDoc()
 
   const handleIndustry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

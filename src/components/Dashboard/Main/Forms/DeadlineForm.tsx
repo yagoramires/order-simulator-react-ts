@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useHandleDeadlines } from '../../../../hooks/handleData/useHandleDeadlines'
+import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
 
 import { toast } from 'react-toastify'
 
@@ -13,7 +13,7 @@ const DeadlineForm = () => {
 
   const [open, setOpen] = useState(false)
 
-  const { addDeadline } = useHandleDeadlines()
+  const { addDeadline } = useAddDoc()
 
   const handleDeadline = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
