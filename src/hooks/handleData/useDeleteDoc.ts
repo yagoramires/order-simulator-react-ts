@@ -17,13 +17,15 @@ export const useDeleteDoc = () => {
       const ref = doc(database, collection, id)
       await deleteDoc(ref)
 
-      if (collection.includes('order/')) {
+      console.log(collection)
+
+      if (collection.includes('orders')) {
         toast.success('Pedido removido com sucesso!')
         navigate(-1)
       } else if (collection.includes('products')) {
         toast.success('Produto removido com sucesso!')
         navigate(-1)
-      } else if (collection.includes('client')) {
+      } else if (collection.includes('clients')) {
         toast.success('Cliente removido  com sucesso!')
         navigate(-1)
       } else if (collection.includes('industries')) {
