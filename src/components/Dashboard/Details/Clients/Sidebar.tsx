@@ -1,8 +1,9 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { IClients } from '../../../../interfaces'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
+import Alert from '../../Alert'
 
 interface DataProps {
   client: IClients
@@ -10,6 +11,8 @@ interface DataProps {
 
 const Sidebar = ({ client }: DataProps) => {
   const navigate = useNavigate()
+
+  const { clientId } = useParams()
 
   return (
     <aside className='flex flex-col gap-16 items-center justify-between p-4  bg-white w-[450px] shadow-lg md:hidden'>
@@ -40,9 +43,12 @@ const Sidebar = ({ client }: DataProps) => {
           <span className='text-xs text-zinc-400'>Rede</span>
           <span className='text-sm font-medium'>{client.network || 'SEM REDE'}</span>
         </div>
-        <button className='w-full p-4 font-medium text-white rounded-md bg-gradient-to-r from-blue-800 to-blue-600'>
-          Editar
-        </button>
+        <div className='flex flex-col gap-4'>
+          <button className='flex items-center justify-center px-4 py-2 font-medium text-white transition-all duration-200 rounded shadow-md cursor-pointer focus: hover:bg-blue-500 h-9 bg-gradient-to-r from-blue-800 to-blue-600'>
+            Editar
+          </button>
+          <Alert data={{ type: 'client', id: clientId || '' }} />
+        </div>
       </div>
     </aside>
   )

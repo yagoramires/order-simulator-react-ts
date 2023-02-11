@@ -27,12 +27,12 @@ const Header = ({ industry, setIndustry }: HeaderProps) => {
   return (
     <header className='flex items-center justify-center p-4 shadow-lg bg-gradient-to-r from-white to-gray-200'>
       <div className='max-w-[1200px] w-[90%] flex items-center justify-between'>
-        <h1 className='font-bold text-5xl leading-[1.5rem] md:text-3xl md:leading-[1.25rem] md:hidden'>
+        <h1 className='font-bold text-5xl leading-[1.5rem] md:text-2xl md:leading-[1.25rem]'>
           D<span className='text-blue-600'>2</span>B
         </h1>
 
         <nav className='md:w-full'>
-          <ul className='flex items-center justify-between gap-2 text-xl font-medium text-blue-600 md:text-sm'>
+          <ul className='flex items-center justify-between gap-2 text-xl font-medium text-blue-600 md:justify-end md:text-sm'>
             {industries?.map((item) => (
               <li
                 onClick={() => setIndustry(item.id || '')}
