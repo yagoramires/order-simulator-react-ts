@@ -14,10 +14,16 @@ export const useDeleteDoc = () => {
   const deleteDocument = async (collection: string, id: string) => {
     setLoading(true)
     try {
-      const ref = doc(database, collection, id)
-      await deleteDoc(ref)
-
-      console.log(collection)
+      if (collection.includes('orders')) {
+        console.log(collection)
+        const ordersRef = doc(database, 'orders', id)
+        await deleteDoc(ordersRef)
+        const clientsRef = doc(database, collection, id)
+        await deleteDoc(clientsRef)
+      } else {
+        const ref = doc(database, collection, id)
+        await deleteDoc(ref)
+      }
 
       if (collection.includes('orders')) {
         toast.success('Pedido removido com sucesso!')

@@ -14,8 +14,7 @@ const Alert = ({ data }: AlertProps) => {
 
   const handleDelete = () => {
     if (data.type === 'order') {
-      deleteDocument('orders', data.id)
-      deleteDocument(`clients/${data.collectionId}/orders/`, data.id)
+      deleteDocument(`clients/${data.collectionId}/orders` || '', data.id)
       return
     }
 
