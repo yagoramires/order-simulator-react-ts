@@ -5,11 +5,11 @@ import DeadlineForm from './Forms/DeadlineForm'
 
 import { IDeadlines } from '../../../interfaces'
 import { TiDelete } from 'react-icons/ti'
-import { useHandleDeadlines } from '../../../hooks/handleData/useHandleDeadlines'
+import { useDeleteDoc } from '../../../hooks/handleData/useDeleteDoc'
 
 const Deadlines = () => {
   const { deadlines } = useFetchCollection('deadlines')
-  const { deleteDeadline } = useHandleDeadlines()
+  const { deleteDocument } = useDeleteDoc()
 
   const [search, setSearch] = useState('')
 
@@ -28,7 +28,7 @@ const Deadlines = () => {
             <TiDelete
               className='text-red-400 cursor-pointer w-[10%]'
               size={20}
-              onClick={() => deleteDeadline('deadlines', deadline.id || '')}
+              onClick={() => deleteDocument('deadlines', deadline.id || '')}
             />
           </div>
         </div>

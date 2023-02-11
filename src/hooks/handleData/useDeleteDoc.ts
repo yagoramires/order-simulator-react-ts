@@ -19,16 +19,19 @@ export const useDeleteDoc = () => {
 
       if (collection.includes('order/')) {
         toast.success('Pedido removido com sucesso!')
+        navigate(-1)
       } else if (collection.includes('products')) {
         toast.success('Produto removido com sucesso!')
+        navigate(-1)
       } else if (collection.includes('client')) {
         toast.success('Cliente removido  com sucesso!')
+        navigate(-1)
       } else if (collection.includes('industries')) {
         toast.success('Indústria removida com sucesso!')
+        navigate(-1)
       } else if (collection.includes('deadline')) {
         toast.success('Prazo de pagamento removido com sucesso!')
       }
-      navigate(-1)
       setLoading(false)
     } catch (e: any) {
       toast.error(e.message)
