@@ -4,10 +4,12 @@ import { useFormatDate } from '../../../hooks/handleData/useFormatDate'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import Loading from '../../../components/Loading'
+import Alert from '../../../components/Dashboard/Alert'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useFormatValue } from '../../../hooks/handleData/useFormatValue'
 import { IProduct } from '../../../interfaces'
+import { useDeleteDoc } from '../../../hooks/handleData/useDeleteDoc'
 
 const OrderDetails = () => {
   const navigate = useNavigate()
@@ -37,7 +39,6 @@ const OrderDetails = () => {
             <MdKeyboardArrowLeft size={20} />
             Voltar
           </button>
-
           <div className='flex flex-col gap-2 w-full max-w-[800px]'>
             <div className='flex flex-col gap-1'>
               <span className='md:md:text-xs text-zinc-400'>Número do pedido</span>
@@ -76,7 +77,6 @@ const OrderDetails = () => {
               <span className='text-sm text-black'>{formatValue(order.total)}</span>
             </div>
           </div>
-
           <div className='w-full max-w-[800px] overflow-hidden rounded-md'>
             {order && (
               <div className='w-full overflow-y-scroll max-h-[200px] max-w-[800px] bg-zinc-200 rounded-md flex flex-col gap-2 p-2'>
@@ -113,6 +113,7 @@ const OrderDetails = () => {
               </div>
             )}
           </div>
+          <Alert data={{ type: 'order', id: orderId || '', collectionId: order.clientId }} />
         </div>
       </div>
     </main>

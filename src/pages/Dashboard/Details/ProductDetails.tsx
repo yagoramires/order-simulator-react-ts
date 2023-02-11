@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../../../components/Loading'
 
 import { MdKeyboardArrowLeft, MdNoPhotography } from 'react-icons/md'
+import Alert from '../../../components/Dashboard/Alert'
 
 const ProductDetails = () => {
   const navigate = useNavigate()
@@ -118,11 +119,16 @@ const ProductDetails = () => {
                 className='p-2 rounded-md shadow-sm bg-zinc-200'
               />
             </label>
-            <input
-              type='submit'
-              className='p-2 mt-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-800 to-blue-600 hover:bg-none hover:bg-blue-500'
-              value='Atualizar'
-            />
+            <div className='flex items-center justify-center gap-4 mt-4'>
+              <input
+                type='submit'
+                className='flex items-center justify-center px-4 py-2 font-medium text-white transition-all duration-200 bg-blue-600 rounded shadow-md cursor-pointer hover:bg-blue-400 h-9'
+                value='Atualizar'
+              />
+              <Alert
+                data={{ type: 'product', id: productId || '', collectionId: industryId || '' }}
+              />
+            </div>
           </form>
         </div>
       </div>

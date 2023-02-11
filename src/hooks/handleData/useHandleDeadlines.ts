@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, Timestamp } from 'firebase/firestore'
 import { database } from '../../firebase/config'
 
 import { toast } from 'react-toastify'
@@ -25,9 +25,19 @@ export const useHandleDeadlines = () => {
     }
   }
 
-  const updateDeadline = () => {
-    console.log('teste')
+  const deleteDeadline = async (collection: string, id: string) => {
+    setLoading(true)
+    try {
+      const ref = doc(database, collection, id)
+      await deleteDoc(ref)
+
+      toast.success('Prazo de pagamento removido com sucesso!')
+      setLoading(false)
+    } catch (e: any) {
+      toast.error(e.message)
+      setLoading(false)
+    }
   }
 
-  return { addDeadline, updateDeadline, loading }
+  return { addDeadline, deleteDeadline, loading }
 }

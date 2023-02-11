@@ -49,12 +49,14 @@ const Main = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           )}
-
-          <div className='flex items-center justify-start w-full gap-4 p-4 text-start'>
-            <span className='text-xs text-zinc-400 w-[15%] lg:w-[25%] md:hidden'>Pedido</span>
-            <span className='text-xs text-zinc-400 w-[20%] lg:w-[25%] md:w-[50%]'>Data</span>
-            <span className='text-xs text-zinc-400 w-[35%] lg:hidden'>Prazo</span>
-          </div>
+          {search ||
+            (products.length > 0 && (
+              <div className='flex items-center justify-start w-full gap-2 p-4 text-start'>
+                <span className='text-xs text-zinc-400 w-[20%] md:w-[40%]'>Código</span>
+                <span className='text-xs text-zinc-400 w-[60%] md:w-[60%]'>Nome</span>
+                <span className='text-xs text-zinc-400 w-[20%] md:hidden'>Valor Uni.</span>
+              </div>
+            ))}
 
           {search && filteredProductCode.length > 0
             ? filteredProductCode.map((product) => (

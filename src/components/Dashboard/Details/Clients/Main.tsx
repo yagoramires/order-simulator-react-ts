@@ -55,8 +55,8 @@ const Main = () => {
             />
           )}
 
-          {clientOrders.length > 0 ||
-            (search.length > 0 && (
+          {search ||
+            (clientOrders.length > 0 && (
               <div className='flex items-center justify-start w-full gap-4 p-4 text-start'>
                 <span className='text-xs text-zinc-400 w-[15%] lg:w-[25%] md:hidden'>Pedido</span>
                 <span className='text-xs text-zinc-400 w-[20%] lg:w-[25%] md:w-[50%]'>Data</span>
