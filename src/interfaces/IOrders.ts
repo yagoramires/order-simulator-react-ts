@@ -16,7 +16,7 @@ export interface IOrder {
   deadline?: string
   products?: Array<IProduct>
   total?: number
-  orderId?: number
+  orderId?: string
 }
 
 export interface IAddOrder {
@@ -30,5 +30,5 @@ export interface IAddOrder {
   products: Array<IProduct>
   deadline: string
   total: number
-  orderId: number
+  orderId: string
 }

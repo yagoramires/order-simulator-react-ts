@@ -84,7 +84,11 @@ const Order = ({ uid, displayName }: UserProps) => {
     if (productsArray.length === 0) return toast.error('Selecione pelo menos um produto!')
     if (!total || total === 0) return toast.error('Ocorreu um erro, tente novamente!')
 
-    addOrder({
+    const lastOrder = orders[orders.length - 1]
+
+    const orderId = lastOrder.orderId ? +lastOrder.orderId + 1 : 1
+
+    const data = {
       clientId: selectedClient.id,
       clientName: selectedClient.socialName,
       clientCnpj: selectedClient.cnpj,
@@ -95,8 +99,10 @@ const Order = ({ uid, displayName }: UserProps) => {
       products: productsArray,
       deadline: selectedDeadline,
       total,
-      orderId: orders.length + 1,
-    })
+      orderId: `${orderId}`,
+    }
+
+    addOrder(data)
 
     navigate('/orders')
   }
