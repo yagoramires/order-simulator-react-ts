@@ -13,8 +13,6 @@ const Alert = ({ data }: AlertProps) => {
   const { deleteDocument } = useDeleteDoc()
 
   const handleDelete = () => {
-    console.log(data)
-
     if (data.type === 'order') {
       deleteDocument('orders', data.id)
       deleteDocument(`clients/${data.collectionId}/orders/`, data.id)
@@ -23,6 +21,16 @@ const Alert = ({ data }: AlertProps) => {
 
     if (data.type === 'product') {
       deleteDocument(`industries/${data.collectionId}/products`, data.id)
+      return
+    }
+
+    if (data.type === 'industry') {
+      deleteDocument(`industries/`, data.id)
+      return
+    }
+
+    if (data.type === 'client') {
+      deleteDocument(`clients/`, data.id)
       return
     }
   }
