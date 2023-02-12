@@ -6,7 +6,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 
 import { MdClose } from 'react-icons/md'
 import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
-import { IAddIndustry, IIndustries } from '../../../../interfaces'
+import { IIndustries } from '../../../../interfaces'
 
 interface IndustryProps {
   industryId: string

@@ -4,13 +4,13 @@ import { IIndustries } from '../../../../interfaces'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import Alert from '../../Alert'
-import EditIndustry from '../../Main/EditForm/EditIndustry'
+import EditIndustry from './EditIndustry'
 
 interface DataProps {
   industry: IIndustries
 }
 
-const SidebarDetails = ({ industry }: DataProps) => {
+const Sidebar = ({ industry }: DataProps) => {
   const navigate = useNavigate()
 
   const { industryId } = useParams()
@@ -49,4 +49,4 @@ const SidebarDetails = ({ industry }: DataProps) => {
   )
 }
 
-export default SidebarDetails
+export default Sidebar

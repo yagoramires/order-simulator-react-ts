@@ -40,8 +40,6 @@ const ProductDetails = () => {
 
   const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    console.log('teste')
   }
 
   if (loading || !product)

@@ -49,7 +49,7 @@ const Clients = () => {
   return (
     <>
       <div className='flex items-center justify-between w-full'>
-        <h1 className='text-2xl font-medium'>Prazos de pagamento</h1>
+        <h1 className='text-2xl font-medium'>Clientes</h1>
         <ClientForm />
       </div>
       <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
