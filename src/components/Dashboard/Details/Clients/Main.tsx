@@ -1,14 +1,12 @@
 import { useState } from 'react'
 import { IoMdAdd } from 'react-icons/io'
-import { MdKeyboardArrowLeft } from 'react-icons/md'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
 
 import Orders from './Items/Orders'
 
 const Main = () => {
   const [search, setSearch] = useState('')
-  const navigate = useNavigate()
 
   const { clientId } = useParams()
   const { clientOrders } = useFetchCollection(`clients/${clientId}/orders`)
@@ -36,13 +34,6 @@ const Main = () => {
       </div>
       <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10 lg:my-4'>
         <div className='flex flex-col gap-4  p-8  overflow-y-scroll rounded-md max-h-[75vh]'>
-          <span
-            onClick={() => navigate(-1)}
-            className='items-center justify-end hidden w-full text-sm font-bold text-blue-600 cursor-pointer md:flex'
-          >
-            <MdKeyboardArrowLeft size={20} />
-            Voltar
-          </span>
           {clientOrders.length === 0 ? (
             <p className='text-black'>Nenhum pedido cadastrado.</p>
           ) : (

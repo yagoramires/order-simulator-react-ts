@@ -1,14 +1,12 @@
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
 
 import ProductCard from './Items/Products'
 import ProductForm from './Form/AddProduct'
-import { MdKeyboardArrowLeft } from 'react-icons/md'
 
 const Main = () => {
   const [search, setSearch] = useState('')
-  const navigate = useNavigate()
 
   const { industryId } = useParams()
   const { products } = useFetchCollection(`industries/${industryId}/products`)
@@ -24,20 +22,13 @@ const Main = () => {
       : []
 
   return (
-    <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] w-full text-white p-8'>
+    <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] w-full text-white p-8 lg:p-4'>
       <div className='flex items-center justify-between w-full'>
         <h1 className='text-2xl font-medium'>Produtos</h1>
         <ProductForm />
       </div>
-      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
+      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10 lg:my-4'>
         <div className='flex flex-col gap-4  p-8  overflow-y-scroll rounded-md max-h-[75vh]'>
-          <span
-            onClick={() => navigate(-1)}
-            className='items-center justify-end hidden w-full text-sm font-bold text-blue-600 cursor-pointer md:flex'
-          >
-            <MdKeyboardArrowLeft size={20} />
-            Voltar
-          </span>
           {products.length === 0 ? (
             <p className='text-black'>Nenhum produto cadastrado.</p>
           ) : (

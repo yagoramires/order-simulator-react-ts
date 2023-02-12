@@ -41,7 +41,7 @@ const Clients = () => {
     return (
       <div className='flex items-center justify-start w-full gap-4 pl-4 text-start'>
         <span className='text-xs text-zinc-400 w-[70%] md:w-full'>Nome</span>
-        <span className='text-xs text-zinc-400 lg:hidden w-[30%] md:hidden'>CNPJ</span>
+        <span className='text-xs text-zinc-400 w-[30%] md:hidden'>CNPJ</span>
       </div>
     )
   }

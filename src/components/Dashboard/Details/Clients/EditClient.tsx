@@ -46,7 +46,7 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
-        <div className='relative flex items-center justify-center px-4 py-2 font-medium text-white transition-all duration-200 rounded shadow-md cursor-pointer focus: hover:bg-blue-500 h-9 bg-gradient-to-r from-blue-800 to-blue-600'>
+        <div className='relative flex items-center justify-center px-4 py-2 font-medium text-white bg-blue-600 rounded cursor-pointer focus: hover:bg-blue-500 h-9'>
           Editar
         </div>
       </Dialog.Trigger>
