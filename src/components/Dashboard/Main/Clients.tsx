@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 import { IClients } from '../../../interfaces'
-import ClientForm from './Forms/ClientForm'
+import ClientForm from './AddForm/AddClient'
 
 const Clients = () => {
   const { clients } = useFetchCollection('clients')

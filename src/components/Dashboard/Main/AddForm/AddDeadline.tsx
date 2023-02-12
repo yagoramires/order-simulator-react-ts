@@ -8,29 +8,23 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { IoMdAdd } from 'react-icons/io'
 import { MdClose } from 'react-icons/md'
 
-const IndustryForm = () => {
-  const [fantasyName, setFantasyName] = useState('')
-  const [socialName, setSocialName] = useState('')
-  const [cnpj, setCnpj] = useState('')
+const AddDeadline = () => {
+  const [value, setValue] = useState('')
 
   const [open, setOpen] = useState(false)
 
-  const { addIndustry } = useAddDoc()
+  const { addDeadline } = useAddDoc()
 
-  const handleIndustry = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleDeadline = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!fantasyName || !socialName || !cnpj) return toast.error('Preencha todos os campos!')
+    if (!value) return toast.error('Preencha o prazo de pagamento!')
 
-    addIndustry({
-      fantasyName,
-      socialName,
-      cnpj,
+    addDeadline({
+      value,
     })
 
-    setFantasyName('')
-    setSocialName('')
-    setCnpj('')
+    setValue('')
     setOpen(false)
   }
 
@@ -46,37 +40,17 @@ const IndustryForm = () => {
         <Dialog.Content className='fixed bg-white top-[25%] left-[calc(50vw-400px)] md:left-[5%] md:w-[90%] w-[800px] rounded-md shadow-lg p-8'>
           <Dialog.Title className='flex justify-between mb-4 font-bold text-blue-600'>
             <Dialog.Close className='flex justify-between w-full mb-4'>
-              Adicionar indústria
+              Adicionar Prazo de pagamento
               <MdClose className='text-xl' />
             </Dialog.Close>
           </Dialog.Title>
-          <form className='flex flex-col w-full gap-4' onSubmit={handleIndustry}>
+          <form className='flex flex-col w-full gap-4' onSubmit={handleDeadline}>
             <input
               type='text'
               className='p-2 bg-gray-300 rounded-md shadow-sm'
-              placeholder='Nome Fantasia'
-              value={fantasyName}
-              onChange={(e) => {
-                setFantasyName(e.target.value)
-              }}
-            />
-            <input
-              type='text'
-              className='p-2 bg-gray-300 rounded-md shadow-sm'
-              placeholder='Razão Social'
-              value={socialName}
-              onChange={(e) => {
-                setSocialName(e.target.value)
-              }}
-            />
-            <input
-              type='text'
-              className='p-2 bg-gray-300 rounded-md shadow-sm'
-              placeholder='CNPJ'
-              value={cnpj}
-              onChange={(e) => {
-                setCnpj(e.target.value)
-              }}
+              placeholder='Prazo de pagamento'
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
             />
             <input
               type='submit'
@@ -90,4 +64,4 @@ const IndustryForm = () => {
   )
 }
 
-export default IndustryForm
+export default AddDeadline

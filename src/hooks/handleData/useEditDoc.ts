@@ -10,6 +10,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
 export const useEditDoc = () => {
   const [loading, setLoading] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   const editIndustry = async (id: string, data: any) => {
     setLoading(true)
@@ -61,6 +62,7 @@ export const useEditDoc = () => {
           'state_changed',
           (snapshot) => {
             const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            setProgress(uploadProgress)
           },
           (error) => {
             alert(error.message)
@@ -96,5 +98,5 @@ export const useEditDoc = () => {
     }
   }
 
-  return { editIndustry, editClient, editDeadline, editProduct, loading }
+  return { editIndustry, editClient, editDeadline, editProduct, progress, loading }
 }
