@@ -29,7 +29,7 @@ const ClientDetails = () => {
   }
 
   return (
-    <div className='flex gap-10'>
+    <div className='flex lg:flex-col'>
       {client && (
         <>
           <Sidebar client={client} />

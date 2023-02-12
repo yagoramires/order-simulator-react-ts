@@ -1,31 +1,40 @@
 import { useState } from 'react'
-import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
 
 import { toast } from 'react-toastify'
 
 import * as Dialog from '@radix-ui/react-dialog'
 
-import { IoMdAdd } from 'react-icons/io'
 import { MdClose } from 'react-icons/md'
+import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
+import { IClients } from '../../../../interfaces'
 
-const AddIndustry = () => {
-  const [fantasyName, setFantasyName] = useState('')
-  const [socialName, setSocialName] = useState('')
-  const [cnpj, setCnpj] = useState('')
+interface ClientProps {
+  clientId: string
+  clientData: IClients
+}
+
+const EditClient = ({ clientId, clientData }: ClientProps) => {
+  const [fantasyName, setFantasyName] = useState(clientData.fantasyName)
+  const [socialName, setSocialName] = useState(clientData.socialName)
+  const [cnpj, setCnpj] = useState(clientData.cnpj)
+  const [network, setNetwork] = useState(clientData.network)
+  const [discount, setDiscount] = useState(clientData.discount)
 
   const [open, setOpen] = useState(false)
 
-  const { addIndustry } = useAddDoc()
+  const { editClient } = useEditDoc()
 
-  const handleIndustry = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleClient = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!fantasyName || !socialName || !cnpj) return toast.error('Preencha todos os campos!')
 
-    addIndustry({
+    editClient(clientId, {
       fantasyName,
       socialName,
       cnpj,
+      network,
+      discount: discount,
     })
 
     setFantasyName('')
@@ -37,8 +46,8 @@ const AddIndustry = () => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
-        <div className='relative flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md shadow-md lg:p-2'>
-          <IoMdAdd /> Novo
+        <div className='relative flex items-center justify-center px-4 py-2 font-medium text-white transition-all duration-200 rounded shadow-md cursor-pointer focus: hover:bg-blue-500 h-9 bg-gradient-to-r from-blue-800 to-blue-600'>
+          Editar
         </div>
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -46,37 +55,45 @@ const AddIndustry = () => {
         <Dialog.Content className='fixed bg-white top-1/2 w-[90%] max-w-[800px] rounded-md shadow-lg p-8 translate-x-[-50%] translate-y-[-50%] left-1/2'>
           <Dialog.Title className='flex justify-between mb-4 font-bold text-blue-600'>
             <Dialog.Close className='flex justify-between w-full mb-4'>
-              Adicionar indústria
+              Editar cliente
               <MdClose className='text-xl' />
             </Dialog.Close>
           </Dialog.Title>
-          <form className='flex flex-col w-full gap-4' onSubmit={handleIndustry}>
+          <form className='flex flex-col w-full gap-4' onSubmit={handleClient}>
             <input
               type='text'
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Nome Fantasia'
               value={fantasyName}
-              onChange={(e) => {
-                setFantasyName(e.target.value)
-              }}
+              onChange={(e) => setFantasyName(e.target.value)}
             />
             <input
               type='text'
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Razão Social'
               value={socialName}
-              onChange={(e) => {
-                setSocialName(e.target.value)
-              }}
+              onChange={(e) => setSocialName(e.target.value)}
             />
             <input
               type='text'
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='CNPJ'
               value={cnpj}
-              onChange={(e) => {
-                setCnpj(e.target.value)
-              }}
+              onChange={(e) => setCnpj(e.target.value)}
+            />
+            <input
+              type='text'
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
+              placeholder='Rede'
+              value={network}
+              onChange={(e) => setNetwork(e.target.value)}
+            />
+            <input
+              type='number'
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
+              placeholder='Desconto'
+              value={discount}
+              onChange={(e) => setDiscount(+e.target.value)}
             />
             <input
               type='submit'
@@ -90,4 +107,4 @@ const AddIndustry = () => {
   )
 }
 
-export default AddIndustry
+export default EditClient

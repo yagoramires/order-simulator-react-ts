@@ -5,7 +5,7 @@ import { database, storage } from '../../firebase/config'
 import { updateDoc, doc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 
-import { IIndustries, IClients, IDeadlines, IProduct } from '../../interfaces/index'
+// import { IIndustries, IClients, IDeadlines, IProduct } from '../../interfaces/index'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
 export const useEditDoc = () => {
@@ -19,6 +19,7 @@ export const useEditDoc = () => {
       await updateDoc(ref, data)
       setLoading(false)
       toast.success('Indústria alterada com sucesso!')
+      window.location.reload()
     } catch (e) {
       toast.error('Erro ao editar a indústria, tente novamente!')
       setLoading(false)

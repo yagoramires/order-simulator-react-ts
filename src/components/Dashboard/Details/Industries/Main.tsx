@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
 
 import ProductCard from './Items/Products'
-import ProductForm from './Form/ProductForm'
+import ProductForm from './Form/AddProduct'
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 
 const Main = () => {

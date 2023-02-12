@@ -1,28 +1,33 @@
 import { useState } from 'react'
-import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
 
 import { toast } from 'react-toastify'
 
 import * as Dialog from '@radix-ui/react-dialog'
 
-import { IoMdAdd } from 'react-icons/io'
 import { MdClose } from 'react-icons/md'
+import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
+import { IAddIndustry, IIndustries } from '../../../../interfaces'
 
-const AddIndustry = () => {
-  const [fantasyName, setFantasyName] = useState('')
-  const [socialName, setSocialName] = useState('')
-  const [cnpj, setCnpj] = useState('')
+interface IndustryProps {
+  industryId: string
+  industryData: IIndustries
+}
+
+const EditIndustry = ({ industryId, industryData }: IndustryProps) => {
+  const [fantasyName, setFantasyName] = useState(industryData.fantasyName)
+  const [socialName, setSocialName] = useState(industryData.socialName)
+  const [cnpj, setCnpj] = useState(industryData.cnpj)
 
   const [open, setOpen] = useState(false)
 
-  const { addIndustry } = useAddDoc()
+  const { editIndustry } = useEditDoc()
 
   const handleIndustry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!fantasyName || !socialName || !cnpj) return toast.error('Preencha todos os campos!')
 
-    addIndustry({
+    editIndustry(industryId, {
       fantasyName,
       socialName,
       cnpj,
@@ -37,8 +42,8 @@ const AddIndustry = () => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
-        <div className='relative flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md shadow-md lg:p-2'>
-          <IoMdAdd /> Novo
+        <div className='relative flex items-center justify-center px-4 py-2 font-medium text-white transition-all duration-200 rounded shadow-md cursor-pointer focus: hover:bg-blue-500 h-9 bg-gradient-to-r from-blue-800 to-blue-600'>
+          Editar
         </div>
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -81,7 +86,7 @@ const AddIndustry = () => {
             <input
               type='submit'
               className='p-2 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-800 to-blue-600'
-              value={'Adicionar'}
+              value={'Editar'}
             />
           </form>
         </Dialog.Content>
@@ -90,4 +95,4 @@ const AddIndustry = () => {
   )
 }
 
-export default AddIndustry
+export default EditIndustry

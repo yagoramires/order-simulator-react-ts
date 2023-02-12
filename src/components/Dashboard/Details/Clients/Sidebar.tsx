@@ -4,6 +4,7 @@ import { IClients } from '../../../../interfaces'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import Alert from '../../Alert'
+import EditClient from './EditClient'
 
 interface DataProps {
   client: IClients
@@ -15,38 +16,35 @@ const Sidebar = ({ client }: DataProps) => {
   const { clientId } = useParams()
 
   return (
-    <aside className='flex flex-col gap-16 items-center justify-between p-4  bg-white w-[450px] shadow-lg md:hidden'>
-      <div className='flex items-center justify-between w-full gap-2 text-xl font-bold text-center text-blue-600 cursor-pointer lg:text-sm md:p-4'>
-        <span
-          onClick={() => navigate(-1)}
-          className='flex items-center justify-between w-full text-xl font-bold text-blue-600 cursor-pointer md:text-sm md:p-4'
-        >
-          <MdKeyboardArrowLeft size={30} />
-          <h1>{client.fantasyName}</h1>
-        </span>
-      </div>
-
-      <div className='flex flex-col w-full h-full gap-4 md:hidden'>
-        <div className='flex flex-col'>
-          <span className='text-xs text-zinc-400'>Razão Social</span>
-          <span className='text-sm font-medium'>{client.socialName}</span>
+    <aside className='flex flex-col gap-8 lg:gap-2 items-center justify-start p-4 lg:p-2 bg-white w-[450px] lg:w-full shadow-lg'>
+      <span
+        onClick={() => navigate(-1)}
+        className='flex items-center justify-end w-full text-blue-600 cursor-pointer lg:justify-start'
+      >
+        <MdKeyboardArrowLeft size={20} />
+        <span>Voltar</span>
+      </span>
+      <div className='flex flex-col w-full gap-4'>
+        <div className='flex flex-col w-full gap-4 lg:flex-row '>
+          <div className='flex flex-col'>
+            <span className='text-xs text-zinc-400'>Razão Social</span>
+            <span className='text-sm font-medium'>{client.socialName}</span>
+          </div>
+          <div className='flex flex-col'>
+            <span className='text-xs text-zinc-400'>Nome Fantasia</span>
+            <span className='text-sm font-medium'>{client.fantasyName}</span>
+          </div>
+          <div className='flex flex-col'>
+            <span className='text-xs text-zinc-400'>CNPJ</span>
+            <span className='text-sm font-medium'>{client.cnpj}</span>
+          </div>
+          <div className='flex flex-col'>
+            <span className='text-xs text-zinc-400'>Rede</span>
+            <span className='text-sm font-medium'>{client.network || 'SEM REDE'}</span>
+          </div>
         </div>
-        <div className='flex flex-col'>
-          <span className='text-xs text-zinc-400'>Nome Fantasia</span>
-          <span className='text-sm font-medium'>{client.fantasyName}</span>
-        </div>
-        <div className='flex flex-col'>
-          <span className='text-xs text-zinc-400'>CNPJ</span>
-          <span className='text-sm font-medium'>{client.cnpj}</span>
-        </div>
-        <div className='flex flex-col'>
-          <span className='text-xs text-zinc-400'>Rede</span>
-          <span className='text-sm font-medium'>{client.network || 'SEM REDE'}</span>
-        </div>
-        <div className='flex flex-col gap-4'>
-          <button className='flex items-center justify-center px-4 py-2 font-medium text-white transition-all duration-200 rounded shadow-md cursor-pointer focus: hover:bg-blue-500 h-9 bg-gradient-to-r from-blue-800 to-blue-600'>
-            Editar
-          </button>
+        <div className='flex flex-col justify-center gap-4 lg:flex-row'>
+          <EditClient clientId={clientId || ''} clientData={client} />
           <Alert data={{ type: 'client', id: clientId || '' }} />
         </div>
       </div>

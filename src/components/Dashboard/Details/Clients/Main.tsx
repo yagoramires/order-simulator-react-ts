@@ -24,17 +24,17 @@ const Main = () => {
       : []
 
   return (
-    <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] w-full text-white p-8'>
-      <div className='flex items-center justify-between w-full'>
+    <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] w-full text-white p-8 lg:p-4'>
+      <div className='flex items-center justify-between w-full '>
         <h1 className='text-2xl font-medium'>Pedidos</h1>
         <Link
           to='/order'
-          className='flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md shadow-md '
+          className='flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md shadow-md lg:p-2 '
         >
           <IoMdAdd /> Novo
         </Link>
       </div>
-      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
+      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10 lg:my-4'>
         <div className='flex flex-col gap-4  p-8  overflow-y-scroll rounded-md max-h-[75vh]'>
           <span
             onClick={() => navigate(-1)}

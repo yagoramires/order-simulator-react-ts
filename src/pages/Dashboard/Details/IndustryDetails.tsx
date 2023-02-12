@@ -29,7 +29,7 @@ const IndustryDetails = () => {
   }
 
   return (
-    <div className='flex gap-10'>
+    <div className='flex lg:flex-col'>
       {industry && (
         <>
           <Sidebar industry={industry} />
