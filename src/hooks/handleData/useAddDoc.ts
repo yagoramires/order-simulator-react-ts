@@ -10,6 +10,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
 export const useAddDoc = () => {
   const [loading, setLoading] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   const addIndustry = async (industryData: IAddIndustry) => {
     setLoading(true)
@@ -55,6 +56,7 @@ export const useAddDoc = () => {
           'state_changed',
           (snapshot) => {
             const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            setProgress(uploadProgress)
           },
           (error) => {
             alert(error.message)
@@ -107,5 +109,5 @@ export const useAddDoc = () => {
     }
   }
 
-  return { addClient, addIndustry, addProduct, addDeadline, loading }
+  return { addClient, addIndustry, addProduct, addDeadline, progress, loading }
 }
