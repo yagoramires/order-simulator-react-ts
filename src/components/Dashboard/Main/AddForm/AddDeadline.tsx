@@ -37,7 +37,7 @@ const AddDeadline = () => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='fixed inset-0 bg-black/80' />
-        <Dialog.Content className='fixed bg-white top-[25%] left-[calc(50vw-400px)] md:left-[5%] md:w-[90%] w-[800px] rounded-md shadow-lg p-8'>
+        <Dialog.Content className='fixed bg-white top-1/2 w-[90%] max-w-[800px] rounded-md shadow-lg p-8 translate-x-[-50%] translate-y-[-50%] left-1/2'>
           <Dialog.Title className='flex justify-between mb-4 font-bold text-blue-600'>
             <Dialog.Close className='flex justify-between w-full mb-4'>
               Adicionar Prazo de pagamento
