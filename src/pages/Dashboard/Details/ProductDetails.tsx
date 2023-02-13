@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
+import { useEditDoc } from '../../../hooks/handleData/useEditDoc'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -7,6 +8,7 @@ import Loading from '../../../components/Loading'
 
 import { MdKeyboardArrowLeft, MdNoPhotography } from 'react-icons/md'
 import Alert from '../../../components/Dashboard/Alert'
+import { toast } from 'react-toastify'
 
 const ProductDetails = () => {
   const navigate = useNavigate()
@@ -18,6 +20,11 @@ const ProductDetails = () => {
     productId,
   )
 
+  console.log(product)
+
+  const { editProduct } = useEditDoc()
+
+  const [productImg, setProductImage] = useState(null)
   const [image, setImage] = useState(null)
   const [name, setName] = useState('')
   const [code, setCode] = useState('')
@@ -26,6 +33,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (product) {
+      setImage(product?.imagePath)
       setName(product?.name)
       setCode(product?.code)
       setFamily(product?.family)
@@ -35,11 +43,43 @@ const ProductDetails = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSelectImage = (e: any) => {
-    setImage(e.target.files[0])
+    setProductImage(e.target.files[0])
   }
 
   const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (!code) return toast.error('Preencha o código!')
+    if (!name) return toast.error('Preencha o nome!')
+    if (!price) return toast.error('Preencha o preço!')
+
+    if (industryId && productImg) {
+      editProduct(
+        industryId,
+        productId || '',
+        {
+          code,
+          name,
+          industry: industryId,
+          price: Number(price),
+          family,
+        },
+        productImg,
+      )
+    } else if (industryId) {
+      editProduct(industryId, productId || '', {
+        code,
+        name,
+        industry: industryId,
+        price: Number(price),
+        family,
+      })
+    }
+
+    setCode('')
+    setName('')
+    setPrice('')
+    setFamily('')
   }
 
   if (loading || !product)
@@ -62,23 +102,27 @@ const ProductDetails = () => {
           </button>
 
           <div className='flex items-center justify-center w-full mb-4 text-blue-600'>
-            {image || product.imagePath ? (
+            {image && !productImg && (
+              <img src={image} alt={product.name} className='w-[150px] md:w-[80px] ' />
+            )}
+
+            {productImg && (
               <img
-                src={image ? URL.createObjectURL(image) : product?.imagePath}
+                src={URL.createObjectURL(productImg)}
                 alt={product.name}
                 className='w-[150px] md:w-[80px] '
               />
-            ) : (
-              <MdNoPhotography className='text-[100px] md:text-[80px] ' />
             )}
+
+            {!image && !productImg && <MdNoPhotography className='text-[100px] md:text-[80px] ' />}
           </div>
           <form className='flex flex-col gap-4 w-[90%] max-w-[800px]' onSubmit={handleUpdate}>
             <label className='flex flex-col gap-2'>
               <span className='md:md:text-xs text-zinc-400'>Imagem</span>
               <input
                 type='file'
+                className='w-full p-2 bg-gray-300 rounded-md shadow-sm'
                 onChange={handleSelectImage}
-                className='p-2 rounded-md shadow-sm bg-zinc-200'
               />
             </label>
             <label className='flex flex-col gap-2'>

@@ -20,7 +20,7 @@ export const useEditDoc = () => {
       setLoading(false)
       toast.success('Indústria alterada com sucesso!')
       window.location.reload()
-    } catch (e) {
+    } catch (e: any) {
       toast.error('Erro ao editar a indústria, tente novamente!')
       setLoading(false)
     }
@@ -33,7 +33,7 @@ export const useEditDoc = () => {
       await updateDoc(ref, data)
       toast.success('Cliente alterado com sucesso!')
       setLoading(false)
-    } catch (e) {
+    } catch (e: any) {
       toast.error('Erro ao editar o cliente, tente novamente!')
       setLoading(false)
     }
@@ -46,15 +46,17 @@ export const useEditDoc = () => {
       await updateDoc(ref, data)
       toast.success('Cliente alterado com sucesso!')
       setLoading(false)
-    } catch (e) {
+    } catch (e: any) {
       toast.error('Erro ao editar o cliente, tente novamente!')
       setLoading(false)
     }
   }
 
-  const editProduct = async (industryId: string, productId: string, data: any, img: File | '') => {
+  const editProduct = async (industryId: string, productId: string, data: any, img?: File) => {
     setLoading(true)
-    if (img !== '') {
+
+    console.log(img)
+    if (img) {
       try {
         const generateName = `industries/${data.industry}/${Date.now()}`
         const storageRef = ref(storage, generateName)
@@ -82,7 +84,8 @@ export const useEditDoc = () => {
             toast.success('Produto alterado com sucesso!')
           },
         )
-      } catch (e) {
+      } catch (e: any) {
+        console.log(e.message)
         toast.error('Erro ao editar o produto, tente novamente!')
         setLoading(false)
       }
@@ -92,7 +95,8 @@ export const useEditDoc = () => {
         await updateDoc(ref, data)
         toast.success('Produto alterado com sucesso!')
         setLoading(false)
-      } catch (e) {
+      } catch (e: any) {
+        console.log(e.message)
         toast.error('Erro ao editar o produto, tente novamente!')
         setLoading(false)
       }

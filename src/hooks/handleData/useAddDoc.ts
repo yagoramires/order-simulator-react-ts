@@ -42,11 +42,11 @@ export const useAddDoc = () => {
     }
   }
 
-  const addProduct = async (productData: IAddProduct, img: File | '') => {
+  const addProduct = async (productData: IAddProduct, img?: File) => {
     setLoading(true)
 
     try {
-      if (img !== '') {
+      if (img) {
         const generateName = `industries/${productData.industry}/${Date.now()}`
         const storageRef = ref(storage, generateName)
 

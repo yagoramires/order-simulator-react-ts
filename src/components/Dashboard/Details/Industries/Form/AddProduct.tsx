@@ -29,7 +29,7 @@ const AddProduct = () => {
     if (!name) return toast.error('Preencha o nome!')
     if (!price) return toast.error('Preencha o preço!')
 
-    if (industryId) {
+    if (industryId && productImg) {
       addProduct(
         {
           code,
@@ -38,8 +38,16 @@ const AddProduct = () => {
           price: Number(price),
           family,
         },
-        productImg || '',
+        productImg,
       )
+    } else if (industryId) {
+      addProduct({
+        code,
+        name,
+        industry: industryId,
+        price: Number(price),
+        family,
+      })
     }
 
     setCode('')
@@ -82,7 +90,6 @@ const AddProduct = () => {
           <form className='flex flex-col w-full gap-4' onSubmit={handleClient}>
             <input
               type='file'
-              placeholder='Nome'
               className='w-full p-2 bg-gray-300 rounded-md shadow-sm'
               onChange={handleSelectImage}
             />
