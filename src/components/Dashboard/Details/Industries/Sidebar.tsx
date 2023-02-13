@@ -31,7 +31,7 @@ const Sidebar = ({ industry }: DataProps) => {
             <span className='text-xs text-zinc-400'>Razão Social</span>
             <span className='font-medium'>{industry.socialName}</span>
           </div>
-          <div className='flex flex-col'>
+          <div className='flex flex-col md:hidden'>
             <span className='text-xs text-zinc-400'>Nome Fantasia</span>
             <span className='font-medium'>{industry.fantasyName}</span>
           </div>

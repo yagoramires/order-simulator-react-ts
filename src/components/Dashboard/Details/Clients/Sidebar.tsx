@@ -31,7 +31,7 @@ const Sidebar = ({ client }: DataProps) => {
             <span className='text-xs text-zinc-400'>Razão Social</span>
             <span className='text-sm font-medium'>{client.socialName}</span>
           </div>
-          <div className='flex flex-col'>
+          <div className='flex flex-col md:hidden'>
             <span className='text-xs text-zinc-400'>Nome Fantasia</span>
             <span className='text-sm font-medium'>{client.fantasyName}</span>
           </div>
