@@ -15,7 +15,6 @@ export const useDeleteDoc = () => {
     setLoading(true)
     try {
       if (collection.includes('orders')) {
-        console.log(collection)
         const ordersRef = doc(database, 'orders', id)
         await deleteDoc(ordersRef)
         const clientsRef = doc(database, collection, id)

@@ -20,8 +20,6 @@ const ProductDetails = () => {
     productId,
   )
 
-  console.log(product)
-
   const { editProduct } = useEditDoc()
 
   const [productImg, setProductImage] = useState(null)

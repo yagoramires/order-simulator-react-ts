@@ -55,7 +55,6 @@ export const useEditDoc = () => {
   const editProduct = async (industryId: string, productId: string, data: any, img?: File) => {
     setLoading(true)
 
-    console.log(img)
     if (img) {
       try {
         const generateName = `industries/${data.industry}/${Date.now()}`
@@ -96,7 +95,6 @@ export const useEditDoc = () => {
         toast.success('Produto alterado com sucesso!')
         setLoading(false)
       } catch (e: any) {
-        console.log(e.message)
         toast.error('Erro ao editar o produto, tente novamente!')
         setLoading(false)
       }
