@@ -2,7 +2,7 @@
     width: 100%;
     padding: 1rem;
 
-    background: white;
+    background: rgb(37 99 235);
 
     position: fixed;
     z-index: 10;
@@ -10,7 +10,7 @@
     right: 0;
     bottom: 0;
 
-    color: rgb(37 99 235);
+    color: white;
 }
 
 .profileContainer {
@@ -47,26 +47,22 @@
     justify-content: center;
     align-items: center;
     padding: .5rem;
-    background: rgb(230, 230, 230);
     border-radius: .5rem;
-}
-
-.navContainer__btn:hover {
-    border-radius: .5rem;
-    background: rgb(220, 220, 220);
 }
 
 .navContainer__label {
     display: none;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1024px) {
     .sidebar {
         position: static;
         display: flex;
         flex-direction: column;
         gap: 1rem;
         max-width: 300px;
+        background: white;
+        height: 100vh;
     }
 
     .profileContainer {

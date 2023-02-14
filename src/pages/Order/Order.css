@@ -71,7 +71,7 @@
     padding: 5rem 0;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1024px) {
     .orderContainer {
         padding: 1rem;
         gap: 1rem;

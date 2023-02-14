@@ -4,12 +4,12 @@ import Sidebar from '../../components/Dashboard/Sidebar'
 
 const Dashboard = () => {
   return (
-    <section className='flex w-full h-[100vh] bg-black100'>
+    <div className='lg:flex'>
       <Sidebar />
-      <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] w-full text-white p-8'>
+      <main className='lg:flex lg:items-center lg:justify-center lg:w-full'>
         <Outlet />
       </main>
-    </section>
+    </div>
   )
 }
 

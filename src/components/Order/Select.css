@@ -95,7 +95,7 @@
     font-weight: bold;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1024px) {
     .selects {
         background: white;
         border-radius: .5rem;

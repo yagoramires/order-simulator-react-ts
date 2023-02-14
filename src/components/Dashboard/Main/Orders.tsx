@@ -7,6 +7,8 @@ import { useFormatDate } from '../../../hooks/formatData/useFormatDate'
 import { useFormatValue } from '../../../hooks/formatData/useFormatValue'
 import { IOrder } from '../../../interfaces'
 
+import './Main.css'
+
 const Orders = () => {
   const { orders } = useFetchCollection('orders')
 
@@ -25,58 +27,35 @@ const Orders = () => {
 
   const linkComponent = (order: IOrder) => {
     return (
-      <div className='flex items-center justify-between w-full gap-4' key={order.id}>
-        <Link
-          to={`${order.id}`}
-          className='text-black border-b-[1px] border-b-zinc-200 p-2 rounded-md hover:bg-zinc-200 w-full'
-        >
-          <div className='flex items-start justify-start w-full gap-4 text-start' key={order.id}>
-            <div className='flex flex-col items-center w-[10%] lg:hidden'>
-              <span className='font-medium'>{order.orderId}</span>
-            </div>
-
-            <div className='flex flex-col items-start w-[35%] lg:w-[60%]'>
-              <span className='font-medium'>{order.clientName}</span>
-            </div>
-            <div className='flex w-[55%] lg:flex-col lg:w-[40%] gap-4'>
-              <div className='flex flex-col items-start w-[30%] lg:w-full'>
-                <span className='font-medium'>
-                  {order.createdAt && formatDate(order.createdAt)}
-                </span>
-              </div>
-              <div className='flex flex-col items-start w-[40%] lg:w-full'>
-                <span className='hidden text-xs text-zinc-400 lg:inline'>Total</span>
-                <span className='font-medium'>{order.total && formatValue(+order.total)}</span>
-              </div>
-              <div className='flex flex-col items-start w-[30%] lg:w-full'>
-                <span className='hidden text-xs text-zinc-400 lg:inline'>Vendedor</span>
-
-                <span className='font-medium'>{order.sellerName}</span>
-              </div>
-            </div>
-          </div>
-        </Link>
-      </div>
+      <Link to={`${order.id}`} className='cardsContainer__card' key={order.id}>
+        <span className='cardsContainer__text w-[10%]'>{order.orderId}</span>
+        <span className='cardsContainer__text w-[50%]'>{order.clientName}</span>
+        <span className='cardsContainer__text w-[30%]'>
+          {order.createdAt && formatDate(order.createdAt)}
+        </span>
+        <span className='cardsContainer__text w-[30%]'>
+          {order.total && formatValue(+order.total)}
+        </span>
+        <span className='cardsContainer__text w-[20%]'>{order.sellerName}</span>
+      </Link>
     )
   }
 
   const labelComponent = () => {
     return (
-      <div className='flex justify-start w-full gap-2 lg:text-start'>
-        <span className='text-xs text-zinc-400 w-[10%] lg:hidden'>Pedido</span>
-        <span className='text-xs text-zinc-400 w-[30%] lg:w-[60%]'>Cliente</span>
-        <div className='flex w-[60%] lg:flex-col lg:w-[40%] gap-4'>
-          <span className='text-xs text-zinc-400 w-[30%] lg:w-full '>Data</span>
-          <span className='text-xs text-zinc-400 w-[40%] lg:hidden'>Total</span>
-          <span className='text-xs text-zinc-400 w-[30%] lg:hidden'>Vendedor</span>
-        </div>
+      <div className='labelContainer'>
+        <span className='labelContainer__label w-[10%]'>Pedido</span>
+        <span className='labelContainer__label w-[50%]'>Cliente</span>
+        <span className='labelContainer__label w-[30%]'>Data</span>
+        <span className='labelContainer__label w-[30%]'>Total</span>
+        <span className='labelContainer__label w-[20%]'>Vendedor</span>
       </div>
     )
   }
 
   return (
     <>
-      <div className='flex items-center justify-between w-full'>
+      {/* <div className='flex items-center justify-between w-full'>
         <h1 className='text-2xl font-medium'>Pedidos</h1>
         <Link
           to='/order'
@@ -84,47 +63,46 @@ const Orders = () => {
         >
           <IoMdAdd /> Novo
         </Link>
-      </div>
-      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
-        <div className='flex flex-col gap-4 p-8 overflow-y-scroll rounded-md max-h-[75vh]'>
-          <div className='flex flex-col gap-4'>
-            {orders.length === 0 ? (
-              <p className='w-full text-center text-black my-[5rem]'>Nenhum pedido cadastrado.</p>
-            ) : (
-              <input
-                type='text'
-                className='p-2 rounded-md shadow-sm bg-zinc-300'
-                placeholder='Pesquisar'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            )}
+      </div> */}
+      <div className='mainContainer'>
+        <div className='searchContainer'>
+          <input
+            type='text'
+            className='searchContainer__input'
+            placeholder='Pesquisar'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <div className='cardsContainer'>
+          {orders.length === 0 && (
+            <p className='cardsContainer__noData'>Nenhum pedido cadastrado.</p>
+          )}
 
-            {orders.length > 0 && !search && labelComponent()}
-            {search && filteredOrdersName.length > 0 && labelComponent()}
-            {search && filteredOrdersOrderId.length > 0 && labelComponent()}
+          {orders.length > 0 && !search && labelComponent()}
+          {search && filteredOrdersName.length > 0 && labelComponent()}
+          {search && filteredOrdersOrderId.length > 0 && labelComponent()}
 
-            {search &&
-              filteredOrdersName.length > 0 &&
-              filteredOrdersName
-                .sort((a, b) => Number(b.orderId) - Number(a.orderId))
-                .map((order) => linkComponent(order))}
+          {search &&
+            filteredOrdersName.length > 0 &&
+            filteredOrdersName
+              .sort((a, b) => Number(b.orderId) - Number(a.orderId))
+              .map((order) => linkComponent(order))}
 
-            {search &&
-              filteredOrdersOrderId.length > 0 &&
-              filteredOrdersOrderId
-                .sort((a, b) => Number(b.orderId) - Number(a.orderId))
-                .map((order) => linkComponent(order))}
+          {search &&
+            filteredOrdersOrderId.length > 0 &&
+            filteredOrdersOrderId
+              .sort((a, b) => Number(b.orderId) - Number(a.orderId))
+              .map((order) => linkComponent(order))}
 
-            {search && !filteredOrdersName && !filteredOrdersOrderId && (
-              <p className='w-full text-center text-black my-[5rem]'>Nenhum pedido encontrado.</p>
-            )}
+          {search && !filteredOrdersName && !filteredOrdersOrderId && (
+            <p className='cardsContainer__noData'>Nenhum pedido encontrado.</p>
+          )}
 
-            {!search &&
-              orders
-                ?.sort((a, b) => Number(b.orderId) - Number(a.orderId))
-                .map((order) => linkComponent(order))}
-          </div>
+          {!search &&
+            orders
+              ?.sort((a, b) => Number(b.orderId) - Number(a.orderId))
+              .map((order) => linkComponent(order))}
         </div>
       </div>
     </>

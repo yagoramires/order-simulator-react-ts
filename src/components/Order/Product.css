@@ -50,7 +50,7 @@
     width: 20%;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1024px) {
     .productContainer__name {
         width: 45%;
     }

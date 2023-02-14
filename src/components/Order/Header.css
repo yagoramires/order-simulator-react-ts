@@ -34,7 +34,7 @@ header {
     object-fit: cover;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1024px) {
     header {
         background-color: white;
     }
