@@ -1,17 +1,19 @@
-// Routes
 import Routes from './routes'
 
-// Toast
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+
 import { AuthContextProvider } from './context/AuthContext'
+import { NewOrderProvider } from './context/NewOrderContext'
 
 function App() {
   return (
-    <div className='App'>
+    <div className='App min-h-[100vh] max-w-[100vw] bg-gradient-to-r from-blue-800 to-blue-600 overflow-scroll'>
       <AuthContextProvider>
-        <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_RIGHT} />
-        <Routes />
+        <NewOrderProvider>
+          <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_RIGHT} />
+          <Routes />
+        </NewOrderProvider>
       </AuthContextProvider>
     </div>
   )

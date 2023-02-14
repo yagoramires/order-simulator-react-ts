@@ -36,13 +36,10 @@ const routes = () => {
   return (
     <Routes>
       <Route path='/' element={user ? <Navigate to='/order' /> : <Login />} />
-      {/* <Route path='*' element={<Navigate to='/' />} /> */}
+      <Route path='*' element={<Navigate to='/' />} />
       {user && (
         <>
-          <Route
-            path='order'
-            element={<Order uid={userData?.uid || ''} displayName={userData?.displayName || ''} />}
-          />
+          <Route path='order' element={<Order />} />
           <Route path='profile' element={<Profile />} />
 
           <Route path='/' element={<Dashboard />}>

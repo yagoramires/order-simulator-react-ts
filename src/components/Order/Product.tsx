@@ -1,8 +1,9 @@
 // Hooks
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 
 // Icons
 import { MdNoPhotography } from 'react-icons/md'
+import { NewOrderContext } from '../../context/NewOrderContext'
 
 import { IProduct } from '../../interfaces'
 interface ProductProps {
@@ -11,9 +12,11 @@ interface ProductProps {
   setProductsArray: React.Dispatch<React.SetStateAction<IProduct[]>>
 }
 
-const Product = ({ product, productsArray, setProductsArray }: ProductProps) => {
+const Product = ({ product }: ProductProps) => {
   const [quantity, setQuantity] = useState(0)
   const [total, setTotal] = useState(0)
+
+  const { productsArray, setProductsArray } = useContext(NewOrderContext)
 
   useEffect(() => {
     setTotal(quantity * (product.price || 0))
@@ -44,30 +47,29 @@ const Product = ({ product, productsArray, setProductsArray }: ProductProps) => 
   }
 
   return (
-    <div className='p-2 rounded-md border-b-[1px] border-b-zinc-300 flex justify-start gap-4 items-center'>
-      <div className='w-[100px] lg:hidden text-blue-600 flex justify-center items-center'>
+    // <div className='w-full lg:rounded-md border-b-[1px] border-b-zinc-300 flex justify-start gap-4 items-center'>
+    <div className='flex items-center justify-start gap-2 lg:gap-4 md:p-2 lg:border-b-[1px] border-b-zinc-300'>
+      <div className='min-w-[80px] w-[80px] text-blue-600 flex items-center justify-center'>
         {product.imagePath ? (
-          <img src={product.imagePath} alt={product.name} />
+          <img src={product.imagePath} alt={product.name} className='w-[50px] lg:w-[80px]' />
         ) : (
-          <MdNoPhotography size={30} />
+          <MdNoPhotography className='text-[50px]' />
         )}
       </div>
-      <div className='text-xs font-bold text-zinc-700 w-[10%] md:w-[30%]'>{product.code}</div>
-      <div className='text-xs text-zinc-700 w-[60%] md:w-[40%]'>{product.name}</div>
-      <div className='flex w-[30%] items-center gap-4 md:flex-col'>
-        <div className='text-xs  text-zinc-700 w-[50px]'>
-          {(product.price || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-        </div>
-        <input
-          type='number'
-          value={quantity}
-          onChange={(e) => handleSelectProductQuantity(+e.target.value)}
-          className='p-2 text-xs text-center rounded-md bg-zinc-200  w-[80px]'
-        />
-        <div className='text-xs  text-zinc-700 w-[50px]'>
-          {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-        </div>
-      </div>
+      <span className='text-xs font-bold text-zinc-700 w-[15%]'>{product.code}</span>
+      <span className='text-xs text-zinc-700 w-[50%]'>{product.name}</span>
+      <span className='text-xs  text-zinc-700 w-[10%]'>
+        {(product.price || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+      </span>
+      <input
+        type='number'
+        value={quantity}
+        onChange={(e) => handleSelectProductQuantity(+e.target.value)}
+        className='p-2 text-xs text-center rounded-md bg-zinc-200  w-[10%]'
+      />
+      <span className='text-xs  text-zinc-700 w-[15%]'>
+        {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+      </span>
     </div>
   )
 }

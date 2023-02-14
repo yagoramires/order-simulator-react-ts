@@ -21,6 +21,8 @@ export const useFetchCollection = (docCollection: string) => {
   const [products, setProducts] = useState<interfaces.IProduct[]>([])
 
   useEffect(() => {
+    if (docCollection === '') return
+
     const fetchData = () => {
       const collectionRef = collection(database, docCollection)
       try {
