@@ -1,0 +1,139 @@
+.selects {
+    width: 100%;
+    max-width: 1200px;
+    background: rgb(37 99 235);
+    padding: .5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .25rem;
+}
+
+.selectContainer {
+    position: relative;
+    font-size: 12px;
+    font-weight: bold;
+    word-break: break-all;
+}
+
+.selectContainer__label {
+    display: none;
+}
+
+.selectContainer__input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: .2rem .5rem;
+    border-radius: .5rem;
+    background: white;
+    border: 1px solid rgb(210, 210, 210);
+
+    cursor: pointer;
+}
+
+.selectContainer__ul {
+    position: absolute;
+    z-index: 10;
+    margin-top: .25rem;
+
+    width: 100%;
+    background: white;
+
+    overflow: hidden;
+
+    border-radius: .5rem;
+    border: 1px solid rgb(210, 210, 210);
+
+    padding: .5rem;
+}
+
+.selectContainer__options div {
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+.selectContainer__li {
+    padding: .25rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.selectContainer__li:hover {
+    background: rgb(230, 230, 230);
+    color: rgb(37 99 235);
+}
+
+.buttonsContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttonsContainer__total {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    text-align: left;
+    font-size: 14px;
+}
+
+.buttonsContainer__total span {
+    color: white;
+}
+
+.buttonsContainer__btn {
+    background: white;
+    color: rgb(37 99 235);
+    border-radius: .5rem;
+    padding: .5rem;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+@media (min-width: 800px) {
+    .selects {
+        background: white;
+        border-radius: .5rem;
+    }
+
+    .selectContainer__input {
+        padding: .5rem;
+        background: rgb(230, 230, 230);
+    }
+
+    .selectContainer__ul {
+        padding: .5rem;
+        background: rgb(230, 230, 230);
+    }
+
+    .selectContainer__label {
+        display: block;
+        color: rgb(170, 170, 170);
+        font-weight: 400;
+    }
+
+    .buttonsContainer {
+        margin-top: .5rem;
+    }
+
+    .buttonsContainer__total span:nth-child(1) {
+        color: rgb(170, 170, 170);
+    }
+
+    .buttonsContainer__total span:nth-child(2) {
+        color: black;
+    }
+
+    .buttonsContainer__btn {
+        color: white;
+        background: rgb(37 99 235);
+        font-size: 1rem;
+
+    }
+
+}

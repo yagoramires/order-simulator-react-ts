@@ -5,11 +5,11 @@ import { useState, useEffect, useContext } from 'react'
 import { MdNoPhotography } from 'react-icons/md'
 import { NewOrderContext } from '../../context/NewOrderContext'
 
+import './Product.css'
+
 import { IProduct } from '../../interfaces'
 interface ProductProps {
   product: IProduct
-  productsArray: Array<IProduct>
-  setProductsArray: React.Dispatch<React.SetStateAction<IProduct[]>>
 }
 
 const Product = ({ product }: ProductProps) => {
@@ -47,27 +47,25 @@ const Product = ({ product }: ProductProps) => {
   }
 
   return (
-    // <div className='w-full lg:rounded-md border-b-[1px] border-b-zinc-300 flex justify-start gap-4 items-center'>
-    <div className='flex items-center justify-start gap-2 lg:gap-4 md:p-2 lg:border-b-[1px] border-b-zinc-300'>
-      <div className='min-w-[80px] w-[80px] text-blue-600 flex items-center justify-center'>
-        {product.imagePath ? (
-          <img src={product.imagePath} alt={product.name} className='w-[50px] lg:w-[80px]' />
-        ) : (
-          <MdNoPhotography className='text-[50px]' />
-        )}
-      </div>
-      <span className='text-xs font-bold text-zinc-700 w-[15%]'>{product.code}</span>
-      <span className='text-xs text-zinc-700 w-[50%]'>{product.name}</span>
-      <span className='text-xs  text-zinc-700 w-[10%]'>
+    <div className='productContainer'>
+      {product.imagePath ? (
+        <img src={product.imagePath} alt={product.name} className='productContainer__image' />
+      ) : (
+        <MdNoPhotography className='productContainer__image--noImg' />
+      )}
+
+      <span className='productContainer__code'>{product.code}</span>
+      <span className='productContainer__name'>{product.name}</span>
+      <span className='productContainer__unitPrice'>
         {(product.price || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
       </span>
       <input
         type='number'
         value={quantity}
         onChange={(e) => handleSelectProductQuantity(+e.target.value)}
-        className='p-2 text-xs text-center rounded-md bg-zinc-200  w-[10%]'
+        className='productContainer__quantity'
       />
-      <span className='text-xs  text-zinc-700 w-[15%]'>
+      <span className='productContainer__totalPrice'>
         {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
       </span>
     </div>

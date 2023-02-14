@@ -23,7 +23,7 @@ import Deadlines from './components/Dashboard/Main/Deadlines'
 import Orders from './components/Dashboard/Main/Orders'
 
 const routes = () => {
-  const { user, userData } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
   if (user === undefined) {
     return (
