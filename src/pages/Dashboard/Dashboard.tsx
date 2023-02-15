@@ -6,9 +6,9 @@ const Dashboard = () => {
   return (
     <div className='lg:flex'>
       <Sidebar />
-      <main className='lg:flex lg:items-center lg:justify-center lg:w-full'>
+      <div className='lg:flex lg:items-center lg:justify-center lg:w-full'>
         <Outlet />
-      </main>
+      </div>
     </div>
   )
 }

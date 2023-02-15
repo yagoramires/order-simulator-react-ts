@@ -7,19 +7,19 @@ import { useFormatDate } from '../../../hooks/formatData/useFormatDate'
 import { useFormatValue } from '../../../hooks/formatData/useFormatValue'
 import { IOrder } from '../../../interfaces'
 
-import './Main.css'
+// import './Main.css'
 
 const Orders = () => {
   const { orders } = useFetchCollection('orders')
 
   const [search, setSearch] = useState('')
 
-  const filteredOrdersName =
+  const nameFilter =
     search.length > 0
       ? orders.filter((order) => order.clientName?.toLowerCase().includes(search.toLowerCase()))
       : []
 
-  const filteredOrdersOrderId =
+  const idFilter =
     search.length > 0 ? orders.filter((order) => String(order.orderId).includes(search)) : []
 
   const { formatDate } = useFormatDate()
@@ -80,22 +80,22 @@ const Orders = () => {
           )}
 
           {orders.length > 0 && !search && labelComponent()}
-          {search && filteredOrdersName.length > 0 && labelComponent()}
-          {search && filteredOrdersOrderId.length > 0 && labelComponent()}
+          {search && nameFilter.length > 0 && labelComponent()}
+          {search && idFilter.length > 0 && labelComponent()}
 
           {search &&
-            filteredOrdersName.length > 0 &&
-            filteredOrdersName
+            nameFilter.length > 0 &&
+            nameFilter
               .sort((a, b) => Number(b.orderId) - Number(a.orderId))
               .map((order) => linkComponent(order))}
 
           {search &&
-            filteredOrdersOrderId.length > 0 &&
-            filteredOrdersOrderId
+            idFilter.length > 0 &&
+            idFilter
               .sort((a, b) => Number(b.orderId) - Number(a.orderId))
               .map((order) => linkComponent(order))}
 
-          {search && !filteredOrdersName && !filteredOrdersOrderId && (
+          {search && !nameFilter && !idFilter && (
             <p className='cardsContainer__noData'>Nenhum pedido encontrado.</p>
           )}
 

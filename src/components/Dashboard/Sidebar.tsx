@@ -60,7 +60,7 @@ const Sidebar = () => {
   }
 
   return (
-    <aside className='fixed bottom-0 left-0 z-10 w-full p-2 bg-dark-100 lg:bg-gray-900 lg:static lg:w-[350px] lg:p-4'>
+    <aside className='fixed bottom-0 left-0 z-10 w-full p-2 bg-dark-100 lg:bg-gray-900 lg:static lg:w-[350px] lg:p-4 lg:min-h-[100vh]'>
       <div className='flex-col items-center justify-center hidden gap-4 my-4 lg:flex'>
         {userData?.photoURL ? (
           <img src={userData.photoURL} alt={userData.displayName} className='w-40 rounded-full' />
