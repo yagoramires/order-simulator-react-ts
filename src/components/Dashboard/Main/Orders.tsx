@@ -1,13 +1,10 @@
 import { useState } from 'react'
-import { IoMdAdd } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 import { useFormatDate } from '../../../hooks/formatData/useFormatDate'
 import { useFormatValue } from '../../../hooks/formatData/useFormatValue'
 import { IOrder } from '../../../interfaces'
-
-// import './Main.css'
 
 const Orders = () => {
   const { orders } = useFetchCollection('orders')
@@ -27,61 +24,53 @@ const Orders = () => {
 
   const linkComponent = (order: IOrder) => {
     return (
-      <Link to={`${order.id}`} className='cardsContainer__card' key={order.id}>
-        <span className='cardsContainer__text w-[10%]'>{order.orderId}</span>
-        <span className='cardsContainer__text w-[50%]'>{order.clientName}</span>
-        <span className='cardsContainer__text w-[30%]'>
-          {order.createdAt && formatDate(order.createdAt)}
-        </span>
-        <span className='cardsContainer__text w-[30%]'>
-          {order.total && formatValue(+order.total)}
-        </span>
-        <span className='cardsContainer__text w-[20%]'>{order.sellerName}</span>
+      <Link
+        to={`${order.id}`}
+        className='flex items-center justify-start w-full gap-2 p-2 bg-gray-900 rounded-lg text-gray-50'
+        key={order.id}
+      >
+        <span className='w-[10%]'>{order.orderId}</span>
+        <span className='w-[30%]'>{order.clientName}</span>
+        <span className='w-[100px]'>{order.createdAt && formatDate(order.createdAt)}</span>
+        <span className='w-[20%]'>{order.total && formatValue(+order.total)}</span>
+        <span className='w-[10%]'>{order.sellerName}</span>
       </Link>
     )
   }
 
   const labelComponent = () => {
     return (
-      <div className='labelContainer'>
-        <span className='labelContainer__label w-[10%]'>Pedido</span>
-        <span className='labelContainer__label w-[50%]'>Cliente</span>
-        <span className='labelContainer__label w-[30%]'>Data</span>
-        <span className='labelContainer__label w-[30%]'>Total</span>
-        <span className='labelContainer__label w-[20%]'>Vendedor</span>
+      <div className='flex items-center justify-start w-full gap-2 p-4 text-gray-50'>
+        <span className='w-[10%]'>Pedido</span>
+        <span className='w-[30%]'>Cliente</span>
+        <span className='w-[100px]'>Data</span>
+        <span className='w-[20%]'>Total</span>
+        <span className='w-[10%]'>Vendedor</span>
       </div>
     )
   }
 
   return (
-    <>
-      {/* <div className='flex items-center justify-between w-full'>
-        <h1 className='text-2xl font-medium'>Pedidos</h1>
-        <Link
-          to='/order'
-          className='flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md shadow-md'
-        >
-          <IoMdAdd /> Novo
-        </Link>
-      </div> */}
-      <div className='mainContainer'>
-        <div className='searchContainer'>
+    <div className=''>
+      <div className='max-w-[1400px] w-full'>
+        <div className='flex items-center justify-center w-full bg-dark-100'>
           <input
             type='text'
-            className='searchContainer__input'
+            className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50'
             placeholder='Pesquisar'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <div className='cardsContainer'>
+
+        {orders.length > 0 && !search && labelComponent()}
+        {search && nameFilter.length > 0 && labelComponent()}
+        {search && idFilter.length > 0 && labelComponent()}
+
+        <div className=' h-[calc(100vh-150px)] flex flex-col items-start min-w-[600px] w-full gap-2 p-2 overflow-auto'>
           {orders.length === 0 && (
             <p className='cardsContainer__noData'>Nenhum pedido cadastrado.</p>
           )}
-
-          {orders.length > 0 && !search && labelComponent()}
-          {search && nameFilter.length > 0 && labelComponent()}
-          {search && idFilter.length > 0 && labelComponent()}
 
           {search &&
             nameFilter.length > 0 &&
@@ -105,7 +94,7 @@ const Orders = () => {
               .map((order) => linkComponent(order))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
