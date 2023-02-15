@@ -53,45 +53,42 @@ const Profile = () => {
   }
 
   return (
-    <main className='min-h-[100vh] bg-gradient-to-r from-blue-800 to-blue-600 flex justify-center items-center py-4'>
-      <div className='w-[90%] bg-white max-w-[1200px] max-h-[95vh] rounded-md shadow-md p-8 flex flex-col gap-4'>
+    <div className='min-h-[100vh] flex flex-col justify-start items-center p-2 w-full'>
+      <div className='max-w-[800px] w-full lg:p-8'>
         <button
           onClick={() => navigate(-1)}
-          className='flex items-center justify-end w-full font-medium text-blue-600'
+          className='flex items-center justify-end w-full mb-8 font-medium text-gray-50'
         >
           <MdKeyboardArrowLeft size={20} />
           Voltar
         </button>
-        <div className='flex flex-col items-center justify-center gap-4 mb-4'>
+        <div className='flex flex-col items-center justify-center gap-4 mb-8'>
           {userData?.photoURL ? (
             <img
               src={profileImg ? URL.createObjectURL(profileImg) : userData.photoURL}
               alt=''
-              className='w-48 h-48 border-4 border-blue-600 rounded-full md:w-24 md:h-24 '
+              className='w-24 h-24 border-2 border-blue-600 rounded-full md:w-32 md:h-32 lg:w-48 lg:h-48'
             />
           ) : (
-            <div className='flex items-center justify-center w-48 h-48 overflow-hidden border-4 border-blue-600 rounded-full md:w-36 md:h-36'>
+            <div className='flex items-center justify-center w-24 h-24 border-2 border-blue-600 rounded-full md:w-32 md:h-32 lg:w-48 lg:h-48overflow-hidden'>
               {profileImg ? (
                 <img
                   src={URL.createObjectURL(profileImg)}
                   alt=''
-                  className='w-48 h-48 rounded-full md:w-36 md:h-36 '
+                  className='w-24 h-24 border-4 border-blue-600 rounded-full md:w-32 md:h-32 lg:w-48 lg:h-48'
                 />
               ) : (
                 <FaUserAlt className='text-blue-600 text-[100px] md:text-[50px]' />
               )}
             </div>
           )}
-          <h1 className='text-2xl font-medium text-blue-600 cursor-pointer md:text-xl'>
-            {userData.displayName}
-          </h1>
         </div>
 
         <form onSubmit={handleUpdateProfile} className='flex flex-col w-full gap-4'>
           <input
             type='file'
             placeholder='Nome'
-            className='w-full p-2 bg-gray-300 rounded-md shadow-sm'
+            className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             onChange={handleSelectImage}
           />
           <input
@@ -99,21 +96,21 @@ const Profile = () => {
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
             placeholder='Nome'
-            className='w-full p-2 bg-gray-300 rounded-md shadow-sm'
+            className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
           />
           <input
             type='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder='E-mail'
-            className='w-full p-2 bg-gray-300 rounded-md shadow-sm'
+            className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
           />
           <input
             type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder='Senha'
-            className='w-full p-2 bg-gray-300 rounded-md shadow-sm'
+            className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             autoComplete='false'
           />
           <input
@@ -121,7 +118,7 @@ const Profile = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder='Confirmação de senha'
-            className='w-full p-2 bg-gray-300 rounded-md shadow-sm'
+            className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             autoComplete='false'
           />
           {loadingImg || loadingName || loadingEmail || loadingPassword ? (
@@ -131,13 +128,13 @@ const Profile = () => {
           ) : (
             <input
               type='submit'
-              className='p-2 my-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-600 to-blue-800'
+              className='p-2 my-4 font-bold text-white bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
               value={'Atualizar'}
             />
           )}
         </form>
       </div>
-    </main>
+    </div>
   )
 }
 

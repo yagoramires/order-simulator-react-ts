@@ -20,68 +20,61 @@ const Deadlines = () => {
 
   const linkComponent = (deadline: IDeadlines) => {
     return (
-      <div className='flex items-center justify-between w-full gap-4' key={deadline.id}>
-        <div className='text-black border-b-[1px] border-b-zinc-200 p-4 rounded-md hover:bg-zinc-200 w-full'>
-          <div className='flex items-center justify-between w-full gap-4'>
-            <span className='w-full font-medium break-words'>{deadline.value}</span>
-
-            <TiDelete
-              className='text-red-400 cursor-pointer w-[10%]'
-              size={20}
-              onClick={() => deleteDocument('deadlines', deadline.id || '')}
-            />
-          </div>
-        </div>
+      <div className='flex items-center w-full gap-2 p-2 break-words bg-gray-900 rounded-lg lg:p-4 text-gray-50'>
+        <span className='w-full font-medium break-words'>{deadline.value}</span>
+        <TiDelete
+          className='text-red-500 cursor-pointer w-[10%]'
+          size={20}
+          onClick={() => deleteDocument('deadlines', deadline.id || '')}
+        />
       </div>
     )
   }
 
   const labelComponent = () => {
     return (
-      <div className='flex items-center justify-start w-full pl-4 text-start'>
-        <span className='text-xs text-zinc-400'>Prazo</span>
+      <div className='flex items-center w-full gap-2 p-2 text-left break-words lg:p-4 text-gray-50'>
+        <span>Prazo de pagamento</span>
       </div>
     )
   }
 
   return (
-    <>
-      <div className='flex items-center justify-between w-full'>
-        <h1 className='text-2xl font-medium'>Prazos de pagamento</h1>
+    <div className='max-w-[1400px] w-full'>
+      <div className='flex items-center justify-between w-full p-2 bg-dark-100'>
+        <input
+          type='text'
+          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50 md:w-[300px]'
+          placeholder='Pesquisar'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <DeadlineForm />
       </div>
 
-      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
-        <div className='flex flex-col gap-4 p-8 overflow-y-scroll rounded-md max-h-[75vh]'>
-          <div className='flex flex-col gap-4'>
-            {deadlines.length === 0 ? (
-              <p className='w-full text-center text-black my-[5rem]'>Nenhum prazo cadastrado.</p>
-            ) : (
-              <input
-                type='text'
-                className='p-2 rounded-md shadow-sm bg-zinc-300'
-                placeholder='Pesquisar'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            )}
+      <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+        {deadlines.length > 0 && !search && labelComponent()}
+        {search && filteredDeadlines.length > 0 && labelComponent()}
 
-            {deadlines.length > 0 && !search && labelComponent()}
-            {search && filteredDeadlines.length > 0 && labelComponent()}
+        {deadlines.length === 0 && (
+          <p className='w-full mt-5 text-center text-gray-50'>
+            Nenhum prazo de pagamento cadastrado.
+          </p>
+        )}
 
-            {search && filteredDeadlines.length > 0
-              ? filteredDeadlines.map((deadline) => linkComponent(deadline))
-              : search && (
-                  <p className='w-full text-center text-black my-[5rem]'>
-                    Nenhuma prazo de pagamento encontrado.
-                  </p>
-                )}
+        {search &&
+          filteredDeadlines.length > 0 &&
+          filteredDeadlines.map((deadline) => linkComponent(deadline))}
 
-            {!search && deadlines?.map((deadline) => linkComponent(deadline))}
-          </div>
-        </div>
+        {search && filteredDeadlines.length === 0 && (
+          <p className='w-full mt-5 text-center text-gray-50'>
+            Nenhum prazo de pagamento encontrado.
+          </p>
+        )}
+
+        {!search && deadlines?.map((deadline) => linkComponent(deadline))}
       </div>
-    </>
+    </div>
   )
 }
 

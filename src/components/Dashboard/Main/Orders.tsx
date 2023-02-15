@@ -55,48 +55,46 @@ const Orders = () => {
   }
 
   return (
-    <div className=''>
-      <div className='max-w-[1400px] w-full'>
-        <div className='flex items-center justify-center w-full p-2 bg-dark-100'>
-          <input
-            type='text'
-            className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50'
-            placeholder='Pesquisar'
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
+    <div className='max-w-[1400px] w-full'>
+      <div className='flex items-center justify-center w-full p-2 bg-dark-100'>
+        <input
+          type='text'
+          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50'
+          placeholder='Pesquisar'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
-        <div className=' h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
-          {orders.length > 0 && !search && labelComponent()}
-          {search && nameFilter.length > 0 && labelComponent()}
-          {search && idFilter.length > 0 && labelComponent()}
+      <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+        {orders.length > 0 && !search && labelComponent()}
+        {search && nameFilter.length > 0 && labelComponent()}
+        {search && idFilter.length > 0 && labelComponent()}
 
-          {orders.length === 0 && (
-            <p className='cardsContainer__noData'>Nenhum pedido cadastrado.</p>
-          )}
+        {orders.length === 0 && (
+          <p className='w-full mt-5 text-center text-gray-50'>Nenhum pedido cadastrado.</p>
+        )}
 
-          {search &&
-            nameFilter.length > 0 &&
-            nameFilter
-              .sort((a, b) => Number(b.orderId) - Number(a.orderId))
-              .map((order) => linkComponent(order))}
+        {search &&
+          nameFilter.length > 0 &&
+          nameFilter
+            .sort((a, b) => Number(b.orderId) - Number(a.orderId))
+            .map((order) => linkComponent(order))}
 
-          {search &&
-            idFilter.length > 0 &&
-            idFilter
-              .sort((a, b) => Number(b.orderId) - Number(a.orderId))
-              .map((order) => linkComponent(order))}
+        {search &&
+          idFilter.length > 0 &&
+          idFilter
+            .sort((a, b) => Number(b.orderId) - Number(a.orderId))
+            .map((order) => linkComponent(order))}
 
-          {search && !nameFilter && !idFilter && (
-            <p className='cardsContainer__noData'>Nenhum pedido encontrado.</p>
-          )}
+        {search && nameFilter.length === 0 && idFilter.length === 0 && (
+          <p className='w-full mt-5 text-center text-gray-50'>Nenhum pedido encontrado.</p>
+        )}
 
-          {!search &&
-            orders
-              ?.sort((a, b) => Number(b.orderId) - Number(a.orderId))
-              .map((order) => linkComponent(order))}
-        </div>
+        {!search &&
+          orders
+            ?.sort((a, b) => Number(b.orderId) - Number(a.orderId))
+            .map((order) => linkComponent(order))}
       </div>
     </div>
   )

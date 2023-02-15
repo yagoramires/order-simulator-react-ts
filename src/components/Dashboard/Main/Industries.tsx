@@ -10,85 +10,74 @@ const Industries = () => {
 
   const [search, setSearch] = useState('')
 
-  const filteredIndustriesName =
+  const nameFilter =
     search.length > 0
       ? industries.filter((industry) =>
           industry.socialName?.toLowerCase().includes(search.toLowerCase()),
         )
       : []
-  const filteredIndustriesCnpj =
+  const cnpjFilter =
     search.length > 0
       ? industries.filter((industry) => industry.cnpj?.toLowerCase().includes(search.toLowerCase()))
       : []
 
   const linkComponent = (industry: IIndustries) => {
     return (
-      <div className='flex items-center justify-between w-full gap-4' key={industry.id}>
-        <Link
-          to={`${industry.id}`}
-          className='text-black border-b-[1px] border-b-zinc-200 p-4 rounded-md hover:bg-zinc-200 w-full'
-        >
-          <div className='flex items-center justify-between w-full gap-4'>
-            <span className='font-medium w-[70%] md:w-full'>{industry.socialName}</span>
-
-            <span className='text-sm font-normal  w-[30%] md:hidden'>{industry.cnpj}</span>
-          </div>
-        </Link>
-      </div>
+      <Link
+        to={`${industry.id}`}
+        className='flex items-center w-full gap-2 p-2 break-words bg-gray-900 rounded-lg lg:p-4 text-gray-50'
+        key={industry.id}
+      >
+        <span className='w-[70%]'>{industry.socialName}</span>
+        <span className='w-[30%]'>{industry.cnpj}</span>
+      </Link>
     )
   }
 
   const labelComponent = () => {
     return (
-      <div className='flex items-center justify-start w-full gap-4 pl-4 text-start'>
-        <span className='text-xs text-zinc-400 w-[70%] md:w-full'>Indústria</span>
-        <span className='text-xs text-zinc-400 lg:hidden w-[30%] md:hidden'>CNPJ</span>
+      <div className='flex items-center w-full gap-2 p-2 text-left break-words lg:p-4 text-gray-50'>
+        <span className='w-[70%]'>Indústria</span>
+        <span className='w-[30%]'>CNPJ</span>
       </div>
     )
   }
 
   return (
-    <>
-      <div className='flex items-center justify-between w-full'>
-        <h1 className='text-2xl font-medium'>Indústrias</h1>
+    <div className='max-w-[1400px] w-full'>
+      <div className='flex items-center justify-between w-full p-2 bg-dark-100'>
+        <input
+          type='text'
+          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50 md:w-[300px]'
+          placeholder='Pesquisar'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <IndustryForm />
       </div>
-      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10'>
-        <div className='flex flex-col gap-4 p-8 overflow-y-scroll rounded-md max-h-[75vh]'>
-          <div className='flex flex-col gap-4'>
-            {industries.length === 0 ? (
-              <p className='w-full text-center text-black my-[5rem]'>
-                Nenhuma indústria cadastrada.
-              </p>
-            ) : (
-              <input
-                type='text'
-                className='p-2 rounded-md shadow-sm bg-zinc-300'
-                placeholder='Pesquisar'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            )}
 
-            {industries.length > 0 && !search && labelComponent()}
-            {search && filteredIndustriesName.length > 0 && labelComponent()}
-            {search && filteredIndustriesCnpj.length > 0 && labelComponent()}
+      <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+        {industries.length > 0 && !search && labelComponent()}
+        {search && nameFilter.length > 0 && labelComponent()}
+        {search && cnpjFilter.length > 0 && labelComponent()}
 
-            {search && filteredIndustriesName.length > 0
-              ? filteredIndustriesName.map((industry) => linkComponent(industry))
-              : filteredIndustriesCnpj.length > 0
-              ? filteredIndustriesCnpj?.map((industry) => linkComponent(industry))
-              : search && (
-                  <p className='w-full text-center text-black my-[5rem]'>
-                    Nenhuma indústria encontrada.
-                  </p>
-                )}
+        {industries.length === 0 && (
+          <p className='w-full mt-5 text-center text-gray-50'>Nenhuma indústria cadastrada.</p>
+        )}
 
-            {!search && industries?.map((industry) => linkComponent(industry))}
-          </div>
-        </div>
+        {search && nameFilter.length > 0 && nameFilter.map((industry) => linkComponent(industry))}
+
+        {cnpjFilter &&
+          cnpjFilter.length > 0 &&
+          cnpjFilter?.map((industry) => linkComponent(industry))}
+
+        {search && nameFilter.length === 0 && cnpjFilter.length === 0 && (
+          <p className='w-full mt-5 text-center text-gray-50'>Nenhuma indústria encontrada.</p>
+        )}
+
+        {!search && industries?.map((industry) => linkComponent(industry))}
       </div>
-    </>
+    </div>
   )
 }
 
