@@ -20,9 +20,10 @@ select {
 
 .loginTabs {
   font-weight: medium;
-  color: black;
+  color: #FAFAFA;
   border-bottom: 2px solid rgb(37, 99, 235, 0);
   width: 50%;
+
 }
 
 

@@ -35,16 +35,16 @@ const Login = () => {
   }, [error])
 
   return (
-    <section className='flex flex-col gap-10 justify-center items-center min-h-[100vh] bg-image bg-gradient-to-r from-blue-800 to-blue-600'>
-      <h1 className='text-5xl text-white'>
+    <div className='h-[100vh] flex flex-col justify-center items-center'>
+      <h1 className='mb-4 text-5xl text-center text-gray-50'>
         <span className='font-bold'>
-          D<span className='text-black'>2</span>B
+          D<span className='text-blue-600'>2</span>B
         </span>{' '}
         Sales Platform
       </h1>
 
       <Tabs.Root
-        className='flex flex-col w-[90%] max-w-[600px] shadow-md bg-white rounded-md py-4'
+        className='flex flex-col w-[90%] max-w-[600px] shadow-md bg-gray-900 rounded-md py-4'
         defaultValue='tab1'
       >
         <Tabs.List className='flex justify-around mb-8'>
@@ -84,7 +84,7 @@ const Login = () => {
             ) : (
               <input
                 type='submit'
-                className='p-2 my-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-600 to-blue-800'
+                className='p-2 my-4 font-medium text-white bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
                 value={'Entrar'}
               />
             )}
@@ -139,14 +139,14 @@ const Login = () => {
             ) : (
               <input
                 type='submit'
-                className='p-2 my-4 font-medium text-white rounded-md shadow-sm cursor-pointer bg-gradient-to-r from-blue-600 to-blue-800'
+                className='p-2 my-4 font-medium text-white bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
                 value={'Registrar'}
               />
             )}
           </form>
         </Tabs.Content>
       </Tabs.Root>
-    </section>
+    </div>
   )
 }
 
