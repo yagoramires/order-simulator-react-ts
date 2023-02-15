@@ -47,7 +47,7 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
-        <div className='relative flex items-center justify-center px-8 py-2 font-medium text-white rounded cursor-pointer lg:bg-blue-600 lg:h-12 lg:py-0'>
+        <div className='relative flex items-center justify-center px-8 py-2 font-medium rounded cursor-pointer text-gray-50 lg:bg-blue-600 lg:h-12 lg:py-0'>
           <FaEdit size={23} />
           <span className='hidden'>Editar</span>
         </div>
