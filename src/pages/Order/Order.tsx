@@ -51,7 +51,7 @@ const Order = () => {
         )}
 
         {selectedIndustry.id ? (
-          <div className='mt-1 lg:mt-2 flex flex-col w-[100vw] max-w-[1400px] max-h-[calc(100vh-300px)] md:max-h-[calc(100vh-344px)] bg-dark-100 overflow-auto p-1 gap-1 md:p-2 md:gap-2 '>
+          <div className='mt-1 md:mt-2 flex flex-col w-[100vw] max-w-[1400px] max-h-[calc(100vh-300px)] md:max-h-[calc(100vh-344px)] bg-dark-100 overflow-auto p-1 gap-1 md:p-2 md:gap-2 '>
             <Label />
 
             {products?.length === 0 && (
