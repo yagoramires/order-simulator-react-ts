@@ -11,71 +11,78 @@ const Main = () => {
   const { clientId } = useParams()
   const { clientOrders } = useFetchCollection(`clients/${clientId}/orders`)
 
-  const filteredOrderId =
+  const idFilter =
     search.length > 0 ? clientOrders.filter((order) => String(order.orderId).includes(search)) : []
 
-  const filteredOrderName =
+  const nameFilter =
     search.length > 0
       ? clientOrders.filter((order) =>
           order.clientName?.toLowerCase().includes(search.toLowerCase()),
         )
       : []
 
+  const labelComponent = () => {
+    return (
+      <div className='flex items-center w-full gap-2 p-2 text-left break-words lg:p-4 text-gray-50'>
+        <span className='w-[15%]'>Pedido</span>
+        <span className='w-[20%]'>Data</span>
+        <span className='w-[35%]'>Prazo</span>
+        <span className='w-[10%]'>Indústria</span>
+        <span className='w-[15%]'>Total</span>
+      </div>
+    )
+  }
+
   return (
-    <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] w-full text-white p-8 lg:p-4'>
-      <div className='flex items-center justify-between w-full '>
-        <h1 className='text-2xl font-medium'>Pedidos</h1>
+    <div className='max-w-[1400px] w-full'>
+      <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
+        <input
+          type='text'
+          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50 max-w-[300px] w-full'
+          placeholder='Pesquisar'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
         <Link
           to='/order'
-          className='flex items-center self-end justify-between gap-4 p-4 text-xl font-bold text-blue-600 bg-white rounded-md shadow-md lg:p-2 '
+          className='relative flex items-center justify-between gap-2 px-4 py-2 font-bold bg-blue-600 rounded-lg text-gray-50'
         >
           <IoMdAdd /> Novo
         </Link>
       </div>
-      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10 lg:my-4'>
-        <div className='flex flex-col gap-4  p-8  overflow-y-scroll rounded-md max-h-[75vh]'>
-          {clientOrders.length === 0 ? (
-            <p className='text-black'>Nenhum pedido cadastrado.</p>
-          ) : (
-            <input
-              type='text'
-              className='p-2 rounded-md shadow-sm bg-zinc-300'
-              placeholder='Pesquisar'
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          )}
 
-          {search ||
-            (clientOrders.length > 0 && (
-              <div className='flex items-center justify-start w-full gap-4 p-4 text-start'>
-                <span className='text-xs text-zinc-400 w-[15%] lg:w-[25%] md:hidden'>Pedido</span>
-                <span className='text-xs text-zinc-400 w-[20%] lg:w-[25%] md:w-[50%]'>Data</span>
-                <span className='text-xs text-zinc-400 w-[35%] lg:hidden'>Prazo</span>
-                <span className='text-xs text-zinc-400 w-[10%] lg:w-[25%] md:hidden'>
-                  Indústria
-                </span>
-                <span className='text-xs text-zinc-400 w-[15%] lg:w-[25%] md:w-[50%]'>Total</span>
-              </div>
-            ))}
+      <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+        {clientOrders.length > 0 && !search && labelComponent()}
+        {search && nameFilter.length > 0 && labelComponent()}
+        {search && idFilter.length > 0 && labelComponent()}
 
-          {search && filteredOrderId.length > 0
-            ? filteredOrderId
-                .sort((a, b) => Number(b.id) - Number(a.id))
-                .map((order) => <Orders order={order} key={order.id} />)
-            : filteredOrderName.length > 0
-            ? filteredOrderName
-                .sort((a, b) => Number(b.id) - Number(a.id))
-                .map((order) => <Orders order={order} key={order.id} />)
-            : search && <p className='text-black'>Nenhum produto encontrado.</p>}
+        {clientOrders.length === 0 && (
+          <p className='w-full mt-5 text-center text-gray-50'>Nenhum pedido cadastrado.</p>
+        )}
 
-          {!search &&
-            clientOrders
-              .sort((a, b) => Number(b.id) - Number(a.id))
-              .map((order) => <Orders order={order} key={order.id} />)}
-        </div>
+        {search &&
+          idFilter.length > 0 &&
+          idFilter
+            .sort((a, b) => Number(b.orderId) - Number(a.orderId))
+            .map((order) => <Orders order={order} key={order.id} />)}
+
+        {search &&
+          nameFilter.length > 0 &&
+          nameFilter
+            .sort((a, b) => Number(b.orderId) - Number(a.orderId))
+            .map((order) => <Orders order={order} key={order.id} />)}
+
+        {search && nameFilter.length === 0 && idFilter.length === 0 && (
+          <p className='w-full mt-5 text-center text-gray-50'>Nenhum pedido encontrado.</p>
+        )}
+
+        {!search &&
+          clientOrders
+            .sort((a, b) => Number(b.orderId) - Number(a.orderId))
+            .map((order) => <Orders order={order} key={order.id} />)}
       </div>
-    </main>
+    </div>
   )
 }
 

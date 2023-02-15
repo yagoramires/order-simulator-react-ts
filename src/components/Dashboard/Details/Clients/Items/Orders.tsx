@@ -25,32 +25,21 @@ const Orders = ({ order }: DataProps) => {
 
   const linkComponent = (order: IOrder) => {
     return (
-      <div
-        className='flex items-center justify-between w-full gap-4 lg:max-w-[450px]'
+      <Link
+        to={`/orders/${orderTrueId.length > 0 && orderTrueId[0].id}`}
         key={order.id}
+        className='flex items-center w-full gap-2 p-2 break-words bg-gray-900 rounded-lg lg:p-4 text-gray-50'
       >
-        <Link
-          to={`/orders/${orderTrueId.length > 0 && orderTrueId[0].id}`}
-          key={order.id}
-          className='flex w-full gap-4 p-4 text-black transition-all duration-200 rounded-md cursor-pointer hover:bg-zinc-200 border-b-[1px] border-b-zinc-200'
-        >
-          <span className='font-medium  w-[15%] lg:w-[25%] md:hidden'>{order.orderId}</span>
-          <span className='font-medium w-[20%] lg:w-[25%] md:w-[50%]'>
-            {order.createdAt?.seconds && formatDate(order.createdAt)}
-          </span>
-          <span className='font-medium w-[35%] break-words overflow-hidden lg:hidden'>
-            {order.deadline}
-          </span>
-          <span className='font-medium w-[10%] lg:w-[25%] md:hidden'>{order.industryName}</span>
-          <span className='font-medium w-[15%] lg:w-[25%] md:w-[50%]'>
-            {order.total && formatValue(+order.total)}
-          </span>
-        </Link>
-      </div>
+        <span className='w-[15%]'>{order.orderId}</span>
+        <span className='w-[20%]'>{order.createdAt?.seconds && formatDate(order.createdAt)}</span>
+        <span className='w-[35%]'>{order.deadline}</span>
+        <span className='w-[10%]'>{order.industryName}</span>
+        <span className='w-[15%]'>{order.total && formatValue(+order.total)}</span>
+      </Link>
     )
   }
 
-  return <div className='flex flex-col gap-4'>{linkComponent(order)}</div>
+  return linkComponent(order)
 }
 
 export default Orders

@@ -13,23 +13,19 @@ const Products = ({ product }: DataProps) => {
 
   const linkComponent = (product: IProduct) => {
     return (
-      <div className='flex items-center justify-between w-full gap-4' key={product.id}>
-        <Link
-          to={`product/${product.id}`}
-          key={product.id}
-          className='flex w-full gap-2 p-4 text-black transition-all duration-200 rounded-md cursor-pointer  hover:bg-zinc-200 border-b-[1px] border-b-zinc-200'
-        >
-          <span className='font-medium w-[20%] md:w-[40%]'>{product.code}</span>
-          <span className='font-medium w-[60%] md:w-[60%]'>{product.name}</span>
-          <span className='font-medium w-[20%] md:hidden'>
-            {product.price && transform(+product.price)}
-          </span>
-        </Link>
-      </div>
+      <Link
+        to={`product/${product.id}`}
+        key={product.id}
+        className='flex items-center w-full gap-2 p-2 break-words bg-gray-900 rounded-lg lg:p-4 text-gray-50'
+      >
+        <span className='w-[20%]'>{product.code}</span>
+        <span className='w-[60%]'>{product.name}</span>
+        <span className='w-[20%]'>{product.price && transform(+product.price)}</span>
+      </Link>
     )
   }
 
-  return <div className='flex flex-col gap-4'>{linkComponent(product)}</div>
+  return linkComponent(product)
 }
 
 export default Products

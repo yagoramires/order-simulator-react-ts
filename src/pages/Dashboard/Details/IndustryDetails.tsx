@@ -29,11 +29,13 @@ const IndustryDetails = () => {
   }
 
   return (
-    <div className='flex lg:flex-col'>
+    <div className='flex'>
       {industry && (
         <>
           <Sidebar industry={industry} />
-          <Main />
+          <div className='lg:flex lg:items-center lg:justify-center lg:w-full'>
+            <Main />
+          </div>
         </>
       )}
     </div>

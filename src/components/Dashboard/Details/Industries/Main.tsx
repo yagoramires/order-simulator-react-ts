@@ -11,58 +11,63 @@ const Main = () => {
   const { industryId } = useParams()
   const { products } = useFetchCollection(`industries/${industryId}/products`)
 
-  const filteredProductCode =
+  const codeFilter =
     search.length > 0
       ? products.filter((product) => product.code?.toLowerCase().includes(search.toLowerCase()))
       : []
 
-  const filteredProductName =
+  const nameFilter =
     search.length > 0
       ? products.filter((product) => product.name?.toLowerCase().includes(search.toLowerCase()))
       : []
 
+  const labelComponent = () => {
+    return (
+      <div className='flex items-center w-full gap-2 p-2 text-left break-words lg:p-4 text-gray-50'>
+        <span className='w-[20%]'>Código</span>
+        <span className='w-[60%]'>Nome</span>
+        <span className='w-[20%]'>Valor Uni.</span>
+      </div>
+    )
+  }
+
   return (
-    <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] w-full text-white p-8 lg:p-4'>
-      <div className='flex items-center justify-between w-full'>
-        <h1 className='text-2xl font-medium'>Produtos</h1>
+    <div className='max-w-[1400px] w-full'>
+      <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
+        <input
+          type='text'
+          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50'
+          placeholder='Pesquisar'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <ProductForm />
       </div>
-      <div className=' bg-white shadow-md max-h-[75vh] rounded-md overflow-hidden my-10 lg:my-4'>
-        <div className='flex flex-col gap-4  p-8  overflow-y-scroll rounded-md max-h-[75vh]'>
-          {products.length === 0 ? (
-            <p className='text-black'>Nenhum produto cadastrado.</p>
-          ) : (
-            <input
-              type='text'
-              className='p-2 rounded-md shadow-sm bg-zinc-300'
-              placeholder='Pesquisar'
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          )}
-          {search ||
-            (products.length > 0 && (
-              <div className='flex items-center justify-start w-full gap-2 p-4 text-start'>
-                <span className='text-xs text-zinc-400 w-[20%] md:w-[40%]'>Código</span>
-                <span className='text-xs text-zinc-400 w-[60%] md:w-[60%]'>Nome</span>
-                <span className='text-xs text-zinc-400 w-[20%] md:hidden'>Valor Uni.</span>
-              </div>
-            ))}
 
-          {search && filteredProductCode.length > 0
-            ? filteredProductCode.map((product) => (
-                <ProductCard product={product} key={product.id} />
-              ))
-            : filteredProductName.length > 0
-            ? filteredProductName.map((product) => (
-                <ProductCard product={product} key={product.id} />
-              ))
-            : search && <p className='text-black'>Nenhum produto encontrado.</p>}
+      <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+        {products.length > 0 && !search && labelComponent()}
+        {search && nameFilter.length > 0 && labelComponent()}
+        {search && codeFilter.length > 0 && labelComponent()}
 
-          {!search && products.map((product) => <ProductCard product={product} key={product.id} />)}
-        </div>
+        {products.length === 0 && (
+          <p className='w-full mt-5 text-center text-gray-50'>Nenhum produto cadastrado.</p>
+        )}
+
+        {search &&
+          codeFilter.length > 0 &&
+          codeFilter.map((product) => <ProductCard product={product} key={product.id} />)}
+
+        {search &&
+          nameFilter.length > 0 &&
+          nameFilter.map((product) => <ProductCard product={product} key={product.id} />)}
+
+        {search && nameFilter.length === 0 && codeFilter.length === 0 && (
+          <p className='w-full mt-5 text-center text-gray-50'>Nenhum produto encontrado.</p>
+        )}
+
+        {!search && products.map((product) => <ProductCard product={product} key={product.id} />)}
       </div>
-    </main>
+    </div>
   )
 }
 
