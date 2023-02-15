@@ -29,17 +29,17 @@ type OrderContextType = {
 const initialValue = {
   selectedIndustry: {
     id: '',
-    fantasyName: 'Selecione uma indústria',
+    fantasyName: 'Indústria',
     cnpj: '',
   },
   selectedClient: {
     id: '',
-    socialName: 'Selecione um cliente',
+    socialName: 'Cliente',
     cnpj: '',
   },
   selectedDeadline: {
     id: '',
-    value: 'Selecione um prazo de pagamento',
+    value: 'Prazo',
   },
   total: 0,
   products: [],

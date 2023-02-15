@@ -5,8 +5,6 @@ import { useState, useEffect, useContext } from 'react'
 import { MdNoPhotography } from 'react-icons/md'
 import { NewOrderContext } from '../../context/NewOrderContext'
 
-import './Product.css'
-
 import { IProduct } from '../../interfaces'
 interface ProductProps {
   product: IProduct
@@ -47,25 +45,27 @@ const Product = ({ product }: ProductProps) => {
   }
 
   return (
-    <div className='productContainer'>
+    <div className='flex items-center justify-start min-w-[600px] w-full gap-2 p-2 bg-gray-900 text-gray-50 rounded-lg'>
       {product.imagePath ? (
-        <img src={product.imagePath} alt={product.name} className='productContainer__image' />
+        <img src={product.imagePath} alt={product.name} className='w-10 lg:w-20' />
       ) : (
-        <MdNoPhotography className='productContainer__image--noImg' />
+        <div className='flex justify-center w-10 lg:w-20'>
+          <MdNoPhotography className='text-[20px] lg:text-[40px]' />
+        </div>
       )}
 
-      <span className='productContainer__code'>{product.code}</span>
-      <span className='productContainer__name'>{product.name}</span>
-      <span className='productContainer__unitPrice'>
+      <span className='w-32 lg:w-52'>{product.code}</span>
+      <span className='w-52 lg:w-full'>{product.name}</span>
+      <span className='w-24 '>
         {(product.price || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
       </span>
       <input
         type='number'
         value={quantity}
         onChange={(e) => handleSelectProductQuantity(+e.target.value)}
-        className='productContainer__quantity'
+        className='w-16 p-2 text-center bg-gray-800 rounded-lg'
       />
-      <span className='productContainer__totalPrice'>
+      <span className='w-24 lg:28'>
         {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
       </span>
     </div>

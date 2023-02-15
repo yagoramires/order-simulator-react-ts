@@ -3,8 +3,6 @@ import { RiArrowDownSLine } from 'react-icons/ri'
 import { NewOrderContext } from '../../context/NewOrderContext'
 import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 
-import './Select.css'
-
 const Select = () => {
   const [clientDropdown, setClientDropdown] = useState(false)
   const [deadlineDropdown, setDeadlineDropdown] = useState(false)
@@ -49,24 +47,31 @@ const Select = () => {
   }
 
   return (
-    <div className='selects'>
-      <div className='selectContainer'>
-        <span className='selectContainer__label'>Indústria</span>
-        <div
-          className='selectContainer__input'
-          onClick={() => {
-            setIndustryDropdown(!industryDropdown)
-            setClientDropdown(false)
-            setDeadlineDropdown(false)
-          }}
-        >
-          <span>{selectedIndustry.fantasyName}</span>
-          <RiArrowDownSLine />
-        </div>
-        <ul className={`selectContainer__ul ${industryDropdown ? '' : 'hidden'}`}>
-          <div>
+    <div className='bg-gray-900 w-full max-w-[1400px] p-2 md:p-4 text-gray-50 lg:rounded-lg'>
+      <div className='flex items-start justify-center w-full gap-2'>
+        <div className='relative w-[50%]'>
+          <span className='text-xs text-gray-500 lg:text-sm'>Indústria</span>
+          <div
+            className='flex items-center justify-between p-2 break-words bg-gray-800 rounded-lg'
+            onClick={() => {
+              setIndustryDropdown(!industryDropdown)
+              setClientDropdown(false)
+              setDeadlineDropdown(false)
+            }}
+          >
+            <span>{selectedIndustry.fantasyName}</span>
+            <RiArrowDownSLine />
+          </div>
+          <ul
+            className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] md:max-h-[100px]  overflow-y-auto shadow-md flex flex-col gap-1 ${
+              industryDropdown ? '' : 'hidden'
+            }`}
+          >
             {industries?.map((industry) => (
-              <li key={industry.id} className='selectContainer__li'>
+              <li
+                key={industry.id}
+                className='w-full px-2 bg-gray-700 rounded-lg cursor-pointer lg:p-2'
+              >
                 <span
                   onClick={() =>
                     handleSelectedIndustry(
@@ -75,77 +80,95 @@ const Select = () => {
                       industry.cnpj || '',
                     )
                   }
+                  className='break-words'
                 >
                   {industry.fantasyName}
                 </span>
               </li>
             ))}
+          </ul>
+        </div>
+
+        <div className='relative w-[50%]'>
+          <span className='text-xs text-gray-500 lg:text-sm'>Prazo de pagamento</span>
+          <div
+            className='flex items-center justify-between p-2 break-words bg-gray-800 rounded-lg'
+            onClick={() => {
+              setDeadlineDropdown(!deadlineDropdown)
+              setClientDropdown(false)
+              setIndustryDropdown(false)
+            }}
+          >
+            <span>{selectedDeadline.value}</span>
+            <RiArrowDownSLine />
           </div>
-        </ul>
+          <ul
+            className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] md:max-h-[100px]  overflow-y-auto shadow-md flex flex-col gap-1 ${
+              deadlineDropdown ? '' : 'hidden'
+            }`}
+          >
+            {deadlines?.map((deadline) => (
+              <li
+                key={deadline.id}
+                className='w-full px-2 bg-gray-700 rounded-lg cursor-pointer lg:p-2'
+              >
+                <span
+                  onClick={() => handleSelectDeadline(deadline.id || '', deadline.value || '')}
+                  className='break-words'
+                >
+                  {deadline.value}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      <div className='selectContainer'>
-        <span className='selectContainer__label'>Cliente</span>
+      <div className='relative'>
+        <span className='text-xs text-gray-500 lg:text-sm'>Cliente</span>
         <div
-          className='selectContainer__input'
+          className='flex items-center justify-between p-2 break-words bg-gray-800 rounded-lg'
           onClick={() => {
             setClientDropdown(!clientDropdown)
             setDeadlineDropdown(false)
+            setIndustryDropdown(false)
           }}
         >
           <span>{selectedClient.socialName}</span>
           <RiArrowDownSLine />
         </div>
-        <ul className={`selectContainer__ul ${clientDropdown ? '' : 'hidden'}`}>
-          <div>
-            {clients?.map((client) => (
-              <li key={client.id} className='selectContainer__li'>
-                <span
-                  onClick={() =>
-                    handleSelectClient(client.id || '', client.socialName || '', client.cnpj || '')
-                  }
-                >
-                  {client.socialName}
-                </span>
-              </li>
-            ))}
-          </div>
-        </ul>
-      </div>
-
-      <div className='selectContainer'>
-        <span className='selectContainer__label'>Prazo de pagamento</span>
-        <div
-          className='selectContainer__input'
-          onClick={() => {
-            setDeadlineDropdown(!deadlineDropdown)
-            setClientDropdown(false)
-          }}
+        <ul
+          className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] overflow-y-auto shadow-md flex flex-col gap-1 ${
+            clientDropdown ? '' : 'hidden'
+          }`}
         >
-          <span>{selectedDeadline.value}</span>
-          <RiArrowDownSLine />
-        </div>
-        <ul className={`selectContainer__ul ${deadlineDropdown ? '' : 'hidden'}`}>
-          <div>
-            {deadlines?.map((deadline) => (
-              <li key={deadline.id} className='selectContainer__li'>
-                <span onClick={() => handleSelectDeadline(deadline.id || '', deadline.value || '')}>
-                  {deadline.value}
-                </span>
-              </li>
-            ))}
-          </div>
+          {clients?.map((client) => (
+            <li
+              key={client.id}
+              className='w-full px-2 bg-gray-700 rounded-lg cursor-pointer lg:p-2'
+            >
+              <span
+                onClick={() =>
+                  handleSelectClient(client.id || '', client.socialName || '', client.cnpj || '')
+                }
+                className='break-words'
+              >
+                {client.socialName}
+              </span>
+            </li>
+          ))}
         </ul>
       </div>
 
-      <div className='buttonsContainer'>
-        <div className='buttonsContainer__total'>
+      <div className='flex items-center justify-between mt-2'>
+        <div className='flex flex-col'>
           <span className='text-xs text-zinc-500'>Total</span>
           <span className='font-bold'>
             {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
           </span>
         </div>
-        <button onClick={createNewOrder} className='buttonsContainer__btn'>
+
+        <button onClick={createNewOrder} className='px-2 py-1 font-bold bg-blue-600 rounded-md'>
           Finalizar Pedido
         </button>
       </div>

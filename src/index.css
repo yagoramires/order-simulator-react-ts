@@ -33,23 +33,31 @@ select {
   width: 50%;
 }
 
-input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
+@media (min-width: 1024px) {
 
-::-webkit-scrollbar-track {
-  background: rgb(37, 99, 235);
-}
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 
-::-webkit-scrollbar {
-  background: rgb(37, 99, 235);
-  width: 6px;
-  height: 6px;
-  background: #F4F4F4;
-}
+  ::-webkit-scrollbar-track {
+    background: #121212;
+  }
 
-::-webkit-scrollbar-thumb {
-  background-color: #F4F4F4;
+  ::-webkit-scrollbar {
+    background: #121212;
+    width: 6px;
+    height: 6px;
+    background: #F4F4F4;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #212121;
+  }
+
+  .selectScroll::-webkit-scrollbar-track {
+    background-color: #424242;
+  }
+
 }
 
 .lds-ring {
