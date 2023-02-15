@@ -1,6 +1,8 @@
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import { useDeleteDoc } from '../../hooks/handleData/useDeleteDoc'
 
+import { MdDeleteForever } from 'react-icons/md'
+
 interface AlertProps {
   data: {
     type: string
@@ -37,8 +39,9 @@ const Alert = ({ data }: AlertProps) => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger asChild>
-        <button className='flex items-center justify-center px-4 py-2 font-medium text-white transition-all duration-200 bg-red-500 rounded shadow-md cursor-pointer focus: hover:bg-red-400 h-9'>
-          Remover
+        <button className='flex items-center justify-center px-8 py-2 font-medium text-white duration-200 rounded cursor-pointer lg:bg-red-500 lg:h-12 lg:py-0'>
+          <MdDeleteForever size={27} />
+          <span className='hidden'>Remover</span>
         </button>
       </AlertDialog.Trigger>
       <AlertDialog.Portal>

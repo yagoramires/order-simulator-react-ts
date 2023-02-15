@@ -5,6 +5,8 @@ import { toast } from 'react-toastify'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import { MdClose } from 'react-icons/md'
+import { FaEdit } from 'react-icons/fa'
+
 import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
 import { IIndustries } from '../../../../interfaces'
 
@@ -42,8 +44,9 @@ const EditIndustry = ({ industryId, industryData }: IndustryProps) => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
-        <div className='relative flex items-center justify-center px-4 py-2 font-medium text-white bg-blue-600 rounded cursor-pointer focus: hover:bg-blue-500 h-9'>
-          Editar
+        <div className='relative flex items-center justify-center px-8 py-2 font-medium text-white rounded cursor-pointer lg:bg-blue-600 lg:h-12 lg:py-0'>
+          <FaEdit size={23} />
+          <span className='hidden'>Editar</span>
         </div>
       </Dialog.Trigger>
       <Dialog.Portal>

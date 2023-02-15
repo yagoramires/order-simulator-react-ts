@@ -20,7 +20,10 @@ const Deadlines = () => {
 
   const linkComponent = (deadline: IDeadlines) => {
     return (
-      <div className='flex items-center w-full gap-2 p-2 break-words bg-gray-900 rounded-lg lg:p-4 text-gray-50'>
+      <div
+        className='flex items-center w-full gap-2 p-2 break-words bg-gray-900 rounded-lg lg:p-4 text-gray-50'
+        key={deadline.id}
+      >
         <span className='w-full font-medium break-words'>{deadline.value}</span>
         <TiDelete
           className='text-red-500 cursor-pointer w-[10%]'
