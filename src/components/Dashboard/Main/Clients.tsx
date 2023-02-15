@@ -44,10 +44,10 @@ const Clients = () => {
 
   return (
     <div className='max-w-[1400px] w-full'>
-      <div className='flex items-center justify-between w-full p-2 bg-dark-100'>
+      <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
         <input
           type='text'
-          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50 md:w-[300px]'
+          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50 max-w-[300px] w-full'
           placeholder='Pesquisar'
           value={search}
           onChange={(e) => setSearch(e.target.value)}

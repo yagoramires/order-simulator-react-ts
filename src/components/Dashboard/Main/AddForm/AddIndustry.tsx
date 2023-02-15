@@ -37,7 +37,7 @@ const AddIndustry = () => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
-        <div className='relative flex items-center justify-between gap-2 p-2 px-4 text-xl font-bold bg-blue-600 rounded-lg text-gray-50 '>
+        <div className='relative flex items-center justify-between gap-2 px-4 py-2 font-bold bg-blue-600 rounded-lg text-gray-50 '>
           <IoMdAdd /> Novo
         </div>
       </Dialog.Trigger>
