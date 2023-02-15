@@ -8,8 +8,6 @@ import { BsCartCheckFill } from 'react-icons/bs'
 import { MdLogout } from 'react-icons/md'
 import { FaPlus, FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit } from 'react-icons/fa'
 
-import './Sidebar.css'
-
 const Sidebar = () => {
   const { userData } = useContext(AuthContext)
   const { signOutUser } = useAuth()
@@ -49,40 +47,42 @@ const Sidebar = () => {
 
   const liMap = () => {
     return options.map((option) => (
-      <li className='navContainer__listItem' key={option.path}>
-        <Link to={`/${option.path}`} className='navContainer__btn'>
+      <li className='w-full text-gray-50' key={option.path}>
+        <Link
+          to={`/${option.path}`}
+          className='flex items-center justify-center w-full p-4 transition-all rounded-lg shadow-sm lg:gap-2 lg:bg-gray-800 lg:justify-start hover:bg-gray-700'
+        >
           {option.icon}
-          <span className='navContainer__label'>{option.text}</span>
+          <span className='hidden lg:block'>{option.text}</span>
         </Link>
       </li>
     ))
   }
 
   return (
-    <aside className='sidebar'>
-      <div className='profileContainer'>
+    <aside className='fixed bottom-0 left-0 z-10 w-full p-2 bg-dark-100 lg:bg-gray-900 lg:static lg:w-[350px] lg:p-4'>
+      <div className='flex-col items-center justify-center hidden gap-4 my-4 lg:flex'>
         {userData?.photoURL ? (
-          <img
-            src={userData.photoURL}
-            alt={userData.displayName}
-            className='profileContainer__img'
-          />
+          <img src={userData.photoURL} alt={userData.displayName} className='w-40 rounded-full' />
         ) : (
           <div className='profileContainer__noImg'>
             <FaUserAlt size={100} className='text-blue-600' />
           </div>
         )}
-        <h1 className='profileContainer__userName'>{userData.displayName}</h1>
+        <h1 className='text-2xl font-bold text-gray-50'>{userData.displayName}</h1>
       </div>
 
-      <nav className='navContainer'>
-        <ul className='navContainer__list'>
+      <nav className=''>
+        <ul className='flex items-center justify-center w-full lg:flex-col lg:gap-2'>
           {liMap()}
 
-          <li className='navContainer__listItem'>
-            <button onClick={signOutUser} className='navContainer__btn'>
+          <li className='w-full text-gray-50 '>
+            <button
+              onClick={signOutUser}
+              className='flex items-center justify-center w-full p-4 transition-all rounded-lg shadow-sm lg:gap-2 lg:bg-gray-800 lg:justify-start hover:bg-gray-700'
+            >
               <MdLogout size={22} />
-              <span className='navContainer__label'>Sair</span>
+              <span className='hidden lg:block'>Sair</span>
             </button>
           </li>
         </ul>
