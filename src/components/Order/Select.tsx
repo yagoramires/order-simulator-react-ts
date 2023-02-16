@@ -147,7 +147,7 @@ const Select = () => {
           <ul
             className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] md:max-h-[100px]  overflow-y-auto shadow-md flex flex-col gap-1 ${
               deadlineDropdown ? '' : 'hidden'
-            }`}
+            } ${deadlinesFilter.length === 0 && 'hidden'}`}
           >
             {deadlinesFilter?.map((deadline) => (
               <li
@@ -191,9 +191,9 @@ const Select = () => {
           className='flex items-center justify-between w-full p-2 break-words bg-gray-800 rounded-lg'
         />
         <ul
-          className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] overflow-y-auto shadow-md flex flex-col gap-1 ${
+          className={`selectScroll absolute z-50 mt-2 rounded-lg p-2 bg-gray-800 w-full overflow-y-auto shadow-md flex flex-col gap-1 ${
             clientDropdown ? '' : 'hidden'
-          }`}
+          } ${clientsFilter.length === 0 && 'hidden'}`}
         >
           {clientsFilter?.map((client) => (
             <li
