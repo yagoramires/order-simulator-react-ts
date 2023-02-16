@@ -143,6 +143,8 @@ const AddClient = () => {
                   value={discountA}
                   onChange={(e) => setDiscountA(+e.target.value)}
                   min={0}
+                  pattern='[0-9]+([,\.][0-9]+)?'
+                  step='any'
                 />
               </label>
               <label className='flex flex-col gap-1'>
@@ -154,6 +156,8 @@ const AddClient = () => {
                   value={discountB}
                   onChange={(e) => setDiscountB(+e.target.value)}
                   min={0}
+                  pattern='[0-9]+([,\.][0-9]+)?'
+                  step='any'
                 />
               </label>
               <label className='flex flex-col gap-1'>
@@ -165,6 +169,8 @@ const AddClient = () => {
                   value={discountC}
                   onChange={(e) => setDiscountC(+e.target.value)}
                   min={0}
+                  pattern='[0-9]+([,\.][0-9]+)?'
+                  step='any'
                 />
               </label>
             </div>

@@ -47,14 +47,36 @@ const Sidebar = ({ client }: DataProps) => {
             <span className='text-xs text-gray-600'>Engefer</span>
             <span className='text-sm font-medium'>{client.engefer ? 'Sim' : 'Não'}</span>
           </div>
-          {/* <div className='flex flex-col'>
+          <div className='flex flex-col'>
+            <span className='text-xs text-gray-600'>Prazo padrão</span>
+            <span className='text-sm font-medium'>
+              {client.deadline ? client.deadline : 'Sem prazo'}
+            </span>
+          </div>
+          <div className='flex flex-col'>
+            <span className='text-xs text-gray-600'>Desconto Ilumi</span>
+            <span className='text-sm font-medium'>
+              {client.discountA && client.discountA > 0
+                ? `${client.discountA} %`
+                : 'Sem desconto Ilumi'}
+            </span>
+          </div>
+          <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>Desconto adicional</span>
             <span className='text-sm font-medium'>
-              {client.discount && client.discount > 0
-                ? `${client.discount} %`
+              {client.discountB && client.discountB > 0
+                ? `${client.discountB} %`
                 : 'Sem desconto adicional'}
             </span>
-          </div> */}
+          </div>
+          <div className='flex flex-col'>
+            <span className='text-xs text-gray-600'>Desconto à vista</span>
+            <span className='text-sm font-medium'>
+              {client.discountC && client.discountC > 0
+                ? `${client.discountC} %`
+                : 'Sem desconto à vista'}
+            </span>
+          </div>
         </div>
         <div className='flex items-center justify-center gap-2 lg:mt-8'>
           <EditClient clientId={clientId || ''} clientData={client} />
