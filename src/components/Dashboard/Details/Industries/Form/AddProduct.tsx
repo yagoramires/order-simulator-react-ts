@@ -16,6 +16,8 @@ const AddProduct = () => {
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [family, setFamily] = useState('')
+  const [minValue, setMinValue] = useState('')
+  const [unityType, setUnityType] = useState('')
   const [open, setOpen] = useState(false)
 
   const { industryId } = useParams()
@@ -37,6 +39,8 @@ const AddProduct = () => {
           industry: industryId,
           price: Number(price),
           family,
+          unityType,
+          minValue: Number(minValue),
         },
         productImg,
       )
@@ -47,6 +51,8 @@ const AddProduct = () => {
         industry: industryId,
         price: Number(price),
         family,
+        unityType,
+        minValue: Number(minValue),
       })
     }
 
@@ -88,7 +94,7 @@ const AddProduct = () => {
               />
             )}
           </div>
-          <form className='flex flex-col w-full gap-4' onSubmit={handleClient}>
+          <form className='flex flex-col w-full gap-2' onSubmit={handleClient}>
             <label className='flex flex-col gap-1'>
               <span className='text-sm text-gray-500'>Imagem</span>
               <input
@@ -140,9 +146,29 @@ const AddProduct = () => {
                 onChange={(e) => setFamily(e.target.value)}
               />
             </label>
+            <label className='flex flex-col gap-1'>
+              <span className='text-sm text-gray-500'>Unidade</span>
+              <input
+                type='text'
+                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                placeholder='Unidade'
+                value={unityType}
+                onChange={(e) => setUnityType(e.target.value)}
+              />
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='text-sm text-gray-500'>Embalagem</span>
+              <input
+                type='number'
+                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                placeholder='Embalagem'
+                value={minValue}
+                onChange={(e) => setMinValue(e.target.value)}
+              />
+            </label>
             <input
               type='submit'
-              className='p-2 font-bold bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
+              className='p-2 mt-2 font-bold bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
               value={'Adicionar'}
             />
           </form>

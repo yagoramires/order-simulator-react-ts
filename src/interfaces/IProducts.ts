@@ -1,20 +1,25 @@
 export interface IProduct {
   id?: string
+  industry?: string
+  imagePath?: string
   code?: string
   name?: string
   price?: number
-  industry?: string
-  imagePath?: string
   family?: string
-  createdAt?: Date
+  unityType?: string
+  minValue?: number
   quantity?: number
+  discount?: number
   total?: number
+  createdAt?: Date
 }
 export interface IAddProduct {
-  code: string
-  name: string
-  price: number
   industry: string
   imagePath?: string
+  code: string
+  name: string
   family?: string
+  unityType: string
+  minValue: number
+  price: number
 }

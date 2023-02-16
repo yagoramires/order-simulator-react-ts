@@ -1,19 +1,12 @@
-import { IOrder } from './IOrders'
+import { IProduct } from './IProducts'
 
 export interface INetwork {
   id?: string
-  socialName?: string
-  fantasyName?: string
-  cnpj?: string
-  discount?: number
-  network?: string
-  orders?: Array<IOrder>
+  name?: string
+  products?: Array<IProduct>
 }
 
 export interface IAddNetwork {
-  socialName: string
-  fantasyName: string
-  cnpj: string
-  discount: number
-  network?: string
+  name?: string
+  products?: Array<IProduct>
 }

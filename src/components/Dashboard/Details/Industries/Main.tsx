@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
+import mock from './Form/productsMock'
 
 import ProductCard from './Form/Products'
 import ProductForm from './Form/AddProduct'
@@ -30,6 +31,7 @@ const Main = () => {
       </div>
     )
   }
+  console.log(mock)
 
   return (
     <div className='max-w-[1400px] w-full'>

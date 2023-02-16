@@ -29,14 +29,18 @@ const ProductDetails = () => {
   const [code, setCode] = useState('')
   const [family, setFamily] = useState('')
   const [price, setPrice] = useState('')
-
+  const [minValue, setMinValue] = useState('')
+  const [unityType, setUnityType] = useState('')
+  console.log(product)
   useEffect(() => {
     if (product) {
-      setImage(product?.imagePath)
-      setName(product?.name)
-      setCode(product?.code)
-      setFamily(product?.family)
-      setPrice(product?.price)
+      setImage(product.imagePath || '')
+      setName(product.name || '')
+      setCode(product.code || '')
+      setFamily(product.family || '')
+      setPrice(product.price || '')
+      setMinValue(product.minValue || '')
+      setUnityType(product.unityType || '')
     }
   }, [product])
 
@@ -62,6 +66,8 @@ const ProductDetails = () => {
           industry: industryId,
           price: Number(price),
           family,
+          unityType,
+          minValue: Number(minValue),
         },
         productImg,
       )
@@ -72,6 +78,8 @@ const ProductDetails = () => {
         industry: industryId,
         price: Number(price),
         family,
+        unityType,
+        minValue: Number(minValue),
       })
     }
 
@@ -79,6 +87,7 @@ const ProductDetails = () => {
     setName('')
     setPrice('')
     setFamily('')
+    navigate(-1)
   }
 
   if (loading || !product)
@@ -155,6 +164,24 @@ const ProductDetails = () => {
               type='number'
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+            />
+          </label>
+          <label className='flex flex-col gap-2'>
+            <span className='text-sm text-gray-700'>Unidade</span>
+            <input
+              type='text'
+              value={unityType}
+              onChange={(e) => setUnityType(e.target.value)}
+              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+            />
+          </label>
+          <label className='flex flex-col gap-2'>
+            <span className='text-sm text-gray-700'>Embalagem</span>
+            <input
+              type='number'
+              value={minValue}
+              onChange={(e) => setMinValue(e.target.value)}
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             />
           </label>
