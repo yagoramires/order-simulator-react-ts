@@ -85,42 +85,62 @@ const Profile = () => {
         </div>
 
         <form onSubmit={handleUpdateProfile} className='flex flex-col w-full gap-4'>
-          <input
-            type='file'
-            placeholder='Nome'
-            className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-            onChange={handleSelectImage}
-          />
-          <input
-            type='text'
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-            placeholder='Nome'
-            className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-          />
-          <input
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder='E-mail'
-            className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-          />
-          <input
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder='Senha'
-            className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-            autoComplete='false'
-          />
-          <input
-            type='password'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder='Confirmação de senha'
-            className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-            autoComplete='false'
-          />
+          <label className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-500'>Imagem de perfil</span>
+
+            <input
+              type='file'
+              placeholder='Nome'
+              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+              onChange={handleSelectImage}
+            />
+          </label>
+          <label className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-500'>Nome</span>
+
+            <input
+              type='text'
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              placeholder='Nome'
+              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+            />
+          </label>
+          <label className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-500'>E-mail</span>
+
+            <input
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder='E-mail'
+              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+            />
+          </label>
+          <label className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-500'>Senha</span>
+
+            <input
+              type='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder='Senha'
+              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+              autoComplete='false'
+            />
+          </label>
+          <label className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-500'>Confirmação de senha</span>
+
+            <input
+              type='password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder='Confirmação de senha'
+              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+              autoComplete='false'
+            />
+          </label>
           {loadingImg || loadingName || loadingEmail || loadingPassword ? (
             <div className='flex justify-center w-full'>
               <Loading size='30px' />
