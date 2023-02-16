@@ -39,7 +39,7 @@ const Alert = ({ data }: AlertProps) => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger asChild>
-        <button className='flex items-center justify-center px-8 py-2 font-medium text-white duration-200 rounded cursor-pointer lg:bg-red-500 lg:h-12 lg:py-0'>
+        <button className='flex items-center justify-center px-8 py-2 font-medium text-white duration-200 rounded cursor-pointer lg:bg-red-500 lg:h-12 lg:py-0 text-gray-50'>
           <MdDeleteForever size={27} />
           <span className='hidden'>Remover</span>
         </button>

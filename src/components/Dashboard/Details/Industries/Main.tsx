@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
 
-import ProductCard from './Items/Products'
+import ProductCard from './Form/Products'
 import ProductForm from './Form/AddProduct'
 
 const Main = () => {

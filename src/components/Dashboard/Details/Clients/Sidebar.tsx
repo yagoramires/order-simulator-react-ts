@@ -4,7 +4,7 @@ import { IClients } from '../../../../interfaces'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import Alert from '../../Alert'
-import EditClient from './EditClient'
+import EditClient from './Form/EditClient'
 
 interface DataProps {
   client: IClients

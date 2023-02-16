@@ -9,7 +9,6 @@ import Alert from '../../../components/Dashboard/Alert'
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useFormatValue } from '../../../hooks/formatData/useFormatValue'
 import { IProduct } from '../../../interfaces'
-import { useDeleteDoc } from '../../../hooks/handleData/useDeleteDoc'
 
 const OrderDetails = () => {
   const navigate = useNavigate()
@@ -29,94 +28,89 @@ const OrderDetails = () => {
     )
 
   return (
-    <main className='bg-gradient-to-r from-blue-800 to-blue-600 h-[100vh] flex justify-center items-center'>
-      <div className='w-[90%] max-w-[1200px] bg-white flex  rounded-md shadow-md max-h-[90vh] items-center overflow-hidden'>
-        <div className='w-full bg-white p-8 flex flex-col gap-4 max-h-[90vh] items-center overflow-y-scroll'>
-          <button
-            onClick={() => navigate(-1)}
-            className='flex items-center justify-end w-full font-medium text-blue-600'
-          >
-            <MdKeyboardArrowLeft size={20} />
-            Voltar
-          </button>
-          <div className='flex flex-col gap-2 w-full max-w-[800px]'>
-            <div className='flex flex-col gap-1'>
-              <span className='md:md:text-xs text-zinc-400'>Número do pedido</span>
-              <span className='text-sm text-black'>{order.orderId}</span>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <span className='md:md:text-xs text-zinc-400'>Data</span>
-              <span className='text-sm text-black'>{formatDate(order.createdAt)}</span>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <span className='md:md:text-xs text-zinc-400'>Razão Social</span>
-              <span className='text-sm text-black'>{order.clientName}</span>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <span className='md:md:text-xs text-zinc-400'>Razão Social</span>
-              <span className='text-sm text-black'>{order.clientName}</span>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <span className='md:text-xs text-zinc-400'>CNPJ</span>
-              <span className='text-sm text-black'>{order.clientCnpj}</span>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <span className='md:text-xs text-zinc-400'>Prazo de pagamento</span>
-              <span className='text-sm text-black'>{order.deadline}</span>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <span className='md:text-xs text-zinc-400'>Indústria</span>
-              <span className='text-sm text-black'>{order.industryName}</span>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <span className='md:text-xs text-zinc-400'>Vendedor</span>
-              <span className='text-sm text-black'>{order.sellerId}</span>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <span className='md:text-xs text-zinc-400'>Total do pedido</span>
-              <span className='text-sm text-black'>{formatValue(order.total)}</span>
-            </div>
+    <div className='h-[100vh] flex flex-col justify-start items-center p-2 w-full overflow-auto'>
+      <div className='max-w-[800px] w-full lg:p-8'>
+        <button
+          onClick={() => navigate(-1)}
+          className='flex items-center justify-end w-full mb-8 font-medium text-gray-50'
+        >
+          <MdKeyboardArrowLeft size={20} />
+          Voltar
+        </button>
+
+        <div className='flex flex-col gap-2 w-full max-w-[800px]'>
+          <div className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-700'>Número do pedido</span>
+            <span className='text-gray-50'>{order.orderId}</span>
           </div>
-          <div className='w-full max-w-[800px] overflow-hidden rounded-md'>
-            {order && (
-              <div className='w-full overflow-y-scroll max-h-[200px] max-w-[800px] bg-zinc-200 rounded-md flex flex-col gap-2 p-2'>
-                {order?.products?.map((product: IProduct) => (
-                  <Link
-                    to={`/industries/${order.industryId}/${product.id}`}
-                    className='w-full p-2 bg-white rounded-md'
-                    key={product.id}
-                  >
-                    <div className='flex flex-col items-start justify-center w-[70%]  md:w-full'>
-                      <span className='text-xs text-zinc-400'>Produto</span>
-                      <span className='text-sm'>{product.name}</span>
-                    </div>
-                    <div className='flex md:hidden w-[30%] gap-4'>
-                      <div className='flex flex-col items-start justify-center'>
-                        <span className='text-xs text-zinc-400'>Vlr. un.</span>
-                        <span className='text-sm'>
-                          {product.price && formatValue(product.price)}
-                        </span>
-                      </div>
-                      <div className='flex flex-col items-start justify-center'>
-                        <span className='text-xs text-zinc-400'>Quantidade</span>
-                        <span className='text-sm'>{product.quantity}</span>
-                      </div>
-                      <div className='flex flex-col items-start justify-center'>
-                        <span className='text-xs text-zinc-400'>Total</span>
-                        <span className='text-sm'>
-                          {product.total && formatValue(product.total)}
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
+          <div className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-700'>Data</span>
+            <span className='text-gray-50'>{formatDate(order.createdAt)}</span>
+          </div>
+          <div className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-700'>Razão Social</span>
+            <span className='text-gray-50'>{order.clientName}</span>
+          </div>
+          <div className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-700'>Razão Social</span>
+            <span className='text-gray-50'>{order.clientName}</span>
+          </div>
+          <div className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-700'>CNPJ</span>
+            <span className='text-gray-50'>{order.clientCnpj}</span>
+          </div>
+          <div className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-700'>Prazo de pagamento</span>
+            <span className='text-gray-50'>{order.deadline}</span>
+          </div>
+          <div className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-700'>Indústria</span>
+            <span className='text-gray-50'>{order.industryName}</span>
+          </div>
+          <div className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-700'>Vendedor</span>
+            <span className='text-gray-50'>{order.sellerId}</span>
+          </div>
+          <div className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-700'>Total do pedido</span>
+            <span className='text-gray-50'>{formatValue(order.total)}</span>
+          </div>
+        </div>
+
+        <div className='w-full mt-4 overflow-hidden break-words bg-gray-900 rounded-md text-gray-50'>
+          {order && (
+            <div className='w-full overflow-y-scroll max-h-[600px] rounded-lg flex flex-col gap-2 p-2 productsScroll'>
+              <div className='flex items-start justify-center gap-2 px-2 text-gray-700'>
+                <span className='text-xs w-[50%]'>Produto</span>
+                <span className='text-xs w-[15%]'>Vlr. un.</span>
+                <span className='text-xs w-[15%]'>Quantidade</span>
+                <span className='text-xs w-[20%]'>Total</span>
               </div>
-            )}
-          </div>
+
+              {order?.products?.map((product: IProduct) => (
+                <Link
+                  to={`/industries/${order.industryId}/${product.id}`}
+                  className='flex items-start justify-center w-full gap-2 p-2 px-2 bg-white rounded-md'
+                  key={product.id}
+                >
+                  <span className='text-sm w-[50%]'>{product.name}</span>
+                  <span className='text-sm w-[15%]'>
+                    {product.price && formatValue(product.price)}
+                  </span>
+                  <span className='text-sm w-[15%]'>{product.quantity}</span>
+                  <span className='text-sm w-[20%]'>
+                    {product.total && formatValue(product.total)}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className='flex justify-center w-full my-4'>
           <Alert data={{ type: 'order', id: orderId || '', collectionId: order.clientId }} />
         </div>
       </div>
-    </main>
+    </div>
   )
 }
 

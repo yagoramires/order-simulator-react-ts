@@ -4,7 +4,7 @@ import { IIndustries } from '../../../../interfaces'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import Alert from '../../Alert'
-import EditIndustry from './EditIndustry'
+import EditIndustry from './Form/EditIndustry'
 
 interface DataProps {
   industry: IIndustries

@@ -59,6 +59,10 @@ select {
     background-color: #424242;
   }
 
+  .productsScroll::-webkit-scrollbar-track {
+    background-color: #212121;
+  }
+
 }
 
 .lds-ring {
