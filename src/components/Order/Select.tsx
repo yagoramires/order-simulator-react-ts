@@ -8,6 +8,10 @@ const Select = () => {
   const [deadlineDropdown, setDeadlineDropdown] = useState(false)
   const [industryDropdown, setIndustryDropdown] = useState(false)
 
+  const [industry, setIndustry] = useState('')
+  const [deadline, setDeadline] = useState('')
+  const [client, setClient] = useState('')
+
   const {
     createNewOrder,
     selectedClient,
@@ -22,6 +26,23 @@ const Select = () => {
   const { industries } = useFetchCollection('industries')
   const { clients } = useFetchCollection('clients')
   const { deadlines } = useFetchCollection('deadlines')
+
+  const industriesFilter =
+    industry.length > 0
+      ? industries.filter((item) =>
+          item.fantasyName?.toLowerCase().includes(industry.toLowerCase()),
+        )
+      : []
+
+  const deadlinesFilter =
+    deadline.length > 0
+      ? deadlines.filter((item) => item.value?.toLowerCase().includes(deadline.toLowerCase()))
+      : []
+
+  const clientsFilter =
+    client.length > 0
+      ? clients.filter((item) => item.socialName?.toLowerCase().includes(client.toLowerCase()))
+      : []
 
   const handleSelectClient = (id: string, socialName: string, cnpj: string) => {
     setSelectedClient({
@@ -51,7 +72,7 @@ const Select = () => {
       <div className='flex items-start justify-center w-full gap-2'>
         <div className='relative w-[50%]'>
           <span className='text-xs text-gray-500 lg:text-sm'>Indústria</span>
-          <div
+          {/* <div
             className='flex items-center justify-between p-2 break-words bg-gray-800 rounded-lg'
             onClick={() => {
               setIndustryDropdown(!industryDropdown)
@@ -61,29 +82,38 @@ const Select = () => {
           >
             <span>{selectedIndustry.fantasyName}</span>
             <RiArrowDownSLine />
-          </div>
+          </div> */}
+          <input
+            type='text'
+            value={industry}
+            onChange={(e) => {
+              setIndustry(e.target.value)
+              setIndustryDropdown(true)
+              setClientDropdown(false)
+              setDeadlineDropdown(false)
+            }}
+            placeholder='Indústria'
+            className='flex items-center justify-between w-full p-2 break-words bg-gray-800 rounded-lg'
+          />
           <ul
             className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] md:max-h-[100px]  overflow-y-auto shadow-md flex flex-col gap-1 ${
-              industryDropdown ? '' : 'hidden'
-            }`}
+              industryDropdown ? '' : 'hidden '
+            } ${industriesFilter.length === 0 && 'hidden'}`}
           >
-            {industries?.map((industry) => (
+            {industriesFilter?.map((industry) => (
               <li
                 key={industry.id}
                 className='w-full px-2 bg-gray-700 rounded-lg cursor-pointer lg:p-2'
+                onClick={() => {
+                  handleSelectedIndustry(
+                    industry.id || '',
+                    industry.fantasyName || '',
+                    industry.cnpj || '',
+                  )
+                  setIndustry(industry.fantasyName || '')
+                }}
               >
-                <span
-                  onClick={() =>
-                    handleSelectedIndustry(
-                      industry.id || '',
-                      industry.fantasyName || '',
-                      industry.cnpj || '',
-                    )
-                  }
-                  className='break-words'
-                >
-                  {industry.fantasyName}
-                </span>
+                <span className='break-words'>{industry.fantasyName}</span>
               </li>
             ))}
           </ul>
@@ -91,7 +121,7 @@ const Select = () => {
 
         <div className='relative w-[50%]'>
           <span className='text-xs text-gray-500 lg:text-sm'>Prazo de pagamento</span>
-          <div
+          {/* <div
             className='flex items-center justify-between p-2 break-words bg-gray-800 rounded-lg'
             onClick={() => {
               setDeadlineDropdown(!deadlineDropdown)
@@ -101,23 +131,34 @@ const Select = () => {
           >
             <span>{selectedDeadline.value}</span>
             <RiArrowDownSLine />
-          </div>
+          </div> */}
+          <input
+            type='text'
+            value={deadline}
+            onChange={(e) => {
+              setDeadline(e.target.value)
+              setIndustryDropdown(false)
+              setClientDropdown(false)
+              setDeadlineDropdown(true)
+            }}
+            placeholder='Prazo de pagamento'
+            className='flex items-center justify-between w-full p-2 break-words bg-gray-800 rounded-lg'
+          />
           <ul
             className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] md:max-h-[100px]  overflow-y-auto shadow-md flex flex-col gap-1 ${
               deadlineDropdown ? '' : 'hidden'
             }`}
           >
-            {deadlines?.map((deadline) => (
+            {deadlinesFilter?.map((deadline) => (
               <li
                 key={deadline.id}
                 className='w-full px-2 bg-gray-700 rounded-lg cursor-pointer lg:p-2'
+                onClick={() => {
+                  handleSelectDeadline(deadline.id || '', deadline.value || '')
+                  setDeadline(deadline.value || '')
+                }}
               >
-                <span
-                  onClick={() => handleSelectDeadline(deadline.id || '', deadline.value || '')}
-                  className='break-words'
-                >
-                  {deadline.value}
-                </span>
+                <span className='break-words'>{deadline.value}</span>
               </li>
             ))}
           </ul>
@@ -126,7 +167,7 @@ const Select = () => {
 
       <div className='relative'>
         <span className='text-xs text-gray-500 lg:text-sm'>Cliente</span>
-        <div
+        {/* <div
           className='flex items-center justify-between p-2 break-words bg-gray-800 rounded-lg'
           onClick={() => {
             setClientDropdown(!clientDropdown)
@@ -136,25 +177,34 @@ const Select = () => {
         >
           <span>{selectedClient.socialName}</span>
           <RiArrowDownSLine />
-        </div>
+        </div> */}
+        <input
+          type='text'
+          value={client}
+          onChange={(e) => {
+            setClient(e.target.value)
+            setIndustryDropdown(false)
+            setClientDropdown(true)
+            setDeadlineDropdown(false)
+          }}
+          placeholder='Cliente'
+          className='flex items-center justify-between w-full p-2 break-words bg-gray-800 rounded-lg'
+        />
         <ul
           className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] overflow-y-auto shadow-md flex flex-col gap-1 ${
             clientDropdown ? '' : 'hidden'
           }`}
         >
-          {clients?.map((client) => (
+          {clientsFilter?.map((client) => (
             <li
               key={client.id}
               className='w-full px-2 bg-gray-700 rounded-lg cursor-pointer lg:p-2'
+              onClick={() => {
+                handleSelectClient(client.id || '', client.socialName || '', client.cnpj || '')
+                setClient(client.socialName || '')
+              }}
             >
-              <span
-                onClick={() =>
-                  handleSelectClient(client.id || '', client.socialName || '', client.cnpj || '')
-                }
-                className='break-words'
-              >
-                {client.socialName}
-              </span>
+              <span className='break-words'>{client.socialName}</span>
             </li>
           ))}
         </ul>
