@@ -89,40 +89,57 @@ const AddProduct = () => {
             )}
           </div>
           <form className='flex flex-col w-full gap-4' onSubmit={handleClient}>
-            <input
-              type='file'
-              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-              onChange={handleSelectImage}
-            />
-            <input
-              type='text'
-              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-              placeholder='Código'
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-            />
-            <input
-              type='text'
-              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-              placeholder='Nome'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type='number'
-              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-              placeholder='Preço'
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-            <input
-              type='text'
-              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-              placeholder='Linha'
-              value={family}
-              onChange={(e) => setFamily(e.target.value)}
-            />
+            <label className='flex flex-col gap-1'>
+              <span className='text-sm text-gray-500'>Imagem</span>
+              <input
+                type='file'
+                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                onChange={handleSelectImage}
+              />
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='text-sm text-gray-500'>Código</span>
 
+              <input
+                type='text'
+                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                placeholder='Código'
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+              />
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='text-sm text-gray-500'>Nome</span>
+
+              <input
+                type='text'
+                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                placeholder='Nome'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='text-sm text-gray-500'>Preço unitário</span>
+
+              <input
+                type='number'
+                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                placeholder='Preço'
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='text-sm text-gray-500'>Linha</span>
+              <input
+                type='text'
+                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                placeholder='Linha'
+                value={family}
+                onChange={(e) => setFamily(e.target.value)}
+              />
+            </label>
             <input
               type='submit'
               className='p-2 font-bold bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
