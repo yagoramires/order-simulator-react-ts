@@ -54,6 +54,7 @@ const AddProduct = () => {
     setName('')
     setPrice('')
     setFamily('')
+    setProductImage(null)
     setOpen(false)
   }
 
