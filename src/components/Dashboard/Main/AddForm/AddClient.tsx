@@ -15,7 +15,10 @@ const AddClient = () => {
   const [cnpj, setCnpj] = useState('')
   const [network, setNetwork] = useState('')
   const [engefer, setEngefer] = useState(false)
-  const [discount, setDiscount] = useState(0)
+  const [deadline, setDeadline] = useState('')
+  const [discountA, setDiscountA] = useState(0)
+  const [discountB, setDiscountB] = useState(0)
+  const [discountC, setDiscountC] = useState(0)
 
   const [open, setOpen] = useState(false)
 
@@ -34,14 +37,20 @@ const AddClient = () => {
       cnpj,
       network,
       engefer,
-      discount,
+      deadline,
+      discountA,
+      discountB,
+      discountC,
     })
 
     setCode('')
     setSocialName('')
     setCnpj('')
     setNetwork('')
-    setDiscount(0)
+    setDiscountA(0)
+    setDiscountB(0)
+    setDiscountC(0)
+    setDeadline('')
     setEngefer(false)
     setOpen(false)
   }
@@ -115,15 +124,50 @@ const AddClient = () => {
               </select>
             </label>
             <label className='flex flex-col gap-1'>
-              <span className='text-sm text-gray-500'>Desconto adicional</span>
+              <span className='text-sm text-gray-500'>Prazo padrão</span>
               <input
                 type='number'
                 className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-                placeholder='Desconto'
-                value={discount}
-                onChange={(e) => setDiscount(+e.target.value)}
+                placeholder='Prazo de pagamento'
+                value={deadline}
+                onChange={(e) => setDeadline(e.target.value)}
               />
             </label>
+            <div className='flex items-center justify-between w-full'>
+              <label className='flex flex-col gap-1'>
+                <span className='text-sm text-gray-500'>Desconto Ilumi</span>
+                <input
+                  type='number'
+                  className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                  placeholder='Desconto ilumi'
+                  value={discountA}
+                  onChange={(e) => setDiscountA(+e.target.value)}
+                  min={0}
+                />
+              </label>
+              <label className='flex flex-col gap-1'>
+                <span className='text-sm text-gray-500'>Desconto adicional</span>
+                <input
+                  type='number'
+                  className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                  placeholder='Desconto adicional'
+                  value={discountB}
+                  onChange={(e) => setDiscountB(+e.target.value)}
+                  min={0}
+                />
+              </label>
+              <label className='flex flex-col gap-1'>
+                <span className='text-sm text-gray-500'>Desconto à vista</span>
+                <input
+                  type='number'
+                  className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                  placeholder='Desconto à vista'
+                  value={discountC}
+                  onChange={(e) => setDiscountC(+e.target.value)}
+                  min={0}
+                />
+              </label>
+            </div>
 
             <input
               type='submit'

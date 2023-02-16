@@ -20,7 +20,9 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
   const [cnpj, setCnpj] = useState(clientData.cnpj)
   const [network, setNetwork] = useState(clientData.network)
   const [engefer, setEngefer] = useState(clientData.engefer)
-  const [discount, setDiscount] = useState(clientData.discount)
+  const [discountA, setDiscountA] = useState(clientData.discountA)
+  const [discountB, setDiscountB] = useState(clientData.discountB)
+  const [discountC, setDiscountC] = useState(clientData.discountC)
 
   const [open, setOpen] = useState(false)
 
@@ -37,7 +39,9 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
       cnpj,
       network,
       engefer,
-      discount,
+      discountA,
+      discountB,
+      discountC,
     })
 
     setNetwork('')
@@ -116,7 +120,7 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
                 <option value='false'>Não</option>
               </select>
             </label>
-            <label className='flex flex-col gap-1'>
+            {/* <label className='flex flex-col gap-1'>
               <span className='text-sm text-gray-500'>Desconto</span>
               <input
                 type='number'
@@ -125,7 +129,7 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
                 value={discount}
                 onChange={(e) => setDiscount(+e.target.value)}
               />
-            </label>
+            </label> */}
             <input
               type='submit'
               className='p-2 mt-2 font-bold bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'

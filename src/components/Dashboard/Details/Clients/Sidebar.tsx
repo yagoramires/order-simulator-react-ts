@@ -47,14 +47,14 @@ const Sidebar = ({ client }: DataProps) => {
             <span className='text-xs text-gray-600'>Engefer</span>
             <span className='text-sm font-medium'>{client.engefer ? 'Sim' : 'Não'}</span>
           </div>
-          <div className='flex flex-col'>
+          {/* <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>Desconto adicional</span>
             <span className='text-sm font-medium'>
               {client.discount && client.discount > 0
                 ? `${client.discount} %`
                 : 'Sem desconto adicional'}
             </span>
-          </div>
+          </div> */}
         </div>
         <div className='flex items-center justify-center gap-2 lg:mt-8'>
           <EditClient clientId={clientId || ''} clientData={client} />

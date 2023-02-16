@@ -5,9 +5,12 @@ export interface IClients {
   code?: string
   socialName?: string
   cnpj?: string
-  discount?: number
   network?: string
   engefer?: boolean
+  discountA?: number
+  discountB?: number
+  discountC?: number
+  deadline?: string
   orders?: Array<IOrder>
 }
 
@@ -15,7 +18,10 @@ export interface IAddClient {
   code: string
   socialName: string
   cnpj: string
-  discount: number
   network?: string
-  engefer?: boolean
+  deadline: string
+  engefer: boolean
+  discountA: number
+  discountB: number
+  discountC: number
 }
