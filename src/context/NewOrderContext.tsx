@@ -124,9 +124,13 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
       orderId: `${orderId}`,
     }
 
-    console.log(data)
-
     addOrder(data)
+
+    setProductsArray([])
+    setSelectedIndustry(initialValue.selectedIndustry)
+    setSelectedClient(initialValue.selectedClient)
+    setSelectedDeadline(initialValue.selectedDeadline)
+    setTotal(initialValue.total)
 
     navigate('/orders')
   }
