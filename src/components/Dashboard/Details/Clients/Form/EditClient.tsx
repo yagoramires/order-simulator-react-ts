@@ -54,7 +54,7 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='fixed inset-0 bg-black/80' />
-        <Dialog.Content className='fixed bg-white top-1/2 w-[90%] max-w-[800px] rounded-lg shadow-md p-8 translate-x-[-50%] translate-y-[-50%] left-1/2 z-10 bg-gray-800'>
+        <Dialog.Content className='fixed top-1/2 w-[90%] max-w-[800px] rounded-lg shadow-md p-8 translate-x-[-50%] translate-y-[-50%] left-1/2 z-10 bg-gray-800'>
           <Dialog.Title className='flex justify-between mb-4 font-bold text-gray-50'>
             <Dialog.Close className='flex justify-between w-full mb-4'>
               Editar cliente
