@@ -99,7 +99,6 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
   }, [productsArray])
 
   const createNewOrder = () => {
-    console.log('teste')
     if (!selectedIndustry?.fantasyName) return toast.error('Selecione uma indústria!')
     if (selectedClient.id === '') return toast.error('Selecione um cliente!')
     if (selectedDeadline.value === 'Selecione um prazo de pagamento')
@@ -107,8 +106,13 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
     if (productsArray.length === 0) return toast.error('Selecione pelo menos um produto!')
     if (!total || total === 0) return toast.error('Ocorreu um erro, tente novamente!')
 
-    const lastOrder = orders[orders.length - 1]
-    const orderId = lastOrder.orderId ? +lastOrder.orderId + 1 : 1
+    let orderId
+    if (orders.length > 0) {
+      const lastOrder = orders[orders.length - 1]
+      orderId = lastOrder.orderId ? +lastOrder.orderId + 1 : 1
+    } else {
+      orderId = 1
+    }
 
     const data = {
       clientId: selectedClient.id,
