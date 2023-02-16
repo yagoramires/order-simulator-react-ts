@@ -28,12 +28,12 @@ const Sidebar = ({ client }: DataProps) => {
       <div className='lg:mt-8'>
         <div className='flex-col hidden gap-4 lg:flex'>
           <div className='flex flex-col'>
+            <span className='text-xs text-gray-600'>Código</span>
+            <span className='text-sm font-medium'>{client.code}</span>
+          </div>
+          <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>Razão Social</span>
             <span className='text-sm font-medium'>{client.socialName}</span>
-          </div>
-          <div className='flex flex-col md:hidden'>
-            <span className='text-xs text-gray-600'>Nome Fantasia</span>
-            <span className='text-sm font-medium'>{client.fantasyName}</span>
           </div>
           <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>CNPJ</span>
@@ -42,6 +42,18 @@ const Sidebar = ({ client }: DataProps) => {
           <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>Rede</span>
             <span className='text-sm font-medium'>{client.network || 'SEM REDE'}</span>
+          </div>
+          <div className='flex flex-col'>
+            <span className='text-xs text-gray-600'>Engefer</span>
+            <span className='text-sm font-medium'>{client.engefer ? 'Sim' : 'Não'}</span>
+          </div>
+          <div className='flex flex-col'>
+            <span className='text-xs text-gray-600'>Desconto adicional</span>
+            <span className='text-sm font-medium'>
+              {client.discount && client.discount > 0
+                ? `${client.discount} %`
+                : 'Sem desconto adicional'}
+            </span>
           </div>
         </div>
         <div className='flex items-center justify-center gap-2 lg:mt-8'>

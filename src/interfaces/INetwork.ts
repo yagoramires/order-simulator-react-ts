@@ -1,21 +1,19 @@
 import { IOrder } from './IOrders'
 
-export interface IClients {
+export interface INetwork {
   id?: string
-  code?: string
   socialName?: string
+  fantasyName?: string
   cnpj?: string
   discount?: number
   network?: string
-  engefer?: boolean
   orders?: Array<IOrder>
 }
 
-export interface IAddClient {
-  code: string
+export interface IAddNetwork {
   socialName: string
+  fantasyName: string
   cnpj: string
   discount: number
   network?: string
-  engefer?: boolean
 }
