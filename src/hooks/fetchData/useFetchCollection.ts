@@ -19,6 +19,7 @@ export const useFetchCollection = (docCollection: string) => {
   const [clients, setClients] = useState<interfaces.IClients[]>([])
   const [deadlines, setDeadlines] = useState<interfaces.IDeadlines[]>([])
   const [products, setProducts] = useState<interfaces.IProduct[]>([])
+  const [networks, setNetworks] = useState<interfaces.INetworks[]>([])
 
   useEffect(() => {
     if (docCollection === '') return
@@ -46,6 +47,8 @@ export const useFetchCollection = (docCollection: string) => {
             setDeadlines(snapshot)
           } else if (docCollection.includes('products')) {
             setProducts(snapshot)
+          } else if (docCollection.includes('networks')) {
+            setNetworks(snapshot)
           }
         })
       } catch (e: any) {
@@ -55,5 +58,5 @@ export const useFetchCollection = (docCollection: string) => {
     fetchData()
   }, [docCollection])
 
-  return { industries, clients, deadlines, orders, products, clientOrders }
+  return { industries, clients, deadlines, orders, products, clientOrders, networks }
 }

@@ -5,8 +5,15 @@ import { database, storage } from '../../firebase/config'
 
 import { toast } from 'react-toastify'
 
-import { IAddDeadline, IAddClient, IAddIndustry, IAddProduct } from '../../interfaces/index'
+import {
+  IAddDeadline,
+  IAddClient,
+  IAddIndustry,
+  IAddProduct,
+  IAddNetwork,
+} from '../../interfaces/index'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { IAddNetworkProduct } from '../../interfaces/INetworks'
 
 export const useAddDoc = () => {
   const [loading, setLoading] = useState(false)
@@ -109,5 +116,44 @@ export const useAddDoc = () => {
     }
   }
 
-  return { addClient, addIndustry, addProduct, addDeadline, progress, loading }
+  const addNetwork = async (networkData: IAddNetwork) => {
+    setLoading(true)
+    try {
+      const ref = collection(database, 'networks')
+      const data = { ...networkData, createdAt: Timestamp.now() }
+      await addDoc(ref, data)
+
+      toast.success('Rede adicionada com sucesso!')
+      setLoading(false)
+    } catch (e: any) {
+      toast.error(e.message)
+      setLoading(false)
+    }
+  }
+
+  const addProductNetwork = async (networkData: IAddNetworkProduct) => {
+    setLoading(true)
+    try {
+      const ref = collection(database, `networks/${networkData.networkId}/products`)
+      const data = { ...networkData, createdAt: Timestamp.now() }
+      await addDoc(ref, data)
+
+      toast.success('Rede adicionada com sucesso!')
+      setLoading(false)
+    } catch (e: any) {
+      toast.error(e.message)
+      setLoading(false)
+    }
+  }
+
+  return {
+    addClient,
+    addIndustry,
+    addProduct,
+    addDeadline,
+    addNetwork,
+    addProductNetwork,
+    progress,
+    loading,
+  }
 }

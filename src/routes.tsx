@@ -13,6 +13,7 @@ import Login from './pages/Login/Login'
 import Order from './pages/Order/Order'
 import Dashboard from './pages/Dashboard/Dashboard'
 import ClientDetails from './pages/Dashboard/Details/ClientDetails'
+import NetworkDetails from './pages/Dashboard/Details/NetworkDetails'
 import OrderDetails from './pages/Dashboard/Details/OrderDetails'
 import ProductDetails from './pages/Dashboard/Details/ProductDetails'
 import Profile from './pages/Dashboard/Profile'
@@ -21,6 +22,7 @@ import Industries from './components/Dashboard/Main/Industries'
 import Clients from './components/Dashboard/Main/Clients'
 import Deadlines from './components/Dashboard/Main/Deadlines'
 import Orders from './components/Dashboard/Main/Orders'
+import Networks from './components/Dashboard/Main/Networks'
 
 const routes = () => {
   const { user } = useContext(AuthContext)
@@ -47,12 +49,14 @@ const routes = () => {
             <Route path='industries' element={<Industries />} />
             <Route path='clients' element={<Clients />} />
             <Route path='deadlines' element={<Deadlines />} />
+            <Route path='networks' element={<Networks />} />
           </Route>
 
           <Route path='industries/:industryId' element={<IndustryDetails />} />
           <Route path='industries/:industryId/product/:productId' element={<ProductDetails />} />
           <Route path='orders/:orderId' element={<OrderDetails />} />
           <Route path='clients/:clientId' element={<ClientDetails />} />
+          <Route path='networks/:networkId' element={<NetworkDetails />} />
         </>
       )}
     </Routes>

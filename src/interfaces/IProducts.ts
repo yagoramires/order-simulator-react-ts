@@ -19,6 +19,7 @@ export interface IAddProduct {
   code: string
   name: string
   family?: string
+  discount?: number
   unityType: string
   minValue: number
   price: number

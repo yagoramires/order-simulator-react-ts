@@ -6,7 +6,14 @@ import { Link } from 'react-router-dom'
 
 import { BsCartCheckFill } from 'react-icons/bs'
 import { MdLogout } from 'react-icons/md'
-import { FaPlus, FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit } from 'react-icons/fa'
+import {
+  FaPlus,
+  FaIndustry,
+  FaUserAlt,
+  FaRegCalendarAlt,
+  FaEdit,
+  FaLayerGroup,
+} from 'react-icons/fa'
 
 const Sidebar = () => {
   const { userData } = useContext(AuthContext)
@@ -32,6 +39,11 @@ const Sidebar = () => {
       icon: <FaUserAlt size={22} />,
       text: 'Clientes',
       path: 'clients',
+    },
+    {
+      icon: <FaLayerGroup size={22} />,
+      text: 'Redes',
+      path: 'networks',
     },
     {
       icon: <FaRegCalendarAlt size={22} />,

@@ -52,6 +52,19 @@ export const useEditDoc = () => {
     }
   }
 
+  const editNetwork = async (id: string, data: any) => {
+    setLoading(true)
+    try {
+      const ref = doc(database, 'networks', id)
+      await updateDoc(ref, data)
+      toast.success('Cliente alterado com sucesso!')
+      setLoading(false)
+    } catch (e: any) {
+      toast.error('Erro ao editar a rede, tente novamente!')
+      setLoading(false)
+    }
+  }
+
   const editProduct = async (industryId: string, productId: string, data: any, img?: File) => {
     setLoading(true)
 
@@ -84,7 +97,6 @@ export const useEditDoc = () => {
           },
         )
       } catch (e: any) {
-        console.log(e.message)
         toast.error('Erro ao editar o produto, tente novamente!')
         setLoading(false)
       }
@@ -101,5 +113,5 @@ export const useEditDoc = () => {
     }
   }
 
-  return { editIndustry, editClient, editDeadline, editProduct, progress, loading }
+  return { editIndustry, editClient, editDeadline, editProduct, editNetwork, progress, loading }
 }

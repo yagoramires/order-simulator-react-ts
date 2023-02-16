@@ -31,7 +31,7 @@ const ProductDetails = () => {
   const [price, setPrice] = useState('')
   const [minValue, setMinValue] = useState('')
   const [unityType, setUnityType] = useState('')
-  console.log(product)
+
   useEffect(() => {
     if (product) {
       setImage(product.imagePath || '')

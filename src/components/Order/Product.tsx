@@ -16,8 +16,6 @@ const Product = ({ product }: ProductProps) => {
 
   const { productsArray, setProductsArray, selectedClient } = useContext(NewOrderContext)
 
-  console.log(selectedClient)
-
   useEffect(() => {
     setTotal(quantity * (product.price || 0))
   }, [quantity])
@@ -56,7 +54,7 @@ const Product = ({ product }: ProductProps) => {
           ? discount - discount * (selectedClient.discountA / 100)
           : discount
     }
-    console.log(discount)
+
     if (selectedClient.discountB) {
       discount =
         selectedClient.discountB > 0
