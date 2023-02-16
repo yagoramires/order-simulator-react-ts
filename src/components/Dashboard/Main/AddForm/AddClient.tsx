@@ -14,7 +14,7 @@ const AddClient = () => {
   const [socialName, setSocialName] = useState('')
   const [cnpj, setCnpj] = useState('')
   const [network, setNetwork] = useState('')
-  const [engefer, setEngefer] = useState(false)
+  const [engefer, setEngefer] = useState('false')
   const [deadline, setDeadline] = useState('')
   const [discountA, setDiscountA] = useState(0)
   const [discountB, setDiscountB] = useState(0)
@@ -51,7 +51,7 @@ const AddClient = () => {
     setDiscountB(0)
     setDiscountC(0)
     setDeadline('')
-    setEngefer(false)
+    setEngefer('false')
     setOpen(false)
   }
 
@@ -116,8 +116,8 @@ const AddClient = () => {
               <span className='text-sm text-gray-500'>Cliente Engefer</span>
               <select
                 className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-                value={`${engefer}`}
-                onChange={(e) => setEngefer(Boolean(e.target.value))}
+                value={engefer}
+                onChange={(e) => setEngefer(e.target.value)}
               >
                 <option value='true'>Sim</option>
                 <option value='false'>Não</option>
@@ -126,7 +126,7 @@ const AddClient = () => {
             <label className='flex flex-col gap-1'>
               <span className='text-sm text-gray-500'>Prazo padrão</span>
               <input
-                type='number'
+                type='text'
                 className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
                 placeholder='Prazo de pagamento'
                 value={deadline}

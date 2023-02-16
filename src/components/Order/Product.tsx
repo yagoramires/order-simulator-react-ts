@@ -14,7 +14,9 @@ const Product = ({ product }: ProductProps) => {
   const [quantity, setQuantity] = useState(0)
   const [total, setTotal] = useState(0)
 
-  const { productsArray, setProductsArray } = useContext(NewOrderContext)
+  const { productsArray, setProductsArray, selectedClient } = useContext(NewOrderContext)
+
+  console.log(selectedClient)
 
   useEffect(() => {
     setTotal(quantity * (product.price || 0))
@@ -44,6 +46,36 @@ const Product = ({ product }: ProductProps) => {
     }
   }
 
+  const calculatePriceWithDiscount = (price: number) => {
+    if (!selectedClient) return price
+
+    let discount = price
+    if (selectedClient.discountA) {
+      discount =
+        selectedClient.discountA > 0
+          ? discount - discount * (selectedClient.discountA / 100)
+          : discount
+    }
+    console.log(discount)
+    if (selectedClient.discountB) {
+      discount =
+        selectedClient.discountB > 0
+          ? discount - discount * (selectedClient.discountB / 100)
+          : discount
+    }
+    if (selectedClient.discountC) {
+      discount =
+        selectedClient.discountC > 0
+          ? discount - discount * (selectedClient.discountC / 100)
+          : discount
+    }
+    if (selectedClient.engefer) {
+      discount = discount * 1.12
+    }
+
+    return discount
+  }
+
   return (
     <div className='flex items-center justify-start min-w-[600px] w-full gap-2 p-2 bg-gray-900 text-gray-50 rounded-lg'>
       {product.imagePath ? (
@@ -57,7 +89,10 @@ const Product = ({ product }: ProductProps) => {
       <span className='w-32 lg:w-52'>{product.code}</span>
       <span className='w-52 lg:w-full'>{product.name}</span>
       <span className='w-24 '>
-        {(product.price || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+        {calculatePriceWithDiscount(product.price || 0).toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        })}
       </span>
       <input
         type='number'

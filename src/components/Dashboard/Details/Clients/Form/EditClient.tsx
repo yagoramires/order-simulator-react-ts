@@ -15,15 +15,15 @@ interface ClientProps {
 }
 
 const EditClient = ({ clientId, clientData }: ClientProps) => {
-  const [code, setCode] = useState(clientData.code)
-  const [socialName, setSocialName] = useState(clientData.socialName)
-  const [cnpj, setCnpj] = useState(clientData.cnpj)
-  const [network, setNetwork] = useState(clientData.network)
+  const [code, setCode] = useState(clientData.code || '')
+  const [socialName, setSocialName] = useState(clientData.socialName || '')
+  const [cnpj, setCnpj] = useState(clientData.cnpj || '')
+  const [network, setNetwork] = useState(clientData.network || '')
   const [engefer, setEngefer] = useState(clientData.engefer)
-  const [deadline, setDeadline] = useState('')
-  const [discountA, setDiscountA] = useState(0)
-  const [discountB, setDiscountB] = useState(0)
-  const [discountC, setDiscountC] = useState(0)
+  const [deadline, setDeadline] = useState(clientData.deadline || '')
+  const [discountA, setDiscountA] = useState(clientData.discountA || '')
+  const [discountB, setDiscountB] = useState(clientData.discountB || '')
+  const [discountC, setDiscountC] = useState(clientData.discountC || '')
 
   const [open, setOpen] = useState(false)
 
@@ -46,15 +46,15 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
       discountC,
     })
 
-    setCode('')
-    setSocialName('')
-    setCnpj('')
-    setNetwork('')
-    setDiscountA(0)
-    setDiscountB(0)
-    setDiscountC(0)
-    setDeadline('')
-    setEngefer(false)
+    // setCode('')
+    // setSocialName('')
+    // setCnpj('')
+    // setNetwork('')
+    // setDiscountA(0)
+    // setDiscountB(0)
+    // setDiscountC(0)
+    // setDeadline('')
+    // setEngefer('false')
     setOpen(false)
   }
 
@@ -121,8 +121,8 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
               <select
                 className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
                 placeholder='Rede'
-                value={`${engefer}`}
-                onChange={(e) => setEngefer(Boolean(e.target.value))}
+                value={engefer}
+                onChange={(e) => setEngefer(e.target.value)}
               >
                 <option value='true'>Sim</option>
                 <option value='false'>Não</option>
@@ -131,7 +131,7 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
             <label className='flex flex-col gap-1'>
               <span className='text-sm text-gray-500'>Prazo padrão</span>
               <input
-                type='number'
+                type='text'
                 className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
                 placeholder='Prazo de pagamento'
                 value={deadline}

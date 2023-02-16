@@ -1,7 +1,8 @@
 import { useState, useContext } from 'react'
-import { RiArrowDownSLine } from 'react-icons/ri'
+// import { RiArrowDownSLine } from 'react-icons/ri'
 import { NewOrderContext } from '../../context/NewOrderContext'
 import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
+import { IClients } from '../../interfaces'
 
 const Select = () => {
   const [clientDropdown, setClientDropdown] = useState(false)
@@ -12,16 +13,8 @@ const Select = () => {
   const [deadline, setDeadline] = useState('')
   const [client, setClient] = useState('')
 
-  const {
-    createNewOrder,
-    selectedClient,
-    setSelectedClient,
-    selectedIndustry,
-    setSelectedIndustry,
-    selectedDeadline,
-    setSelectedDeadline,
-    total,
-  } = useContext(NewOrderContext)
+  const { createNewOrder, setSelectedClient, setSelectedIndustry, setSelectedDeadline, total } =
+    useContext(NewOrderContext)
 
   const { industries } = useFetchCollection('industries')
   const { clients } = useFetchCollection('clients')
@@ -44,12 +37,8 @@ const Select = () => {
       ? clients.filter((item) => item.socialName?.toLowerCase().includes(client.toLowerCase()))
       : []
 
-  const handleSelectClient = (id: string, socialName: string, cnpj: string) => {
-    setSelectedClient({
-      id,
-      socialName,
-      cnpj,
-    })
+  const handleSelectClient = (client: IClients) => {
+    setSelectedClient(client)
     setClientDropdown(false)
   }
 
@@ -200,7 +189,7 @@ const Select = () => {
               key={client.id}
               className='w-full px-2 bg-gray-700 rounded-lg cursor-pointer lg:p-2'
               onClick={() => {
-                handleSelectClient(client.id || '', client.socialName || '', client.cnpj || '')
+                handleSelectClient(client)
                 setClient(client.socialName || '')
               }}
             >

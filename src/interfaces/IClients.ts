@@ -6,7 +6,7 @@ export interface IClients {
   socialName?: string
   cnpj?: string
   network?: string
-  engefer?: boolean
+  engefer?: string
   discountA?: number
   discountB?: number
   discountC?: number
@@ -20,7 +20,7 @@ export interface IAddClient {
   cnpj: string
   network?: string
   deadline: string
-  engefer: boolean
+  engefer: string
   discountA: number
   discountB: number
   discountC: number
