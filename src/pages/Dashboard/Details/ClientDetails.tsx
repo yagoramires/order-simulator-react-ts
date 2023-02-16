@@ -29,11 +29,11 @@ const ClientDetails = () => {
   }
 
   return (
-    <div className='flex'>
+    <div className='flex w-full'>
       {client && (
         <>
           <Sidebar client={client} />
-          <div className='lg:flex lg:items-center lg:justify-center lg:w-full'>
+          <div className='w-full lg:flex lg:items-center lg:justify-center'>
             <Main />
           </div>
         </>
