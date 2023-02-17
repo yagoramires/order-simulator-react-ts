@@ -131,28 +131,12 @@ export const useAddDoc = () => {
     }
   }
 
-  const addProductNetwork = async (networkData: IAddNetworkProduct) => {
-    setLoading(true)
-    try {
-      const ref = collection(database, `networks/${networkData.networkId}/products`)
-      const data = { ...networkData, createdAt: Timestamp.now() }
-      await addDoc(ref, data)
-
-      toast.success('Rede adicionada com sucesso!')
-      setLoading(false)
-    } catch (e: any) {
-      toast.error(e.message)
-      setLoading(false)
-    }
-  }
-
   return {
     addClient,
     addIndustry,
     addProduct,
     addDeadline,
     addNetwork,
-    addProductNetwork,
     progress,
     loading,
   }

@@ -6,6 +6,7 @@ export interface INetworks {
 
 export interface IAddNetwork {
   name?: string
+  products?: Array<INetworkProduct>
 }
 
 export interface INetworkProduct {

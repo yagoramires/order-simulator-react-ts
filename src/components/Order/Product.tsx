@@ -73,13 +73,13 @@ const Product = ({ product }: ProductProps) => {
       discount = discount * 1.12
     }
 
-    if (selectedClient.network) {
-      const getClientNetwork = networks.filter(
-        (network) => network.name?.toLowerCase() === selectedClient.network?.toLowerCase(),
-      )
+    // if (selectedClient.network) {
+    //   const getClientNetwork = networks.filter(
+    //     (network) => network.name?.toLowerCase() === selectedClient.network?.toLowerCase(),
+    //   )
 
-      // console.log(getClientNetwork[0].id)
-    }
+    //   // console.log(getClientNetwork[0].id)
+    // }
 
     return discount
   }

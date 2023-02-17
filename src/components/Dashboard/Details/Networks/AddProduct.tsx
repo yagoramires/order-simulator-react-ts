@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
+import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
+import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
 
 import { useParams } from 'react-router-dom'
 
@@ -14,20 +15,30 @@ const AddProduct = () => {
   const [open, setOpen] = useState(false)
 
   const { networkId } = useParams()
+  const { networks } = useFetchCollection('networks')
 
-  const { addProductNetwork } = useAddDoc()
+  console.log(networks)
+
+  const { updateProductNetwork } = useEditDoc()
 
   const handleClient = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!code) return toast.error('Preencha o código!')
     if (!discount) return toast.error('Preencha o desconto!')
+    if (!networkId) return
 
-    addProductNetwork({
-      networkId: networkId || '',
-      code,
-      discount,
-    })
+    const networkFilter = networks.filter((network) => network.id === networkId)
+    let network = networkFilter[0]
+    const product = { code, discount }
+
+    if (network.products) {
+      network.products.push(product)
+    } else {
+      network = { ...network, products: [product] }
+    }
+
+    updateProductNetwork(networkId, network)
 
     setCode('')
     setDiscount(0)

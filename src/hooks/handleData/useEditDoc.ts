@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 
 // import { IIndustries, IClients, IDeadlines, IProduct } from '../../interfaces/index'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { IAddNetwork } from '../../interfaces'
 
 export const useEditDoc = () => {
   const [loading, setLoading] = useState(false)
@@ -65,6 +66,20 @@ export const useEditDoc = () => {
     }
   }
 
+  const updateProductNetwork = async (id: string, data: any) => {
+    setLoading(true)
+    try {
+      const ref = doc(database, 'networks', id)
+      await updateDoc(ref, data)
+
+      toast.success('Produto adicionado com sucesso!')
+      setLoading(false)
+    } catch (e: any) {
+      toast.error('Erro ao adicionar o produto, tente novamente!')
+      setLoading(false)
+    }
+  }
+
   const editProduct = async (industryId: string, productId: string, data: any, img?: File) => {
     setLoading(true)
 
@@ -113,5 +128,14 @@ export const useEditDoc = () => {
     }
   }
 
-  return { editIndustry, editClient, editDeadline, editProduct, editNetwork, progress, loading }
+  return {
+    editIndustry,
+    editClient,
+    editDeadline,
+    editProduct,
+    editNetwork,
+    updateProductNetwork,
+    progress,
+    loading,
+  }
 }
