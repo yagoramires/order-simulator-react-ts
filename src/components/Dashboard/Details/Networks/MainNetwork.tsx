@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { TiDelete } from 'react-icons/ti'
 import { useParams } from 'react-router-dom'
 import { useFetchDocument } from '../../../../hooks/fetchData/useFetchDocument'
+import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
 import { INetworkProduct } from '../../../../interfaces'
 import LabelComponent from '../../../GlobalComponents/LabelComponent'
 import MessageComponent from '../../../GlobalComponents/MessageComponent'
@@ -14,6 +15,7 @@ const MainNetwork = () => {
 
   const { networkId } = useParams()
   const { document: network } = useFetchDocument('networks', networkId)
+  const { updateProductNetwork } = useEditDoc()
 
   const codeFilter =
     search.length > 0
@@ -30,7 +32,11 @@ const MainNetwork = () => {
       >
         <span className='w-[70%]'>{product.code}</span>
         <span className='w-[20%]'>{`${product.discount} %`}</span>
-        <TiDelete className='text-red-500 cursor-pointer w-[10%]' size={20} onClick={() => ''} />
+        <TiDelete
+          className='text-red-500 cursor-pointer w-[10%]'
+          size={20}
+          onClick={() => handleDelete(index)}
+        />
       </div>
     )
   }
@@ -42,6 +48,15 @@ const MainNetwork = () => {
         <span className='w-[10%]'></span>
       </LabelComponent>
     )
+  }
+
+  const handleDelete = (index: number) => {
+    console.log(network)
+    const products = network?.products.filter((product: INetworkProduct, i: number) => i !== index)
+    const data = { ...network, products }
+    console.log(data)
+
+    updateProductNetwork(networkId || '', data)
   }
 
   if (!network) return <PageLoading />
