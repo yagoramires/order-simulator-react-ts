@@ -73,6 +73,7 @@ export const useEditDoc = () => {
       await updateDoc(ref, data)
 
       toast.success('Produto adicionado com sucesso!')
+      window.location.reload()
       setLoading(false)
     } catch (e: any) {
       toast.error('Erro ao adicionar o produto, tente novamente!')
