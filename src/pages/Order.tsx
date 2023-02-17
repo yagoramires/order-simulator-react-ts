@@ -14,8 +14,6 @@ const Order = () => {
 
   const { selectedIndustry, products } = useContext(NewOrderContext)
 
-  console.log(products)
-
   const codeFilter =
     search.length > 0
       ? products.filter((product) =>
