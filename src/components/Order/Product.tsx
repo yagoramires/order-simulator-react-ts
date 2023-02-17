@@ -91,10 +91,6 @@ const Product = ({ product }: ProductProps) => {
         (product) => product.code === String(code),
       )
 
-      const teste = getClientNetwork[0]?.products?.filter((product) =>
-        console.log(product.code, code),
-      )
-
       if (productsFilter && productsFilter?.length > 0) {
         const value = productsFilter[0].discount
         discount = value && value > 0 ? discount - discount * (value / 100) : discount
