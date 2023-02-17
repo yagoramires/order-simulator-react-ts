@@ -62,7 +62,7 @@ const Sidebar = () => {
       <li className='w-full text-gray-50' key={option.path}>
         <Link
           to={`/${option.path}`}
-          className='flex items-center justify-center w-full p-4 transition-all rounded-lg lg:shadow-sm lg:gap-2 lg:bg-gray-800 lg:justify-start hover:bg-gray-700'
+          className='flex items-center justify-center w-full p-2 transition-all rounded-lg lg:px-4 lg:py-3 lg:shadow-sm lg:gap-2 lg:bg-gray-800 lg:justify-start lg:hover:bg-gray-700'
         >
           {option.icon}
           <span className='hidden lg:block'>{option.text}</span>
@@ -72,7 +72,7 @@ const Sidebar = () => {
   }
 
   return (
-    <aside className='fixed bottom-0 left-0 z-10 w-full p-2 bg-dark-100 lg:bg-gray-900 lg:static lg:w-[350px] lg:p-4 lg:min-h-[100vh] shadow-sm'>
+    <aside className='fixed bottom-0 left-0 z-10 w-full py-2 bg-dark-100 lg:bg-gray-900 lg:static lg:w-[400px] lg:p-4 lg:min-h-[100vh] shadow-sm'>
       <div className='flex-col items-center justify-center hidden gap-4 my-4 lg:flex'>
         {userData?.photoURL ? (
           <img src={userData.photoURL} alt={userData.displayName} className='w-40 rounded-full' />
@@ -91,7 +91,7 @@ const Sidebar = () => {
           <li className='w-full text-gray-50 '>
             <button
               onClick={signOutUser}
-              className='flex items-center justify-center w-full p-4 transition-all rounded-lg lg:shadow-sm lg:gap-2 lg:bg-gray-800 lg:justify-start hover:bg-gray-700'
+              className='flex items-center justify-center w-full p-2 transition-all rounded-lg lg:px-4 lg:py-3 lg:shadow-sm lg:gap-2 lg:bg-gray-800 lg:justify-start lg:hover:bg-gray-700'
             >
               <MdLogout size={22} />
               <span className='hidden lg:block'>Sair</span>

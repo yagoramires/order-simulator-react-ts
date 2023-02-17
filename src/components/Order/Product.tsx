@@ -50,12 +50,14 @@ const Product = ({ product }: ProductProps) => {
     if (!selectedClient) return price
 
     let discount = price
+
     if (selectedClient.discountA) {
       discount =
         selectedClient.discountA > 0
           ? discount - discount * (selectedClient.discountA / 100)
           : discount
     }
+    discount = Number(discount.toFixed(8))
 
     if (selectedClient.discountB) {
       discount =
@@ -63,42 +65,52 @@ const Product = ({ product }: ProductProps) => {
           ? discount - discount * (selectedClient.discountB / 100)
           : discount
     }
+
+    discount = Number(discount.toFixed(8))
     if (selectedClient.discountC) {
       discount =
         selectedClient.discountC > 0
           ? discount - discount * (selectedClient.discountC / 100)
           : discount
     }
+    discount = Number(discount.toFixed(8))
+
     if (selectedClient.engefer) {
       discount = discount * 1.12
     }
+    discount = Number(discount.toFixed(8))
 
-    // if (selectedClient.network) {
-    //   const getClientNetwork = networks.filter(
-    //     (network) => network.name?.toLowerCase() === selectedClient.network?.toLowerCase(),
-    //   )
+    if (selectedClient.network) {
+      const getClientNetwork = networks.filter(
+        (network) => network.name?.toLowerCase() === selectedClient.network?.toLowerCase(),
+      )
 
-    //   // console.log(getClientNetwork[0].id)
-    // }
+      const productsFilter = getClientNetwork[0]?.products?.filter(
+        (product) => product.code === code,
+      )
+
+      if (productsFilter && productsFilter?.length > 0) {
+        const value = productsFilter[0].discount
+        discount = value && value > 0 ? discount - discount * (value / 100) : discount
+      }
+    }
 
     return discount
   }
 
   return (
-    <tr className='flex items-center justify-start min-w-[600px] w-full gap-2 p-2 bg-gray-900 text-gray-50 rounded-lg'>
+    <div className='flex items-center justify-start min-w-[600px] w-full gap-2 p-2 bg-gray-900 text-gray-50 rounded-lg'>
       {product.imagePath ? (
-        <td>
-          <img src={product.imagePath} alt={product.name} className='w-10 lg:w-20' />
-        </td>
+        <img src={product.imagePath} alt={product.name} className='w-10 lg:w-20' />
       ) : (
-        <td className='flex justify-center w-10 lg:w-20'>
+        <span className='flex justify-center w-10 lg:w-20'>
           <MdNoPhotography className='text-[20px] lg:text-[40px]' />
-        </td>
+        </span>
       )}
 
-      <td className='w-32 lg:w-52'>{product.code}</td>
-      <td className='w-52 lg:w-full'>{product.name}</td>
-      <td className='w-24 '>
+      <span className='w-32 lg:w-52'>{product.code}</span>
+      <span className='w-52 lg:w-full'>{product.name}</span>
+      <span className='w-24 '>
         {calculatePriceWithDiscount(product.price || 0, product.code || '').toLocaleString(
           'pt-BR',
           {
@@ -106,19 +118,19 @@ const Product = ({ product }: ProductProps) => {
             currency: 'BRL',
           },
         )}
-      </td>
-      <td>
+      </span>
+      <span>
         <input
           type='number'
           value={quantity}
           onChange={(e) => handleSelectProductQuantity(+e.target.value)}
           className='w-16 p-2 text-center bg-gray-800 rounded-lg'
         />
-      </td>
-      <td className='w-24 lg:28'>
+      </span>
+      <span className='w-24 lg:28'>
         {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-      </td>
-    </tr>
+      </span>
+    </div>
   )
 }
 

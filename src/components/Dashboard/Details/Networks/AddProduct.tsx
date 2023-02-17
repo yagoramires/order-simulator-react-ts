@@ -17,8 +17,6 @@ const AddProduct = () => {
   const { networkId } = useParams()
   const { networks } = useFetchCollection('networks')
 
-  console.log(networks)
-
   const { updateProductNetwork } = useEditDoc()
 
   const handleClient = (e: React.FormEvent<HTMLFormElement>) => {

@@ -8,10 +8,9 @@ const BackButton = () => {
   return (
     <button
       onClick={() => navigate(-1)}
-      className='flex items-center justify-end w-full mb-8 font-medium text-gray-50'
+      className='flex items-center justify-end px-8 font-medium lg:w-full lg:mb-8 lg:p-0 text-gray-50'
     >
-      <MdKeyboardArrowLeft size={20} />
-      Voltar
+      <MdKeyboardArrowLeft size={30} />
     </button>
   )
 }
