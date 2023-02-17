@@ -72,6 +72,7 @@ const Product = ({ product }: ProductProps) => {
     }
 
     discount = Number(discount.toFixed(8))
+
     if (selectedClient.discountC) {
       discount =
         selectedClient.discountC > 0
@@ -80,18 +81,18 @@ const Product = ({ product }: ProductProps) => {
     }
     discount = Number(discount.toFixed(8))
 
-    if (selectedClient.engefer) {
-      discount = discount * 1.12
-    }
-    discount = Number(discount.toFixed(8))
-
     if (selectedClient.network) {
       const getClientNetwork = networks.filter(
         (network) => network.name?.toLowerCase() === selectedClient.network?.toLowerCase(),
       )
+      console.log(getClientNetwork)
 
       const productsFilter = getClientNetwork[0]?.products?.filter(
-        (product) => product.code === code,
+        (product) => product.code === String(code),
+      )
+
+      const teste = getClientNetwork[0]?.products?.filter((product) =>
+        console.log(product.code, code),
       )
 
       if (productsFilter && productsFilter?.length > 0) {
@@ -99,6 +100,11 @@ const Product = ({ product }: ProductProps) => {
         discount = value && value > 0 ? discount - discount * (value / 100) : discount
       }
     }
+
+    if (selectedClient.engefer) {
+      discount = discount * 1.12
+    }
+    discount = Number(discount.toFixed(8))
 
     return discount
   }
