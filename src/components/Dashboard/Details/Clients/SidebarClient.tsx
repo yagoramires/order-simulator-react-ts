@@ -33,7 +33,9 @@ const SidebarClients = ({ client }: DataProps) => {
           </div>
           <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>Rede</span>
-            <span className='text-sm font-medium'>{client.network || 'SEM REDE'}</span>
+            <span className='text-sm font-medium'>
+              {client.network && client.network !== 'undefined' ? client.network : 'SEM REDE'}
+            </span>
           </div>
           <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>Engefer</span>
@@ -49,7 +51,7 @@ const SidebarClients = ({ client }: DataProps) => {
             <span className='text-xs text-gray-600'>Desconto Ilumi</span>
             <span className='text-sm font-medium'>
               {client.discountA && client.discountA > 0
-                ? `${client.discountA} %`
+                ? `${client.discountA.toLocaleString('pt-BR')} %`
                 : 'Sem desconto Ilumi'}
             </span>
           </div>
@@ -57,7 +59,7 @@ const SidebarClients = ({ client }: DataProps) => {
             <span className='text-xs text-gray-600'>Desconto adicional</span>
             <span className='text-sm font-medium'>
               {client.discountB && client.discountB > 0
-                ? `${client.discountB} %`
+                ? `${client.discountB.toLocaleString('pt-BR')} %`
                 : 'Sem desconto adicional'}
             </span>
           </div>
@@ -65,7 +67,7 @@ const SidebarClients = ({ client }: DataProps) => {
             <span className='text-xs text-gray-600'>Desconto à vista</span>
             <span className='text-sm font-medium'>
               {client.discountC && client.discountC > 0
-                ? `${client.discountC} %`
+                ? `${client.discountC.toLocaleString('pt-BR')} %`
                 : 'Sem desconto à vista'}
             </span>
           </div>

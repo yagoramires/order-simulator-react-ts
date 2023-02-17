@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 import DialogComponent from '../../../GlobalComponents/DialogComponent'
 import { IoMdAdd } from 'react-icons/io'
 
+import mock from '../../../../clientsMock'
+
 const AddClient = () => {
   const [code, setCode] = useState('')
   const [socialName, setSocialName] = useState('')
@@ -24,33 +26,51 @@ const AddClient = () => {
   const handleClient = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!code) return toast.error('Preencha o nome fantasia!')
-    if (!socialName) return toast.error('Preencha a razão social!')
-    if (!cnpj) return toast.error('Preencha todos o cnpj!')
-
-    addClient({
-      code,
-      socialName,
-      cnpj,
-      network,
-      engefer,
-      deadline,
-      discountA,
-      discountB,
-      discountC,
+    mock.forEach((client: any) => {
+      addClient({
+        code: String(client.code),
+        socialName: String(client.socialName),
+        cnpj: String(client.cnpj),
+        network: String(client.network),
+        deadline: String(client.deadline),
+        engefer: String(client.engefer),
+        discountA: Number(client.discountA),
+        discountB: Number(client.discountB),
+        discountC: Number(client.discountC),
+      })
     })
-
-    setCode('')
-    setSocialName('')
-    setCnpj('')
-    setNetwork('')
-    setDiscountA(0)
-    setDiscountB(0)
-    setDiscountC(0)
-    setDeadline('')
-    setEngefer('false')
-    setOpen(false)
   }
+
+  // const handleClient = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault()
+
+  //   if (!code) return toast.error('Preencha o nome fantasia!')
+  //   if (!socialName) return toast.error('Preencha a razão social!')
+  //   if (!cnpj) return toast.error('Preencha todos o cnpj!')
+
+  //   addClient({
+  //     code,
+  //     socialName,
+  //     cnpj,
+  //     network,
+  //     engefer,
+  //     deadline,
+  //     discountA,
+  //     discountB,
+  //     discountC,
+  //   })
+
+  //   setCode('')
+  //   setSocialName('')
+  //   setCnpj('')
+  //   setNetwork('')
+  //   setDiscountA(0)
+  //   setDiscountB(0)
+  //   setDiscountC(0)
+  //   setDeadline('')
+  //   setEngefer('false')
+  //   setOpen(false)
+  // }
 
   return (
     <DialogComponent

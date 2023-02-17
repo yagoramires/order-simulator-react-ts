@@ -22,7 +22,22 @@ const AddProduct = () => {
 
   const { addProduct } = useAddDoc()
 
-  const handleClient = (e: React.FormEvent<HTMLFormElement>) => {
+  // const handleAddProduct = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault()
+
+  //   mock.forEach((product: any) => {
+  //     addProduct({
+  //       code: `${product.code}`,
+  //       name: product.name,
+  //       industry: industryId || '',
+  //       price: product.price,
+  //       unityType: product.unityType,
+  //       minValue: Number(product.minValue),
+  //     })
+  //   })
+  // }
+
+  const handleAddProduct = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!code) return toast.error('Preencha o código!')
@@ -88,7 +103,7 @@ const AddProduct = () => {
               />
             )}
           </div>
-          <form className='flex flex-col w-full gap-2' onSubmit={handleClient}>
+          <form className='flex flex-col w-full gap-2' onSubmit={handleAddProduct}>
             <label className='flex flex-col gap-1'>
               <span className='text-sm text-gray-500'>Imagem</span>
               <input

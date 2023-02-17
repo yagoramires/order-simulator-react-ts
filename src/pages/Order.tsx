@@ -14,9 +14,13 @@ const Order = () => {
 
   const { selectedIndustry, products } = useContext(NewOrderContext)
 
+  console.log(products)
+
   const codeFilter =
     search.length > 0
-      ? products.filter((product) => product.code?.toLowerCase().includes(search.toLowerCase()))
+      ? products.filter((product) =>
+          String(product.code).toLowerCase().includes(search.toLowerCase()),
+        )
       : []
 
   const nameFilter =
@@ -24,11 +28,10 @@ const Order = () => {
       ? products.filter((product) => product.name?.toLowerCase().includes(search.toLowerCase()))
       : []
 
-  console.log(selectedIndustry)
   return (
-    <>
+    <div className='max-h-[100vh]'>
       <Header />
-      <div className='overflow-hidden max-h-[100vh] w-full flex flex-col items-center justify-center'>
+      <div className='overflow-hidden max-h-[calc(100vh - 72px)] w-full flex flex-col items-center justify-center'>
         <div className='flex flex-col w-[100vw] max-w-[1400px] bg-dark-100 overflow-auto p-1 gap-1 md:p-2 md:gap-2'>
           <Select />
         </div>
@@ -45,10 +48,10 @@ const Order = () => {
         )}
         {selectedIndustry.id && products?.length > 0 && (
           <>
-            <div className='flex justify-center w-full p-1 md:p-2'>
+            <div className='flex justify-center w-full p-1 md:p-2  max-w-[1400px]'>
               <Search search={search} setSearch={setSearch} />
             </div>
-            <div className='mt-1 md:mt-2 flex flex-col w-[100vw] max-w-[1400px] max-h-[calc(100vh-300px)] md:max-h-[calc(100vh-344px)] bg-dark-100 overflow-auto p-1 gap-1 md:p-2 md:gap-2 '>
+            <div className='mt-1 md:mt-2 flex flex-col w-[100vw] max-w-[1400px] max-h-[calc(100vh-300px)] md:max-h-[calc(100vh-366px)] bg-dark-100 overflow-auto p-1 gap-1 md:p-2 md:gap-2 '>
               <Label />
 
               {!search &&
@@ -65,7 +68,7 @@ const Order = () => {
           </>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

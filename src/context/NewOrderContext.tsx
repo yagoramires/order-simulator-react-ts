@@ -88,7 +88,12 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
 
   useEffect(() => {
     setProductsArray([])
+    setTotal(0)
   }, [selectedIndustry])
+
+  useEffect(() => {
+    setTotal(0)
+  }, [selectedClient])
 
   useEffect(() => {
     const initialValue = 0

@@ -19,7 +19,12 @@ const Product = ({ product }: ProductProps) => {
   const { networks } = useFetchCollection('networks')
 
   useEffect(() => {
-    setTotal(quantity * (product.price || 0))
+    setTotal(0)
+    setQuantity(0)
+  }, [selectedClient])
+
+  useEffect(() => {
+    setTotal(quantity * calculatePriceWithDiscount(product.price || 0, product.code || ''))
   }, [quantity])
 
   const handleSelectProductQuantity = (qnt: number) => {
@@ -32,7 +37,7 @@ const Product = ({ product }: ProductProps) => {
     }
 
     if (checkIfProductIsInArray.length === 0) {
-      const totalPrice = qnt * (product.price || 0)
+      const totalPrice = qnt * calculatePriceWithDiscount(product.price || 0, product.code || '')
       const addProduct = { ...product, quantity: qnt, total: totalPrice }
       return setProductsArray([...productsArray, addProduct])
     }
@@ -40,7 +45,7 @@ const Product = ({ product }: ProductProps) => {
     if (checkIfProductIsInArray.length === 1) {
       const removeProduct = productsArray.filter((prod) => prod.id !== product.id)
 
-      const totalPrice = qnt * (product.price || 0)
+      const totalPrice = qnt * calculatePriceWithDiscount(product.price || 0, product.code || '')
       const addProduct = { ...product, quantity: qnt, total: totalPrice }
       return setProductsArray([...removeProduct, addProduct])
     }

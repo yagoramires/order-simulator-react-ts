@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "productsMock.js"  ]
+, "src/productsMock.js"  ]
 }
