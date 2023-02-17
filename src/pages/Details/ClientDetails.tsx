@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
+import { useFetchDocument } from '../../hooks/fetchData/useFetchDocument'
 
 import { useParams } from 'react-router-dom'
 
-import Loading from '../../../components/Loading'
+import Loading from '../../components/GlobalComponents/Loading'
 
-import { IClients } from '../../../interfaces'
-import Sidebar from '../../../components/Dashboard/Details/Clients/Sidebar'
-import Main from '../../../components/Dashboard/Details/Clients/Main'
+import { IClients } from '../../interfaces'
+import Sidebar from '../../components/Dashboard/Details/Clients/Sidebar'
+import Main from '../../components/Dashboard/Details/Clients/Main'
 
 const ClientDetails = () => {
   const { clientId } = useParams()

@@ -49,6 +49,24 @@ export const useFetchCollection = (docCollection: string) => {
             setProducts(snapshot)
           } else if (docCollection.includes('networks')) {
             setNetworks(snapshot)
+            //   console.log(snapshot)
+            //   const networkArr = [{ ...snapshot, products: [] }]
+            //   console.log(networkArr)
+            //   snapshot.forEach((snap) => {
+            //     const collectionRef = collection(database, `networks/${snap.id}/products`)
+            //     const q = query(collectionRef, orderBy('createdAt', 'asc'))
+
+            //     onSnapshot(q, (querySnapshot: QuerySnapshot<DocumentData>) => {
+            //       const snapshot = querySnapshot.docs.map((doc) => ({
+            //         id: doc.id,
+            //         ...doc.data(),
+            //       }))
+            //       // networkArr.products.push(...snapshot)
+            //     })
+            //     // console.log(data)
+            //   })
+            // }
+            // // setNetworks(networkArr)
           }
         })
       } catch (e: any) {

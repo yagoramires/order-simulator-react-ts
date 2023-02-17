@@ -1,9 +1,13 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
+
+import LabelComponent from '../../GlobalComponents/LabelComponent'
+import LinkComponent from '../../GlobalComponents/LinkComponent'
+import ClientForm from './Forms/AddClient'
+
 import { IClients } from '../../../interfaces'
-import ClientForm from './AddForm/AddClient'
+import MessageComponent from '../../GlobalComponents/MessageComponent'
+import Search from '../../GlobalComponents/Search'
 
 const Clients = () => {
   const { clients } = useFetchCollection('clients')
@@ -22,55 +26,43 @@ const Clients = () => {
 
   const linkComponent = (client: IClients) => {
     return (
-      <Link
-        to={`${client.id}`}
-        className='flex items-center w-full gap-2 p-2 break-words bg-gray-900 rounded-lg lg:p-4 text-gray-50'
-        key={client.id}
-      >
+      <LinkComponent id={client.id || ''}>
         <span className='w-[70%] '>{client.socialName}</span>
         <span className='w-[30%] '>{client.cnpj}</span>
-      </Link>
+      </LinkComponent>
     )
   }
 
   const labelComponent = () => {
     return (
-      <div className='flex items-center w-full gap-2 p-2 text-left break-words lg:p-4 text-gray-50'>
-        <span className='text-xs text-zinc-400 w-[70%] md:w-full'>Nome</span>
-        <span className='text-xs text-zinc-400 w-[30%] md:hidden'>CNPJ</span>
-      </div>
+      <LabelComponent>
+        <span className='w-[70%]'>Nome</span>
+        <span className='w-[30%]'>CNPJ</span>
+      </LabelComponent>
     )
   }
 
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <input
-          type='text'
-          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50 max-w-[300px] w-full'
-          placeholder='Pesquisar'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <Search search={search} setSearch={setSearch} />
+
         <ClientForm />
       </div>
+
+      {!search && clients.length === 0 && <MessageComponent text='Nenhum cliente cadastrado.' />}
+      {search && nameFilter.length === 0 && cnpjFilter.length === 0 && (
+        <MessageComponent text='Nenhum cliente encontrado.' />
+      )}
 
       <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
         {clients.length > 0 && !search && labelComponent()}
         {search && nameFilter.length > 0 && labelComponent()}
         {search && cnpjFilter.length > 0 && labelComponent()}
 
-        {clients.length === 0 && (
-          <p className='w-full mt-5 text-center text-gray-50'>Nenhum cliente cadastrado.</p>
-        )}
-
+        {!search && clients?.map((client) => linkComponent(client))}
         {search && nameFilter.length > 0 && nameFilter.map((client) => linkComponent(client))}
         {cnpjFilter && cnpjFilter.length > 0 && cnpjFilter.map((client) => linkComponent(client))}
-
-        {search && nameFilter.length === 0 && cnpjFilter.length === 0 && (
-          <p className='w-full mt-5 text-center text-gray-50'>Nenhum cliente encontrado.</p>
-        )}
-        {!search && clients?.map((client) => linkComponent(client))}
       </div>
     </div>
   )

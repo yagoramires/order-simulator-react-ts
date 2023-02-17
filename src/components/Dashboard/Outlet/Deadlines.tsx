@@ -1,17 +1,20 @@
 import { useState } from 'react'
-
+import { useDeleteDoc } from '../../../hooks/handleData/useDeleteDoc'
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
-import DeadlineForm from './AddForm/AddDeadline'
+
+import { TiDelete } from 'react-icons/ti'
 
 import { IDeadlines } from '../../../interfaces'
-import { TiDelete } from 'react-icons/ti'
-import { useDeleteDoc } from '../../../hooks/handleData/useDeleteDoc'
+import LabelComponent from '../../GlobalComponents/LabelComponent'
+import MessageComponent from '../../GlobalComponents/MessageComponent'
+import DeadlineForm from './Forms/AddDeadline'
+import Search from '../../GlobalComponents/Search'
 
 const Deadlines = () => {
+  const [search, setSearch] = useState('')
+
   const { deadlines } = useFetchCollection('deadlines')
   const { deleteDocument } = useDeleteDoc()
-
-  const [search, setSearch] = useState('')
 
   const filteredDeadlines =
     search.length > 0
@@ -36,46 +39,35 @@ const Deadlines = () => {
 
   const labelComponent = () => {
     return (
-      <div className='flex items-center w-full gap-2 p-2 text-left break-words lg:p-4 text-gray-50'>
+      <LabelComponent>
         <span>Prazo de pagamento</span>
-      </div>
+      </LabelComponent>
     )
   }
 
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <input
-          type='text'
-          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50 max-w-[300px] w-full'
-          placeholder='Pesquisar'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <Search search={search} setSearch={setSearch} />
+
         <DeadlineForm />
       </div>
+
+      {deadlines.length === 0 && <MessageComponent text='Nenhum prazo de pagamento cadastrado.' />}
+
+      {search && filteredDeadlines.length === 0 && (
+        <MessageComponent text='Nenhum  prazo de pagamento encontrado.' />
+      )}
 
       <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
         {deadlines.length > 0 && !search && labelComponent()}
         {search && filteredDeadlines.length > 0 && labelComponent()}
 
-        {deadlines.length === 0 && (
-          <p className='w-full mt-5 text-center text-gray-50'>
-            Nenhum prazo de pagamento cadastrado.
-          </p>
-        )}
+        {!search && deadlines?.map((deadline) => linkComponent(deadline))}
 
         {search &&
           filteredDeadlines.length > 0 &&
           filteredDeadlines.map((deadline) => linkComponent(deadline))}
-
-        {search && filteredDeadlines.length === 0 && (
-          <p className='w-full mt-5 text-center text-gray-50'>
-            Nenhum prazo de pagamento encontrado.
-          </p>
-        )}
-
-        {!search && deadlines?.map((deadline) => linkComponent(deadline))}
       </div>
     </div>
   )

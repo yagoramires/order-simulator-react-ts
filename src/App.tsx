@@ -8,11 +8,11 @@ import { NewOrderProvider } from './context/NewOrderContext'
 
 function App() {
   return (
-    <div className='App min-h-[100vh] max-w-[100vw] bg-dark-100 overflow-hidden'>
+    <div className='App bg-dark-100 min-h-[100vh]'>
       <AuthContextProvider>
         <NewOrderProvider>
-          <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_RIGHT} />
           <Routes />
+          <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_RIGHT} />
         </NewOrderProvider>
       </AuthContextProvider>
     </div>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useAuth } from '../../hooks/auth/useAuth'
+import { useAuth } from '../hooks/auth/useAuth'
 
 import { toast } from 'react-toastify'
 
 import * as Tabs from '@radix-ui/react-tabs'
-import Loading from '../../components/Loading'
+import Loading from '../components/GlobalComponents/Loading'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -35,11 +35,11 @@ const Login = () => {
   }, [error])
 
   return (
-    <div className='h-[100vh] flex flex-col justify-center items-center'>
+    <div className='min-h-[100vh] flex flex-col justify-center items-center'>
       <h1 className='mb-4 text-5xl text-center text-gray-50'>
         <span className='font-bold'>
           D<span className='text-blue-600'>2</span>B
-        </span>{' '}
+        </span>
         Sales Platform
       </h1>
 

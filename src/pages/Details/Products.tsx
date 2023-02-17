@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
-import { useEditDoc } from '../../../hooks/handleData/useEditDoc'
+import { useFetchDocument } from '../../hooks/fetchData/useFetchDocument'
+import { useEditDoc } from '../../hooks/handleData/useEditDoc'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
-import Loading from '../../../components/Loading'
+import Loading from '../../components/GlobalComponents/Loading'
 
 import { MdKeyboardArrowLeft, MdNoPhotography } from 'react-icons/md'
-import Alert from '../../../components/Dashboard/Alert'
+import Alert from '../../components/GlobalComponents/Alert'
 import { toast } from 'react-toastify'
 import { FaEdit } from 'react-icons/fa'
 

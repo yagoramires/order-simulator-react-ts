@@ -1,11 +1,13 @@
-// Context
 import React, { useContext, useState } from 'react'
-import { FaUserAlt } from 'react-icons/fa'
-import { MdKeyboardArrowLeft } from 'react-icons/md'
+import { useUpdateProfile } from '../../../hooks/auth/useUpdateProfile'
+import { AuthContext } from '../../../context/AuthContext'
+
 import { useNavigate } from 'react-router-dom'
-import Loading from '../../components/Loading'
-import { AuthContext } from '../../context/AuthContext'
-import { useUpdateProfile } from '../../hooks/auth/useUpdateProfile'
+
+import Loading from '../../GlobalComponents/Loading'
+import BackButton from '../../GlobalComponents/BackBtn'
+
+import { FaUserAlt } from 'react-icons/fa'
 
 const Profile = () => {
   const { userData } = useContext(AuthContext)
@@ -55,13 +57,7 @@ const Profile = () => {
   return (
     <div className='min-h-[100vh] flex flex-col justify-start items-center p-2 w-full'>
       <div className='max-w-[800px] w-full lg:p-8'>
-        <button
-          onClick={() => navigate(-1)}
-          className='flex items-center justify-end w-full mb-8 font-medium text-gray-50'
-        >
-          <MdKeyboardArrowLeft size={20} />
-          Voltar
-        </button>
+        <BackButton />
         <div className='flex flex-col items-center justify-center gap-4 mb-8'>
           {userData?.photoURL ? (
             <img

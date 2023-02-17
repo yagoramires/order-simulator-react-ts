@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { IIndustries } from '../../../../interfaces'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
-import Alert from '../../Alert'
+import Alert from '../../../GlobalComponents/Alert'
 import EditIndustry from './Form/EditIndustry'
 
 interface DataProps {

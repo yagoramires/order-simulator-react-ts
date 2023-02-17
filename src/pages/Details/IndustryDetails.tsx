@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
+import { useFetchDocument } from '../../hooks/fetchData/useFetchDocument'
 
 import { useParams } from 'react-router-dom'
 
-import Main from '../../../components/Dashboard/Details/Industries/Main'
-import Sidebar from '../../../components/Dashboard/Details/Industries/Sidebar'
-import Loading from '../../../components/Loading'
+import Main from '../../components/Dashboard/Details/Industries/Main'
+import Sidebar from '../../components/Dashboard/Details/Industries/Sidebar'
+import Loading from '../../components/GlobalComponents/Loading'
 
-import { IIndustries } from '../../../interfaces/index'
+import { IIndustries } from '../../interfaces/index'
 
 const IndustryDetails = () => {
   const { industryId } = useParams()

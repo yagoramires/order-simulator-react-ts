@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useFetchDocument } from '../../../hooks/fetchData/useFetchDocument'
+import { useFetchDocument } from '../../hooks/fetchData/useFetchDocument'
 
 import { useParams } from 'react-router-dom'
 
-import Loading from '../../../components/Loading'
+import Loading from '../../components/GlobalComponents/Loading'
 
-import { INetworks } from '../../../interfaces'
-import Sidebar from '../../../components/Dashboard/Details/Networks/Sidebar'
-import Main from '../../../components/Dashboard/Details/Networks/Main'
+import { INetworks } from '../../interfaces'
+import Sidebar from '../../components/Dashboard/Details/Networks/Sidebar'
+import Main from '../../components/Dashboard/Details/Networks/Main'
 
 const NetworkDetails = () => {
   const { networkId } = useParams()

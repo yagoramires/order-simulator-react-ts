@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { INetworks } from '../../../../interfaces'
 
 import { MdKeyboardArrowLeft } from 'react-icons/md'
-import Alert from '../../Alert'
+import Alert from '../../../GlobalComponents/Alert'
 import EditNetwork from './Form/EditNetwork'
 
 interface DataProps {

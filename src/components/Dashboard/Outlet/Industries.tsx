@@ -1,14 +1,18 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-
 import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
+
+import LabelComponent from '../../GlobalComponents/LabelComponent'
+import LinkComponent from '../../GlobalComponents/LinkComponent'
+import MessageComponent from '../../GlobalComponents/MessageComponent'
+import IndustryForm from './Forms/AddIndustry'
+import Search from '../../GlobalComponents/Search'
+
 import { IIndustries } from '../../../interfaces'
-import IndustryForm from './AddForm/AddIndustry'
 
 const Industries = () => {
-  const { industries } = useFetchCollection('industries')
-
   const [search, setSearch] = useState('')
+
+  const { industries } = useFetchCollection('industries')
 
   const nameFilter =
     search.length > 0
@@ -16,6 +20,7 @@ const Industries = () => {
           industry.socialName?.toLowerCase().includes(search.toLowerCase()),
         )
       : []
+
   const cnpjFilter =
     search.length > 0
       ? industries.filter((industry) => industry.cnpj?.toLowerCase().includes(search.toLowerCase()))
@@ -23,59 +28,55 @@ const Industries = () => {
 
   const linkComponent = (industry: IIndustries) => {
     return (
-      <Link
-        to={`${industry.id}`}
-        className='flex items-center w-full gap-2 p-2 break-words bg-gray-900 rounded-lg lg:p-4 text-gray-50'
-        key={industry.id}
-      >
+      <LinkComponent id={industry.id || ''}>
         <span className='w-[70%]'>{industry.socialName}</span>
         <span className='w-[30%]'>{industry.cnpj}</span>
-      </Link>
+      </LinkComponent>
     )
   }
 
   const labelComponent = () => {
     return (
-      <div className='flex items-center w-full gap-2 p-2 text-left break-words lg:p-4 text-gray-50'>
+      <LabelComponent>
         <span className='w-[70%]'>Indústria</span>
         <span className='w-[30%]'>CNPJ</span>
-      </div>
+      </LabelComponent>
     )
   }
 
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <input
-          type='text'
-          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50 max-w-[300px] w-full'
-          placeholder='Pesquisar'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <Search search={search} setSearch={setSearch} />
+
         <IndustryForm />
       </div>
+
+      {!search && industries.length === 0 && (
+        <MessageComponent
+          text='Nenhuma indústria
+         cadastrada.'
+        />
+      )}
+      {search && nameFilter.length === 0 && cnpjFilter.length === 0 && (
+        <MessageComponent
+          text='Nenhuma indústria
+        encontrada.'
+        />
+      )}
 
       <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
         {industries.length > 0 && !search && labelComponent()}
         {search && nameFilter.length > 0 && labelComponent()}
         {search && cnpjFilter.length > 0 && labelComponent()}
 
-        {industries.length === 0 && (
-          <p className='w-full mt-5 text-center text-gray-50'>Nenhuma indústria cadastrada.</p>
-        )}
+        {!search && industries?.map((industry) => linkComponent(industry))}
 
         {search && nameFilter.length > 0 && nameFilter.map((industry) => linkComponent(industry))}
 
         {cnpjFilter &&
           cnpjFilter.length > 0 &&
           cnpjFilter?.map((industry) => linkComponent(industry))}
-
-        {search && nameFilter.length === 0 && cnpjFilter.length === 0 && (
-          <p className='w-full mt-5 text-center text-gray-50'>Nenhuma indústria encontrada.</p>
-        )}
-
-        {!search && industries?.map((industry) => linkComponent(industry))}
       </div>
     </div>
   )
