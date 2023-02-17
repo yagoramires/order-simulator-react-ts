@@ -58,7 +58,7 @@ export const useEditDoc = () => {
     try {
       const ref = doc(database, 'networks', id)
       await updateDoc(ref, data)
-      toast.success('Cliente alterado com sucesso!')
+      toast.success('Rede alterada com sucesso!')
       setLoading(false)
     } catch (e: any) {
       toast.error('Erro ao editar a rede, tente novamente!')

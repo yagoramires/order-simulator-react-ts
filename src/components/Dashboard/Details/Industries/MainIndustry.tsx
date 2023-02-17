@@ -20,7 +20,9 @@ const MainIndustry = () => {
 
   const codeFilter =
     search.length > 0
-      ? products.filter((product) => product.code?.toLowerCase().includes(search.toLowerCase()))
+      ? products.filter((product) =>
+          String(product.code).toLowerCase().includes(search.toLowerCase()),
+        )
       : []
 
   const nameFilter =
@@ -30,8 +32,8 @@ const MainIndustry = () => {
 
   const linkComponent = (product: IProduct) => {
     return (
-      <LinkComponent id={product.id || ''} key={product.id}>
-        <span className='w-[20%]'>{product.code}</span>
+      <LinkComponent id={`/industries/${industryId}/product/${product.id || ''}`} key={product.id}>
+        <span className='w-[20%]'>{String(product.code)}</span>
         <span className='w-[60%]'>{product.name}</span>
         <span className='w-[20%]'>{product.price && formatValue(+product.price)}</span>
       </LinkComponent>

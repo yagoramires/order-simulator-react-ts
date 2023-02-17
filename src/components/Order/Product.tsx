@@ -55,6 +55,7 @@ const Product = ({ product }: ProductProps) => {
     if (!selectedClient) return price
 
     let discount = price
+    console.log('VALOR CHEIO: ' + discount)
 
     if (selectedClient.discountA) {
       discount =
@@ -63,6 +64,7 @@ const Product = ({ product }: ProductProps) => {
           : discount
     }
     discount = Number(discount.toFixed(8))
+    console.log('VALOR DESCONTO A: ' + discount)
 
     if (selectedClient.discountB) {
       discount =
@@ -72,6 +74,7 @@ const Product = ({ product }: ProductProps) => {
     }
 
     discount = Number(discount.toFixed(8))
+    console.log('VALOR DESCONTO B: ' + discount)
 
     if (selectedClient.discountC) {
       discount =
@@ -80,12 +83,12 @@ const Product = ({ product }: ProductProps) => {
           : discount
     }
     discount = Number(discount.toFixed(8))
+    console.log('VALOR DESCONTO C: ' + discount)
 
     if (selectedClient.network) {
       const getClientNetwork = networks.filter(
         (network) => network.name?.toLowerCase() === selectedClient.network?.toLowerCase(),
       )
-      console.log(getClientNetwork)
 
       const productsFilter = getClientNetwork[0]?.products?.filter(
         (product) => product.code === String(code),
@@ -96,11 +99,25 @@ const Product = ({ product }: ProductProps) => {
         discount = value && value > 0 ? discount - discount * (value / 100) : discount
       }
     }
+    // else if (!selectedClient.network || selectedClient.network === 'undefined') {
+    //   const getClientNetwork = networks.filter((network) => network.name === 'DESCONTO MÁXIMO')
 
-    if (selectedClient.engefer) {
-      discount = discount * 1.12
-    }
-    discount = Number(discount.toFixed(8))
+    //   const productsFilter = getClientNetwork[0]?.products?.filter(
+    //     (product) => product.code === String(code),
+    //   )
+
+    //   if (productsFilter && productsFilter?.length > 0) {
+    //     const value = productsFilter[0].discount
+    //     discount = value && value > 0 ? discount - discount * (value / 100) : discount
+    //   }
+    // }
+    console.log('VALOR DESCONTO REDE: ' + discount)
+
+    // if (selectedClient.engefer) {
+    //   discount = discount * 1.12
+    // }
+    // discount = Number(discount.toFixed(8))
+    // console.log('VALOR ADICIONAL ENGEFER' +discount)
 
     return discount
   }

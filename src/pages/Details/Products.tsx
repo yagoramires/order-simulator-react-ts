@@ -119,7 +119,9 @@ const ProductDetails = () => {
             />
           )}
 
-          {!image && !productImg && <MdNoPhotography className='text-[100px] md:text-[80px] ' />}
+          {!image && !productImg && (
+            <MdNoPhotography className='text-[100px] md:text-[80px] text-gray-50' />
+          )}
         </div>
 
         <form onSubmit={handleUpdate} className='flex flex-col w-full gap-2'>
