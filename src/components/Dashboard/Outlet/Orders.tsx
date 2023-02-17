@@ -27,7 +27,7 @@ const Orders = () => {
 
   const linkComponent = (order: IOrder) => {
     return (
-      <LinkComponent id={order.id || ''}>
+      <LinkComponent id={order.id || ''} key={order.id}>
         <span className='w-[15%]'>{order.orderId}</span>
         <span className='w-[45%]'>{order.clientName}</span>
         <div className='w-[40%] flex gap-2'>

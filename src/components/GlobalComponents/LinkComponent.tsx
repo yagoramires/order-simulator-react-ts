@@ -10,7 +10,6 @@ const LinkComponent = ({ children, id }: ChildrenProps) => {
     <Link
       to={`${id}`}
       className='flex items-center w-full gap-2 p-2 break-words bg-gray-900 rounded-lg lg:p-4 text-gray-50'
-      key={id}
     >
       {children}
     </Link>

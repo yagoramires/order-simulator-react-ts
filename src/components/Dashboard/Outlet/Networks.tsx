@@ -20,7 +20,7 @@ const Networks = () => {
 
   const linkComponent = (network: INetworks) => {
     return (
-      <LinkComponent id={network.id || ''}>
+      <LinkComponent id={network.id || ''} key={network.id}>
         <span className='w-full'>{network.name}</span>
       </LinkComponent>
     )

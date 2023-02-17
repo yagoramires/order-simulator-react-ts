@@ -2,8 +2,6 @@ import React, { useContext, useState } from 'react'
 import { useUpdateProfile } from '../../../hooks/auth/useUpdateProfile'
 import { AuthContext } from '../../../context/AuthContext'
 
-import { useNavigate } from 'react-router-dom'
-
 import Loading from '../../GlobalComponents/Loading'
 import BackButton from '../../GlobalComponents/BackBtn'
 
@@ -21,8 +19,6 @@ const Profile = () => {
     loadingEmail,
     loadingPassword,
   } = useUpdateProfile()
-
-  const navigate = useNavigate()
 
   const [profileImg, setProfileImg] = useState(null)
   const [displayName, setDisplayName] = useState(userData.displayName || '')

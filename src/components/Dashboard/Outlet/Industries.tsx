@@ -28,7 +28,7 @@ const Industries = () => {
 
   const linkComponent = (industry: IIndustries) => {
     return (
-      <LinkComponent id={industry.id || ''}>
+      <LinkComponent id={industry.id || ''} key={industry.id}>
         <span className='w-[70%]'>{industry.socialName}</span>
         <span className='w-[30%]'>{industry.cnpj}</span>
       </LinkComponent>

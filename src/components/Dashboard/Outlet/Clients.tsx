@@ -26,7 +26,7 @@ const Clients = () => {
 
   const linkComponent = (client: IClients) => {
     return (
-      <LinkComponent id={client.id || ''}>
+      <LinkComponent id={client.id || ''} key={client.id}>
         <span className='w-[70%] '>{client.socialName}</span>
         <span className='w-[30%] '>{client.cnpj}</span>
       </LinkComponent>
