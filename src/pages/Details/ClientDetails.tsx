@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom'
 import Loading from '../../components/GlobalComponents/Loading'
 
 import { IClients } from '../../interfaces'
-import Sidebar from '../../components/Dashboard/Details/Clients/Sidebar'
-import Main from '../../components/Dashboard/Details/Clients/Main'
+import Sidebar from '../../components/Dashboard/Details/Clients/SidebarClient'
+import Main from '../../components/Dashboard/Details/Clients/MainClient'
 
 const ClientDetails = () => {
   const { clientId } = useParams()

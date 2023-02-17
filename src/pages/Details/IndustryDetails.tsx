@@ -3,8 +3,8 @@ import { useFetchDocument } from '../../hooks/fetchData/useFetchDocument'
 
 import { useParams } from 'react-router-dom'
 
-import Main from '../../components/Dashboard/Details/Industries/Main'
-import Sidebar from '../../components/Dashboard/Details/Industries/Sidebar'
+import Main from '../../components/Dashboard/Details/Industries/MainIndustry'
+import Sidebar from '../../components/Dashboard/Details/Industries/SidebarIndustry'
 import Loading from '../../components/GlobalComponents/Loading'
 
 import { IIndustries } from '../../interfaces/index'

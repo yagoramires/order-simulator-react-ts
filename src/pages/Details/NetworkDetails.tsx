@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom'
 import Loading from '../../components/GlobalComponents/Loading'
 
 import { INetworks } from '../../interfaces'
-import Sidebar from '../../components/Dashboard/Details/Networks/Sidebar'
-import Main from '../../components/Dashboard/Details/Networks/Main'
+import Sidebar from '../../components/Dashboard/Details/Networks/SidebarNetwork'
+import Main from '../../components/Dashboard/Details/Networks/MainNetwork'
 
 const NetworkDetails = () => {
   const { networkId } = useParams()

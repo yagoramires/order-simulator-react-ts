@@ -1,34 +1,38 @@
 import { useState } from 'react'
-import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
+import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
 
 import { toast } from 'react-toastify'
 
 import DialogComponent from '../../../GlobalComponents/DialogComponent'
-import { IoMdAdd } from 'react-icons/io'
+import { FaEdit } from 'react-icons/fa'
+import { IClients } from '../../../../interfaces'
 
-const AddClient = () => {
-  const [code, setCode] = useState('')
-  const [socialName, setSocialName] = useState('')
-  const [cnpj, setCnpj] = useState('')
-  const [network, setNetwork] = useState('')
-  const [engefer, setEngefer] = useState('false')
-  const [deadline, setDeadline] = useState('')
-  const [discountA, setDiscountA] = useState(0)
-  const [discountB, setDiscountB] = useState(0)
-  const [discountC, setDiscountC] = useState(0)
+interface ClientProps {
+  clientId: string
+  clientData: IClients
+}
+
+const EditClient = ({ clientId, clientData }: ClientProps) => {
+  const [code, setCode] = useState(clientData.code || '')
+  const [socialName, setSocialName] = useState(clientData.socialName || '')
+  const [cnpj, setCnpj] = useState(clientData.cnpj || '')
+  const [network, setNetwork] = useState(clientData.network || '')
+  const [engefer, setEngefer] = useState(clientData.engefer)
+  const [deadline, setDeadline] = useState(clientData.deadline || '')
+  const [discountA, setDiscountA] = useState(clientData.discountA || '')
+  const [discountB, setDiscountB] = useState(clientData.discountB || '')
+  const [discountC, setDiscountC] = useState(clientData.discountC || '')
 
   const [open, setOpen] = useState(false)
 
-  const { addClient } = useAddDoc()
+  const { editClient } = useEditDoc()
 
   const handleClient = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!code) return toast.error('Preencha o nome fantasia!')
-    if (!socialName) return toast.error('Preencha a razão social!')
-    if (!cnpj) return toast.error('Preencha todos o cnpj!')
+    if (!code || !socialName || !cnpj) return toast.error('Preencha todos os campos!')
 
-    addClient({
+    editClient(clientId, {
       code,
       socialName,
       cnpj,
@@ -39,27 +43,18 @@ const AddClient = () => {
       discountB,
       discountC,
     })
-
-    setCode('')
-    setSocialName('')
-    setCnpj('')
-    setNetwork('')
-    setDiscountA(0)
-    setDiscountB(0)
-    setDiscountC(0)
-    setDeadline('')
-    setEngefer('false')
     setOpen(false)
   }
 
   return (
     <DialogComponent
-      type={'Adicionar Cliente'}
+      type={'Editar Cliente'}
       open={open}
       setOpen={setOpen}
       childrenButton={
-        <div className='relative flex items-center justify-between gap-2 px-4 py-2 font-bold bg-blue-600 rounded-lg text-gray-50 '>
-          <IoMdAdd /> Novo
+        <div className='relative flex items-center justify-center px-8 py-2 font-medium rounded cursor-pointer text-gray-50 lg:bg-blue-600 lg:h-12 lg:py-0'>
+          <FaEdit size={23} />
+          <span className='hidden'>Editar</span>
         </div>
       }
       childrenForm={
@@ -83,9 +78,9 @@ const AddClient = () => {
               value={socialName}
               onChange={(e) => setSocialName(e.target.value)}
             />
-            <label className='flex flex-col gap-1'>
-              <span className='text-sm text-gray-500'>CNPJ</span>
-            </label>
+          </label>
+          <label className='flex flex-col gap-1'>
+            <span className='text-sm text-gray-500'>CNPJ</span>
             <input
               type='text'
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
@@ -108,6 +103,7 @@ const AddClient = () => {
             <span className='text-sm text-gray-500'>Cliente Engefer</span>
             <select
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+              placeholder='Rede'
               value={engefer}
               onChange={(e) => setEngefer(e.target.value)}
             >
@@ -166,11 +162,10 @@ const AddClient = () => {
               />
             </label>
           </div>
-
           <input
             type='submit'
             className='p-2 mt-2 font-bold bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
-            value={'Adicionar'}
+            value={'Atualizar'}
           />
         </form>
       }
@@ -178,4 +173,4 @@ const AddClient = () => {
   )
 }
 
-export default AddClient
+export default EditClient

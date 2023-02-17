@@ -1,45 +1,50 @@
 import { useState } from 'react'
-import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
+import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
 
 import { toast } from 'react-toastify'
 
-import DialogComponent from '../../../GlobalComponents/DialogComponent'
-import { IoMdAdd } from 'react-icons/io'
+import { FaEdit } from 'react-icons/fa'
 
-const AddIndustry = () => {
-  const [fantasyName, setFantasyName] = useState('')
-  const [socialName, setSocialName] = useState('')
-  const [cnpj, setCnpj] = useState('')
+import { IIndustries } from '../../../../interfaces'
+import DialogComponent from '../../../GlobalComponents/DialogComponent'
+
+interface IndustryProps {
+  industryId: string
+  industryData: IIndustries
+}
+
+const EditIndustry = ({ industryId, industryData }: IndustryProps) => {
+  const [fantasyName, setFantasyName] = useState(industryData.fantasyName)
+  const [socialName, setSocialName] = useState(industryData.socialName)
+  const [cnpj, setCnpj] = useState(industryData.cnpj)
 
   const [open, setOpen] = useState(false)
 
-  const { addIndustry } = useAddDoc()
+  const { editIndustry } = useEditDoc()
 
   const handleIndustry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!fantasyName || !socialName || !cnpj) return toast.error('Preencha todos os campos!')
 
-    addIndustry({
+    editIndustry(industryId, {
       fantasyName,
       socialName,
       cnpj,
     })
 
-    setFantasyName('')
-    setSocialName('')
-    setCnpj('')
     setOpen(false)
   }
 
   return (
     <DialogComponent
-      type={'Adicionar Indústria'}
+      type={'Editar Indústria'}
       open={open}
       setOpen={setOpen}
       childrenButton={
-        <div className='relative flex items-center justify-between gap-2 px-4 py-2 font-bold bg-blue-600 rounded-lg text-gray-50 '>
-          <IoMdAdd /> Novo
+        <div className='relative flex items-center justify-center px-8 py-2 font-medium rounded cursor-pointer text-gray-50 lg:bg-blue-600 lg:h-12 lg:py-0'>
+          <FaEdit size={23} />
+          <span className='hidden'>Editar</span>
         </div>
       }
       childrenForm={
@@ -84,7 +89,7 @@ const AddIndustry = () => {
           <input
             type='submit'
             className='p-2 font-bold bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
-            value={'Adicionar'}
+            value={'Editar'}
           />
         </form>
       }
@@ -92,4 +97,4 @@ const AddIndustry = () => {
   )
 }
 
-export default AddIndustry
+export default EditIndustry

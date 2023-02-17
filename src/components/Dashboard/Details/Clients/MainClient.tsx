@@ -1,14 +1,25 @@
 import { useState } from 'react'
-import { IoMdAdd } from 'react-icons/io'
-import { Link, useParams } from 'react-router-dom'
 import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
+import { useFormatDate } from '../../../../hooks/formatData/useFormatDate'
+import { useFormatValue } from '../../../../hooks/formatData/useFormatValue'
 
-import Orders from './Items/Orders'
+import { Link, useParams } from 'react-router-dom'
 
-const Main = () => {
+import LabelComponent from '../../../GlobalComponents/LabelComponent'
+import LinkComponent from '../../../GlobalComponents/LinkComponent'
+import MessageComponent from '../../../GlobalComponents/MessageComponent'
+import Search from '../../../GlobalComponents/Search'
+
+import { IoMdAdd } from 'react-icons/io'
+
+import { IOrder } from '../../../../interfaces'
+
+const MainClient = () => {
   const [search, setSearch] = useState('')
 
   const { clientId } = useParams()
+  const { formatDate } = useFormatDate()
+  const { formatValue } = useFormatValue()
   const { clientOrders } = useFetchCollection(`clients/${clientId}/orders`)
 
   const idFilter =
@@ -21,28 +32,34 @@ const Main = () => {
         )
       : []
 
+  const linkComponent = (order: IOrder) => {
+    return (
+      <LinkComponent id={order.id || ''} key={order.id}>
+        <span className='w-[15%]'>{order.orderId}</span>
+        <span className='w-[20%]'>{order.createdAt?.seconds && formatDate(order.createdAt)}</span>
+        <span className='w-[35%]'>{order.deadline}</span>
+        <span className='w-[10%]'>{order.industryName}</span>
+        <span className='w-[15%]'>{order.total && formatValue(+order.total)}</span>
+      </LinkComponent>
+    )
+  }
+
   const labelComponent = () => {
     return (
-      <div className='flex items-center w-full gap-2 p-2 text-left break-words lg:p-4 text-gray-50'>
+      <LabelComponent>
         <span className='w-[15%]'>Pedido</span>
         <span className='w-[20%]'>Data</span>
         <span className='w-[35%]'>Prazo</span>
         <span className='w-[10%]'>Indústria</span>
         <span className='w-[15%]'>Total</span>
-      </div>
+      </LabelComponent>
     )
   }
 
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <input
-          type='text'
-          className='p-2 bg-gray-900 rounded-lg placeholder:text-center text-gray-50 max-w-[300px] w-full'
-          placeholder='Pesquisar'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <Search search={search} setSearch={setSearch} />
 
         <Link
           to='/order'
@@ -52,38 +69,37 @@ const Main = () => {
         </Link>
       </div>
 
+      {!search && clientOrders.length === 0 && (
+        <MessageComponent text='Nenhum pedido cadastrado.' />
+      )}
+
+      {search && nameFilter.length === 0 && idFilter.length === 0 && (
+        <MessageComponent text='Nenhum pedido encontrado.' />
+      )}
+
       <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
         {clientOrders.length > 0 && !search && labelComponent()}
         {search && nameFilter.length > 0 && labelComponent()}
         {search && idFilter.length > 0 && labelComponent()}
 
-        {clientOrders.length === 0 && (
-          <p className='w-full mt-5 text-center text-gray-50'>Nenhum pedido cadastrado.</p>
-        )}
-
+        {!search &&
+          clientOrders
+            .sort((a, b) => Number(b.orderId) - Number(a.orderId))
+            .map((order) => linkComponent(order))}
         {search &&
           idFilter.length > 0 &&
           idFilter
             .sort((a, b) => Number(b.orderId) - Number(a.orderId))
-            .map((order) => <Orders order={order} key={order.id} />)}
+            .map((order) => linkComponent(order))}
 
         {search &&
           nameFilter.length > 0 &&
           nameFilter
             .sort((a, b) => Number(b.orderId) - Number(a.orderId))
-            .map((order) => <Orders order={order} key={order.id} />)}
-
-        {search && nameFilter.length === 0 && idFilter.length === 0 && (
-          <p className='w-full mt-5 text-center text-gray-50'>Nenhum pedido encontrado.</p>
-        )}
-
-        {!search &&
-          clientOrders
-            .sort((a, b) => Number(b.orderId) - Number(a.orderId))
-            .map((order) => <Orders order={order} key={order.id} />)}
+            .map((order) => linkComponent(order))}
       </div>
     </div>
   )
 }
 
-export default Main
+export default MainClient

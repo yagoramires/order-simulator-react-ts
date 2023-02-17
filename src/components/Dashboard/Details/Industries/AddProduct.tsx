@@ -1,14 +1,12 @@
 import { useState } from 'react'
-import { useAddDoc } from '../../../../../hooks/handleData/useAddDoc'
+import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
 
 import { useParams } from 'react-router-dom'
 
 import { toast } from 'react-toastify'
 
-import * as Dialog from '@radix-ui/react-dialog'
-
+import DialogComponent from '../../../GlobalComponents/DialogComponent'
 import { IoMdAdd } from 'react-icons/io'
-import { MdClose } from 'react-icons/md'
 
 const AddProduct = () => {
   const [productImg, setProductImage] = useState(null)
@@ -70,21 +68,17 @@ const AddProduct = () => {
   }
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger>
+    <DialogComponent
+      type={'Adicionar Produto'}
+      open={open}
+      setOpen={setOpen}
+      childrenButton={
         <div className='relative flex items-center justify-between gap-2 px-4 py-2 font-bold bg-blue-600 rounded-lg text-gray-50 '>
           <IoMdAdd /> Novo
         </div>
-      </Dialog.Trigger>
-      <Dialog.Portal>
-        <Dialog.Overlay className='fixed inset-0 bg-black/80' />
-        <Dialog.Content className='fixed top-1/2 w-[90%] max-w-[800px] rounded-lg shadow-md p-8 translate-x-[-50%] translate-y-[-50%] left-1/2 z-10 bg-gray-800'>
-          <Dialog.Title className='flex justify-between mb-4 font-bold text-gray-50'>
-            <Dialog.Close className='flex justify-between w-full mb-4'>
-              Adicionar produto
-              <MdClose className='text-xl' />
-            </Dialog.Close>
-          </Dialog.Title>
+      }
+      childrenForm={
+        <>
           <div className='flex items-center justify-center w-full text-blue-600'>
             {productImg && (
               <img
@@ -172,9 +166,9 @@ const AddProduct = () => {
               value={'Adicionar'}
             />
           </form>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+        </>
+      }
+    />
   )
 }
 
