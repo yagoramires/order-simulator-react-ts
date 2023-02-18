@@ -55,7 +55,7 @@ const Product = ({ product }: ProductProps) => {
     if (!selectedClient) return price
 
     let discount = price
-    console.log('VALOR CHEIO: ' + discount)
+    // console.log('VALOR CHEIO: ' + discount)
 
     if (selectedClient.discountA) {
       discount =
@@ -64,7 +64,7 @@ const Product = ({ product }: ProductProps) => {
           : discount
     }
     discount = Number(discount.toFixed(8))
-    console.log('VALOR DESCONTO A: ' + discount)
+    // console.log('VALOR DESCONTO A: ' + discount)
 
     if (selectedClient.discountB) {
       discount =
@@ -74,7 +74,7 @@ const Product = ({ product }: ProductProps) => {
     }
 
     discount = Number(discount.toFixed(8))
-    console.log('VALOR DESCONTO B: ' + discount)
+    // console.log('VALOR DESCONTO B: ' + discount)
 
     if (selectedClient.discountC) {
       discount =
@@ -83,7 +83,7 @@ const Product = ({ product }: ProductProps) => {
           : discount
     }
     discount = Number(discount.toFixed(8))
-    console.log('VALOR DESCONTO C: ' + discount)
+    // console.log('VALOR DESCONTO C: ' + discount)
 
     if (selectedClient.network) {
       const getClientNetwork = networks.filter(
@@ -111,7 +111,7 @@ const Product = ({ product }: ProductProps) => {
     //     discount = value && value > 0 ? discount - discount * (value / 100) : discount
     //   }
     // }
-    console.log('VALOR DESCONTO REDE: ' + discount)
+    // console.log('VALOR DESCONTO REDE: ' + discount)
 
     // if (selectedClient.engefer) {
     //   discount = discount * 1.12

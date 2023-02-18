@@ -143,12 +143,12 @@ const AddClient = () => {
               onChange={(e) => setDeadline(e.target.value)}
             />
           </label>
-          <div className='flex items-center justify-between w-full'>
-            <label className='flex flex-col gap-1'>
+          <div className='flex items-center justify-between w-full gap-2'>
+            <label className='flex flex-col items-center gap-1'>
               <span className='text-sm text-gray-500'>Desconto Ilumi</span>
               <input
                 type='number'
-                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                className='w-[25%] p-2 bg-gray-900 rounded-lg text-gray-50 text-center'
                 placeholder='Desconto ilumi'
                 value={discountA}
                 onChange={(e) => setDiscountA(+e.target.value)}
@@ -157,11 +157,11 @@ const AddClient = () => {
                 step='any'
               />
             </label>
-            <label className='flex flex-col gap-1'>
+            <label className='flex flex-col items-center gap-1'>
               <span className='text-sm text-gray-500'>Desconto adicional</span>
               <input
                 type='number'
-                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                className='w-[25%]  p-2 bg-gray-900 rounded-lg text-gray-50 text-center'
                 placeholder='Desconto adicional'
                 value={discountB}
                 onChange={(e) => setDiscountB(+e.target.value)}
@@ -170,11 +170,11 @@ const AddClient = () => {
                 step='any'
               />
             </label>
-            <label className='flex flex-col gap-1'>
+            <label className='flex flex-col items-center gap-1'>
               <span className='text-sm text-gray-500'>Desconto à vista</span>
               <input
                 type='number'
-                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                className='w-[25%]  p-2 bg-gray-900 rounded-lg text-gray-50 text-center'
                 placeholder='Desconto à vista'
                 value={discountC}
                 onChange={(e) => setDiscountC(+e.target.value)}
