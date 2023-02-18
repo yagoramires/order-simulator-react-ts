@@ -51,10 +51,8 @@ const MainNetwork = () => {
   }
 
   const handleDelete = (index: number) => {
-    console.log(network)
     const products = network?.products.filter((product: INetworkProduct, i: number) => i !== index)
     const data = { ...network, products }
-    console.log(data)
 
     updateProductNetwork(networkId || '', data)
   }
