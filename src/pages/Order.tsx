@@ -57,19 +57,19 @@ const Order = () => {
               <Label />
 
               {!search &&
-                selectedIndustry?.products?.map((product) => (
-                  <Product product={product} key={product.id} />
+                selectedIndustry?.products?.map((product, index) => (
+                  <Product product={product} key={index} />
                 ))}
 
               {search &&
                 codeFilter &&
                 codeFilter.length > 0 &&
-                codeFilter?.map((product) => <Product product={product} key={product.id} />)}
+                codeFilter?.map((product, index) => <Product product={product} key={index} />)}
 
               {search &&
                 nameFilter &&
                 nameFilter.length > 0 &&
-                nameFilter?.map((product) => <Product product={product} key={product.id} />)}
+                nameFilter?.map((product, index) => <Product product={product} key={index} />)}
             </div>
           </>
         )}
