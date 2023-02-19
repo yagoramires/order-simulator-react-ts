@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react'
 import { FaSearch } from 'react-icons/fa'
-import { RiArrowDownSLine } from 'react-icons/ri'
 import { NewOrderContext } from '../../context/NewOrderContext'
 import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 import { IClients, IIndustries } from '../../interfaces'
@@ -8,10 +7,6 @@ import { IClients, IIndustries } from '../../interfaces'
 const Select = () => {
   const [clientDropdown, setClientDropdown] = useState(false)
   const [industryDropdown, setIndustryDropdown] = useState(false)
-
-  // const [deadlineDropdown, setDeadlineDropdown] = useState(false)
-  // const [searchResultIndustry, setSearchResultIndustry] = useState([])
-  // const [searchResultClient, setSearchResultClient] = useState([])
 
   const [industry, setIndustry] = useState('')
   const [deadline, setDeadline] = useState('')
