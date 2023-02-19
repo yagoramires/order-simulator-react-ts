@@ -12,19 +12,21 @@ import MessageComponent from '../components/GlobalComponents/MessageComponent'
 const Order = () => {
   const [search, setSearch] = useState('')
 
-  // const { selectedIndustry, products } = useContext(NewOrderContext)
+  const { selectedIndustry } = useContext(NewOrderContext)
 
-  // const codeFilter =
-  //   search.length > 0
-  //     ? products.filter((product) =>
-  //         String(product.code).toLowerCase().includes(search.toLowerCase()),
-  //       )
-  //     : []
+  const codeFilter =
+    search.length > 0
+      ? selectedIndustry?.products?.filter((product) =>
+          String(product.code).toLowerCase().includes(search.toLowerCase()),
+        )
+      : []
 
-  // const nameFilter =
-  //   search.length > 0
-  //     ? products.filter((product) => product.name?.toLowerCase().includes(search.toLowerCase()))
-  //     : []
+  const nameFilter =
+    search.length > 0
+      ? selectedIndustry?.products?.filter((product) =>
+          product.name?.toLowerCase().includes(search.toLowerCase()),
+        )
+      : []
 
   return (
     <div className='max-h-[100vh]'>
@@ -33,38 +35,40 @@ const Order = () => {
         <div className='flex flex-col w-[100vw] max-w-[1400px] bg-dark-100 overflow-auto p-1 gap-1 md:p-2 md:gap-2'>
           <Select />
         </div>
-        {/* 
+
         {!selectedIndustry.id && (
           <MessageComponent text='Selecione uma indústria para carregar os produtos.' />
         )}
-        {selectedIndustry.id && products?.length === 0 && (
+        {selectedIndustry.id && selectedIndustry?.products?.length === 0 && (
           <MessageComponent text='Nenhum produto cadastrado.' />
         )}
 
-        {search && nameFilter.length === 0 && codeFilter.length === 0 && (
+        {/* {search && nameFilter.length === 0 && codeFilter.length === 0 && (
           <MessageComponent text='Nenhum produto encontrado.' />
-        )}
-        {selectedIndustry.id && products?.length > 0 && (
+        )} */}
+        {selectedIndustry.products && selectedIndustry.products?.length > 0 && (
           <>
             <div className='flex justify-center w-full p-1 md:p-2  max-w-[1400px]'>
-              <Search search={search} setSearch={setSearch} />
+              {/* <Search search={search} setSearch={setSearch} /> */}
             </div>
             <div className='mt-1 md:mt-2 flex flex-col w-[100vw] max-w-[1400px] max-h-[calc(100vh-300px)] md:max-h-[calc(100vh-366px)] bg-dark-100 overflow-auto p-1 gap-1 md:p-2 md:gap-2 '>
               <Label />
 
               {!search &&
-                products?.map((product) => <Product product={product} key={product.id} />)}
+                selectedIndustry?.products?.map((product) => (
+                  <Product product={product} key={product.id} />
+                ))}
 
-              {search &&
+              {/* {search &&
                 codeFilter.length > 0 &&
                 codeFilter?.map((product) => <Product product={product} key={product.id} />)}
 
               {search &&
                 nameFilter.length > 0 &&
-                nameFilter?.map((product) => <Product product={product} key={product.id} />)}
+                nameFilter?.map((product) => <Product product={product} key={product.id} />)} */}
             </div>
           </>
-        )} */}
+        )}
       </div>
     </div>
   )
