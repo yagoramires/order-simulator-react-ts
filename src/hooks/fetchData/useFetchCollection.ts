@@ -19,14 +19,19 @@ import * as interfaces from '../../interfaces/index'
 export const useFetchCollection = (docCollection: string) => {
   const [ordersFetch, setOrdersFetch] = useState<interfaces.IOrder[]>([])
   const [lastOrdersFetch, setLastOrdersFetch] = useState<DocumentData>()
+
   const [industriesFetch, setIndustriesFetch] = useState<interfaces.IIndustries[]>([])
   const [lastIndustriesFetch, setLastIndustriesFetch] = useState<DocumentData>()
+
   const [clientsFetch, setClientsFetch] = useState<interfaces.IClients[]>([])
   const [lastClientsFetch, setLastClientsFetch] = useState<DocumentData>()
+
   const [deadlinesFetch, setDeadlinesFetch] = useState<interfaces.IDeadlines[]>([])
   const [lastDeadlinesFetch, setLastDeadlinesFetch] = useState<DocumentData>()
+
   const [networksFetch, setNetworksFetch] = useState<interfaces.INetworks[]>([])
   const [lastNetworksFetch, setLastNetworksFetch] = useState<DocumentData>()
+
   const [searchQuery, setSearchQuery] = useState<DocumentData>([])
 
   useEffect(() => {

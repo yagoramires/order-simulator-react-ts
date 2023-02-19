@@ -10,27 +10,33 @@ import { MdKeyboardArrowLeft, MdNoPhotography } from 'react-icons/md'
 import Alert from '../../components/GlobalComponents/Alert'
 import { toast } from 'react-toastify'
 import { FaEdit } from 'react-icons/fa'
+import { IProduct } from '../../interfaces'
 
 const ProductDetails = () => {
   const navigate = useNavigate()
 
   const { industryId, productId } = useParams()
 
-  const { document: product, loading } = useFetchDocument(
-    `industries/${industryId}/products`,
-    productId,
-  )
+  const { document: industry, loading } = useFetchDocument('industries', industryId)
+
+  const [product, setProduct] = useState<IProduct>()
 
   // const { editProduct } = useEditDoc()
 
   const [productImg, setProductImage] = useState(null)
-  const [image, setImage] = useState(null)
-  const [name, setName] = useState('')
-  const [code, setCode] = useState('')
-  const [family, setFamily] = useState('')
-  const [price, setPrice] = useState('')
-  const [minValue, setMinValue] = useState('')
-  const [unityType, setUnityType] = useState('')
+  const [image, setImage] = useState<string>()
+  const [name, setName] = useState<string>()
+  const [code, setCode] = useState<string>()
+  const [family, setFamily] = useState<string>()
+  const [price, setPrice] = useState<number>()
+  const [minValue, setMinValue] = useState<number>()
+  const [unityType, setUnityType] = useState<string>()
+
+  useEffect(() => {
+    if (industry) {
+      setProduct(industry.products[productId || 0])
+    }
+  }, [industry])
 
   useEffect(() => {
     if (product) {
@@ -38,11 +44,13 @@ const ProductDetails = () => {
       setName(product.name || '')
       setCode(product.code || '')
       setFamily(product.family || '')
-      setPrice(product.price || '')
-      setMinValue(product.minValue || '')
+      setPrice(product.price || 0)
+      setMinValue(product.minValue || 0)
       setUnityType(product.unityType || '')
     }
   }, [product])
+
+  console.log(product)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSelectImage = (e: any) => {
@@ -83,10 +91,10 @@ const ProductDetails = () => {
     //   })
     // }
 
-    setCode('')
-    setName('')
-    setPrice('')
-    setFamily('')
+    // setCode('')
+    // setName('')
+    // setPrice('')
+    // setFamily('')
     navigate(-1)
   }
 
@@ -165,7 +173,7 @@ const ProductDetails = () => {
             <input
               type='number'
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(+e.target.value)}
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             />
           </label>
@@ -183,7 +191,7 @@ const ProductDetails = () => {
             <input
               type='number'
               value={minValue}
-              onChange={(e) => setMinValue(e.target.value)}
+              onChange={(e) => setMinValue(+e.target.value)}
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             />
           </label>

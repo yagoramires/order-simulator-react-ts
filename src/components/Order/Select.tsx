@@ -58,9 +58,9 @@ const Select = () => {
               industryDropdown ? '' : 'hidden '
             } `}
           >
-            {searchIndustryQuery?.map((industry: IIndustries) => (
+            {searchIndustryQuery?.map((industry: IIndustries, index: number) => (
               <li
-                key={industry.id}
+                key={index}
                 className='w-full px-2 uppercase bg-gray-700 rounded-lg cursor-pointer lg:p-2'
                 onClick={() => {
                   setSelectedIndustry(industry)
@@ -107,14 +107,15 @@ const Select = () => {
             clientDropdown ? '' : 'hidden '
           } `}
         >
-          {searchClientQuery?.map((client: IClients) => (
+          {searchClientQuery?.map((client: IClients, index: number) => (
             <li
-              key={client.id}
+              key={index}
               className='w-full px-2 uppercase bg-gray-700 rounded-lg cursor-pointer lg:p-2'
               onClick={() => {
                 setSelectedClient(client)
                 setClientDropdown(false)
                 setDeadline(client.deadline || '')
+                setSelectedDeadline(client.deadline || '')
                 setClient(client.socialName || '')
               }}
             >

@@ -42,6 +42,7 @@ const EditClient = ({ clientId, clientData }: ClientProps) => {
       discountA,
       discountB,
       discountC,
+      orders: clientData.orders || [],
     })
     setOpen(false)
   }

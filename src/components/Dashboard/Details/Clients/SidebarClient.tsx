@@ -25,7 +25,7 @@ const SidebarClients = ({ client }: DataProps) => {
           </div>
           <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>Razão Social</span>
-            <span className='text-sm font-medium'>{client.socialName}</span>
+            <span className='text-sm font-medium'>{client.socialName?.toUpperCase()}</span>
           </div>
           <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>CNPJ</span>
@@ -34,7 +34,9 @@ const SidebarClients = ({ client }: DataProps) => {
           <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>Rede</span>
             <span className='text-sm font-medium'>
-              {client.network && client.network !== 'undefined' ? client.network : 'SEM REDE'}
+              {client.network && client.network !== 'undefined'
+                ? client.network?.toUpperCase()
+                : 'SEM REDE'}
             </span>
           </div>
           <div className='flex flex-col'>

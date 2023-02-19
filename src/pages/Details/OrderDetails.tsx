@@ -27,6 +27,8 @@ const OrderDetails = () => {
       </div>
     )
 
+  console.log(order)
+
   return (
     <div className='h-[100vh] flex flex-col justify-start items-center p-2 w-full overflow-auto'>
       <div className='max-w-[800px] w-full lg:p-8'>
@@ -49,7 +51,7 @@ const OrderDetails = () => {
           </div>
           <div className='flex flex-col gap-1'>
             <span className='text-sm text-gray-700'>Razão Social</span>
-            <span className='text-gray-50'>{order.clientName}</span>
+            <span className='text-gray-50'>{order.clientName?.toUpperCase()}</span>
           </div>
           <div className='flex flex-col gap-1'>
             <span className='text-sm text-gray-700'>Razão Social</span>
@@ -65,11 +67,11 @@ const OrderDetails = () => {
           </div>
           <div className='flex flex-col gap-1'>
             <span className='text-sm text-gray-700'>Indústria</span>
-            <span className='text-gray-50'>{order.industryName}</span>
+            <span className='text-gray-50'>{order.industryName?.toUpperCase()}</span>
           </div>
           <div className='flex flex-col gap-1'>
             <span className='text-sm text-gray-700'>Vendedor</span>
-            <span className='text-gray-50'>{order.sellerId}</span>
+            <span className='capitalize text-gray-50'>{order.sellerId}</span>
           </div>
           <div className='flex flex-col gap-1'>
             <span className='text-sm text-gray-700'>Total do pedido</span>
@@ -87,13 +89,12 @@ const OrderDetails = () => {
                 <span className='text-xs w-[20%]'>Total</span>
               </div>
 
-              {order?.products?.map((product: IProduct) => (
-                <Link
-                  to={`/industries/${order.industryId}/${product.id}`}
+              {order?.products?.map((product: IProduct, index: number) => (
+                <div
                   className='flex items-start justify-center w-full gap-2 p-2 px-2 bg-white rounded-md'
-                  key={product.id}
+                  key={index}
                 >
-                  <span className='text-sm w-[50%]'>{product.name}</span>
+                  <span className='text-sm w-[50%]'>{product.name?.toUpperCase()}</span>
                   <span className='text-sm w-[15%]'>
                     {product.price && formatValue(product.price)}
                   </span>
@@ -101,7 +102,7 @@ const OrderDetails = () => {
                   <span className='text-sm w-[20%]'>
                     {product.total && formatValue(product.total)}
                   </span>
-                </Link>
+                </div>
               ))}
             </div>
           )}

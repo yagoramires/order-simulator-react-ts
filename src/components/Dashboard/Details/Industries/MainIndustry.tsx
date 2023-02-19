@@ -36,7 +36,7 @@ const MainIndustry = ({ industry }: DataProps) => {
 
   const linkComponent = (product: IProduct, index: number) => {
     return (
-      <LinkComponent id={`/industries/${industryId}/product/${product.id || ''}`} key={index}>
+      <LinkComponent id={`/industries/${industryId}/product/${index}`} key={index}>
         <span className='w-[20%]'>{String(product.code)}</span>
         <span className='w-[60%]'>{product.name?.toUpperCase()}</span>
         <span className='w-[20%]'>{product.price && formatValue(+product.price)}</span>

@@ -14,13 +14,12 @@ type NewOrderProps = {
 type OrderContextType = {
   selectedIndustry: IIndustries
   selectedClient: IClients
-  selectedDeadline: IDeadlines
+  selectedDeadline: string
   total: number
-  // products: IProduct[]
   productsArray: IProduct[]
   setSelectedIndustry: React.Dispatch<SetStateAction<IIndustries>>
   setSelectedClient: React.Dispatch<SetStateAction<IClients>>
-  setSelectedDeadline: React.Dispatch<SetStateAction<IDeadlines>>
+  setSelectedDeadline: React.Dispatch<SetStateAction<string>>
   setTotal: React.Dispatch<SetStateAction<number>>
   createNewOrder: () => void
   setProductsArray: React.Dispatch<SetStateAction<IProduct[]>>
@@ -31,18 +30,15 @@ const initialValue = {
     id: '',
     fantasyName: 'Indústria',
     cnpj: '',
+    products: [],
   },
   selectedClient: {
     id: '',
     socialName: 'Cliente',
     cnpj: '',
   },
-  selectedDeadline: {
-    id: '',
-    value: 'Prazo',
-  },
+  selectedDeadline: '',
   total: 0,
-  // products: [],
   productsArray: [],
   setSelectedIndustry: () => {
     ;('')
@@ -71,9 +67,7 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
     initialValue.selectedIndustry,
   )
   const [selectedClient, setSelectedClient] = useState<IClients>(initialValue.selectedClient)
-  const [selectedDeadline, setSelectedDeadline] = useState<IDeadlines>(
-    initialValue.selectedDeadline,
-  )
+  const [selectedDeadline, setSelectedDeadline] = useState<string>(initialValue.selectedDeadline)
   const [total, setTotal] = useState<number>(initialValue.total)
   const [productsArray, setProductsArray] = useState<IProduct[]>(initialValue.productsArray)
 
@@ -81,10 +75,7 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
 
   const { userData } = useContext(AuthContext)
   const { addOrder } = useCreateOrder()
-  // const { orders } = useFetchCollection('orders')
-  // const { products } = useFetchCollection(
-  //   selectedIndustry.id ? `industries/${selectedIndustry.id}/products` : '',
-  // )
+  const { ordersFetch } = useFetchCollection('orders')
 
   useEffect(() => {
     setProductsArray([])
@@ -106,18 +97,18 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
   const createNewOrder = () => {
     if (!selectedIndustry?.fantasyName) return toast.error('Selecione uma indústria!')
     if (selectedClient.id === '') return toast.error('Selecione um cliente!')
-    if (selectedDeadline.value === 'Selecione um prazo de pagamento')
+    if (selectedDeadline === 'Selecione um prazo de pagamento')
       return toast.error('Selecione um prazo de pagamento!')
     if (productsArray.length === 0) return toast.error('Selecione pelo menos um produto!')
     if (!total || total === 0) return toast.error('Ocorreu um erro, tente novamente!')
 
     let orderId
-    // if (orders.length > 0) {
-    //   const lastOrder = orders[orders.length - 1]
-    //   orderId = lastOrder.orderId ? +lastOrder.orderId + 1 : 1
-    // } else {
-    //   orderId = 1
-    // }
+    if (ordersFetch.length > 0) {
+      const lastOrder = ordersFetch[ordersFetch.length - 1]
+      orderId = lastOrder.orderId ? +lastOrder.orderId + 1 : 1
+    } else {
+      orderId = 1
+    }
 
     const data = {
       clientId: selectedClient.id,
@@ -128,12 +119,12 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
       sellerId: userData.uid,
       sellerName: userData.displayName,
       products: productsArray,
-      deadline: selectedDeadline.value,
+      deadline: selectedDeadline,
       total,
       orderId: `${orderId}`,
     }
 
-    addOrder(data)
+    addOrder(data, selectedClient)
 
     setProductsArray([])
     setSelectedIndustry(initialValue.selectedIndustry)
@@ -156,7 +147,6 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
         setSelectedClient,
         setSelectedDeadline,
         setTotal,
-        // products,
         productsArray,
         setProductsArray,
       }}

@@ -5,6 +5,7 @@ import { useState, useEffect, useContext } from 'react'
 import { MdNoPhotography } from 'react-icons/md'
 import { NewOrderContext } from '../../context/NewOrderContext'
 import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
+import { useCalculateDiscount } from '../../hooks/formatData/useCalculateDiscount'
 
 import { IProduct } from '../../interfaces'
 interface ProductProps {
@@ -16,7 +17,16 @@ const Product = ({ product }: ProductProps) => {
   const [total, setTotal] = useState(0)
 
   const { productsArray, setProductsArray, selectedClient } = useContext(NewOrderContext)
-  // const { networks } = useFetchCollection('networks')
+  const { networksFetch } = useFetchCollection('networks')
+  const { calculatePriceWithDiscount } = useCalculateDiscount()
+
+  const price = calculatePriceWithDiscount(product.price || 0, product.code || '', selectedClient)
+
+  useEffect(() => {
+    console.log(productsArray)
+    console.log(quantity)
+    console.log(total)
+  }, [total])
 
   useEffect(() => {
     setTotal(0)
@@ -24,12 +34,13 @@ const Product = ({ product }: ProductProps) => {
   }, [selectedClient])
 
   useEffect(() => {
-    setTotal(quantity * calculatePriceWithDiscount(product.price || 0, product.code || ''))
+    setTotal(quantity * price)
   }, [quantity])
 
   const handleSelectProductQuantity = (qnt: number) => {
     setQuantity(qnt)
     const checkIfProductIsInArray = productsArray.filter((prod) => prod.id === product.id)
+    console.log(checkIfProductIsInArray)
 
     if (qnt === 0) {
       const removeProduct = productsArray.filter((prod) => prod.id !== product.id)
@@ -37,89 +48,20 @@ const Product = ({ product }: ProductProps) => {
     }
 
     if (checkIfProductIsInArray.length === 0) {
-      const totalPrice = qnt * calculatePriceWithDiscount(product.price || 0, product.code || '')
+      const totalPrice = qnt * price
       const addProduct = { ...product, quantity: qnt, total: totalPrice }
       return setProductsArray([...productsArray, addProduct])
     }
+    console.log(checkIfProductIsInArray)
 
     if (checkIfProductIsInArray.length === 1) {
       const removeProduct = productsArray.filter((prod) => prod.id !== product.id)
 
-      const totalPrice = qnt * calculatePriceWithDiscount(product.price || 0, product.code || '')
+      const totalPrice = qnt * price
       const addProduct = { ...product, quantity: qnt, total: totalPrice }
       return setProductsArray([...removeProduct, addProduct])
     }
-  }
-
-  const calculatePriceWithDiscount = (price: number, code: string) => {
-    if (!selectedClient) return price
-
-    let discount = price
-    // console.log('VALOR CHEIO: ' + discount)
-
-    if (selectedClient.discountA) {
-      discount =
-        selectedClient.discountA > 0
-          ? discount - discount * (selectedClient.discountA / 100)
-          : discount
-    }
-    discount = Number(discount.toFixed(8))
-    // console.log('VALOR DESCONTO A: ' + discount)
-
-    if (selectedClient.discountB) {
-      discount =
-        selectedClient.discountB > 0
-          ? discount - discount * (selectedClient.discountB / 100)
-          : discount
-    }
-
-    discount = Number(discount.toFixed(8))
-    // console.log('VALOR DESCONTO B: ' + discount)
-
-    if (selectedClient.discountC) {
-      discount =
-        selectedClient.discountC > 0
-          ? discount - discount * (selectedClient.discountC / 100)
-          : discount
-    }
-    discount = Number(discount.toFixed(8))
-    // console.log('VALOR DESCONTO C: ' + discount)
-
-    // if (selectedClient.network) {
-    //   const getClientNetwork = networks.filter(
-    //     (network) => network.name?.toLowerCase() === selectedClient.network?.toLowerCase(),
-    //   )
-
-    //   const productsFilter = getClientNetwork[0]?.products?.filter(
-    //     (product) => product.code === String(code),
-    //   )
-
-    //   if (productsFilter && productsFilter?.length > 0) {
-    //     const value = productsFilter[0].discount
-    //     discount = value && value > 0 ? discount - discount * (value / 100) : discount
-    //   }
-    // }
-    // else if (!selectedClient.network || selectedClient.network === 'undefined') {
-    //   const getClientNetwork = networks.filter((network) => network.name === 'DESCONTO MÁXIMO')
-
-    //   const productsFilter = getClientNetwork[0]?.products?.filter(
-    //     (product) => product.code === String(code),
-    //   )
-
-    //   if (productsFilter && productsFilter?.length > 0) {
-    //     const value = productsFilter[0].discount
-    //     discount = value && value > 0 ? discount - discount * (value / 100) : discount
-    //   }
-    // }
-    // console.log('VALOR DESCONTO REDE: ' + discount)
-
-    // if (selectedClient.engefer) {
-    //   discount = discount * 1.12
-    // }
-    // discount = Number(discount.toFixed(8))
-    // console.log('VALOR ADICIONAL ENGEFER' +discount)
-
-    return discount
+    console.log(checkIfProductIsInArray)
   }
 
   return (
@@ -135,13 +77,10 @@ const Product = ({ product }: ProductProps) => {
       <span className='w-32 lg:w-52'>{product.code}</span>
       <span className='w-52 lg:w-full'>{product.name}</span>
       <span className='w-24 '>
-        {calculatePriceWithDiscount(product.price || 0, product.code || '').toLocaleString(
-          'pt-BR',
-          {
-            style: 'currency',
-            currency: 'BRL',
-          },
-        )}
+        {price.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        })}
       </span>
       <span>
         <input
