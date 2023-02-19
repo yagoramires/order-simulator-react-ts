@@ -1,13 +1,17 @@
 import { useState, useContext } from 'react'
-// import { RiArrowDownSLine } from 'react-icons/ri'
+import { FaSearch } from 'react-icons/fa'
+import { RiArrowDownSLine } from 'react-icons/ri'
 import { NewOrderContext } from '../../context/NewOrderContext'
 import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
-import { IClients } from '../../interfaces'
+import { IClients, IIndustries } from '../../interfaces'
 
 const Select = () => {
   const [clientDropdown, setClientDropdown] = useState(false)
-  const [deadlineDropdown, setDeadlineDropdown] = useState(false)
   const [industryDropdown, setIndustryDropdown] = useState(false)
+
+  // const [deadlineDropdown, setDeadlineDropdown] = useState(false)
+  // const [searchResultIndustry, setSearchResultIndustry] = useState([])
+  // const [searchResultClient, setSearchResultClient] = useState([])
 
   const [industry, setIndustry] = useState('')
   const [deadline, setDeadline] = useState('')
@@ -16,44 +20,22 @@ const Select = () => {
   const { createNewOrder, setSelectedClient, setSelectedIndustry, setSelectedDeadline, total } =
     useContext(NewOrderContext)
 
-  const { industries } = useFetchCollection('industries')
-  const { clients } = useFetchCollection('clients')
-  const { deadlines } = useFetchCollection('deadlines')
+  const { searchQuery: searchIndustryQuery, searchDoc: searchIndustry } =
+    useFetchCollection('industries')
+  const { searchQuery: searchClientQuery, searchDoc: searchClient } = useFetchCollection('clients')
 
-  const industriesFilter =
-    industry.length > 0
-      ? industries.filter((item) =>
-          item.fantasyName?.toLowerCase().includes(industry.toLowerCase()),
-        )
-      : []
-
-  const deadlinesFilter =
-    deadline.length > 0
-      ? deadlines.filter((item) => item.value?.toLowerCase().includes(deadline.toLowerCase()))
-      : []
-
-  const clientsFilter =
-    client.length > 0
-      ? clients.filter((item) => item.socialName?.toLowerCase().includes(client.toLowerCase()))
-      : []
-
-  const handleSelectClient = (client: IClients) => {
-    setSelectedClient(client)
+  const handleSearchIndustry = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIndustryDropdown(true)
     setClientDropdown(false)
+    searchIndustry(industry.toLowerCase())
   }
 
-  const handleSelectedIndustry = (id: string, fantasyName: string, cnpj: string) => {
-    setSelectedIndustry({
-      id,
-      fantasyName,
-      cnpj,
-    })
+  const handleSearchClient = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setClientDropdown(true)
     setIndustryDropdown(false)
-  }
-
-  const handleSelectDeadline = (id: string, value: string) => {
-    setSelectedDeadline({ id, value })
-    setDeadlineDropdown(false)
+    searchClient(client.toLowerCase())
   }
 
   return (
@@ -61,141 +43,91 @@ const Select = () => {
       <div className='flex items-start justify-center w-full gap-2'>
         <div className='relative w-[50%]'>
           <span className='text-xs text-gray-500 lg:text-sm'>Indústria</span>
-          {/* <div
-            className='flex items-center justify-between p-2 break-words bg-gray-800 rounded-lg'
-            onClick={() => {
-              setIndustryDropdown(!industryDropdown)
-              setClientDropdown(false)
-              setDeadlineDropdown(false)
-            }}
-          >
-            <span>{selectedIndustry.fantasyName}</span>
-            <RiArrowDownSLine />
-          </div> */}
-          <input
-            type='text'
-            value={industry}
-            onChange={(e) => {
-              setIndustry(e.target.value)
-              setIndustryDropdown(true)
-              setClientDropdown(false)
-              setDeadlineDropdown(false)
-            }}
-            placeholder='Indústria'
-            className='flex items-center justify-between w-full p-2 break-words bg-gray-800 rounded-lg'
-          />
+
+          <form onSubmit={handleSearchIndustry} className='flex'>
+            <input
+              type='text'
+              value={industry}
+              onChange={(e) => {
+                setIndustry(e.target.value)
+              }}
+              placeholder='Indústria'
+              className='flex items-center justify-between w-full p-2 uppercase break-words bg-gray-800 rounded-l-lg'
+            />
+            <button className='flex items-center justify-center w-[50px] p-2 bg-blue-600 rounded-r-lg'>
+              <FaSearch />
+            </button>
+          </form>
           <ul
             className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] md:max-h-[100px]  overflow-y-auto shadow-md flex flex-col gap-1 ${
               industryDropdown ? '' : 'hidden '
-            } ${industriesFilter.length === 0 && 'hidden'}`}
+            } `}
           >
-            {industriesFilter?.map((industry) => (
+            {searchIndustryQuery?.map((industry: IIndustries) => (
               <li
                 key={industry.id}
-                className='w-full px-2 bg-gray-700 rounded-lg cursor-pointer lg:p-2'
+                className='w-full px-2 uppercase bg-gray-700 rounded-lg cursor-pointer lg:p-2'
                 onClick={() => {
-                  handleSelectedIndustry(
-                    industry.id || '',
-                    industry.fantasyName || '',
-                    industry.cnpj || '',
-                  )
+                  setSelectedIndustry(industry)
+                  setIndustryDropdown(false)
                   setIndustry(industry.fantasyName || '')
                 }}
               >
                 <span className='break-words'>{industry.fantasyName}</span>
               </li>
             ))}
+
+            {searchIndustryQuery.length === 0 && <p>Nenhuma indústria encontrada.</p>}
           </ul>
         </div>
 
         <div className='relative w-[50%]'>
           <span className='text-xs text-gray-500 lg:text-sm'>Prazo de pagamento</span>
-          {/* <div
-            className='flex items-center justify-between p-2 break-words bg-gray-800 rounded-lg'
-            onClick={() => {
-              setDeadlineDropdown(!deadlineDropdown)
-              setClientDropdown(false)
-              setIndustryDropdown(false)
-            }}
-          >
-            <span>{selectedDeadline.value}</span>
-            <RiArrowDownSLine />
-          </div> */}
-          <input
-            type='text'
-            value={deadline}
-            onChange={(e) => {
-              setDeadline(e.target.value)
-              setIndustryDropdown(false)
-              setClientDropdown(false)
-              setDeadlineDropdown(true)
-            }}
-            placeholder='Prazo de pagamento'
-            className='flex items-center justify-between w-full p-2 break-words bg-gray-800 rounded-lg'
-          />
-          <ul
-            className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] md:max-h-[100px]  overflow-y-auto shadow-md flex flex-col gap-1 ${
-              deadlineDropdown ? '' : 'hidden'
-            } ${deadlinesFilter.length === 0 && 'hidden'}`}
-          >
-            {deadlinesFilter?.map((deadline) => (
-              <li
-                key={deadline.id}
-                className='w-full px-2 bg-gray-700 rounded-lg cursor-pointer lg:p-2'
-                onClick={() => {
-                  handleSelectDeadline(deadline.id || '', deadline.value || '')
-                  setDeadline(deadline.value || '')
-                }}
-              >
-                <span className='break-words'>{deadline.value}</span>
-              </li>
-            ))}
-          </ul>
+
+          <p className='flex items-center justify-between w-full p-2 break-words bg-gray-800 rounded-lg'>
+            {deadline || 'Selecione um cliente'}
+          </p>
         </div>
       </div>
 
       <div className='relative'>
         <span className='text-xs text-gray-500 lg:text-sm'>Cliente</span>
-        {/* <div
-          className='flex items-center justify-between p-2 break-words bg-gray-800 rounded-lg'
-          onClick={() => {
-            setClientDropdown(!clientDropdown)
-            setDeadlineDropdown(false)
-            setIndustryDropdown(false)
-          }}
-        >
-          <span>{selectedClient.socialName}</span>
-          <RiArrowDownSLine />
-        </div> */}
-        <input
-          type='text'
-          value={client}
-          onChange={(e) => {
-            setClient(e.target.value)
-            setIndustryDropdown(false)
-            setClientDropdown(true)
-            setDeadlineDropdown(false)
-          }}
-          placeholder='Cliente'
-          className='flex items-center justify-between w-full p-2 break-words bg-gray-800 rounded-lg'
-        />
+
+        <form onSubmit={handleSearchClient} className='flex'>
+          <input
+            type='text'
+            value={client}
+            onChange={(e) => {
+              setClient(e.target.value)
+            }}
+            placeholder='Cliente'
+            className='flex items-center justify-between w-full p-2 uppercase break-words bg-gray-800 rounded-l-lg'
+          />
+          <button className='flex items-center justify-center w-[50px] p-2 bg-blue-600 rounded-r-lg'>
+            <FaSearch />
+          </button>
+        </form>
         <ul
-          className={`selectScroll absolute z-50 mt-2 rounded-lg p-2 bg-gray-800 w-full overflow-y-auto shadow-md flex flex-col gap-1 ${
-            clientDropdown ? '' : 'hidden'
-          } ${clientsFilter.length === 0 && 'hidden'}`}
+          className={`selectScroll absolute z-10 mt-2 rounded-lg p-2 bg-gray-800 w-full max-h-[50px] md:max-h-[100px]  overflow-y-auto shadow-md flex flex-col gap-1 ${
+            clientDropdown ? '' : 'hidden '
+          } `}
         >
-          {clientsFilter?.map((client) => (
+          {searchClientQuery?.map((client: IClients) => (
             <li
               key={client.id}
-              className='w-full px-2 bg-gray-700 rounded-lg cursor-pointer lg:p-2'
+              className='w-full px-2 uppercase bg-gray-700 rounded-lg cursor-pointer lg:p-2'
               onClick={() => {
-                handleSelectClient(client)
+                setSelectedClient(client)
+                setClientDropdown(false)
+                setDeadline(client.deadline || '')
                 setClient(client.socialName || '')
               }}
             >
               <span className='break-words'>{client.socialName}</span>
             </li>
           ))}
+
+          {searchClientQuery.length === 0 && <p>Nenhum cliente encontrado.</p>}
         </ul>
       </div>
 

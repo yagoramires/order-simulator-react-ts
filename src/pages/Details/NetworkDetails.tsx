@@ -34,7 +34,7 @@ const NetworkDetails = () => {
         <>
           <Sidebar network={network} />
           <div className='w-full lg:flex lg:items-center lg:justify-center'>
-            <Main />
+            <Main network={network} />
           </div>
         </>
       )}

@@ -31,6 +31,7 @@ const EditIndustry = ({ industryId, industryData }: IndustryProps) => {
       fantasyName,
       socialName,
       cnpj,
+      products: industryData.products || [],
     })
 
     setOpen(false)
@@ -57,7 +58,7 @@ const EditIndustry = ({ industryId, industryData }: IndustryProps) => {
               placeholder='Nome Fantasia'
               value={fantasyName}
               onChange={(e) => {
-                setFantasyName(e.target.value)
+                setFantasyName(e.target.value.toLowerCase())
               }}
             />
           </label>
@@ -69,7 +70,7 @@ const EditIndustry = ({ industryId, industryData }: IndustryProps) => {
               placeholder='Razão Social'
               value={socialName}
               onChange={(e) => {
-                setSocialName(e.target.value)
+                setSocialName(e.target.value.toLowerCase())
               }}
             />
           </label>

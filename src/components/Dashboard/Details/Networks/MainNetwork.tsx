@@ -1,20 +1,25 @@
 import { useState } from 'react'
-import { TiDelete } from 'react-icons/ti'
 import { useParams } from 'react-router-dom'
-import { useFetchDocument } from '../../../../hooks/fetchData/useFetchDocument'
+
 import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
-import { INetworkProduct } from '../../../../interfaces'
+
 import LabelComponent from '../../../GlobalComponents/LabelComponent'
 import MessageComponent from '../../../GlobalComponents/MessageComponent'
 import PageLoading from '../../../GlobalComponents/PageLoading'
-import Search from '../../../GlobalComponents/Search'
+import Filter from '../../../GlobalComponents/Filter'
 import ProductForm from './AddProduct'
 
-const MainNetwork = () => {
+import { TiDelete } from 'react-icons/ti'
+
+import { INetworkProduct, INetworks } from '../../../../interfaces'
+interface NetworkProps {
+  network: INetworks
+}
+
+const MainNetwork = ({ network }: NetworkProps) => {
   const [search, setSearch] = useState('')
 
   const { networkId } = useParams()
-  const { document: network } = useFetchDocument('networks', networkId)
   const { updateProductNetwork } = useEditDoc()
 
   const codeFilter =
@@ -51,7 +56,7 @@ const MainNetwork = () => {
   }
 
   const handleDelete = (index: number) => {
-    const products = network?.products.filter((product: INetworkProduct, i: number) => i !== index)
+    const products = network?.products?.filter((product: INetworkProduct, i: number) => i !== index)
     const data = { ...network, products }
 
     updateProductNetwork(networkId || '', data)
@@ -62,7 +67,7 @@ const MainNetwork = () => {
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <Search search={search} setSearch={setSearch} />
+        <Filter search={search} setSearch={setSearch} />
 
         <ProductForm />
       </div>
@@ -73,8 +78,8 @@ const MainNetwork = () => {
       {search && codeFilter?.length === 0 && <MessageComponent text='Nenhum produto encontrado.' />}
 
       <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
-        {network.products?.length > 0 && !search && labelComponent()}
-        {search && codeFilter?.length > 0 && labelComponent()}
+        {network.products && network.products.length > 0 && !search && labelComponent()}
+        {search && codeFilter && codeFilter.length > 0 && labelComponent()}
 
         {!search &&
           network.products?.map((product: INetworkProduct, index: number) =>
@@ -82,6 +87,7 @@ const MainNetwork = () => {
           )}
 
         {search &&
+          codeFilter &&
           codeFilter.length > 0 &&
           codeFilter.map((product: INetworkProduct, index: number) =>
             productComponent(product, index),

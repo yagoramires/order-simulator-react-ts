@@ -6,22 +6,18 @@ import LinkComponent from '../../GlobalComponents/LinkComponent'
 import MessageComponent from '../../GlobalComponents/MessageComponent'
 import Search from '../../GlobalComponents/Search'
 import NetworkForm from './Forms/AddNetwork'
+import LoadMoreBtn from '../../GlobalComponents/LoadMoreBtn'
 
 import { INetworks } from '../../../interfaces'
 
 const Networks = () => {
-  const [search, setSearch] = useState('')
-  const { networks } = useFetchCollection('networks')
-
-  const nameFilter =
-    search.length > 0
-      ? networks.filter((network) => network.name?.toLowerCase().includes(search.toLowerCase()))
-      : []
+  const { networksFetch, fetchMore } = useFetchCollection('networks')
+  const [result, setResult] = useState([])
 
   const linkComponent = (network: INetworks) => {
     return (
       <LinkComponent id={network.id || ''} key={network.id}>
-        <span className='w-full'>{network.name}</span>
+        <span className='w-full'>{network.name?.toLocaleUpperCase()}</span>
       </LinkComponent>
     )
   }
@@ -37,23 +33,27 @@ const Networks = () => {
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <Search search={search} setSearch={setSearch} />
+        <Search collection='networks' setResult={setResult} />
 
         <NetworkForm />
       </div>
 
-      {!search && networks.length === 0 && <MessageComponent text='Nenhuma rede cadastrada.' />}
-
-      {search && nameFilter.length === 0 && <MessageComponent text='Nenhuma rede encontrada.' />}
+      {result.length === 0 && networksFetch.length === 0 && (
+        <MessageComponent text='Nenhuma rede cadastrada.' />
+      )}
 
       <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
-        {networks.length > 0 && !search && labelComponent()}
-        {search && nameFilter.length > 0 && labelComponent()}
+        {networksFetch.length > 0 && result.length === 0 && labelComponent()}
+        {result.length > 0 && labelComponent()}
 
-        {!search && networks?.map((network) => linkComponent(network))}
+        {networksFetch.length > 0 &&
+          result.length === 0 &&
+          networksFetch?.map((network) => linkComponent(network))}
 
-        {search && nameFilter.length > 0 && nameFilter.map((network) => linkComponent(network))}
+        {result.length > 0 && result.map((network) => linkComponent(network))}
       </div>
+
+      {result.length === 0 && networksFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />}
     </div>
   )
 }

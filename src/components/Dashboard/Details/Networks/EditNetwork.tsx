@@ -47,11 +47,11 @@ const EditNetwork = ({ networkId, networkData }: NetworkProps) => {
             <span className='text-sm text-gray-500'>Nome</span>
             <input
               type='text'
-              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+              className='w-full p-2 uppercase bg-gray-900 rounded-lg text-gray-50'
               placeholder='Nome Fantasia'
               value={name}
               onChange={(e) => {
-                setName(e.target.value)
+                setName(e.target.value.toLowerCase())
               }}
             />
           </label>

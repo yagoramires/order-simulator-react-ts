@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
+import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
 
 import { useParams } from 'react-router-dom'
 
@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 
 import DialogComponent from '../../../GlobalComponents/DialogComponent'
 import { IoMdAdd } from 'react-icons/io'
+import { useFetchDocument } from '../../../../hooks/fetchData/useFetchDocument'
 
 const AddProduct = () => {
   const [productImg, setProductImage] = useState(null)
@@ -19,22 +20,19 @@ const AddProduct = () => {
   const [open, setOpen] = useState(false)
 
   const { industryId } = useParams()
+  const { document: industry } = useFetchDocument('industries', industryId)
+  const { updateProductIndustry } = useEditDoc()
 
-  const { addProduct } = useAddDoc()
-
-  // const handleAddProduct = (e: React.FormEvent<HTMLFormElement>) => {
+  // const handleAddProduct = async (e: React.FormEvent<HTMLFormElement>) => {
   //   e.preventDefault()
 
-  //   mock.forEach((product: any) => {
-  //     addProduct({
-  //       code: `${product.code}`,
-  //       name: product.name,
-  //       industry: industryId || '',
-  //       price: product.price,
-  //       unityType: product.unityType,
-  //       minValue: Number(product.minValue),
-  //     })
-  //   })
+  //   const ref = doc(database, 'industries', industryId || '')
+
+  //   const addMock = { ...industry, products: mock }
+
+  //   console.log(addMock)
+  //   await updateDoc(ref, addMock)
+  //   return
   // }
 
   const handleAddProduct = (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,30 +41,22 @@ const AddProduct = () => {
     if (!code) return toast.error('Preencha o código!')
     if (!name) return toast.error('Preencha o nome!')
     if (!price) return toast.error('Preencha o preço!')
+    if (!industryId || !industry) return
 
-    if (industryId && productImg) {
-      addProduct(
-        {
-          code,
-          name,
-          industry: industryId,
-          price: Number(price),
-          family,
-          unityType,
-          minValue: Number(minValue),
-        },
-        productImg,
-      )
-    } else if (industryId) {
-      addProduct({
-        code,
-        name,
-        industry: industryId,
-        price: Number(price),
-        family,
-        unityType,
-        minValue: Number(minValue),
-      })
+    const product = {
+      code,
+      name,
+      industryId,
+      family,
+      unityType,
+      price: Number(price),
+      minValue: Number(minValue),
+    }
+
+    if (productImg) {
+      updateProductIndustry(industry, product, productImg)
+    } else {
+      updateProductIndustry(industry, product)
     }
 
     setCode('')
@@ -120,7 +110,7 @@ const AddProduct = () => {
                 className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
                 placeholder='Código'
                 value={code}
-                onChange={(e) => setCode(e.target.value)}
+                onChange={(e) => setCode(e.target.value.toLowerCase())}
               />
             </label>
             <label className='flex flex-col gap-1'>
@@ -131,7 +121,7 @@ const AddProduct = () => {
                 className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
                 placeholder='Nome'
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setName(e.target.value.toLowerCase())}
               />
             </label>
             <label className='flex flex-col gap-1'>
@@ -152,7 +142,7 @@ const AddProduct = () => {
                 className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
                 placeholder='Linha'
                 value={family}
-                onChange={(e) => setFamily(e.target.value)}
+                onChange={(e) => setFamily(e.target.value.toLowerCase())}
               />
             </label>
             <label className='flex flex-col gap-1'>
@@ -162,7 +152,7 @@ const AddProduct = () => {
                 className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
                 placeholder='Unidade'
                 value={unityType}
-                onChange={(e) => setUnityType(e.target.value)}
+                onChange={(e) => setUnityType(e.target.value.toLowerCase())}
               />
             </label>
             <label className='flex flex-col gap-1'>

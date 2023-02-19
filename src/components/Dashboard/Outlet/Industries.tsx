@@ -6,30 +6,18 @@ import LinkComponent from '../../GlobalComponents/LinkComponent'
 import MessageComponent from '../../GlobalComponents/MessageComponent'
 import IndustryForm from './Forms/AddIndustry'
 import Search from '../../GlobalComponents/Search'
+import LoadMoreBtn from '../../GlobalComponents/LoadMoreBtn'
 
 import { IIndustries } from '../../../interfaces'
 
 const Industries = () => {
-  const [search, setSearch] = useState('')
-
-  const { industries } = useFetchCollection('industries')
-
-  const nameFilter =
-    search.length > 0
-      ? industries.filter((industry) =>
-          industry.socialName?.toLowerCase().includes(search.toLowerCase()),
-        )
-      : []
-
-  const cnpjFilter =
-    search.length > 0
-      ? industries.filter((industry) => industry.cnpj?.toLowerCase().includes(search.toLowerCase()))
-      : []
+  const { industriesFetch, fetchMore } = useFetchCollection('industries')
+  const [result, setResult] = useState([])
 
   const linkComponent = (industry: IIndustries) => {
     return (
       <LinkComponent id={industry.id || ''} key={industry.id}>
-        <span className='w-[70%]'>{industry.socialName}</span>
+        <span className='w-[70%]'>{industry.socialName?.toUpperCase()}</span>
         <span className='w-[30%]'>{industry.cnpj}</span>
       </LinkComponent>
     )
@@ -47,37 +35,30 @@ const Industries = () => {
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <Search search={search} setSearch={setSearch} />
+        <Search collection='industries' setResult={setResult} />
 
         <IndustryForm />
       </div>
 
-      {!search && industries.length === 0 && (
+      {result.length === 0 && industriesFetch.length === 0 && (
         <MessageComponent
           text='Nenhuma indústria
          cadastrada.'
         />
       )}
-      {search && nameFilter.length === 0 && cnpjFilter.length === 0 && (
-        <MessageComponent
-          text='Nenhuma indústria
-        encontrada.'
-        />
-      )}
 
-      <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
-        {industries.length > 0 && !search && labelComponent()}
-        {search && nameFilter.length > 0 && labelComponent()}
-        {search && cnpjFilter.length > 0 && labelComponent()}
+      <div className='h-[calc(100vh-160px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+        {industriesFetch.length > 0 && result.length === 0 && labelComponent()}
+        {result.length > 0 && labelComponent()}
 
-        {!search && industries?.map((industry) => linkComponent(industry))}
+        {industriesFetch.length > 0 &&
+          result.length === 0 &&
+          industriesFetch?.map((industry) => linkComponent(industry))}
 
-        {search && nameFilter.length > 0 && nameFilter.map((industry) => linkComponent(industry))}
-
-        {cnpjFilter &&
-          cnpjFilter.length > 0 &&
-          cnpjFilter?.map((industry) => linkComponent(industry))}
+        {result.length > 0 && result.map((industry) => linkComponent(industry))}
       </div>
+
+      {result.length === 0 && industriesFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />}
     </div>
   )
 }

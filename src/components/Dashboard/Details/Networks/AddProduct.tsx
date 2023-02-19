@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
-import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
-
 import { useParams } from 'react-router-dom'
 
-import { toast } from 'react-toastify'
+import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
+import { useFetchDocument } from '../../../../hooks/fetchData/useFetchDocument'
 
 import { IoMdAdd } from 'react-icons/io'
 import DialogComponent from '../../../GlobalComponents/DialogComponent'
+import { toast } from 'react-toastify'
 
 const AddProduct = () => {
   const [code, setCode] = useState('')
@@ -15,7 +14,7 @@ const AddProduct = () => {
   const [open, setOpen] = useState(false)
 
   const { networkId } = useParams()
-  const { networks } = useFetchCollection('networks')
+  const { document: network } = useFetchDocument('networks', networkId || '')
 
   const { updateProductNetwork } = useEditDoc()
 
@@ -24,19 +23,18 @@ const AddProduct = () => {
 
     if (!code) return toast.error('Preencha o código!')
     if (!discount) return toast.error('Preencha o desconto!')
-    if (!networkId) return
+    if (!networkId || !network) return
 
-    const networkFilter = networks.filter((network) => network.id === networkId)
-    let network = networkFilter[0]
     const product = { code, discount }
+    let update = network
 
     if (network.products) {
-      network.products.push(product)
+      update.products.push(product)
     } else {
-      network = { ...network, products: [product] }
+      update = { ...network, products: [product] }
     }
 
-    updateProductNetwork(networkId, network)
+    updateProductNetwork(networkId, update)
 
     setCode('')
     setDiscount(0)

@@ -16,7 +16,7 @@ const Product = ({ product }: ProductProps) => {
   const [total, setTotal] = useState(0)
 
   const { productsArray, setProductsArray, selectedClient } = useContext(NewOrderContext)
-  const { networks } = useFetchCollection('networks')
+  // const { networks } = useFetchCollection('networks')
 
   useEffect(() => {
     setTotal(0)
@@ -85,20 +85,20 @@ const Product = ({ product }: ProductProps) => {
     discount = Number(discount.toFixed(8))
     // console.log('VALOR DESCONTO C: ' + discount)
 
-    if (selectedClient.network) {
-      const getClientNetwork = networks.filter(
-        (network) => network.name?.toLowerCase() === selectedClient.network?.toLowerCase(),
-      )
+    // if (selectedClient.network) {
+    //   const getClientNetwork = networks.filter(
+    //     (network) => network.name?.toLowerCase() === selectedClient.network?.toLowerCase(),
+    //   )
 
-      const productsFilter = getClientNetwork[0]?.products?.filter(
-        (product) => product.code === String(code),
-      )
+    //   const productsFilter = getClientNetwork[0]?.products?.filter(
+    //     (product) => product.code === String(code),
+    //   )
 
-      if (productsFilter && productsFilter?.length > 0) {
-        const value = productsFilter[0].discount
-        discount = value && value > 0 ? discount - discount * (value / 100) : discount
-      }
-    }
+    //   if (productsFilter && productsFilter?.length > 0) {
+    //     const value = productsFilter[0].discount
+    //     discount = value && value > 0 ? discount - discount * (value / 100) : discount
+    //   }
+    // }
     // else if (!selectedClient.network || selectedClient.network === 'undefined') {
     //   const getClientNetwork = networks.filter((network) => network.name === 'DESCONTO MÁXIMO')
 

@@ -20,11 +20,11 @@ const SidebarIndustry = ({ industry }: DataProps) => {
         <div className='flex-col hidden gap-4 lg:flex'>
           <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>Razão Social</span>
-            <span className='text-sm font-medium'>{industry.socialName}</span>
+            <span className='text-sm font-medium'>{industry.socialName?.toUpperCase()}</span>
           </div>
           <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>Nome Fantasia</span>
-            <span className='text-sm font-medium'>{industry.fantasyName}</span>
+            <span className='text-sm font-medium'>{industry.fantasyName?.toUpperCase()}</span>
           </div>
           <div className='flex flex-col'>
             <span className='text-xs text-gray-600'>CNPJ</span>

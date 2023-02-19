@@ -1,6 +1,6 @@
 export interface IProduct {
   id?: string
-  industry?: string
+  industryId?: string
   imagePath?: string
   code?: string
   name?: string
@@ -14,7 +14,7 @@ export interface IProduct {
   createdAt?: Date
 }
 export interface IAddProduct {
-  industry: string
+  industryId: string
   imagePath?: string
   code: string
   name: string

@@ -4,22 +4,19 @@ import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 
 import { TiDelete } from 'react-icons/ti'
 
-import { IDeadlines } from '../../../interfaces'
 import LabelComponent from '../../GlobalComponents/LabelComponent'
 import MessageComponent from '../../GlobalComponents/MessageComponent'
 import DeadlineForm from './Forms/AddDeadline'
 import Search from '../../GlobalComponents/Search'
+import LoadMoreBtn from '../../GlobalComponents/LoadMoreBtn'
+
+import { IDeadlines } from '../../../interfaces'
 
 const Deadlines = () => {
-  const [search, setSearch] = useState('')
+  const { deadlinesFetch, fetchMore } = useFetchCollection('deadlines')
+  const [result, setResult] = useState([])
 
-  const { deadlines } = useFetchCollection('deadlines')
   const { deleteDocument } = useDeleteDoc()
-
-  const filteredDeadlines =
-    search.length > 0
-      ? deadlines.filter((deadline) => deadline.value?.toLowerCase().includes(search.toLowerCase()))
-      : []
 
   const linkComponent = (deadline: IDeadlines) => {
     return (
@@ -48,27 +45,26 @@ const Deadlines = () => {
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <Search search={search} setSearch={setSearch} />
+        <Search collection='deadlines' setResult={setResult} />
 
         <DeadlineForm />
       </div>
 
-      {deadlines.length === 0 && <MessageComponent text='Nenhum prazo de pagamento cadastrado.' />}
-
-      {search && filteredDeadlines.length === 0 && (
-        <MessageComponent text='Nenhum  prazo de pagamento encontrado.' />
+      {deadlinesFetch.length === 0 && (
+        <MessageComponent text='Nenhum prazo de pagamento cadastrado.' />
       )}
 
-      <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
-        {deadlines.length > 0 && !search && labelComponent()}
-        {search && filteredDeadlines.length > 0 && labelComponent()}
+      <div className='h-[calc(100vh-160px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+        {deadlinesFetch.length > 0 && result.length === 0 && labelComponent()}
+        {result.length > 0 && labelComponent()}
 
-        {!search && deadlines?.map((deadline) => linkComponent(deadline))}
+        {deadlinesFetch.length > 0 &&
+          result.length === 0 &&
+          deadlinesFetch?.map((deadline) => linkComponent(deadline))}
 
-        {search &&
-          filteredDeadlines.length > 0 &&
-          filteredDeadlines.map((deadline) => linkComponent(deadline))}
+        {result.length > 0 && result.map((deadline) => linkComponent(deadline))}
       </div>
+      {result.length === 0 && deadlinesFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />}
     </div>
   )
 }

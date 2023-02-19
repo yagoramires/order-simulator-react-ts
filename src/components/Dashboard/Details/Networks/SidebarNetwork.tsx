@@ -6,11 +6,11 @@ import Alert from '../../../GlobalComponents/Alert'
 import EditNetwork from './EditNetwork'
 import BackButton from '../../../GlobalComponents/BackBtn'
 
-interface DataProps {
+interface NetworkProps {
   network: INetworks
 }
 
-const SidebarNetwork = ({ network }: DataProps) => {
+const SidebarNetwork = ({ network }: NetworkProps) => {
   const { networkId } = useParams()
 
   return (
@@ -21,7 +21,7 @@ const SidebarNetwork = ({ network }: DataProps) => {
         <div className='flex-col hidden w-full gap-4 lg:flex lg:justify-start'>
           <div className='flex flex-col w-full '>
             <span className='text-xs text-gray-600'>Nome</span>
-            <span className='text-sm font-medium'>{network.name}</span>
+            <span className='text-sm font-medium'>{network.name?.toUpperCase()}</span>
           </div>
 
           <div className='flex items-center justify-center gap-2 lg:mt-8'>

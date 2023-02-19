@@ -20,17 +20,17 @@ const MainClient = () => {
   const { clientId } = useParams()
   const { formatDate } = useFormatDate()
   const { formatValue } = useFormatValue()
-  const { clientOrders } = useFetchCollection(`clients/${clientId}/orders`)
+  // const { clientOrders } = useFetchCollection(`clients/${clientId}/orders`)
 
-  const idFilter =
-    search.length > 0 ? clientOrders.filter((order) => String(order.orderId).includes(search)) : []
+  // const idFilter =
+  //   search.length > 0 ? clientOrders.filter((order) => String(order.orderId).includes(search)) : []
 
-  const nameFilter =
-    search.length > 0
-      ? clientOrders.filter((order) =>
-          order.clientName?.toLowerCase().includes(search.toLowerCase()),
-        )
-      : []
+  // const nameFilter =
+  //   search.length > 0
+  //     ? clientOrders.filter((order) =>
+  //         order.clientName?.toLowerCase().includes(search.toLowerCase()),
+  //       )
+  //     : []
 
   const linkComponent = (order: IOrder) => {
     return (
@@ -59,7 +59,7 @@ const MainClient = () => {
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <Search search={search} setSearch={setSearch} />
+        {/* <Search search={search} setSearch={setSearch} /> */}
 
         <Link
           to='/order'
@@ -68,7 +68,7 @@ const MainClient = () => {
           <IoMdAdd /> Novo
         </Link>
       </div>
-
+      {/* 
       {!search && clientOrders.length === 0 && (
         <MessageComponent text='Nenhum pedido cadastrado.' />
       )}
@@ -97,7 +97,7 @@ const MainClient = () => {
           nameFilter
             .sort((a, b) => Number(b.orderId) - Number(a.orderId))
             .map((order) => linkComponent(order))}
-      </div>
+      </div> */}
     </div>
   )
 }

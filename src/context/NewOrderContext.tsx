@@ -16,7 +16,7 @@ type OrderContextType = {
   selectedClient: IClients
   selectedDeadline: IDeadlines
   total: number
-  products: IProduct[]
+  // products: IProduct[]
   productsArray: IProduct[]
   setSelectedIndustry: React.Dispatch<SetStateAction<IIndustries>>
   setSelectedClient: React.Dispatch<SetStateAction<IClients>>
@@ -42,7 +42,7 @@ const initialValue = {
     value: 'Prazo',
   },
   total: 0,
-  products: [],
+  // products: [],
   productsArray: [],
   setSelectedIndustry: () => {
     ;('')
@@ -81,10 +81,10 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
 
   const { userData } = useContext(AuthContext)
   const { addOrder } = useCreateOrder()
-  const { orders } = useFetchCollection('orders')
-  const { products } = useFetchCollection(
-    selectedIndustry.id ? `industries/${selectedIndustry.id}/products` : '',
-  )
+  // const { orders } = useFetchCollection('orders')
+  // const { products } = useFetchCollection(
+  //   selectedIndustry.id ? `industries/${selectedIndustry.id}/products` : '',
+  // )
 
   useEffect(() => {
     setProductsArray([])
@@ -112,12 +112,12 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
     if (!total || total === 0) return toast.error('Ocorreu um erro, tente novamente!')
 
     let orderId
-    if (orders.length > 0) {
-      const lastOrder = orders[orders.length - 1]
-      orderId = lastOrder.orderId ? +lastOrder.orderId + 1 : 1
-    } else {
-      orderId = 1
-    }
+    // if (orders.length > 0) {
+    //   const lastOrder = orders[orders.length - 1]
+    //   orderId = lastOrder.orderId ? +lastOrder.orderId + 1 : 1
+    // } else {
+    //   orderId = 1
+    // }
 
     const data = {
       clientId: selectedClient.id,
@@ -156,7 +156,7 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
         setSelectedClient,
         setSelectedDeadline,
         setTotal,
-        products,
+        // products,
         productsArray,
         setProductsArray,
       }}

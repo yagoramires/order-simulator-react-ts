@@ -10,30 +10,24 @@ import MessageComponent from '../../GlobalComponents/MessageComponent'
 import Search from '../../GlobalComponents/Search'
 
 import { IOrder } from '../../../interfaces'
+import LoadMoreBtn from '../../GlobalComponents/LoadMoreBtn'
 
 const Orders = () => {
-  const [search, setSearch] = useState('')
-  const { orders } = useFetchCollection('orders')
+  const { ordersFetch, fetchMore } = useFetchCollection('orders')
+  const [result, setResult] = useState([])
+
   const { formatDate } = useFormatDate()
   const { formatValue } = useFormatValue()
-
-  const nameFilter =
-    search.length > 0
-      ? orders.filter((order) => order.clientName?.toLowerCase().includes(search.toLowerCase()))
-      : []
-
-  const idFilter =
-    search.length > 0 ? orders.filter((order) => String(order.orderId).includes(search)) : []
 
   const linkComponent = (order: IOrder) => {
     return (
       <LinkComponent id={order.id || ''} key={order.id}>
         <span className='w-[15%]'>{order.orderId}</span>
-        <span className='w-[45%]'>{order.clientName}</span>
+        <span className='w-[45%]'>{order.clientName?.toUpperCase()}</span>
         <div className='w-[40%] flex gap-2'>
           <span className='w-[33%]'>{order.createdAt && formatDate(order.createdAt)}</span>
           <span className='w-[33%]'>{order.total && formatValue(+order.total)}</span>
-          <span className='w-[33%]'>{order.sellerName}</span>
+          <span className='w-[33%] capitalize'>{order.sellerName}</span>
         </div>
       </LinkComponent>
     )
@@ -56,42 +50,28 @@ const Orders = () => {
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-center w-full p-2 bg-dark-100'>
-        <Search search={search} setSearch={setSearch} />
+        <Search collection='orders' setResult={setResult} />
       </div>
 
-      {!search && orders.length === 0 && (
+      {result.length === 0 && ordersFetch.length === 0 && (
         <MessageComponent
           text='Nenhum pedido
-         cadastrado.'
+          cadastrado.'
         />
       )}
 
-      {search && nameFilter.length === 0 && idFilter.length === 0 && (
-        <MessageComponent text='Nenhum pedido encontrado.' />
-      )}
+      <div className='h-[calc(100vh-160px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+        {ordersFetch.length > 0 && result.length === 0 && labelComponent()}
+        {result.length > 0 && labelComponent()}
 
-      <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
-        {orders.length > 0 && !search && labelComponent()}
-        {search && nameFilter.length > 0 && labelComponent()}
-        {search && idFilter.length > 0 && labelComponent()}
+        {ordersFetch.length > 0 &&
+          result.length === 0 &&
+          ordersFetch?.map((client) => linkComponent(client))}
 
-        {!search &&
-          orders
-            ?.sort((a, b) => Number(b.orderId) - Number(a.orderId))
-            .map((order) => linkComponent(order))}
-
-        {search &&
-          nameFilter.length > 0 &&
-          nameFilter
-            .sort((a, b) => Number(b.orderId) - Number(a.orderId))
-            .map((order) => linkComponent(order))}
-
-        {search &&
-          idFilter.length > 0 &&
-          idFilter
-            .sort((a, b) => Number(b.orderId) - Number(a.orderId))
-            .map((order) => linkComponent(order))}
+        {result.length > 0 && result.map((client) => linkComponent(client))}
       </div>
+
+      {result.length === 0 && ordersFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />}
     </div>
   )
 }

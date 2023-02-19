@@ -21,7 +21,7 @@ const ProductDetails = () => {
     productId,
   )
 
-  const { editProduct } = useEditDoc()
+  // const { editProduct } = useEditDoc()
 
   const [productImg, setProductImage] = useState(null)
   const [image, setImage] = useState(null)
@@ -56,32 +56,32 @@ const ProductDetails = () => {
     if (!name) return toast.error('Preencha o nome!')
     if (!price) return toast.error('Preencha o preço!')
 
-    if (industryId && productImg) {
-      editProduct(
-        industryId,
-        productId || '',
-        {
-          code,
-          name,
-          industry: industryId,
-          price: Number(price),
-          family,
-          unityType,
-          minValue: Number(minValue),
-        },
-        productImg,
-      )
-    } else if (industryId) {
-      editProduct(industryId, productId || '', {
-        code,
-        name,
-        industry: industryId,
-        price: Number(price),
-        family,
-        unityType,
-        minValue: Number(minValue),
-      })
-    }
+    // if (industryId && productImg) {
+    //   editProduct(
+    //     industryId,
+    //     productId || '',
+    //     {
+    //       code,
+    //       name,
+    //       industry: industryId,
+    //       price: Number(price),
+    //       family,
+    //       unityType,
+    //       minValue: Number(minValue),
+    //     },
+    //     productImg,
+    //   )
+    // } else if (industryId) {
+    //   editProduct(industryId, productId || '', {
+    //     code,
+    //     name,
+    //     industry: industryId,
+    //     price: Number(price),
+    //     family,
+    //     unityType,
+    //     minValue: Number(minValue),
+    //   })
+    // }
 
     setCode('')
     setName('')
