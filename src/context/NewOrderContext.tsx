@@ -131,8 +131,6 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
     setSelectedClient(initialValue.selectedClient)
     setSelectedDeadline(initialValue.selectedDeadline)
     setTotal(initialValue.total)
-
-    navigate('/orders')
   }
 
   return (
