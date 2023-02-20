@@ -87,6 +87,7 @@ const MainClient = () => {
         {search && idFilter.length > 0 && labelComponent()}
 
         {!search &&
+          client?.orders &&
           client?.orders
             .sort((a: any, b: any) => Number(b.orderId) - Number(a.orderId))
             .map((order: IOrder, index: number) => linkComponent(order, index))}
