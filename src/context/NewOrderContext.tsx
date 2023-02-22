@@ -104,8 +104,8 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
 
     let orderId
     if (ordersFetch.length > 0) {
-      const lastOrder = ordersFetch[ordersFetch.length - 1]
-      orderId = lastOrder.orderId ? +lastOrder.orderId + 1 : 1
+      const lastOrder = ordersFetch[0]
+      orderId =  Number(lastOrder?.orderId) + 1
     } else {
       orderId = 1
     }
@@ -123,6 +123,7 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
       total,
       orderId: `${orderId}`,
     }
+    console.log(data)
 
     addOrder(data, selectedClient)
 

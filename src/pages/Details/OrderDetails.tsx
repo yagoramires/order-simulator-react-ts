@@ -27,7 +27,6 @@ const OrderDetails = () => {
       </div>
     )
 
-  console.log(order)
 
   return (
     <div className='h-[100vh] flex flex-col justify-start items-center p-2 w-full overflow-auto'>
