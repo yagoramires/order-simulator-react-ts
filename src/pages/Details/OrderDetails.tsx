@@ -52,10 +52,7 @@ const OrderDetails = () => {
             <span className='text-sm text-gray-700'>Razão Social</span>
             <span className='text-gray-50'>{order.clientName?.toUpperCase()}</span>
           </div>
-          <div className='flex flex-col gap-1'>
-            <span className='text-sm text-gray-700'>Razão Social</span>
-            <span className='text-gray-50'>{order.clientName}</span>
-          </div>
+
           <div className='flex flex-col gap-1'>
             <span className='text-sm text-gray-700'>CNPJ</span>
             <span className='text-gray-50'>{order.clientCnpj}</span>

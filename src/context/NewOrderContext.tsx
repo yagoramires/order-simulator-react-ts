@@ -123,7 +123,6 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
       total,
       orderId: `${orderId}`,
     }
-    console.log(data)
 
     addOrder(data, selectedClient)
 
