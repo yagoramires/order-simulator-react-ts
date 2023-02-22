@@ -13,10 +13,11 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 
 const Order = () => {
   const [search, setSearch] = useState('')
-  const [page, setPage] = useState<any>([])
-  const [pageNumber, setPageNumber] = useState(1)
+  // const [page, setPage] = useState<any>([])
+  // const [pageNumber, setPageNumber] = useState(1)
+  const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([])
 
-  const { selectedIndustry } = useContext(NewOrderContext)
+  const { selectedIndustry,productsArray } = useContext(NewOrderContext)
 
   const codeFilter =
     search.length > 0
@@ -32,27 +33,27 @@ const Order = () => {
         )
       : []
 
-  useEffect(() => {
-    if (selectedIndustry.products && selectedIndustry.products.length > 0) {
-      setPage(selectedIndustry.products?.slice((pageNumber - 1) * 100, pageNumber * 100))
-    }
-  }, [selectedIndustry])
+  // useEffect(() => {
+  //   if (selectedIndustry.products && selectedIndustry.products.length > 0) {
+  //     setPage(selectedIndustry.products?.slice((pageNumber - 1) * 100, pageNumber * 100))
+  //   }
+  // }, [selectedIndustry])
 
-  useEffect(() => {
-    setPage(selectedIndustry.products?.slice((pageNumber - 1) * 100, pageNumber * 100))
-  }, [pageNumber])
+  // useEffect(() => {
+  //   setPage(selectedIndustry.products?.slice((pageNumber - 1) * 100, pageNumber * 100))
+  // }, [pageNumber])
 
-  const nextPage = () => {
-    setPageNumber(pageNumber + 1)
-    setPage(selectedIndustry.products?.slice((pageNumber - 1) * 100, pageNumber * 100))
-  }
+  // const nextPage = () => {
+  //   setPageNumber(pageNumber + 1)
+  //   setPage(selectedIndustry.products?.slice((pageNumber - 1) * 100, pageNumber * 100))
+  // }
 
-  const prevPage = () => {
-    setPageNumber(pageNumber - 1)
-    setPage(selectedIndustry.products?.slice((pageNumber - 1) * 100, pageNumber * 100))
-  }
+  // const prevPage = () => {
+  //   setPageNumber(pageNumber - 1)
+  //   setPage(selectedIndustry.products?.slice((pageNumber - 1) * 100, pageNumber * 100))
+  // }
 
-  console.log(page)
+  // console.log(page)
   return (
     <div className='max-h-[100vh]'>
       <Header />
@@ -64,7 +65,8 @@ const Order = () => {
         {!selectedIndustry.id && (
           <MessageComponent text='Selecione uma indústria para carregar os produtos.' />
         )}
-        {selectedIndustry.id && page.length === 0 && (
+        {/* {selectedIndustry.id && page.length === 0 && ( */}
+        {selectedIndustry.id && selectedIndustry?.products?.length === 0 && (
           <MessageComponent text='Nenhum produto cadastrado.' />
         )}
 
@@ -82,7 +84,8 @@ const Order = () => {
               <Label />
 
               {!search &&
-                page.map((product: IProduct, index: number) => (
+                // page.map((product: IProduct, index: number) => (
+                  selectedIndustry?.products?.map((product: IProduct, index: number) => (
                   <Product product={product} key={index} />
                 ))}
 
@@ -98,7 +101,7 @@ const Order = () => {
             </div>
           </>
         )}
-        {selectedIndustry.products && selectedIndustry?.products?.length > 0 && (
+        {/* {selectedIndustry.products && selectedIndustry?.products?.length > 0 && (
           <div className='flex justify-center w-full gap-20 mt-2 text-gray-50'>
             {pageNumber > 1 && (
               <button onClick={prevPage}>
@@ -111,7 +114,7 @@ const Order = () => {
               </button>
             )}
           </div>
-        )}
+        )} */}
       </div>
     </div>
   )
