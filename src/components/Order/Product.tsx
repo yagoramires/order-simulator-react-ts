@@ -78,9 +78,11 @@ const Product = ({ product }: ProductProps) => {
           value={quantity}
           onChange={(e) => setQuantity(+e.target.value)}
           className='w-16 p-2 text-center bg-gray-800 rounded-lg'
+          min={0}
+          step={product.minValue}
         />
       </span>
-      <span className='w-24 lg:28'>
+      <span className='w-32 lg:36'>
         {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
       </span>
     </div>

@@ -1,8 +1,9 @@
 import { useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext'
 
 import { Link } from 'react-router-dom'
 
-import { AuthContext } from '../../context/AuthContext'
+import { RxAvatar } from 'react-icons/rx'
 
 const Header = () => {
   const { userData } = useContext(AuthContext)
@@ -23,8 +24,8 @@ const Header = () => {
                 className='object-cover w-10 h-10 rounded-full'
               />
             ) : (
-              <div className='object-cover w-10 h-10 rounded-full'>
-                <p>avatar</p>
+              <div className='flex items-center justify-center'>
+                <RxAvatar size={35} />
               </div>
             )}
           </Link>

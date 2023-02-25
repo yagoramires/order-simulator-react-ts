@@ -134,3 +134,14 @@ select {
     transform: translate(-50%, -50%) scale(1);
   }
 }
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+
+}

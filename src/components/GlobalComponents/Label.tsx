@@ -6,7 +6,7 @@ const Label = () => {
       <span className='w-52 lg:w-full'>Nome</span>
       <span className='w-24'>Vlr. Un.</span>
       <span className='w-16'>Qnt.</span>
-      <span className='w-24 lg:28'>Total</span>
+      <span className='w-32 lg:36'>Total</span>
     </div>
   )
 }
