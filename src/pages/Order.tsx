@@ -28,8 +28,6 @@ const Order = () => {
           <Select />
         </div>
 
-        <Search collection={`industries/${selectedIndustry?.id}/products`} setResult={setResult} />
-
         {!selectedIndustry.id && (
           <MessageComponent text='Selecione uma indústria para carregar os produtos.' />
         )}
@@ -44,6 +42,10 @@ const Order = () => {
           <>
             <div className='flex justify-center w-full p-1 md:p-2  max-w-[1400px]'></div>
             <div className='mt-1 md:mt-2 flex flex-col w-[100vw] max-w-[1400px] max-h-[calc(100vh-368px)] md:max-h-[calc(100vh-400px)] bg-dark-100 overflow-auto p-1 gap-1 md:p-2 md:gap-2 '>
+              <Search
+                collection={`industries/${selectedIndustry?.id}/products`}
+                setResult={setResult}
+              />
               <Label />
 
               {result.length === 0 &&
