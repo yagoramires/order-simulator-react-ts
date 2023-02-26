@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 import { BsCartCheckFill } from 'react-icons/bs'
 import { MdLogout } from 'react-icons/md'
+import { RxAvatar } from 'react-icons/rx'
 import {
   FaPlus,
   FaIndustry,
@@ -78,7 +79,7 @@ const Sidebar = () => {
           <img src={userData.photoURL} alt={userData.displayName} className='w-40 rounded-full' />
         ) : (
           <div className='profileContainer__noImg'>
-            <FaUserAlt size={100} className='text-blue-600' />
+            <RxAvatar size={80} className='text-gray-50' />
           </div>
         )}
         <h1 className='text-2xl font-bold text-gray-50'>{userData.displayName}</h1>
