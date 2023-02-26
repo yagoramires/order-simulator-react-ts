@@ -28,7 +28,7 @@ const Order = () => {
           <Select />
         </div>
 
-        <Search collection='products' setResult={setResult} />
+        <Search collection={`industries/${selectedIndustry?.id}/products`} setResult={setResult} />
 
         {!selectedIndustry.id && (
           <MessageComponent text='Selecione uma indústria para carregar os produtos.' />

@@ -192,7 +192,7 @@ export const useFetchCollection = (docCollection: string) => {
           where('socialName', '>=', search),
           where('socialName', '<=', search + '~'),
         )
-      } else if (docCollection === 'products') {
+      } else if (docCollection.includes('products')) {
         q = query(collectionRef, where('code', '>=', search), where('code', '<=', search + '~'))
       } else if (docCollection === 'deadlines') {
         q = query(collectionRef, where('value', '>=', search), where('value', '<=', search + '~'))
@@ -207,6 +207,7 @@ export const useFetchCollection = (docCollection: string) => {
           id: doc.id,
           ...doc.data(),
         }))
+
         if (snapshot.length > 0) {
           setSearchQuery(snapshot)
         } else {
@@ -215,6 +216,7 @@ export const useFetchCollection = (docCollection: string) => {
         return
       })
     } catch (e: any) {
+      console.log(e.message)
       toast.error(e.message)
       return
     }
