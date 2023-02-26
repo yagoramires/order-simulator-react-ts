@@ -39,11 +39,17 @@ export const useFetchCollection = (docCollection: string) => {
 
   useEffect(() => {
     if (docCollection === '') return
+    if (docCollection === 'industries//products') return
 
     const fetchData = () => {
       const collectionRef = collection(database, docCollection)
       try {
-        const q = query(collectionRef, orderBy('createdAt', 'desc'), limit(25))
+        let q
+        if (docCollection.includes('products')) {
+          q = query(collectionRef, orderBy('createdAt', 'asc'), limit(50))
+        } else {
+          q = query(collectionRef, orderBy('createdAt', 'desc'), limit(25))
+        }
 
         onSnapshot(q, (querySnapshot: QuerySnapshot<DocumentData>) => {
           const snapshot = querySnapshot.docs.map((doc) => ({
@@ -171,8 +177,8 @@ export const useFetchCollection = (docCollection: string) => {
       if (docCollection === 'industries') {
         q = query(
           collectionRef,
-          where('fantasyName', '>=', search),
-          where('fantasyName', '<=', search + '~'),
+          where('socialName', '>=', search),
+          where('socialName', '<=', search + '~'),
         )
       } else if (docCollection === 'orders') {
         q = query(
@@ -186,6 +192,8 @@ export const useFetchCollection = (docCollection: string) => {
           where('socialName', '>=', search),
           where('socialName', '<=', search + '~'),
         )
+      } else if (docCollection === 'products') {
+        q = query(collectionRef, where('code', '>=', search), where('code', '<=', search + '~'))
       } else if (docCollection === 'deadlines') {
         q = query(collectionRef, where('value', '>=', search), where('value', '<=', search + '~'))
       } else if (docCollection.includes('networks')) {
@@ -199,13 +207,11 @@ export const useFetchCollection = (docCollection: string) => {
           id: doc.id,
           ...doc.data(),
         }))
-
         if (snapshot.length > 0) {
           setSearchQuery(snapshot)
         } else {
           setSearchQuery([])
         }
-
         return
       })
     } catch (e: any) {

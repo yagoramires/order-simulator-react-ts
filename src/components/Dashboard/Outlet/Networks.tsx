@@ -53,7 +53,7 @@ const Networks = () => {
         {result.length > 0 && result.map((network) => linkComponent(network))}
       </div>
 
-      {result.length === 0 && networksFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />}
+      {/* {result.length === 0 && networksFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />} */}
     </div>
   )
 }

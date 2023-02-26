@@ -58,7 +58,7 @@ const Industries = () => {
         {result.length > 0 && result.map((industry) => linkComponent(industry))}
       </div>
 
-      {result.length === 0 && industriesFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />}
+      {/* {result.length === 0 && industriesFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />} */}
     </div>
   )
 }
