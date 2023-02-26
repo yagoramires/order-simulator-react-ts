@@ -8,35 +8,34 @@ import LabelComponent from '../../../GlobalComponents/LabelComponent'
 import Filter from '../../../GlobalComponents/Filter'
 import MessageComponent from '../../../GlobalComponents/MessageComponent'
 
-import { IIndustries, IProduct } from '../../../../interfaces'
+import { IProduct } from '../../../../interfaces'
+import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
 
-interface DataProps {
-  industry: IIndustries
-}
-
-const MainIndustry = ({ industry }: DataProps) => {
+const MainIndustry = () => {
   const [search, setSearch] = useState('')
 
   const { industryId } = useParams()
   const { formatValue } = useFormatValue()
 
+  const { productsFetch } = useFetchCollection(`industries/${industryId}/products`)
+
   const codeFilter =
     search.length > 0
-      ? industry?.products?.filter((product: IProduct) =>
+      ? productsFetch.filter((product: IProduct) =>
           String(product.code).toLowerCase().includes(search.toLowerCase()),
         )
       : []
 
   const nameFilter =
     search.length > 0
-      ? industry?.products?.filter((product: IProduct) =>
+      ? productsFetch.filter((product: IProduct) =>
           product.name?.toLowerCase().includes(search.toLowerCase()),
         )
       : []
 
   const linkComponent = (product: IProduct, index: number) => {
     return (
-      <LinkComponent id={`/industries/${industryId}/product/${index}`} key={index}>
+      <LinkComponent id={`/industries/${industryId}/product/${product.id}`} key={product.id}>
         <span className='w-[20%]'>{String(product.code)}</span>
         <span className='w-[60%]'>{product.name?.toUpperCase()}</span>
         <span className='w-[20%]'>{product.price && formatValue(+product.price)}</span>
@@ -61,19 +60,17 @@ const MainIndustry = ({ industry }: DataProps) => {
 
         <ProductForm />
       </div>
-      {!search && !industry?.products && <MessageComponent text='Nenhum produto cadastrado.' />}
+      {!search && !productsFetch && <MessageComponent text='Nenhum produto cadastrado.' />}
 
       {search && nameFilter?.length === 0 && codeFilter?.length === 0 && (
         <MessageComponent text='Nenhum produto encontrado.' />
       )}
 
       <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
-        {industry.products && industry.products.length > 0 && labelComponent()}
+        {productsFetch && productsFetch.length > 0 && labelComponent()}
 
         {!search &&
-          industry?.products?.map((product: IProduct, index: number) =>
-            linkComponent(product, index),
-          )}
+          productsFetch.map((product: IProduct, index: number) => linkComponent(product, index))}
         {search &&
           codeFilter &&
           codeFilter.length > 0 &&

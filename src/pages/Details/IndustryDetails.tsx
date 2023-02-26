@@ -34,7 +34,7 @@ const IndustryDetails = () => {
         <>
           <Sidebar industry={industry} />
           <div className='w-full lg:flex lg:items-center lg:justify-center'>
-            <Main industry={industry} />
+            <Main />
           </div>
         </>
       )}

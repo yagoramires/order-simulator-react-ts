@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
 
 import { useParams } from 'react-router-dom'
 
@@ -8,6 +7,10 @@ import { toast } from 'react-toastify'
 import DialogComponent from '../../../GlobalComponents/DialogComponent'
 import { IoMdAdd } from 'react-icons/io'
 import { useFetchDocument } from '../../../../hooks/fetchData/useFetchDocument'
+import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
+import { doc } from 'firebase/firestore'
+import mock from '../../../../productsMock'
+import { IProduct } from '../../../../interfaces'
 
 const AddProduct = () => {
   const [productImg, setProductImage] = useState(null)
@@ -20,18 +23,16 @@ const AddProduct = () => {
   const [open, setOpen] = useState(false)
 
   const { industryId } = useParams()
-  const { document: industry } = useFetchDocument('industries', industryId)
-  const { updateProductIndustry } = useEditDoc()
+  // const { document: industry } = useFetchDocument('industries', industryId)
+  const { addProduct } = useAddDoc()
 
   // const handleAddProduct = async (e: React.FormEvent<HTMLFormElement>) => {
   //   e.preventDefault()
 
-  //   const ref = doc(database, 'industries', industryId || '')
-
-  //   const addMock = { ...industry, products: mock }
-
-  //   console.log(addMock)
-  //   await updateDoc(ref, addMock)
+  //   mock.forEach(async (product: any) => {
+  //     // console.log(product)
+  //     await addProduct({ ...product, industryId })
+  //   })
   //   return
   // }
 
@@ -41,7 +42,7 @@ const AddProduct = () => {
     if (!code) return toast.error('Preencha o código!')
     if (!name) return toast.error('Preencha o nome!')
     if (!price) return toast.error('Preencha o preço!')
-    if (!industryId || !industry) return
+    if (!industryId) return
 
     const product = {
       code,
@@ -54,9 +55,9 @@ const AddProduct = () => {
     }
 
     if (productImg) {
-      updateProductIndustry(industry, product, productImg)
+      addProduct(product, productImg)
     } else {
-      updateProductIndustry(industry, product)
+      addProduct(product)
     }
 
     setCode('')

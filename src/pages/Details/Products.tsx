@@ -17,11 +17,11 @@ const ProductDetails = () => {
 
   const { industryId, productId } = useParams()
 
-  const { document: industry, loading } = useFetchDocument('industries', industryId)
-
-  const [product, setProduct] = useState<IProduct>()
-
-  // const { editProduct } = useEditDoc()
+  const { document: product, loading } = useFetchDocument(
+    `industries/${industryId}/products`,
+    productId,
+  )
+  const { editProduct } = useEditDoc()
 
   const [productImg, setProductImage] = useState(null)
   const [image, setImage] = useState<string>()
@@ -31,12 +31,6 @@ const ProductDetails = () => {
   const [price, setPrice] = useState<number>()
   const [minValue, setMinValue] = useState<number>()
   const [unityType, setUnityType] = useState<string>()
-
-  useEffect(() => {
-    if (industry) {
-      setProduct(industry.products[productId || 0])
-    }
-  }, [industry])
 
   useEffect(() => {
     if (product) {
@@ -50,8 +44,6 @@ const ProductDetails = () => {
     }
   }, [product])
 
-  console.log(product)
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSelectImage = (e: any) => {
     setProductImage(e.target.files[0])
@@ -64,37 +56,37 @@ const ProductDetails = () => {
     if (!name) return toast.error('Preencha o nome!')
     if (!price) return toast.error('Preencha o preço!')
 
-    // if (industryId && productImg) {
-    //   editProduct(
-    //     industryId,
-    //     productId || '',
-    //     {
-    //       code,
-    //       name,
-    //       industry: industryId,
-    //       price: Number(price),
-    //       family,
-    //       unityType,
-    //       minValue: Number(minValue),
-    //     },
-    //     productImg,
-    //   )
-    // } else if (industryId) {
-    //   editProduct(industryId, productId || '', {
-    //     code,
-    //     name,
-    //     industry: industryId,
-    //     price: Number(price),
-    //     family,
-    //     unityType,
-    //     minValue: Number(minValue),
-    //   })
-    // }
+    if (industryId && productImg) {
+      editProduct(
+        industryId,
+        productId || '',
+        {
+          code,
+          name,
+          industry: industryId,
+          price: Number(price),
+          family,
+          unityType,
+          minValue: Number(minValue),
+        },
+        productImg,
+      )
+    } else if (industryId) {
+      editProduct(industryId, productId || '', {
+        code,
+        name,
+        industryId,
+        price: Number(price),
+        family,
+        unityType,
+        minValue: Number(minValue),
+      })
+    }
 
-    // setCode('')
-    // setName('')
-    // setPrice('')
-    // setFamily('')
+    setCode('')
+    setName('')
+    setPrice(0)
+    setFamily('')
     navigate(-1)
   }
 
@@ -145,7 +137,7 @@ const ProductDetails = () => {
             <span className='text-sm text-gray-700'>Produto</span>
             <input
               type='text'
-              value={name}
+              value={name || ''}
               onChange={(e) => setName(e.target.value)}
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             />
@@ -154,7 +146,7 @@ const ProductDetails = () => {
             <span className='text-sm text-gray-700'>Código</span>
             <input
               type='text'
-              value={code}
+              value={code || ''}
               onChange={(e) => setCode(e.target.value)}
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             />
@@ -163,7 +155,7 @@ const ProductDetails = () => {
             <span className='text-sm text-gray-700'>Linha</span>
             <input
               type='text'
-              value={family}
+              value={family || ''}
               onChange={(e) => setFamily(e.target.value)}
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             />
@@ -172,7 +164,7 @@ const ProductDetails = () => {
             <span className='text-sm text-gray-700'>Valor</span>
             <input
               type='number'
-              value={price}
+              value={price || ''}
               onChange={(e) => setPrice(+e.target.value)}
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             />
@@ -181,7 +173,7 @@ const ProductDetails = () => {
             <span className='text-sm text-gray-700'>Unidade</span>
             <input
               type='text'
-              value={unityType}
+              value={unityType || ''}
               onChange={(e) => setUnityType(e.target.value)}
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             />
@@ -190,7 +182,7 @@ const ProductDetails = () => {
             <span className='text-sm text-gray-700'>Embalagem</span>
             <input
               type='number'
-              value={minValue}
+              value={minValue || 0}
               onChange={(e) => setMinValue(+e.target.value)}
               className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
             />

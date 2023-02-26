@@ -81,109 +81,20 @@ export const useEditDoc = () => {
     }
   }
 
-  const updateProductIndustry = async (
-    industry: IIndustries,
-    productData: IAddProduct,
-    img?: File,
-  ) => {
-    setLoading(true)
-
-    try {
-      if (img) {
-        const generateName = `industries/${productData.industryId}/${Date.now()}`
-        const storageRef = ref(storage, generateName)
-
-        const uploadTask = uploadBytesResumable(storageRef, img)
-
-        uploadTask.on(
-          'state_changed',
-          (snapshot) => {
-            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            setProgress(uploadProgress)
-          },
-          (error) => {
-            alert(error.message)
-          },
-          async () => {
-            const url = await getDownloadURL(uploadTask.snapshot.ref)
-            const ref = doc(database, 'industries', productData.industryId)
-
-            const productWithImg = { ...productData, imagePath: url }
-
-            if (industry.products) {
-              const verifyIfProductIsInArray = industry.products.filter(
-                (product) => product.code === productData.code,
-              )
-
-              if (verifyIfProductIsInArray.length > 0) {
-                console.log('ta no array')
-                toast.error('Produto já cadastrado!')
-                return
-              }
-
-              const productsArray = industry.products
-              productsArray.push(productWithImg)
-              await updateDoc(ref, { ...industry, products: productsArray })
-              setLoading(false)
-              toast.success('Produto adicionado com sucesso!')
-              window.location.reload()
-              return
-            } else {
-              const productsArray = []
-              productsArray.push(productWithImg)
-              await updateDoc(ref, { ...industry, products: productsArray })
-              setLoading(false)
-              toast.success('Produto adicionado com sucesso!')
-              window.location.reload()
-              return
-            }
-          },
-        )
-      } else {
-        const ref = doc(database, 'industries', productData.industryId)
-
-        if (industry.products) {
-          const verifyIfProductIsInArray = industry.products.filter(
-            (product) => product.code === productData.code,
-          )
-
-          if (verifyIfProductIsInArray.length > 0) {
-            console.log('ta no array')
-            toast.error('Produto já cadastrado!')
-            return
-          }
-
-          const productsArray = industry.products
-          productsArray.push(productData)
-          await updateDoc(ref, { ...industry, products: productsArray })
-          setLoading(false)
-          toast.success('Produto adicionado com sucesso!')
-          window.location.reload()
-          return
-        } else {
-          const productsArray = []
-          productsArray.push(productData)
-          await updateDoc(ref, { ...industry, products: productsArray })
-          setLoading(false)
-          toast.success('Produto adicionado com sucesso!')
-          window.location.reload()
-          return
-        }
-      }
-    } catch (e: any) {
-      toast.error(e.message)
-      setLoading(false)
-    }
-  }
-
-  // const editProduct = async (industryId: string, productId: string, data: any, img?: File) => {
+  // const updateProductIndustry = async (
+  //   industry: IIndustries,
+  //   productData: IAddProduct,
+  //   img?: File,
+  // ) => {
   //   setLoading(true)
 
-  //   if (img) {
-  //     try {
-  //       const generateName = `industries/${data.industry}/${Date.now()}`
+  //   try {
+  //     if (img) {
+  //       const generateName = `industries/${productData.industryId}/${Date.now()}`
   //       const storageRef = ref(storage, generateName)
+
   //       const uploadTask = uploadBytesResumable(storageRef, img)
+
   //       uploadTask.on(
   //         'state_changed',
   //         (snapshot) => {
@@ -195,43 +106,132 @@ export const useEditDoc = () => {
   //         },
   //         async () => {
   //           const url = await getDownloadURL(uploadTask.snapshot.ref)
-  //           const ref = doc(database, `industries/${industryId}/products`, productId)
+  //           const ref = doc(database, 'industries', productData.industryId)
 
-  //           const docData = {
-  //             imagePath: url,
-  //             ...data,
+  //           const productWithImg = { ...productData, imagePath: url }
+
+  //           if (industry.products) {
+  //             const verifyIfProductIsInArray = industry.products.filter(
+  //               (product) => product.code === productData.code,
+  //             )
+
+  //             if (verifyIfProductIsInArray.length > 0) {
+  //               console.log('ta no array')
+  //               toast.error('Produto já cadastrado!')
+  //               return
+  //             }
+
+  //             const productsArray = industry.products
+  //             productsArray.push(productWithImg)
+  //             await updateDoc(ref, { ...industry, products: productsArray })
+  //             setLoading(false)
+  //             toast.success('Produto adicionado com sucesso!')
+  //             window.location.reload()
+  //             return
+  //           } else {
+  //             const productsArray = []
+  //             productsArray.push(productWithImg)
+  //             await updateDoc(ref, { ...industry, products: productsArray })
+  //             setLoading(false)
+  //             toast.success('Produto adicionado com sucesso!')
+  //             window.location.reload()
+  //             return
   //           }
-
-  //           await updateDoc(ref, docData)
-  //           setLoading(false)
-  //           toast.success('Produto alterado com sucesso!')
   //         },
   //       )
-  //     } catch (e: any) {
-  //       toast.error('Erro ao editar o produto, tente novamente!')
-  //       setLoading(false)
+  //     } else {
+  //       const ref = doc(database, 'industries', productData.industryId)
+
+  //       if (industry.products) {
+  //         const verifyIfProductIsInArray = industry.products.filter(
+  //           (product) => product.code === productData.code,
+  //         )
+
+  //         if (verifyIfProductIsInArray.length > 0) {
+  //           console.log('ta no array')
+  //           toast.error('Produto já cadastrado!')
+  //           return
+  //         }
+
+  //         const productsArray = industry.products
+  //         productsArray.push(productData)
+  //         await updateDoc(ref, { ...industry, products: productsArray })
+  //         setLoading(false)
+  //         toast.success('Produto adicionado com sucesso!')
+  //         window.location.reload()
+  //         return
+  //       } else {
+  //         const productsArray = []
+  //         productsArray.push(productData)
+  //         await updateDoc(ref, { ...industry, products: productsArray })
+  //         setLoading(false)
+  //         toast.success('Produto adicionado com sucesso!')
+  //         window.location.reload()
+  //         return
+  //       }
   //     }
-  //   } else {
-  //     try {
-  //       const ref = doc(database, `industries/${industryId}/products`, productId)
-  //       await updateDoc(ref, data)
-  //       toast.success('Produto alterado com sucesso!')
-  //       setLoading(false)
-  //     } catch (e: any) {
-  //       toast.error('Erro ao editar o produto, tente novamente!')
-  //       setLoading(false)
-  //     }
+  //   } catch (e: any) {
+  //     toast.error(e.message)
+  //     setLoading(false)
   //   }
   // }
+
+  const editProduct = async (industryId: string, productId: string, data: any, img?: File) => {
+    setLoading(true)
+
+    if (img) {
+      try {
+        const generateName = `industries/${data.industry}/${Date.now()}`
+        const storageRef = ref(storage, generateName)
+        const uploadTask = uploadBytesResumable(storageRef, img)
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+            const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            setProgress(uploadProgress)
+          },
+          (error) => {
+            alert(error.message)
+          },
+          async () => {
+            const url = await getDownloadURL(uploadTask.snapshot.ref)
+            const ref = doc(database, `industries/${industryId}/products`, productId)
+
+            const docData = {
+              imagePath: url,
+              ...data,
+            }
+
+            await updateDoc(ref, docData)
+            setLoading(false)
+            toast.success('Produto alterado com sucesso!')
+          },
+        )
+      } catch (e: any) {
+        toast.error('Erro ao editar o produto, tente novamente!')
+        setLoading(false)
+      }
+    } else {
+      try {
+        const ref = doc(database, `industries/${industryId}/products`, productId)
+        await updateDoc(ref, data)
+        toast.success('Produto alterado com sucesso!')
+        setLoading(false)
+      } catch (e: any) {
+        toast.error('Erro ao editar o produto, tente novamente!')
+        setLoading(false)
+      }
+    }
+  }
 
   return {
     editIndustry,
     editClient,
     editDeadline,
-    // editProduct,
+    editProduct,
     editNetwork,
     updateProductNetwork,
-    updateProductIndustry,
+    // updateProductIndustry,
     progress,
     loading,
   }

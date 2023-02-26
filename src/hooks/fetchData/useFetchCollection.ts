@@ -32,6 +32,9 @@ export const useFetchCollection = (docCollection: string) => {
   const [networksFetch, setNetworksFetch] = useState<interfaces.INetworks[]>([])
   const [lastNetworksFetch, setLastNetworksFetch] = useState<DocumentData>()
 
+  const [productsFetch, setProductsFetch] = useState<interfaces.IProduct[]>([])
+  const [lastProductsFetch, setLastProductsFetch] = useState<DocumentData>()
+
   const [searchQuery, setSearchQuery] = useState<DocumentData>([])
 
   useEffect(() => {
@@ -63,6 +66,9 @@ export const useFetchCollection = (docCollection: string) => {
           } else if (docCollection.includes('networks')) {
             setNetworksFetch(snapshot)
             setLastNetworksFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
+          } else if (docCollection.includes('products')) {
+            setProductsFetch(snapshot)
+            setLastProductsFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
           }
         })
       } catch (e: any) {
@@ -113,6 +119,13 @@ export const useFetchCollection = (docCollection: string) => {
           startAfter(lastNetworksFetch),
           limit(25),
         )
+      } else if (docCollection.includes('products')) {
+        q = query(
+          collectionRef,
+          orderBy('createdAt', 'asc'),
+          startAfter(lastProductsFetch),
+          limit(25),
+        )
       } else {
         return
       }
@@ -138,6 +151,9 @@ export const useFetchCollection = (docCollection: string) => {
         } else if (docCollection.includes('networks')) {
           setNetworksFetch([...networksFetch, ...snapshot])
           setLastNetworksFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
+        } else if (docCollection.includes('products')) {
+          setProductsFetch([...productsFetch, ...snapshot])
+          setLastProductsFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
         }
       })
     } catch (e: any) {
@@ -204,6 +220,7 @@ export const useFetchCollection = (docCollection: string) => {
     deadlinesFetch,
     ordersFetch,
     networksFetch,
+    productsFetch,
     fetchMore,
     searchDoc,
     searchQuery,
