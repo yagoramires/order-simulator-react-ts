@@ -42,9 +42,9 @@ const NewOrder = () => {
       open={open}
       setOpen={setOpen}
       childrenButton={
-        <div className='flex items-center justify-center w-[264.78px] p-2 transition-all rounded-lg lg:px-4 lg:py-3 lg:shadow-sm lg:gap-2 lg:bg-blue-600 lg:justify-start lg:hover:bg-blue-500'>
+        <span className='flex items-center justify-center w-full p-2 transition-all rounded-lg lg:px-4 lg:py-3 lg:shadow-sm lg:gap-2 lg:bg-blue-600 lg:justify-start lg:hover:bg-blue-500'>
           <FaPlus size={22} /> <span className='hidden lg:inline'>Novo Pedido</span>
-        </div>
+        </span>
       }
       childrenForm={
         <div>

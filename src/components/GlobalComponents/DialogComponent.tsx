@@ -13,7 +13,9 @@ interface DialogProps {
 const DialogComponent = ({ open, setOpen, childrenButton, childrenForm, type }: DialogProps) => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger>{childrenButton}</Dialog.Trigger>
+      <Dialog.Trigger className={`${type === 'Novo Pedido' && 'w-full'}`}>
+        {childrenButton}
+      </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='fixed inset-0 bg-black/80' />
         <Dialog.Content className='fixed bg-white top-1/2 w-[90%] max-w-[800px] rounded-lg shadow-md p-8 translate-x-[-50%] translate-y-[-50%] left-1/2 z-10 bg-gray-800'>
