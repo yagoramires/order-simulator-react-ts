@@ -40,11 +40,11 @@ const Sidebar = () => {
       text: 'Redes',
       path: 'networks',
     },
-    {
-      icon: <FaRegCalendarAlt size={22} />,
-      text: 'Prazos de Pagamento',
-      path: 'deadlines',
-    },
+    // {
+    //   icon: <FaRegCalendarAlt size={22} />,
+    //   text: 'Prazos de Pagamento',
+    //   path: 'deadlines',
+    // },
     {
       icon: <FaEdit size={22} />,
       text: 'Editar Perfil',
