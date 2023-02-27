@@ -7,25 +7,19 @@ import { Link } from 'react-router-dom'
 import { BsCartCheckFill } from 'react-icons/bs'
 import { MdLogout } from 'react-icons/md'
 import { RxAvatar } from 'react-icons/rx'
-import {
-  FaPlus,
-  FaIndustry,
-  FaUserAlt,
-  FaRegCalendarAlt,
-  FaEdit,
-  FaLayerGroup,
-} from 'react-icons/fa'
+import { FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit, FaLayerGroup } from 'react-icons/fa'
+import NewOrder from './NewOrder'
 
 const Sidebar = () => {
   const { userData } = useContext(AuthContext)
   const { signOutUser } = useAuth()
 
   const options = [
-    {
-      icon: <FaPlus size={22} />,
-      text: 'Novo Pedido',
-      path: 'order',
-    },
+    // {
+    //   icon: <FaPlus size={22} />,
+    //   text: 'Novo Pedido',
+    //   path: `/order/${industryId}/${clientId}`,
+    // },
     {
       icon: <BsCartCheckFill size={22} />,
       text: 'Pedidos',
@@ -87,6 +81,10 @@ const Sidebar = () => {
 
       <nav className=''>
         <ul className='flex items-center justify-center w-full lg:flex-col lg:gap-2'>
+          <li className='w-full text-gray-50'>
+            <NewOrder />
+          </li>
+
           {liMap()}
 
           <li className='w-full text-gray-50 '>
