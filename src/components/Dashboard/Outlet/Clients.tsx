@@ -58,7 +58,9 @@ const Clients = () => {
         {result.length > 0 && result.map((client) => linkComponent(client))}
       </div>
 
-      {result.length === 0 && clientsFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />}
+      {result.length === 0 && clientsFetch.length % 25 === 0 && (
+        <LoadMoreBtn fetchMore={fetchMore} />
+      )}
     </div>
   )
 }

@@ -71,7 +71,9 @@ const Orders = () => {
         {result.length > 0 && result.map((client) => linkComponent(client))}
       </div>
 
-      {result.length === 0 && ordersFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />}
+      {result.length === 0 && ordersFetch.length % 25 === 0 && (
+        <LoadMoreBtn fetchMore={fetchMore} />
+      )}
     </div>
   )
 }
