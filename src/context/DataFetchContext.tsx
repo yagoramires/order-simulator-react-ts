@@ -8,12 +8,12 @@ type DataContextProps = {
 }
 
 type DataContextType = {
-  orders: interfaces.IOrder[] | []
-  industries: interfaces.IIndustries[] | []
-  clients: interfaces.IClients[] | []
-  deadlines: interfaces.IDeadlines[] | []
+  // orders: interfaces.IOrder[] | []
+  // industries: interfaces.IIndustries[] | []
+  // clients: interfaces.IClients[] | []
+  // deadlines: interfaces.IDeadlines[] | []
   // products: interfaces.IProduct[] | []
-  networks: interfaces.INetworks[] | []
+  // networks: interfaces.INetworks[] | []
   // setOrders: React.Dispatch<React.SetStateAction<interfaces.IOrder[] | []>>
   // setClientOrders: React.Dispatch<React.SetStateAction<interfaces.IOrder[] | []>>
   // setIndustries: React.Dispatch<React.SetStateAction<interfaces.IIndustries[] | []>>
@@ -24,13 +24,13 @@ type DataContextType = {
 }
 
 const initialValue = {
-  orders: [],
-  clientOrders: [],
-  industries: [],
-  clients: [],
-  deadlines: [],
+  // orders: [],
+  // clientOrders: [],
+  // industries: [],
+  // clients: [],
+  // deadlines: [],
   // products: [],
-  networks: [],
+  // networks: [],
   // setOrders: () => [],
   // setClientOrders: () => [],
   // setIndustries: () => [],
@@ -43,20 +43,20 @@ const initialValue = {
 export const DataFetchContext = createContext<DataContextType>(initialValue)
 
 export const DataFetchContextProvider = ({ children }: DataContextProps) => {
-  const [orders, setOrders] = useState<interfaces.IOrder[] | []>(initialValue.orders)
+  // const [orders, setOrders] = useState<interfaces.IOrder[] | []>(initialValue.orders)
 
-  const [industries, setIndustries] = useState<interfaces.IIndustries[] | []>(
-    initialValue.industries,
-  )
-  const [clients, setClients] = useState<interfaces.IClients[] | []>(initialValue.clients)
-  const [deadlines, setDeadlines] = useState<interfaces.IDeadlines[] | []>(initialValue.deadlines)
-  const [networks, setNetworks] = useState<interfaces.INetworks[] | []>(initialValue.networks)
+  // const [industries, setIndustries] = useState<interfaces.IIndustries[] | []>(
+  //   initialValue.industries,
+  // )
+  // const [clients, setClients] = useState<interfaces.IClients[] | []>(initialValue.clients)
+  // const [deadlines, setDeadlines] = useState<interfaces.IDeadlines[] | []>(initialValue.deadlines)
+  // const [networks, setNetworks] = useState<interfaces.INetworks[] | []>(initialValue.networks)
 
-  const { industriesFetch } = useFetchCollection('industries')
-  const { clientsFetch } = useFetchCollection('clients')
-  const { deadlinesFetch } = useFetchCollection('deadlines')
-  const { ordersFetch } = useFetchCollection('orders')
-  const { networksFetch } = useFetchCollection('networks')
+  // const { industriesFetch } = useFetchCollection('industries')
+  // const { clientsFetch } = useFetchCollection('clients')
+  // const { deadlinesFetch } = useFetchCollection('deadlines')
+  // const { ordersFetch } = useFetchCollection('orders')
+  // const { networksFetch } = useFetchCollection('networks')
 
   // useEffect(() => {
   //   setIndustries(industriesFetch)
@@ -68,13 +68,15 @@ export const DataFetchContextProvider = ({ children }: DataContextProps) => {
 
   return (
     <DataFetchContext.Provider
-      value={{
-        orders,
-        industries,
-        clients,
-        deadlines,
-        networks,
-      }}
+      value={
+        {
+          // orders,
+          // industries,
+          // clients,
+          // deadlines,
+          // networks,
+        }
+      }
     >
       {children}
     </DataFetchContext.Provider>
