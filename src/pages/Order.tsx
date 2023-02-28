@@ -29,7 +29,7 @@ const Order = () => {
     <div className='max-h-[100vh] flex flex-col justify-center items-center'>
       <Header />
       <div className='flex flex-col w-[100vw] max-w-[1400px] bg-dark-100 overflow-auto gap-1 md:gap-2 p-1 md:p-2'>
-        <SelectedItems clientName={client?.socialName} clientDeadline={client?.deadline} />
+        {client && industry && <SelectedItems client={client} industry={industry} />}
       </div>
       <div className='flex flex-col w-[100vw] max-w-[1400px] bg-dark-100 overflow-auto gap-1 md:gap-2 p-1 md:p-2'>
         <Search collection={`industries/${industryId}/products`} setResult={setResult} />
@@ -53,13 +53,15 @@ const Order = () => {
             </div>
 
             {result.length === 0 &&
+              client &&
               productsFetch?.map((product: IProduct, index: number) => (
-                <Product product={product} key={index} />
+                <Product product={product} key={product.id} client={client} type='select' />
               ))}
 
             {result.length > 0 &&
+              client &&
               result?.map((product: IProduct, index: number) => (
-                <Product product={product} key={index} />
+                <Product product={product} key={product.id} client={client} type='select' />
               ))}
           </div>
         </>

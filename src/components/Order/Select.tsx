@@ -12,7 +12,7 @@ const Select = () => {
   const [deadline, setDeadline] = useState('')
   const [client, setClient] = useState('')
 
-  const { createNewOrder, setSelectedClient, setSelectedIndustry, setSelectedDeadline, total } =
+  const { createNewOrder, setSelectedClient, setSelectedIndustry, total } =
     useContext(NewOrderContext)
 
   const { searchQuery: searchIndustryQuery, searchDoc: searchIndustry } =
@@ -115,7 +115,7 @@ const Select = () => {
                 setSelectedClient(client)
                 setClientDropdown(false)
                 setDeadline(client.deadline || '')
-                setSelectedDeadline(client.deadline || '')
+                // setSelectedDeadline(client.deadline || '')
                 setClient(client.socialName || '')
               }}
             >
@@ -134,10 +134,10 @@ const Select = () => {
             {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
           </span>
         </div>
-
+        {/* 
         <button onClick={createNewOrder} className='px-2 py-1 font-bold bg-blue-600 rounded-md'>
           Finalizar Pedido
-        </button>
+        </button> */}
       </div>
     </div>
   )

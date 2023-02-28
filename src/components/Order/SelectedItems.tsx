@@ -1,18 +1,20 @@
 import { FaShoppingCart } from 'react-icons/fa'
+import { IClients, IIndustries } from '../../interfaces'
+import Cart from './Cart'
 
-interface ItemsProps {
-  clientName: string
-  clientDeadline: string
+interface ClientProps {
+  client: IClients
+  industry: IIndustries
 }
 
-const SelectedItems = ({ clientName, clientDeadline }: ItemsProps) => {
+const SelectedItems = ({ client, industry }: ClientProps) => {
   return (
     <div className='bg-gray-900 w-full max-w-[1400px] p-2  text-gray-50 rounded-lg'>
       <div className='flex items-start justify-center w-full gap-2'>
         <div className='relative w-[50%]'>
           <span className='text-xs text-gray-500 lg:text-sm'>Cliente</span>
           <span className='flex items-center justify-between w-full text-xs uppercase break-words rounded-lg lg:text-sm'>
-            {clientName}
+            {client.socialName}
           </span>
         </div>
 
@@ -20,7 +22,7 @@ const SelectedItems = ({ clientName, clientDeadline }: ItemsProps) => {
           <span className='text-xs text-gray-500 lg:text-sm'>Prazo de pagamento</span>
 
           <span className='flex items-center justify-between w-full text-xs uppercase break-words rounded-lg lg:text-sm'>
-            {clientDeadline}
+            {client.deadline}
           </span>
         </div>
       </div>
@@ -33,12 +35,7 @@ const SelectedItems = ({ clientName, clientDeadline }: ItemsProps) => {
           </span>
         </div> */}
 
-        <button
-          onClick={() => console.log('')}
-          className='flex items-center justify-center gap-2 px-2 py-1 font-bold bg-blue-600 rounded-md'
-        >
-          <FaShoppingCart /> Carrinho
-        </button>
+        <Cart client={client} industry={industry} />
       </div>
     </div>
   )

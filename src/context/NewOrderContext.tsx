@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { useFetchCollection } from '../hooks/fetchData/useFetchCollection'
 import { useCreateOrder } from '../hooks/handleData/useAddOrder'
 
-import { IClients, IDeadlines, IIndustries, IProduct } from '../interfaces'
+import { IClients, IIndustries, IProduct } from '../interfaces'
 import { AuthContext } from './AuthContext'
 
 type NewOrderProps = {
@@ -14,14 +14,12 @@ type NewOrderProps = {
 type OrderContextType = {
   selectedIndustry: IIndustries
   selectedClient: IClients
-  selectedDeadline: string
   total: number
   productsArray: IProduct[]
   setSelectedIndustry: React.Dispatch<SetStateAction<IIndustries>>
   setSelectedClient: React.Dispatch<SetStateAction<IClients>>
-  setSelectedDeadline: React.Dispatch<SetStateAction<string>>
   setTotal: React.Dispatch<SetStateAction<number>>
-  createNewOrder: () => void
+  createNewOrder: (client: IClients, industry: IIndustries) => void
   setProductsArray: React.Dispatch<SetStateAction<IProduct[]>>
 }
 
@@ -37,7 +35,6 @@ const initialValue = {
     socialName: 'Cliente',
     cnpj: '',
   },
-  selectedDeadline: '',
   total: 0,
   productsArray: [],
   setSelectedIndustry: () => {
@@ -46,13 +43,11 @@ const initialValue = {
   setSelectedClient: () => {
     ;('')
   },
-  setSelectedDeadline: () => {
-    ;('')
-  },
+
   setTotal: () => {
     ;('')
   },
-  createNewOrder: () => {
+  createNewOrder: (client: IClients, industry: IIndustries) => {
     ;('')
   },
   setProductsArray: () => {
@@ -67,7 +62,6 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
     initialValue.selectedIndustry,
   )
   const [selectedClient, setSelectedClient] = useState<IClients>(initialValue.selectedClient)
-  const [selectedDeadline, setSelectedDeadline] = useState<string>(initialValue.selectedDeadline)
   const [total, setTotal] = useState<number>(initialValue.total)
   const [productsArray, setProductsArray] = useState<IProduct[]>(initialValue.productsArray)
 
@@ -94,42 +88,39 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
     setTotal(total)
   }, [productsArray])
 
-  const createNewOrder = () => {
+  const createNewOrder = (client: IClients, industry: IIndustries) => {
     if (!selectedIndustry?.fantasyName) return toast.error('Selecione uma indústria!')
     if (selectedClient.id === '') return toast.error('Selecione um cliente!')
-    if (selectedDeadline === 'Selecione um prazo de pagamento')
-      return toast.error('Selecione um prazo de pagamento!')
     if (productsArray.length === 0) return toast.error('Selecione pelo menos um produto!')
     if (!total || total === 0) return toast.error('Ocorreu um erro, tente novamente!')
 
     let orderId
     if (ordersFetch.length > 0) {
       const lastOrder = ordersFetch[0]
-      orderId =  Number(lastOrder?.orderId) + 1
+      orderId = Number(lastOrder?.orderId) + 1
     } else {
       orderId = 1
     }
 
     const data = {
-      clientId: selectedClient.id,
-      clientName: selectedClient.socialName,
-      clientCnpj: selectedClient.cnpj,
-      industryId: selectedIndustry.id,
-      industryName: selectedIndustry.fantasyName,
+      clientId: client.id,
+      clientName: client.socialName,
+      clientCnpj: client.cnpj,
+      industryId: industry.id,
+      industryName: industry.fantasyName,
       sellerId: userData.uid,
       sellerName: userData.displayName,
       products: productsArray,
-      deadline: selectedDeadline,
+      deadline: client.deadline,
       total,
       orderId: `${orderId}`,
     }
 
-    addOrder(data, selectedClient)
+    addOrder(data, client)
 
     setProductsArray([])
     setSelectedIndustry(initialValue.selectedIndustry)
     setSelectedClient(initialValue.selectedClient)
-    setSelectedDeadline(initialValue.selectedDeadline)
     setTotal(initialValue.total)
   }
 
@@ -139,11 +130,9 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
         createNewOrder,
         selectedIndustry,
         selectedClient,
-        selectedDeadline,
         total,
         setSelectedIndustry,
         setSelectedClient,
-        setSelectedDeadline,
         setTotal,
         productsArray,
         setProductsArray,
