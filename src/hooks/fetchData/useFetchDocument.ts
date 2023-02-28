@@ -16,7 +16,8 @@ export const useFetchDocument = (docCollection: string, id: string | undefined) 
         const docRef = doc(database, docCollection, id)
         const docSnap = await getDoc(docRef)
 
-        setDocument(docSnap.data())
+        setDocument({ ...docSnap.data(), id })
+
         setLoading(false)
       } catch (e: any) {
         toast.error(e.message)

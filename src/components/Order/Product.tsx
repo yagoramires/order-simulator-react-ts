@@ -21,7 +21,7 @@ const Product = ({ product, client, type }: ProductProps) => {
 
   // console.log(product)
 
-  const { productsArray, setProductsArray } = useContext(NewOrderContext)
+  const { productsArray, setProductsArray, createNewOrder } = useContext(NewOrderContext)
   // const { networksFetch } = useFetchCollection('networks')
 
   const { calculatePriceWithDiscount } = useCalculateDiscount()

@@ -5,6 +5,7 @@ import { FaShoppingCart } from 'react-icons/fa'
 import { NewOrderContext } from '../../context/NewOrderContext'
 import Product from './Product'
 import { IClients } from '../../interfaces'
+import MessageComponent from '../GlobalComponents/MessageComponent'
 
 interface ClientProps {
   client: IClients
@@ -18,6 +19,7 @@ const Cart = ({ client, industry }: ClientProps) => {
 
   const handleCreateNewOrder = () => {
     createNewOrder(client, industry)
+    setOpen(false)
   }
 
   return (
@@ -33,10 +35,15 @@ const Cart = ({ client, industry }: ClientProps) => {
       childrenForm={
         <div className='flex flex-col gap-2'>
           <div className='flex flex-col max-w-full gap-2 overflow-auto max-h-[400px] md:max-h-[600px]'>
-            {productsArray.length > 0 &&
+            {productsArray.length > 0 ? (
               productsArray.map((product) => (
                 <Product product={product} key={product.id} client={client} type='cart' />
-              ))}
+              ))
+            ) : (
+              <div className='mb-20'>
+                <MessageComponent text={'Nenhum produto selecionado.'} />
+              </div>
+            )}
           </div>
           <div className='flex items-end justify-between'>
             <div className='flex flex-col mt-4 text-gray-50'>

@@ -89,8 +89,8 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
   }, [productsArray])
 
   const createNewOrder = (client: IClients, industry: IIndustries) => {
-    if (!selectedIndustry?.fantasyName) return toast.error('Selecione uma indústria!')
-    if (selectedClient.id === '') return toast.error('Selecione um cliente!')
+    if (!industry) return toast.error('Selecione uma indústria!')
+    if (!client) return toast.error('Selecione um cliente!')
     if (productsArray.length === 0) return toast.error('Selecione pelo menos um produto!')
     if (!total || total === 0) return toast.error('Ocorreu um erro, tente novamente!')
 

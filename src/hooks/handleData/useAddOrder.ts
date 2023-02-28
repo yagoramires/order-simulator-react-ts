@@ -34,7 +34,7 @@ export const useCreateOrder = () => {
         await updateDoc(ref, { ...clientData, orders: ordersArray })
       }
 
-      navigate('/orders/' + id)
+      // navigate('/orders/' + id)
 
       toast.success('Pedido adicionado com sucesso!')
       setLoading(false)
