@@ -193,7 +193,7 @@ export const useFetchCollection = (docCollection: string) => {
           where('socialName', '<=', search + '~'),
         )
       } else if (docCollection.includes('products')) {
-        q = query(collectionRef, where('code', '>=', search), where('code', '<=', search + '~'))
+        q = query(collectionRef,where('code', '<=', search + '~'), where('code', '==', search))
       } else if (docCollection === 'deadlines') {
         q = query(collectionRef, where('value', '>=', search), where('value', '<=', search + '~'))
       } else if (docCollection.includes('networks')) {
