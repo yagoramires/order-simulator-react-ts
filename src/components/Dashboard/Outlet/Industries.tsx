@@ -5,7 +5,7 @@ import LabelComponent from '../../GlobalComponents/LabelComponent'
 import LinkComponent from '../../GlobalComponents/LinkComponent'
 import MessageComponent from '../../GlobalComponents/MessageComponent'
 import IndustryForm from './Forms/AddIndustry'
-import Search from '../../GlobalComponents/Search'
+import Search from '../../GlobalComponents/SearchComponent'
 import LoadMoreBtn from '../../GlobalComponents/LoadMoreBtn'
 
 import { IIndustries } from '../../../interfaces'
@@ -34,8 +34,8 @@ const Industries = () => {
 
   return (
     <div className='max-w-[1400px] w-full'>
-      <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <Search collection='industries' setResult={setResult} />
+      <div className='flex items-start justify-between w-full gap-2 p-2 bg-dark-100'>
+        <Search type='industries' collection='industries' setResult={setResult} />
 
         <IndustryForm />
       </div>

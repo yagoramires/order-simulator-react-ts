@@ -12,6 +12,7 @@ export interface IProduct {
   discount?: number
   total?: number
   createdAt?: Date
+  searchstr?: Array<string>
 }
 export interface IAddProduct {
   industryId: string
@@ -23,4 +24,5 @@ export interface IAddProduct {
   unityType: string
   minValue: number
   price: number
+  searchstr: Array<string>
 }

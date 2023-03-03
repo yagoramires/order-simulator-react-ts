@@ -7,7 +7,7 @@ import { useFormatValue } from '../../../hooks/formatData/useFormatValue'
 import LinkComponent from '../../GlobalComponents/LinkComponent'
 import LabelComponent from '../../GlobalComponents/LabelComponent'
 import MessageComponent from '../../GlobalComponents/MessageComponent'
-import Search from '../../GlobalComponents/Search'
+import Search from '../../GlobalComponents/SearchComponent'
 
 import { IOrder } from '../../../interfaces'
 import LoadMoreBtn from '../../GlobalComponents/LoadMoreBtn'
@@ -49,8 +49,8 @@ const Orders = () => {
 
   return (
     <div className='max-w-[1400px] w-full'>
-      <div className='flex items-center justify-center w-full p-2 bg-dark-100'>
-        <Search collection='orders' setResult={setResult} />
+      <div className='flex items-start justify-center w-full p-2 bg-dark-100'>
+        <Search type='orders' collection='orders' setResult={setResult} />
       </div>
 
       {result.length === 0 && ordersFetch.length === 0 && (

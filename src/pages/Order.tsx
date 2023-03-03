@@ -10,7 +10,7 @@ import MessageComponent from '../components/GlobalComponents/MessageComponent'
 import { IProduct } from '../interfaces'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { useFetchCollection } from '../hooks/fetchData/useFetchCollection'
-import Search from '../components/GlobalComponents/Search'
+import Search from '../components/GlobalComponents/SearchComponent'
 import { useFetchDocument } from '../hooks/fetchData/useFetchDocument'
 import { useParams } from 'react-router-dom'
 import LoadMoreBtn from '../components/GlobalComponents/LoadMoreBtn'
@@ -32,7 +32,11 @@ const Order = () => {
         {client && industry && <SelectedItems client={client} industry={industry} />}
       </div>
       <div className='flex flex-col w-[100vw] max-w-[1400px] bg-dark-100 overflow-auto gap-1 md:gap-2 p-1 md:p-2'>
-        <Search collection={`industries/${industryId}/products`} setResult={setResult} />
+        <Search
+          type='products'
+          collection={`industries/${industryId}/products`}
+          setResult={setResult}
+        />
         <div className='hidden lg:block'>
           <Label />
         </div>

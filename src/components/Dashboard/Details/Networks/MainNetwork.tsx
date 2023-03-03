@@ -7,7 +7,6 @@ import LabelComponent from '../../../GlobalComponents/LabelComponent'
 import MessageComponent from '../../../GlobalComponents/MessageComponent'
 import PageLoading from '../../../GlobalComponents/PageLoading'
 import Filter from '../../../GlobalComponents/Filter'
-import ProductForm from './AddProduct'
 
 import { TiDelete } from 'react-icons/ti'
 
@@ -66,10 +65,8 @@ const MainNetwork = ({ network }: NetworkProps) => {
 
   return (
     <div className='max-w-[1400px] w-full'>
-      <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
+      <div className='flex items-center justify-center w-full gap-2 p-2 bg-dark-100'>
         <Filter search={search} setSearch={setSearch} />
-
-        <ProductForm />
       </div>
 
       {!search && network.products?.length === 0 && (

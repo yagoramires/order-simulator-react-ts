@@ -5,6 +5,7 @@ import { INetworks } from '../../../../interfaces'
 import Alert from '../../../GlobalComponents/Alert'
 import EditNetwork from './EditNetwork'
 import BackButton from '../../../GlobalComponents/BackBtn'
+import ProductForm from './AddProduct'
 
 interface NetworkProps {
   network: INetworks
@@ -23,8 +24,11 @@ const SidebarNetwork = ({ network }: NetworkProps) => {
             <span className='text-xs text-gray-600'>Nome</span>
             <span className='text-sm font-medium'>{network.name?.toUpperCase()}</span>
           </div>
-
           <div className='flex items-center justify-center gap-2 lg:mt-8'>
+            <ProductForm />
+          </div>
+
+          <div className='flex items-center justify-center gap-2 '>
             <EditNetwork networkId={networkId || ''} networkData={network} />
             <Alert data={{ type: 'network', id: networkId || '' }} />
           </div>

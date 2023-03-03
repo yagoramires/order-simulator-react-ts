@@ -26,9 +26,6 @@ export const useFetchCollection = (docCollection: string) => {
   const [clientsFetch, setClientsFetch] = useState<interfaces.IClients[]>([])
   const [lastClientsFetch, setLastClientsFetch] = useState<DocumentData>()
 
-  const [deadlinesFetch, setDeadlinesFetch] = useState<interfaces.IDeadlines[]>([])
-  const [lastDeadlinesFetch, setLastDeadlinesFetch] = useState<DocumentData>()
-
   const [networksFetch, setNetworksFetch] = useState<interfaces.INetworks[]>([])
   const [lastNetworksFetch, setLastNetworksFetch] = useState<DocumentData>()
 
@@ -66,9 +63,6 @@ export const useFetchCollection = (docCollection: string) => {
           } else if (docCollection === 'clients') {
             setClientsFetch(snapshot)
             setLastClientsFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
-          } else if (docCollection === 'deadlines') {
-            setDeadlinesFetch(snapshot)
-            setLastDeadlinesFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
           } else if (docCollection.includes('networks')) {
             setNetworksFetch(snapshot)
             setLastNetworksFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
@@ -111,13 +105,6 @@ export const useFetchCollection = (docCollection: string) => {
           startAfter(lastClientsFetch),
           limit(25),
         )
-      } else if (docCollection === 'deadlines') {
-        q = query(
-          collectionRef,
-          orderBy('createdAt', 'desc'),
-          startAfter(lastDeadlinesFetch),
-          limit(25),
-        )
       } else if (docCollection.includes('networks')) {
         q = query(
           collectionRef,
@@ -151,9 +138,6 @@ export const useFetchCollection = (docCollection: string) => {
         } else if (docCollection === 'clients') {
           setClientsFetch([...clientsFetch, ...snapshot])
           setLastClientsFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
-        } else if (docCollection === 'deadlines') {
-          setDeadlinesFetch([...deadlinesFetch, ...snapshot])
-          setLastDeadlinesFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
         } else if (docCollection.includes('networks')) {
           setNetworksFetch([...networksFetch, ...snapshot])
           setLastNetworksFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
@@ -169,6 +153,7 @@ export const useFetchCollection = (docCollection: string) => {
 
   const searchDoc = (search: string) => {
     setSearchQuery([])
+    if (search === '') return
     const collectionRef = collection(database, docCollection)
 
     try {
@@ -193,7 +178,13 @@ export const useFetchCollection = (docCollection: string) => {
           where('socialName', '<=', search + '~'),
         )
       } else if (docCollection.includes('products')) {
-        q = query(collectionRef, where('code', '>=', search), where('code', '<=', search + '~'))
+        console.log(search)
+        q = query(
+          collectionRef,
+          where('code', '>=', search),
+          where('code', '<=', search + '~'),
+          limit(25),
+        )
       } else if (docCollection === 'deadlines') {
         q = query(collectionRef, where('value', '>=', search), where('value', '<=', search + '~'))
       } else if (docCollection.includes('networks')) {
@@ -207,6 +198,8 @@ export const useFetchCollection = (docCollection: string) => {
           id: doc.id,
           ...doc.data(),
         }))
+
+        console.log(snapshot)
 
         if (snapshot.length > 0) {
           setSearchQuery(snapshot)
@@ -225,7 +218,6 @@ export const useFetchCollection = (docCollection: string) => {
   return {
     industriesFetch,
     clientsFetch,
-    deadlinesFetch,
     ordersFetch,
     networksFetch,
     productsFetch,

@@ -27,8 +27,6 @@ import ClientDetails from './pages/Details/ClientDetails'
 import Networks from './components/Dashboard/Outlet/Networks'
 import NetworkDetails from './pages/Details/NetworkDetails'
 
-import Deadlines from './components/Dashboard/Outlet/Deadlines'
-
 const routes = () => {
   const { user } = useContext(AuthContext)
 
@@ -49,7 +47,6 @@ const routes = () => {
             <Route path='orders' element={<Orders />} />
             <Route path='industries' element={<Industries />} />
             <Route path='clients' element={<Clients />} />
-            <Route path='deadlines' element={<Deadlines />} />
             <Route path='networks' element={<Networks />} />
           </Route>
 

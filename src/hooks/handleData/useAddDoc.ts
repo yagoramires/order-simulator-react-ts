@@ -5,13 +5,7 @@ import { database, storage } from '../../firebase/config'
 
 import { toast } from 'react-toastify'
 
-import {
-  IAddDeadline,
-  IAddClient,
-  IAddIndustry,
-  IAddProduct,
-  IAddNetwork,
-} from '../../interfaces/index'
+import { IAddClient, IAddIndustry, IAddProduct, IAddNetwork } from '../../interfaces/index'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
 export const useAddDoc = () => {
@@ -100,21 +94,6 @@ export const useAddDoc = () => {
     }
   }
 
-  const addDeadline = async (deadlineData: IAddDeadline) => {
-    setLoading(true)
-    try {
-      const ref = collection(database, 'deadlines')
-      const data = { ...deadlineData, createdAt: Timestamp.now() }
-      await addDoc(ref, data)
-
-      toast.success('Prazo de pagamento adicionado com sucesso!')
-      setLoading(false)
-    } catch (e: any) {
-      toast.error(e.message)
-      setLoading(false)
-    }
-  }
-
   const addNetwork = async (networkData: IAddNetwork) => {
     setLoading(true)
     try {
@@ -134,7 +113,6 @@ export const useAddDoc = () => {
     addClient,
     addIndustry,
     addProduct,
-    addDeadline,
     addNetwork,
     progress,
     loading,

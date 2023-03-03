@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Alert from '../../../GlobalComponents/Alert'
 import BackButton from '../../../GlobalComponents/BackBtn'
 import EditIndustry from './EditIndustry'
+import ProductForm from './AddProduct'
 
 import { IIndustries } from '../../../../interfaces'
 interface DataProps {
@@ -30,6 +31,9 @@ const SidebarIndustry = ({ industry }: DataProps) => {
             <span className='text-xs text-gray-600'>CNPJ</span>
             <span className='text-sm font-medium'>{industry.cnpj}</span>
           </div>
+        </div>
+        <div className='flex items-center justify-center gap-2 lg:mt-8'>
+          <ProductForm />
         </div>
         <div className='flex items-center justify-center gap-2 lg:mt-8'>
           <EditIndustry industryId={industryId || ''} industryData={industry} />

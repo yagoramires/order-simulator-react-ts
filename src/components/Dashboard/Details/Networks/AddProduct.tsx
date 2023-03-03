@@ -47,8 +47,8 @@ const AddProduct = () => {
       open={open}
       setOpen={setOpen}
       childrenButton={
-        <div className='relative flex items-center justify-between gap-2 px-4 py-2 font-bold bg-blue-600 rounded-lg text-gray-50 '>
-          <IoMdAdd /> Novo
+        <div className='relative flex items-center justify-between w-full gap-2 px-4 py-4 font-bold bg-blue-600 rounded-lg text-gray-50'>
+          Adicionar Produto
         </div>
       }
       childrenForm={

@@ -6,11 +6,8 @@ import { toast } from 'react-toastify'
 
 import DialogComponent from '../../../GlobalComponents/DialogComponent'
 import { IoMdAdd } from 'react-icons/io'
-import { useFetchDocument } from '../../../../hooks/fetchData/useFetchDocument'
 import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
-import { doc } from 'firebase/firestore'
 import mock from '../../../../productsMock'
-import { IProduct } from '../../../../interfaces'
 
 const AddProduct = () => {
   const [productImg, setProductImage] = useState(null)
@@ -23,15 +20,17 @@ const AddProduct = () => {
   const [open, setOpen] = useState(false)
 
   const { industryId } = useParams()
-  // const { document: industry } = useFetchDocument('industries', industryId)
   const { addProduct } = useAddDoc()
 
   // const handleAddProduct = async (e: React.FormEvent<HTMLFormElement>) => {
   //   e.preventDefault()
 
   //   mock.forEach(async (product: any) => {
-  //     // console.log(product)
-  //     await addProduct({ ...product, industryId })
+  //     await addProduct({
+  //       ...product,
+  //       industryId,
+  //       searchstr: createSearchArr(product.code, product.name),
+  //     })
   //   })
   //   return
   // }
@@ -52,7 +51,10 @@ const AddProduct = () => {
       unityType,
       price: Number(price),
       minValue: Number(minValue),
+      searchstr: createSearchArr(code, name),
     }
+
+    console.log(product)
 
     if (productImg) {
       addProduct(product, productImg)
@@ -68,6 +70,13 @@ const AddProduct = () => {
     setOpen(false)
   }
 
+  const createSearchArr = (code: string, name: string) => {
+    const nameArr = name.split(' ')
+    const searchArr = [code, ...nameArr]
+
+    return searchArr
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSelectImage = (e: any) => {
     setProductImage(e.target.files[0])
@@ -79,8 +88,8 @@ const AddProduct = () => {
       open={open}
       setOpen={setOpen}
       childrenButton={
-        <div className='relative flex items-center justify-between gap-2 px-4 py-2 font-bold bg-blue-600 rounded-lg text-gray-50 '>
-          <IoMdAdd /> Novo
+        <div className='relative flex items-center justify-between w-full gap-2 px-4 py-4 font-bold bg-blue-600 rounded-lg text-gray-50'>
+          Adicionar Produto
         </div>
       }
       childrenForm={

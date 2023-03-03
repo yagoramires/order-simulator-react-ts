@@ -2,14 +2,13 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFormatValue } from '../../../../hooks/formatData/useFormatValue'
 
-import ProductForm from './AddProduct'
 import LinkComponent from '../../../GlobalComponents/LinkComponent'
 import LabelComponent from '../../../GlobalComponents/LabelComponent'
 import MessageComponent from '../../../GlobalComponents/MessageComponent'
+import SearchComponent from '../../../GlobalComponents/SearchComponent'
 
 import { IProduct } from '../../../../interfaces'
 import { useFetchCollection } from '../../../../hooks/fetchData/useFetchCollection'
-import Search from '../../../GlobalComponents/Search'
 
 const MainIndustry = () => {
   const [result, setResult] = useState([])
@@ -42,9 +41,11 @@ const MainIndustry = () => {
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <Search collection={`/industries/${industryId}/products`} setResult={setResult} />
-
-        <ProductForm />
+        <SearchComponent
+          collection={`/industries/${industryId}/products`}
+          type='products'
+          setResult={setResult}
+        />
       </div>
       <div className='h-[calc(100vh-130px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
         {productsFetch.length > 0 && result.length === 0 && labelComponent()}

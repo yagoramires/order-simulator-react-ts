@@ -5,7 +5,7 @@ import ClientForm from './Forms/AddClient'
 import LabelComponent from '../../GlobalComponents/LabelComponent'
 import LinkComponent from '../../GlobalComponents/LinkComponent'
 import MessageComponent from '../../GlobalComponents/MessageComponent'
-import Search from '../../GlobalComponents/Search'
+import Search from '../../GlobalComponents/SearchComponent'
 import LoadMoreBtn from '../../GlobalComponents/LoadMoreBtn'
 
 import { IClients } from '../../../interfaces'
@@ -34,8 +34,8 @@ const Clients = () => {
 
   return (
     <div className='max-w-[1400px] w-full'>
-      <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <Search collection='clients' setResult={setResult} />
+      <div className='flex items-start justify-between w-full gap-2 p-2 bg-dark-100'>
+        <Search type='clients' collection='clients' setResult={setResult} />
 
         <ClientForm />
       </div>

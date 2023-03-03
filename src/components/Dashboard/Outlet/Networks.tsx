@@ -4,7 +4,7 @@ import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 import LabelComponent from '../../GlobalComponents/LabelComponent'
 import LinkComponent from '../../GlobalComponents/LinkComponent'
 import MessageComponent from '../../GlobalComponents/MessageComponent'
-import Search from '../../GlobalComponents/Search'
+import Search from '../../GlobalComponents/SearchComponent'
 import NetworkForm from './Forms/AddNetwork'
 import LoadMoreBtn from '../../GlobalComponents/LoadMoreBtn'
 
@@ -32,8 +32,8 @@ const Networks = () => {
 
   return (
     <div className='max-w-[1400px] w-full'>
-      <div className='flex items-center justify-between w-full gap-2 p-2 bg-dark-100'>
-        <Search collection='networks' setResult={setResult} />
+      <div className='flex items-start justify-between w-full gap-2 p-2 bg-dark-100'>
+        <Search type='networks' collection='networks' setResult={setResult} />
 
         <NetworkForm />
       </div>
