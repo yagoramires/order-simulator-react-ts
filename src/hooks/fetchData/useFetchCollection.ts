@@ -8,7 +8,6 @@ import {
   query,
   QuerySnapshot,
   startAfter,
-  where,
 } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
