@@ -32,8 +32,6 @@ export const useFetchCollection = (docCollection: string) => {
   const [productsFetch, setProductsFetch] = useState<interfaces.IProduct[]>([])
   const [lastProductsFetch, setLastProductsFetch] = useState<DocumentData>()
 
-  const [searchQuery, setSearchQuery] = useState<DocumentData>([])
-
   useEffect(() => {
     if (docCollection === '') return
     if (docCollection === 'industries//products') return
@@ -151,70 +149,6 @@ export const useFetchCollection = (docCollection: string) => {
     }
   }
 
-  const searchDoc = (search: string) => {
-    setSearchQuery([])
-    if (search === '') return
-    const collectionRef = collection(database, docCollection)
-
-    try {
-      let q
-
-      if (docCollection === 'industries') {
-        q = query(
-          collectionRef,
-          where('socialName', '>=', search),
-          where('socialName', '<=', search + '~'),
-        )
-      } else if (docCollection === 'orders') {
-        q = query(
-          collectionRef,
-          where('clientName', '>=', search),
-          where('clientName', '<=', search + '~'),
-        )
-      } else if (docCollection === 'clients') {
-        q = query(
-          collectionRef,
-          where('socialName', '>=', search),
-          where('socialName', '<=', search + '~'),
-        )
-      } else if (docCollection.includes('products')) {
-        console.log(search)
-        q = query(
-          collectionRef,
-          where('code', '>=', search),
-          where('code', '<=', search + '~'),
-          limit(25),
-        )
-      } else if (docCollection === 'deadlines') {
-        q = query(collectionRef, where('value', '>=', search), where('value', '<=', search + '~'))
-      } else if (docCollection.includes('networks')) {
-        q = query(collectionRef, where('name', '>=', search), where('name', '<=', search + '~'))
-      } else {
-        return
-      }
-
-      onSnapshot(q, (querySnapshot: QuerySnapshot<DocumentData>) => {
-        const snapshot = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-
-        console.log(snapshot)
-
-        if (snapshot.length > 0) {
-          setSearchQuery(snapshot)
-        } else {
-          setSearchQuery([])
-        }
-        return
-      })
-    } catch (e: any) {
-      console.log(e.message)
-      toast.error(e.message)
-      return
-    }
-  }
-
   return {
     industriesFetch,
     clientsFetch,
@@ -222,8 +156,5 @@ export const useFetchCollection = (docCollection: string) => {
     networksFetch,
     productsFetch,
     fetchMore,
-    searchDoc,
-    searchQuery,
-    setSearchQuery,
   }
 }
