@@ -16,7 +16,8 @@ const Header = () => {
         </h1>
 
         <nav>
-          <Link to='/orders'>
+          <Link to='/orders' className='flex items-center justify-center gap-4'>
+            {userData.displayName}
             {userData?.photoURL ? (
               <img
                 src={userData.photoURL}

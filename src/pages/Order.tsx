@@ -29,7 +29,7 @@ const Order = () => {
     <div className='max-h-[100vh] flex flex-col justify-center items-center'>
       <Header />
       <div className='flex flex-col w-[100vw] max-w-[1400px] bg-dark-100 overflow-auto gap-1 md:gap-2 p-1 md:p-2'>
-        {client && industry && <SelectedItems client={client} industry={industry} />}
+        {/* {client && industry && <SelectedItems client={client} industry={industry} />} */}
       </div>
       <div className='flex flex-col w-[100vw] max-w-[1400px] bg-dark-100 overflow-auto gap-1 md:gap-2 p-1 md:p-2'>
         <Search
