@@ -4,6 +4,7 @@ import { FaCartArrowDown, FaCartPlus } from 'react-icons/fa'
 
 // Icons
 import { MdNoPhotography } from 'react-icons/md'
+import { toast } from 'react-toastify'
 import { NewOrderContext } from '../../context/NewOrderContext'
 import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 import { useCalculateDiscount } from '../../hooks/formatData/useCalculateDiscount'
@@ -71,10 +72,17 @@ const Product = ({ product, client, type }: ProductProps) => {
 
   const addItem = () => {
     if (quantity === 0) return
+    if (product.minValue && quantity % product.minValue !== 0) {
+      toast.error('Por favor, selecione um múltiplo de ' + product.minValue + '.')
+      return
+    }
+
     const checkIfProductIsInArray = productsArray.filter((prod) => prod.code === product.code)
     if (checkIfProductIsInArray.length === 0) {
       const totalPrice = quantity * price
       const addProduct = { ...product, price, quantity, total: totalPrice }
+      toast.success('Produto adicionado ao carrinho.')
+      setQuantity(0)
       return setProductsArray([...productsArray, addProduct])
     }
     if (checkIfProductIsInArray.length === 1) {
@@ -82,12 +90,15 @@ const Product = ({ product, client, type }: ProductProps) => {
 
       const totalPrice = quantity * price
       const addProduct = { ...product, price, quantity, total: totalPrice }
+      toast.success('Produto adicionado ao carrinho.')
+      setQuantity(0)
       return setProductsArray([...removeProduct, addProduct])
     }
   }
 
   const removeItem = () => {
     const removeProduct = productsArray.filter((prod) => prod.code !== product.code)
+    toast.success('Produto removido do carrinho.')
     return setProductsArray(removeProduct)
   }
 
@@ -109,7 +120,12 @@ const Product = ({ product, client, type }: ProductProps) => {
           currency: 'BRL',
         })}
       </span>
-      <span>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          addItem()
+        }}
+      >
         <input
           type='number'
           value={quantity}
@@ -118,7 +134,7 @@ const Product = ({ product, client, type }: ProductProps) => {
           min={0}
           step={product.minValue}
         />
-      </span>
+      </form>
       <span className='w-32 lg:36'>
         {total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
       </span>

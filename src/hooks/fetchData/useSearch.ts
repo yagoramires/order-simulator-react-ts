@@ -42,8 +42,7 @@ export const useSearch = (docCollection: string) => {
         } else {
           const qArray = query(
             collectionRef,
-            where('searchstr', 'array-contains', search),
-            limit(25),
+            where('searchstr', 'array-contains', search.toUpperCase()),
           )
 
           onSnapshot(qArray, (querySnapshot: QuerySnapshot<DocumentData>) => {
@@ -74,8 +73,8 @@ export const useSearch = (docCollection: string) => {
     try {
       const qCode = query(
         collectionRef,
-        where('code', '>=', search),
-        where('code', '<=', search + '~'),
+        where('socialName', '>=', search),
+        where('socialName', '<=', search + '~'),
         limit(25),
       )
 
@@ -147,7 +146,7 @@ export const useSearch = (docCollection: string) => {
   }
 
   const searchOrders = (search: string) => {
-    setIndustriesQuery([])
+    setOrdersQuery([])
     if (search === '') return
     const collectionRef = collection(database, docCollection)
 
@@ -165,7 +164,7 @@ export const useSearch = (docCollection: string) => {
         }))
 
         if (snapshot.length > 0) {
-          setIndustriesQuery(snapshot)
+          setOrdersQuery(snapshot)
         } else {
           toast.error('Nenhum pedido encontrado.')
         }
@@ -179,7 +178,7 @@ export const useSearch = (docCollection: string) => {
   }
 
   const searchNetworks = (search: string) => {
-    setIndustriesQuery([])
+    setNetworksQuery([])
     if (search === '') return
     const collectionRef = collection(database, docCollection)
 
@@ -197,7 +196,7 @@ export const useSearch = (docCollection: string) => {
         }))
 
         if (snapshot.length > 0) {
-          setIndustriesQuery(snapshot)
+          setNetworksQuery(snapshot)
         } else {
           toast.error('Nenhum rede encontrada.')
         }

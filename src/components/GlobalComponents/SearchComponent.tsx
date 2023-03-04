@@ -11,7 +11,6 @@ interface SearchProps {
 }
 
 const SearchComponent = ({ collection, setResult, type }: SearchProps) => {
-  // const { searchQuery, setSearchQuery, searchDoc } = useFetchCollection(collection)
   const {
     searchProduct,
     searchClient,
@@ -103,7 +102,7 @@ const SearchComponent = ({ collection, setResult, type }: SearchProps) => {
         <button
           className='w-full p-2 text-gray-50'
           onClick={() => {
-            // setSearchQuery([])
+            setResult([])
             setSearch('')
           }}
         >

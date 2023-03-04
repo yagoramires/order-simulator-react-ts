@@ -70,7 +70,9 @@ const Order = () => {
           </div>
         </>
       )}
-      {productsFetch && productsFetch.length > 0 && <LoadMoreBtn fetchMore={fetchMore} />}
+      {productsFetch && productsFetch.length > 0 && result.length === 0 && (
+        <LoadMoreBtn fetchMore={fetchMore} />
+      )}
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 import { FaPlus, FaSearch } from 'react-icons/fa'
 import { IClients, IIndustries } from '../../interfaces'
 import { Link } from 'react-router-dom'
+import { useSearch } from '../../hooks/fetchData/useSearch'
 
 const NewOrder = () => {
   const [open, setOpen] = useState(false)
@@ -18,15 +19,14 @@ const NewOrder = () => {
   const [selectedIndustry, setSelectedIndustry] = useState<IIndustries>()
   const [selectedClient, setSelectedClient] = useState<IClients>()
 
-  const { searchQuery: searchIndustryQuery, searchDoc: searchIndustry } =
-    useFetchCollection('industries')
-  const { searchQuery: searchClientQuery, searchDoc: searchClient } = useFetchCollection('clients')
+  const { searchIndustries, industriesQuery } = useSearch('industries')
+  const { searchClient, clientsQuery } = useSearch('clients')
 
   const handleSearchIndustry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIndustryDropdown(true)
     setClientDropdown(false)
-    searchIndustry(industry.toLowerCase())
+    searchIndustries(industry.toLowerCase())
   }
 
   const handleSearchClient = (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,7 +71,7 @@ const NewOrder = () => {
                 industryDropdown ? '' : 'hidden '
               } `}
             >
-              {searchIndustryQuery?.map((industry: IIndustries, index: number) => (
+              {industriesQuery?.map((industry: IIndustries, index: number) => (
                 <li
                   key={index}
                   className='w-full px-2 uppercase bg-gray-700 rounded-lg cursor-pointer lg:p-2'
@@ -85,7 +85,7 @@ const NewOrder = () => {
                 </li>
               ))}
 
-              {searchIndustryQuery.length === 0 && (
+              {industriesQuery.length === 0 && (
                 <p className='text-gray-50'>Nenhuma indústria encontrada.</p>
               )}
             </ul>
@@ -112,7 +112,7 @@ const NewOrder = () => {
                 clientDropdown ? '' : 'hidden '
               } `}
             >
-              {searchClientQuery?.map((client: IClients, index: number) => (
+              {clientsQuery?.map((client: IClients, index: number) => (
                 <li
                   key={index}
                   className='w-full px-2 uppercase bg-gray-700 rounded-lg cursor-pointer lg:p-2'
@@ -126,7 +126,7 @@ const NewOrder = () => {
                 </li>
               ))}
 
-              {searchClientQuery.length === 0 && (
+              {clientsQuery.length === 0 && (
                 <p className='text-gray-50'>Nenhum cliente encontrado.</p>
               )}
             </ul>
