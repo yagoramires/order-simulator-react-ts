@@ -23,6 +23,8 @@ const Order = () => {
   const { document: industry } = useFetchDocument('industries', industryId)
   const { document: client } = useFetchDocument('clients', clientId)
 
+  console.log(client)
+
   const { productsFetch, fetchMore } = useFetchCollection(`industries/${industryId}/products`)
 
   return (

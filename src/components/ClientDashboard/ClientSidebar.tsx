@@ -4,47 +4,16 @@ import { useAuth } from '../../hooks/auth/useAuth'
 
 import { Link } from 'react-router-dom'
 
-import { BsCartCheckFill } from 'react-icons/bs'
 import { MdLogout } from 'react-icons/md'
 import { RxAvatar } from 'react-icons/rx'
-import { FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit, FaLayerGroup } from 'react-icons/fa'
-import NewOrder from '../ClientDashboard/NewOrder'
+import { FaEdit } from 'react-icons/fa'
+import NewOrder from './NewOrder'
 
-const Sidebar = () => {
+const ClientSidebar = () => {
   const { userData } = useContext(AuthContext)
   const { signOutUser } = useAuth()
 
   const options = [
-    // {
-    //   icon: <FaPlus size={22} />,
-    //   text: 'Novo Pedido',
-    //   path: `/order/${industryId}/${clientId}`,
-    // },
-    {
-      icon: <BsCartCheckFill size={22} />,
-      text: 'Pedidos',
-      path: 'orders',
-    },
-    {
-      icon: <FaIndustry size={22} />,
-      text: 'Indústrias',
-      path: 'industries',
-    },
-    {
-      icon: <FaUserAlt size={22} />,
-      text: 'Clientes',
-      path: 'clients',
-    },
-    {
-      icon: <FaLayerGroup size={22} />,
-      text: 'Redes',
-      path: 'networks',
-    },
-    // {
-    //   icon: <FaRegCalendarAlt size={22} />,
-    //   text: 'Prazos de Pagamento',
-    //   path: 'deadlines',
-    // },
     {
       icon: <FaEdit size={22} />,
       text: 'Editar Perfil',
@@ -81,9 +50,9 @@ const Sidebar = () => {
 
       <nav className=''>
         <ul className='flex items-center justify-center w-full lg:flex-col lg:gap-2'>
-          {/* <li className='w-full text-gray-50'>
+          <li className='w-full text-gray-50'>
             <NewOrder />
-          </li> */}
+          </li>
 
           {liMap()}
 
@@ -102,4 +71,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default ClientSidebar

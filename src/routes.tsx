@@ -40,8 +40,11 @@ const routes = () => {
       <Route path='*' element={<Navigate to='/' />} />
       {user && (
         <>
+          <Route
+            path='order/:industryId/:clientId'
+            element={!userData.admin ? <Order /> : <Navigate to='/' />}
+          />
           <Route path='/' element={userData.admin ? <Dashboard /> : <ClientDashboard />}>
-            <Route path='order' element={userData.admin ? <Orders /> : <Navigate to='/' />} />
             <Route path='orders' element={userData.admin ? <Orders /> : <Navigate to='/' />} />
             <Route
               path='industries'

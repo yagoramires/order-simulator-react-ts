@@ -1,40 +1,43 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
 import DialogComponent from '../GlobalComponents/DialogComponent'
 import { useFetchCollection } from '../../hooks/fetchData/useFetchCollection'
 import { FaPlus, FaSearch } from 'react-icons/fa'
 import { IClients, IIndustries } from '../../interfaces'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useSearch } from '../../hooks/fetchData/useSearch'
+import { useFetchDocument } from '../../hooks/fetchData/useFetchDocument'
+import { AuthContext } from '../../context/AuthContext'
 
 const NewOrder = () => {
   const [open, setOpen] = useState(false)
+  const { userData } = useContext(AuthContext)
 
-  const [clientDropdown, setClientDropdown] = useState(false)
+  // const [clientDropdown, setClientDropdown] = useState(false)
   const [industryDropdown, setIndustryDropdown] = useState(false)
 
   const [industry, setIndustry] = useState('')
-  const [client, setClient] = useState('')
+  // const [client, setClient] = useState('')
 
   const [selectedIndustry, setSelectedIndustry] = useState<IIndustries>()
-  const [selectedClient, setSelectedClient] = useState<IClients>()
+  // const [selectedClient, setSelectedClient] = useState<IClients>()
 
   const { searchIndustries, industriesQuery } = useSearch('industries')
-  const { searchClient, clientsQuery } = useSearch('clients')
+  // const { searchClient, clientsQuery } = useSearch('clients')
 
   const handleSearchIndustry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIndustryDropdown(true)
-    setClientDropdown(false)
+    // setClientDropdown(false)
     searchIndustries(industry.toLowerCase())
   }
 
-  const handleSearchClient = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setClientDropdown(true)
-    setIndustryDropdown(false)
-    searchClient(client.toLowerCase())
-  }
+  // const handleSearchClient = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault()
+  //   setClientDropdown(true)
+  //   setIndustryDropdown(false)
+  //   searchClient(client.toLowerCase())
+  // }
 
   return (
     <DialogComponent
@@ -90,7 +93,7 @@ const NewOrder = () => {
               )}
             </ul>
           </div>
-          <div className='relative'>
+          {/* <div className='relative'>
             <span className='text-xs text-gray-500 lg:text-sm'>Cliente</span>
 
             <form onSubmit={handleSearchClient} className='flex'>
@@ -131,18 +134,18 @@ const NewOrder = () => {
               )}
             </ul>
 
-            {selectedIndustry && selectedClient && (
-              <div className='flex items-center justify-center mt-4'>
-                <Link
-                  to={`order/${selectedIndustry?.id}/${selectedClient?.id}`}
-                  type='submit'
-                  className='p-2 mt-2 font-bold text-center bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
-                >
-                  Novo pedido
-                </Link>
-              </div>
-            )}
-          </div>
+          </div> */}
+          {selectedIndustry && (
+            <div className='flex items-center justify-center mt-4'>
+              <Link
+                to={`order/${selectedIndustry?.id}/${userData.uid}`}
+                type='submit'
+                className='p-2 mt-2 font-bold text-center bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
+              >
+                Novo pedido
+              </Link>
+            </div>
+          )}
         </div>
       }
     />
