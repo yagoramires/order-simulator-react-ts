@@ -81,9 +81,9 @@ const Sidebar = () => {
 
       <nav className=''>
         <ul className='flex items-center justify-center w-full lg:flex-col lg:gap-2'>
-          <li className='w-full text-gray-50'>
+          {/* <li className='w-full text-gray-50'>
             <NewOrder />
-          </li>
+          </li> */}
 
           {liMap()}
 

@@ -26,35 +26,53 @@ import ClientDetails from './pages/Details/ClientDetails'
 
 import Networks from './components/Dashboard/Outlet/Networks'
 import NetworkDetails from './pages/Details/NetworkDetails'
+import ClientDashboard from './pages/ClientDashboard'
 
 const routes = () => {
-  const { user } = useContext(AuthContext)
-
-  if (user === undefined) {
+  const { user, userData } = useContext(AuthContext)
+  if (user === undefined || !userData) {
     return <PageLoading />
   }
 
   return (
     <Routes>
-      <Route path='/' element={user ? <Navigate to='/orders' /> : <Login />} />
+      {!user && <Route path='/' element={<Login />} />}
       <Route path='*' element={<Navigate to='/' />} />
-      <Route path='order/:industryId/:clientId' element={<Order />} />
       {user && (
         <>
-          <Route path='profile' element={<Profile />} />
-
-          <Route path='/' element={<Dashboard />}>
-            <Route path='orders' element={<Orders />} />
-            <Route path='industries' element={<Industries />} />
-            <Route path='clients' element={<Clients />} />
-            <Route path='networks' element={<Networks />} />
+          <Route path='/' element={userData.admin ? <Dashboard /> : <ClientDashboard />}>
+            <Route path='order' element={userData.admin ? <Orders /> : <Navigate to='/' />} />
+            <Route path='orders' element={userData.admin ? <Orders /> : <Navigate to='/' />} />
+            <Route
+              path='industries'
+              element={userData.admin ? <Industries /> : <Navigate to='/' />}
+            />
+            <Route path='clients' element={userData.admin ? <Clients /> : <Navigate to='/' />} />
+            <Route path='networks' element={userData.admin ? <Networks /> : <Navigate to='/' />} />
           </Route>
 
-          <Route path='industries/:industryId' element={<IndustryDetails />} />
-          <Route path='industries/:industryId/product/:productId' element={<ProductDetails />} />
-          <Route path='orders/:orderId' element={<OrderDetails />} />
-          <Route path='clients/:clientId' element={<ClientDetails />} />
-          <Route path='networks/:networkId' element={<NetworkDetails />} />
+          <Route path='profile' element={<Profile />} />
+
+          <Route
+            path='industries/:industryId'
+            element={userData.admin ? <IndustryDetails /> : <Navigate to='/' />}
+          />
+          <Route
+            path='industries/:industryId/product/:productId'
+            element={userData.admin ? <ProductDetails /> : <Navigate to='/' />}
+          />
+          <Route
+            path='orders/:orderId'
+            element={userData.admin ? <OrderDetails /> : <Navigate to='/' />}
+          />
+          <Route
+            path='clients/:clientId'
+            element={userData.admin ? <ClientDetails /> : <Navigate to='/' />}
+          />
+          <Route
+            path='networks/:networkId'
+            element={userData.admin ? <NetworkDetails /> : <Navigate to='/' />}
+          />
         </>
       )}
     </Routes>

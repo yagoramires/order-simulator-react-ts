@@ -62,7 +62,7 @@ const Profile = () => {
               className='w-24 h-24 border-2 border-blue-600 rounded-full md:w-32 md:h-32 lg:w-48 lg:h-48'
             />
           ) : (
-            <div className='flex items-center justify-center w-24 h-24 border-2 border-blue-600 rounded-full md:w-32 md:h-32 lg:w-48 lg:h-48overflow-hidden'>
+            <div className='flex items-center justify-center w-24 h-24 overflow-hidden border-2 border-blue-600 rounded-full md:w-32 md:h-32 lg:w-48 lg:h-48'>
               {profileImg ? (
                 <img
                   src={URL.createObjectURL(profileImg)}
@@ -70,7 +70,7 @@ const Profile = () => {
                   className='w-24 h-24 border-4 border-blue-600 rounded-full md:w-32 md:h-32 lg:w-48 lg:h-48'
                 />
               ) : (
-                <FaUserAlt className='text-blue-600 text-[100px] md:text-[50px]' />
+                <FaUserAlt className='text-gray-50 text-[100px] md:text-[50px] lg:text-[80px]' />
               )}
             </div>
           )}

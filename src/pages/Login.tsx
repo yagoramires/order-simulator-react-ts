@@ -8,7 +8,9 @@ import Loading from '../components/GlobalComponents/Loading'
 
 const Login = () => {
   const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
+  const [socialName, setSocialName] = useState('')
+  const [cnpj, setCnpj] = useState('')
+  const [deadline, setDeadline] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
@@ -22,10 +24,11 @@ const Login = () => {
   }
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!email || !password || !name) return toast.error('Preencha todos os campos!')
+    if (!email || !password || !socialName || !cnpj || deadline === 'disabled')
+      return toast.error('Preencha todos os campos!')
     if (password !== confirmPassword) return toast.error('As senhas precisam ser iguais!')
 
-    registerUser(email, password, name)
+    registerUser(email, password, socialName, cnpj, deadline)
   }
 
   useEffect(() => {
@@ -94,14 +97,37 @@ const Login = () => {
           <form className='flex flex-col gap-4 px-4' onSubmit={handleRegister}>
             <input
               type='text'
-              value={name}
+              value={socialName}
               onChange={(e) => {
-                setName(e.target.value)
+                setSocialName(e.target.value)
               }}
               className='p-2 bg-gray-300 rounded-md shadow-sm'
-              placeholder='Nome'
-              autoComplete='true'
+              placeholder='Razão Social'
+              autoComplete='false'
+              required
             />
+            <input
+              type='cnpj'
+              value={cnpj}
+              onChange={(e) => {
+                setCnpj(e.target.value)
+              }}
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
+              placeholder='CNPJ'
+              autoComplete='false'
+              required
+            />
+            <select
+              className='p-2 bg-gray-300 rounded-md shadow-sm'
+              defaultValue='disabled'
+              required
+            >
+              <option value='disabled' disabled>
+                Selecione o Prazo de Pagamento
+              </option>
+              <option value={'14/21/28'}>14/21/28 DD (Desconto adicional de 3%)</option>
+              <option value={'28/42/56/70/84'}>28/42/56/70/84 DD (Sem desconto adicional)</option>
+            </select>
             <input
               type='email'
               value={email}
@@ -111,6 +137,7 @@ const Login = () => {
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='E-mail'
               autoComplete='true'
+              required
             />
             <input
               type='password'
@@ -120,7 +147,8 @@ const Login = () => {
               }}
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Senha'
-              autoComplete='true'
+              autoComplete='false'
+              required
             />
             <input
               type='password'
@@ -130,8 +158,10 @@ const Login = () => {
               }}
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               placeholder='Confirmação de senha'
-              autoComplete='true'
+              autoComplete='false'
+              required
             />
+
             {loading ? (
               <div className='flex justify-center w-full'>
                 <Loading size='30px' />
