@@ -47,7 +47,7 @@ const Clients = () => {
         />
       )}
 
-      <div className='h-[calc(100vh-160px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+      <div className='h-[calc(100vh-110px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
         {clientsFetch.length > 0 && result.length === 0 && labelComponent()}
         {result.length > 0 && labelComponent()}
 

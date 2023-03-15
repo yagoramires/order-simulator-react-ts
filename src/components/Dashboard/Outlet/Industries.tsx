@@ -40,14 +40,13 @@ const Industries = () => {
         <IndustryForm />
       </div>
 
-      {result.length === 0 && industriesFetch.length === 0 && (
-        <MessageComponent
-          text='Nenhuma indústria
+      <div className='h-[calc(100vh-110px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+        {result.length === 0 && industriesFetch.length === 0 && (
+          <MessageComponent
+            text='Nenhuma indústria
          cadastrada.'
-        />
-      )}
-
-      <div className='h-[calc(100vh-160px)] flex flex-col items-start w-full gap-2 p-2 overflow-auto'>
+          />
+        )}
         {industriesFetch.length > 0 && result.length === 0 && labelComponent()}
         {result.length > 0 && labelComponent()}
 
