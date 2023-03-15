@@ -10,7 +10,7 @@ import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useFormatValue } from '../../hooks/formatData/useFormatValue'
 import { IProduct } from '../../interfaces'
 
-const ClientOrder = () => {
+const OrderDetails = () => {
   const navigate = useNavigate()
 
   const { orderId } = useParams()
@@ -102,12 +102,12 @@ const ClientOrder = () => {
             </div>
           )}
         </div>
-        <div className='flex justify-center w-full my-4'>
+        {/* <div className='flex justify-center w-full my-4'>
           <Alert data={{ type: 'order', id: orderId || '', collectionId: order.clientId }} />
-        </div>
+        </div> */}
       </div>
     </div>
   )
 }
 
-export default ClientOrder
+export default OrderDetails

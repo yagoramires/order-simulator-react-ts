@@ -25,9 +25,8 @@ const Orders = () => {
         <span className='w-[15%]'>{order.orderId}</span>
         <span className='w-[45%]'>{order.clientName?.toUpperCase()}</span>
         <div className='w-[40%] flex gap-2'>
-          <span className='w-[33%]'>{order.createdAt && formatDate(order.createdAt)}</span>
-          <span className='w-[33%]'>{order.total && formatValue(+order.total)}</span>
-          <span className='w-[33%] capitalize'>{order.sellerName}</span>
+          <span className='w-[50%]'>{order.createdAt && formatDate(order.createdAt)}</span>
+          <span className='w-[50%]'>{order.total && formatValue(+order.total)}</span>
         </div>
       </LinkComponent>
     )
@@ -39,9 +38,8 @@ const Orders = () => {
         <span className='w-[15%]'>Pedido</span>
         <span className='w-[45%]'>Cliente</span>
         <div className='w-[40%] flex gap-2'>
-          <span className='w-[33%]'>Data</span>
-          <span className='w-[33%]'>Total</span>
-          <span className='w-[33%]'>Vendedor</span>
+          <span className='w-[50%]'>Data</span>
+          <span className='w-[50%]'>Total</span>
         </div>
       </LabelComponent>
     )

@@ -50,8 +50,7 @@ const Order = () => {
 
       {productsFetch && productsFetch?.length > 0 && (
         <>
-          {/* <div className='flex justify-center w-full p-1 md:p-2  max-w-[1400px]'></div> */}
-          <div className='mt-1 md:mt-2 flex flex-col w-[100vw] max-w-[1400px] max-h-[calc(100vh-284px)] md:max-h-[calc(100vh-410px)] lg:max-h-[calc(100vh-360px)] bg-dark-100 overflow-auto p-1 gap-1 md:p-2 md:gap-2 '>
+          <div className='mt-1 md:mt-2 flex flex-col w-[100vw] max-w-[1400px] max-h-[calc(100vh-165px)] md:max-h-[calc(100vh-200px)] lg:max-h-[calc(100vh-250px)] bg-dark-100 overflow-auto p-1 gap-1 md:p-2 md:gap-2 '>
             <div className='lg:hidden'>
               <Label />
             </div>

@@ -108,8 +108,6 @@ export const NewOrderProvider = ({ children }: NewOrderProps) => {
       clientCnpj: client.cnpj,
       industryId: industry.id,
       industryName: industry.fantasyName,
-      sellerId: userData.uid,
-      sellerName: userData.displayName,
       products: productsArray,
       deadline: client.deadline,
       total,

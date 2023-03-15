@@ -27,6 +27,7 @@ import ClientDetails from './pages/Details/ClientDetails'
 import Networks from './components/Dashboard/Outlet/Networks'
 import NetworkDetails from './pages/Details/NetworkDetails'
 import ClientDashboard from './pages/ClientDashboard'
+import ClientOrder from './pages/Details/ClientOrder'
 
 const routes = () => {
   const { user, userData } = useContext(AuthContext)
@@ -66,7 +67,7 @@ const routes = () => {
           />
           <Route
             path='orders/:orderId'
-            element={userData.admin ? <OrderDetails /> : <Navigate to='/' />}
+            element={userData.admin ? <OrderDetails /> : <ClientOrder />}
           />
           <Route
             path='clients/:clientId'
