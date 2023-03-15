@@ -44,7 +44,6 @@ const Login = () => {
 
   function validarCNPJ(cnpj: string) {
     const cnpjNumb = cnpj.replace(/[^\d]+/g, '')
-    console.log(cnpjNumb)
 
     if (cnpjNumb == '') return false
 

@@ -22,7 +22,6 @@ const MainClient = () => {
   const { formatValue } = useFormatValue()
 
   const { document: client } = useFetchDocument('clients', clientId)
-  console.log(client)
 
   const idFilter =
     search.length > 0

@@ -54,8 +54,6 @@ const AddProduct = () => {
       searchstr: createSearchArr(code, name),
     }
 
-    console.log(product)
-
     if (productImg) {
       addProduct(product, productImg)
     } else {

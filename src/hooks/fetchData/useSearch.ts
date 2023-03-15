@@ -139,7 +139,6 @@ export const useSearch = (docCollection: string) => {
         return
       })
     } catch (e: any) {
-      console.log(e.message)
       toast.error(e.message)
       return
     }
@@ -171,7 +170,6 @@ export const useSearch = (docCollection: string) => {
         return
       })
     } catch (e: any) {
-      console.log(e.message)
       toast.error(e.message)
       return
     }
@@ -203,7 +201,6 @@ export const useSearch = (docCollection: string) => {
         return
       })
     } catch (e: any) {
-      console.log(e.message)
       toast.error(e.message)
       return
     }
