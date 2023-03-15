@@ -70,9 +70,10 @@ export const useAuth = () => {
         discountC: 5,
       }
 
-      const ref = collection(database, 'clients')
+      // const ref = collection(database, 'clients', user.uid)
       const data = { ...clientData, createdAt: Timestamp.now() }
-      await addDoc(ref, data)
+      // await addDoc(ref, data)
+      await setDoc(doc(database, 'clients', user.uid), data)
 
       setLoading(false)
     } catch (e: any) {

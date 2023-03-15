@@ -24,11 +24,71 @@ const Login = () => {
   }
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!email || !password || !socialName || !cnpj || deadline === 'disabled')
-      return toast.error('Preencha todos os campos!')
-    if (password !== confirmPassword) return toast.error('As senhas precisam ser iguais!')
+    if (!email || !password || !socialName || !cnpj || deadline === 'disabled') {
+      toast.error('Preencha todos os campos!')
+      return
+    }
+
+    if (!validarCNPJ(cnpj)) {
+      toast.error('CNPJ Inválido')
+      return
+    }
+
+    if (password !== confirmPassword) {
+      toast.error('As senhas precisam ser iguais!')
+      return
+    }
 
     registerUser(email, password, socialName, cnpj, deadline)
+  }
+
+  function validarCNPJ(cnpj: string) {
+    const cnpjNumb = cnpj.replace(/[^\d]+/g, '')
+    console.log(cnpjNumb)
+
+    if (cnpjNumb == '') return false
+
+    if (cnpjNumb.length != 14) return false
+
+    // Elimina CNPJs invalidos conhecidos
+    if (
+      cnpjNumb == '00000000000000' ||
+      cnpjNumb == '11111111111111' ||
+      cnpjNumb == '22222222222222' ||
+      cnpjNumb == '33333333333333' ||
+      cnpjNumb == '44444444444444' ||
+      cnpjNumb == '55555555555555' ||
+      cnpjNumb == '66666666666666' ||
+      cnpjNumb == '77777777777777' ||
+      cnpjNumb == '88888888888888' ||
+      cnpjNumb == '99999999999999'
+    )
+      return false
+
+    // Valida DVs
+    let size = String(cnpjNumb).length - 2
+    let numbers = cnpjNumb.substring(0, size)
+    const digits = cnpjNumb.substring(size)
+    let sum = 0
+    let position = size - 7
+    for (let i = size; i >= 1; i--) {
+      sum += Number(numbers.charAt(size - i)) * position--
+      if (position < 2) position = 9
+    }
+    let result = sum % 11 < 2 ? 0 : 11 - (sum % 11)
+    if (result != Number(digits.charAt(0))) return false
+
+    size = size + 1
+    numbers = cnpj.substring(0, size)
+    sum = 0
+    position = size - 7
+    for (let i = size; i >= 1; i--) {
+      sum += Number(numbers.charAt(size - i)) * position--
+      if (position < 2) position = 9
+    }
+    result = sum % 11 < 2 ? 0 : 11 - (sum % 11)
+    return true
+    if (result != Number(digits.charAt(1))) return false
   }
 
   useEffect(() => {
