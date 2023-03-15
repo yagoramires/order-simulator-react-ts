@@ -64,10 +64,10 @@ const OrderDetails = () => {
             <span className='text-sm text-gray-700'>Indústria</span>
             <span className='text-gray-50'>{order.industryName?.toUpperCase()}</span>
           </div>
-          <div className='flex flex-col gap-1'>
+          {/* <div className='flex flex-col gap-1'>
             <span className='text-sm text-gray-700'>Vendedor</span>
             <span className='capitalize text-gray-50'>{order.sellerId}</span>
-          </div>
+          </div> */}
           <div className='flex flex-col gap-1'>
             <span className='text-sm text-gray-700'>Total do pedido</span>
             <span className='text-gray-50'>{formatValue(order.total)}</span>

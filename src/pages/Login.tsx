@@ -24,16 +24,30 @@ const Login = () => {
   }
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!email || !password || !socialName || !cnpj || deadline === 'disabled') {
+    if (!socialName) {
       toast.error('Preencha todos os campos!')
       return
     }
-
+    if (!cnpj) {
+      toast.error('Preencha todos os campos!')
+      return
+    }
     if (!validarCNPJ(cnpj)) {
       toast.error('CNPJ Inválido')
       return
     }
-
+    if (!deadline) {
+      toast.error('Preencha todos os campos!')
+      return
+    }
+    if (!email) {
+      toast.error('Preencha o e-mail!')
+      return
+    }
+    if (!password) {
+      toast.error('Preencha a senha!')
+      return
+    }
     if (password !== confirmPassword) {
       toast.error('As senhas precisam ser iguais!')
       return
@@ -180,6 +194,9 @@ const Login = () => {
               className='p-2 bg-gray-300 rounded-md shadow-sm'
               defaultValue='disabled'
               required
+              onChange={(e) => {
+                setDeadline(e.target.value)
+              }}
             >
               <option value='disabled' disabled>
                 Selecione o Prazo de Pagamento
