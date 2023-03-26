@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom'
 import { BsCartCheckFill } from 'react-icons/bs'
 import { MdLogout } from 'react-icons/md'
 import { RxAvatar } from 'react-icons/rx'
-import { FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit, FaLayerGroup } from 'react-icons/fa'
-import NewOrder from '../ClientDashboard/NewOrder'
+import { FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit } from 'react-icons/fa'
+import { TbDiscount2 } from 'react-icons/tb'
 
 const Sidebar = () => {
   const { userData } = useContext(AuthContext)
@@ -36,7 +36,7 @@ const Sidebar = () => {
       path: 'clients',
     },
     {
-      icon: <FaLayerGroup size={22} />,
+      icon: <TbDiscount2 size={22} />,
       text: 'Redes',
       path: 'networks',
     },
@@ -81,10 +81,6 @@ const Sidebar = () => {
 
       <nav className=''>
         <ul className='flex items-center justify-center w-full lg:flex-col lg:gap-2'>
-          {/* <li className='w-full text-gray-50'>
-            <NewOrder />
-          </li> */}
-
           {liMap()}
 
           <li className='w-full text-gray-50 '>
