@@ -32,12 +32,14 @@ const SidebarIndustry = ({ industry }: DataProps) => {
             <span className='text-sm font-medium'>{industry.cnpj}</span>
           </div>
         </div>
-        <div className='flex items-center justify-center gap-2 lg:mt-8'>
-          <ProductForm />
-        </div>
-        <div className='flex items-center justify-center gap-2 lg:mt-8'>
-          <EditIndustry industryId={industryId || ''} industryData={industry} />
-          <Alert data={{ type: 'industry', id: industryId || '' }} />
+        <div className='flex items-center justify-center lg:flex-col'>
+          <div className='flex items-center justify-center gap-2 lg:mt-8'>
+            <ProductForm />
+          </div>
+          <div className='flex items-center justify-center gap-2 lg:mt-8'>
+            <EditIndustry industryId={industryId || ''} industryData={industry} />
+            <Alert data={{ type: 'industry', id: industryId || '' }} />
+          </div>
         </div>
       </div>
     </aside>

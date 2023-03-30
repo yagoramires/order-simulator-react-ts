@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import DialogComponent from '../../../GlobalComponents/DialogComponent'
-import { IoMdAdd } from 'react-icons/io'
+import { AiOutlineFileAdd } from 'react-icons/ai'
 import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
 import mock from '../../../../productsMock'
 
@@ -86,8 +86,9 @@ const AddProduct = () => {
       open={open}
       setOpen={setOpen}
       childrenButton={
-        <div className='relative flex items-center justify-between w-full gap-2 px-4 py-4 font-bold bg-blue-600 rounded-lg text-gray-50'>
-          Adicionar Produto
+        <div className='relative flex items-center justify-center px-8 py-2 font-medium rounded cursor-pointer text-gray-50 lg:bg-blue-600 lg:h-12 lg:py-0'>
+          <AiOutlineFileAdd size={23} />
+          <span className='hidden lg:inline-flex'>Adicionar produto</span>
         </div>
       }
       childrenForm={
