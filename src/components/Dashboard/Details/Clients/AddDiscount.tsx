@@ -1,19 +1,22 @@
 import { useState } from 'react'
 
-import { useParams } from 'react-router-dom'
-
 import { toast } from 'react-toastify'
 
 import DialogComponent from '../../../GlobalComponents/DialogComponent'
-import { useAddDoc } from '../../../../hooks/handleData/useAddDoc'
+import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
+import { IClients } from '../../../../interfaces'
 
-const AddDiscount = () => {
+interface ClientProps {
+  client: IClients
+  clientId: string
+}
+
+const AddDiscount = ({ client, clientId }: ClientProps) => {
   const [code, setCode] = useState('')
   const [discount, setDiscount] = useState(0)
   const [open, setOpen] = useState(false)
 
-  const { industryId } = useParams()
-  // const { addDiscount } = useAddDoc()
+  const { editClient } = useEditDoc()
 
   const handleAddDiscount = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -21,13 +24,31 @@ const AddDiscount = () => {
     if (!code) return toast.error('Preencha o código!')
     if (!discount) return toast.error('Preencha o desconto!')
 
+    const discountProducts = client.discountProducts
+      ? [...client.discountProducts, { code, discount }]
+      : [{ code, discount }]
+
     const data = {
-      code,
-      discount,
+      ...client,
+      discountProducts,
     }
+    editClient(clientId, data)
+
+    console.log(client)
 
     setCode('')
     setDiscount(0)
+    setOpen(false)
+  }
+
+  const handleRemoveDiscount = (code: string) => {
+    const discountProducts = client.discountProducts?.filter((product) => product.code !== code)
+
+    const data = {
+      ...client,
+      discountProducts,
+    }
+    editClient(clientId, data)
     setOpen(false)
   }
 
@@ -42,36 +63,49 @@ const AddDiscount = () => {
         </div>
       }
       childrenForm={
-        <form className='flex flex-col w-full gap-2' onSubmit={handleAddDiscount}>
-          <label className='flex flex-col gap-1'>
-            <span className='text-sm text-gray-500'>Código</span>
+        <>
+          {client.discountProducts && client.discountProducts?.length > 0 && (
+            <ul>
+              {client.discountProducts.map((product) => (
+                <li key={product.code} className='flex items-center justify-between text-gray-50'>
+                  Código: {product.code} - Desconto: {product.discount}%{' '}
+                  <button onClick={() => handleRemoveDiscount(product.code)}>X</button>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <form className='flex flex-col w-full gap-2' onSubmit={handleAddDiscount}>
+            <label className='flex flex-col gap-1'>
+              <span className='text-sm text-gray-500'>Código</span>
+
+              <input
+                type='text'
+                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                placeholder='Código'
+                value={code}
+                onChange={(e) => setCode(e.target.value.toLowerCase())}
+              />
+            </label>
+            <label className='flex flex-col gap-1'>
+              <span className='text-sm text-gray-500'>Desconto</span>
+
+              <input
+                type='text'
+                className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
+                placeholder='Nome'
+                value={discount}
+                onChange={(e) => setDiscount(Number(e.target.value.toLowerCase()))}
+              />
+            </label>
 
             <input
-              type='text'
-              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-              placeholder='Código'
-              value={code}
-              onChange={(e) => setCode(e.target.value.toLowerCase())}
+              type='submit'
+              className='p-2 mt-2 font-bold bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
+              value={'Adicionar'}
             />
-          </label>
-          <label className='flex flex-col gap-1'>
-            <span className='text-sm text-gray-500'>Desconto</span>
-
-            <input
-              type='text'
-              className='w-full p-2 bg-gray-900 rounded-lg text-gray-50'
-              placeholder='Nome'
-              value={discount}
-              onChange={(e) => setDiscount(Number(e.target.value.toLowerCase()))}
-            />
-          </label>
-
-          <input
-            type='submit'
-            className='p-2 mt-2 font-bold bg-blue-600 rounded-md shadow-sm cursor-pointer text-gray-50'
-            value={'Adicionar'}
-          />
-        </form>
+          </form>
+        </>
       }
     />
   )

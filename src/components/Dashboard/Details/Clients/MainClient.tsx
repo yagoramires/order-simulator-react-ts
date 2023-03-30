@@ -54,7 +54,7 @@ const MainClient = () => {
         >
           <IoMdAdd /> Novo
         </Link> */}
-        <AddDiscount />
+        {client && <AddDiscount client={client} clientId={clientId || ''} />}
       </div>
 
       {client?.orders?.length === 0 && <MessageComponent text='Nenhum pedido cadastrado.' />}

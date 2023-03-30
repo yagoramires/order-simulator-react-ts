@@ -12,6 +12,7 @@ export interface IClients {
   discountC?: number
   deadline?: string
   orders?: Array<IOrder>
+  discountProducts?: Array<{ code: string; discount: string }>
 }
 
 export interface IAddClient {
