@@ -3,7 +3,6 @@ import { useFetchCollection } from '../../../hooks/fetchData/useFetchCollection'
 
 import UserForm from './Forms/AddUser'
 import LabelComponent from '../../GlobalComponents/LabelComponent'
-import LinkComponent from '../../GlobalComponents/LinkComponent'
 import MessageComponent from '../../GlobalComponents/MessageComponent'
 import Search from '../../GlobalComponents/SearchComponent'
 import LoadMoreBtn from '../../GlobalComponents/LoadMoreBtn'
@@ -16,10 +15,13 @@ const Users = () => {
 
   const linkComponent = (user: IUser) => {
     return (
-      <LinkComponent id={user.id || ''} key={user.id}>
+      <li
+        className='flex items-center w-full gap-2 p-2 py-3 break-words transition-all duration-200 bg-gray-900 rounded-lg lg:p-4 text-gray-50 hover:bg-gray-800'
+        key={user.id}
+      >
         <span className='w-[40%] '>{user.name?.toUpperCase()}</span>
         <span className='w-[60%] '>{user.email}</span>
-      </LinkComponent>
+      </li>
     )
   }
 
