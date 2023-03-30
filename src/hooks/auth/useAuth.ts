@@ -11,11 +11,13 @@ import {
   sendPasswordResetEmail,
   updateProfile,
   onAuthStateChanged,
+  deleteUser,
 } from 'firebase/auth'
 
 // React Hooks
 import { useState } from 'react'
 import { addDoc, collection, doc, setDoc, Timestamp } from 'firebase/firestore'
+import { toast } from 'react-toastify'
 
 export const useAuth = () => {
   const [message, setMessage] = useState('')
@@ -90,6 +92,17 @@ export const useAuth = () => {
 
       await updateProfile(user, { displayName: username })
 
+      const userData = {
+        admin: true,
+        name: username,
+        email,
+        createdAt: Timestamp.now(),
+      }
+
+      await setDoc(doc(database, 'users', user.uid), userData)
+      sendEmailVerification(user, actionCodeSettings)
+
+      toast.success('Usuário cadastrado com sucesso.')
       setLoading(false)
     } catch (e: any) {
       setError(e.message)
@@ -114,6 +127,11 @@ export const useAuth = () => {
   const signOutUser = () => {
     signOut(auth)
   }
+
+  // // Function to remove users
+  // const removeUser = (user:any) => {
+  //   deleteUser(user)
+  // }
 
   // Function to send reset password email for users
   const resetPassword = async (email: string) => {

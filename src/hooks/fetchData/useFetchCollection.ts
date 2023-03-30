@@ -31,6 +31,9 @@ export const useFetchCollection = (docCollection: string) => {
   const [productsFetch, setProductsFetch] = useState<interfaces.IProduct[]>([])
   const [lastProductsFetch, setLastProductsFetch] = useState<DocumentData>()
 
+  const [usersFetch, setUsersFetch] = useState<interfaces.IUser[]>([])
+  const [lastUsersFetch, setLastUsersFetch] = useState<DocumentData>()
+
   useEffect(() => {
     if (docCollection === '') return
     if (docCollection === 'industries//products') return
@@ -66,6 +69,9 @@ export const useFetchCollection = (docCollection: string) => {
           } else if (docCollection.includes('products')) {
             setProductsFetch(snapshot)
             setLastProductsFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
+          } else if (docCollection.includes('users')) {
+            setUsersFetch(snapshot)
+            setLastUsersFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
           }
         })
       } catch (e: any) {
@@ -109,6 +115,8 @@ export const useFetchCollection = (docCollection: string) => {
           startAfter(lastNetworksFetch),
           limit(25),
         )
+      } else if (docCollection.includes('users')) {
+        q = query(collectionRef, orderBy('createdAt', 'asc'), startAfter(lastUsersFetch), limit(25))
       } else if (docCollection.includes('products')) {
         q = query(
           collectionRef,
@@ -141,6 +149,9 @@ export const useFetchCollection = (docCollection: string) => {
         } else if (docCollection.includes('products')) {
           setProductsFetch([...productsFetch, ...snapshot])
           setLastProductsFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
+        } else if (docCollection.includes('users')) {
+          setUsersFetch([...usersFetch, ...snapshot])
+          setLastUsersFetch(querySnapshot.docs[querySnapshot.docs.length - 1])
         }
       })
     } catch (e: any) {
@@ -154,6 +165,7 @@ export const useFetchCollection = (docCollection: string) => {
     ordersFetch,
     networksFetch,
     productsFetch,
+    usersFetch,
     fetchMore,
   }
 }

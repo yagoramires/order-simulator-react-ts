@@ -3,6 +3,8 @@ export interface IUser {
   email?: string
   displayName?: string
   type?: string
+  name?: string
+  admin?: boolean
 }
 
 export interface IAddUser {

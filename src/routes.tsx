@@ -24,6 +24,8 @@ import ProductDetails from './pages/Details/Products'
 import Clients from './components/Dashboard/Outlet/Clients'
 import ClientDetails from './pages/Details/ClientDetails'
 
+import Users from './components/Dashboard/Outlet/Users'
+
 import Networks from './components/Dashboard/Outlet/Networks'
 import NetworkDetails from './pages/Details/NetworkDetails'
 import ClientDashboard from './pages/ClientDashboard'
@@ -46,13 +48,19 @@ const routes = () => {
             element={!userData.admin ? <Order /> : <Navigate to='/' />}
           />
           <Route path='/' element={userData.admin ? <Dashboard /> : <ClientDashboard />}>
-            <Route path='orders' element={userData.admin ? <Orders /> : <Navigate to='/' />} />
+            {/* <Route path='orders' element={userData.admin ? <Orders /> : <Navigate to='/' />} />
             <Route
               path='industries'
               element={userData.admin ? <Industries /> : <Navigate to='/' />}
             />
             <Route path='clients' element={userData.admin ? <Clients /> : <Navigate to='/' />} />
-            <Route path='networks' element={userData.admin ? <Networks /> : <Navigate to='/' />} />
+            <Route path='networks' element={userData.admin ? <Networks /> : <Navigate to='/' />} /> */}
+            <Route path='/' element={<Navigate to='/orders' />} />
+            <Route path='orders' element={<Orders />} />
+            <Route path='industries' element={<Industries />} />
+            <Route path='clients' element={<Clients />} />
+            <Route path='users' element={<Users />} />
+            <Route path='networks' element={<Networks />} />
           </Route>
 
           <Route path='profile' element={<Profile />} />

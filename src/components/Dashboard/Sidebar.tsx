@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { BsCartCheckFill } from 'react-icons/bs'
 import { MdLogout } from 'react-icons/md'
 import { RxAvatar } from 'react-icons/rx'
-import { FaIndustry, FaUserAlt, FaRegCalendarAlt, FaEdit } from 'react-icons/fa'
+import { FaIndustry, FaUsers, FaIdCardAlt, FaRegCalendarAlt, FaEdit } from 'react-icons/fa'
 import { TbDiscount2 } from 'react-icons/tb'
 
 const Sidebar = () => {
@@ -31,9 +31,14 @@ const Sidebar = () => {
       path: 'industries',
     },
     {
-      icon: <FaUserAlt size={22} />,
+      icon: <FaIdCardAlt size={22} />,
       text: 'Clientes',
       path: 'clients',
+    },
+    {
+      icon: <FaUsers size={22} />,
+      text: 'Usuários',
+      path: 'users',
     },
     {
       icon: <TbDiscount2 size={22} />,
