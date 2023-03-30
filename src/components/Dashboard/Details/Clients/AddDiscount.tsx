@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import DialogComponent from '../../../GlobalComponents/DialogComponent'
 import { useEditDoc } from '../../../../hooks/handleData/useEditDoc'
 import { IClients } from '../../../../interfaces'
+import { MdClose } from 'react-icons/md'
 
 interface ClientProps {
   client: IClients
@@ -34,8 +35,6 @@ const AddDiscount = ({ client, clientId }: ClientProps) => {
     }
     editClient(clientId, data)
 
-    console.log(client)
-
     setCode('')
     setDiscount(0)
     setOpen(false)
@@ -48,6 +47,7 @@ const AddDiscount = ({ client, clientId }: ClientProps) => {
       ...client,
       discountProducts,
     }
+
     editClient(clientId, data)
     setOpen(false)
   }
@@ -69,7 +69,12 @@ const AddDiscount = ({ client, clientId }: ClientProps) => {
               {client.discountProducts.map((product) => (
                 <li key={product.code} className='flex items-center justify-between text-gray-50'>
                   Código: {product.code} - Desconto: {product.discount}%{' '}
-                  <button onClick={() => handleRemoveDiscount(product.code)}>X</button>
+                  <button
+                    onClick={() => handleRemoveDiscount(product.code)}
+                    className='transition-all duration-200 hover:text-red-500'
+                  >
+                    <MdClose />
+                  </button>
                 </li>
               ))}
             </ul>

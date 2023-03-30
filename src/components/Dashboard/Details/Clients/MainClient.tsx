@@ -1,15 +1,12 @@
-import { useState } from 'react'
 import { useFormatDate } from '../../../../hooks/formatData/useFormatDate'
 import { useFormatValue } from '../../../../hooks/formatData/useFormatValue'
 import { useFetchDocument } from '../../../../hooks/fetchData/useFetchDocument'
 
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import LabelComponent from '../../../GlobalComponents/LabelComponent'
 import LinkComponent from '../../../GlobalComponents/LinkComponent'
 import MessageComponent from '../../../GlobalComponents/MessageComponent'
-
-import { IoMdAdd } from 'react-icons/io'
 
 import { IOrder } from '../../../../interfaces'
 import AddDiscount from './AddDiscount'
@@ -48,12 +45,6 @@ const MainClient = () => {
   return (
     <div className='max-w-[1400px] w-full'>
       <div className='flex items-center justify-end w-full gap-2 p-2 bg-dark-100'>
-        {/* <Link
-          to='/order'
-          className='relative flex items-center justify-between gap-2 px-4 py-2 font-bold bg-blue-600 rounded-lg text-gray-50'
-        >
-          <IoMdAdd /> Novo
-        </Link> */}
         {client && <AddDiscount client={client} clientId={clientId || ''} />}
       </div>
 
